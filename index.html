@@ -33,7 +33,6 @@
             position: fixed;
             top: 0;
             left: 0;
-
             width: 100%;
             height: 72px;
 
@@ -54,7 +53,6 @@
         .logo {
             font-size: 23px;
             font-weight: 900;
-
             letter-spacing: 5px;
 
             color: white;
@@ -71,11 +69,8 @@
 
         nav a {
             color: #aaa;
-
             text-decoration: none;
-
             font-size: 14px;
-
             transition: 0.2s;
         }
 
@@ -84,12 +79,11 @@
         }
 
         /* =========================
-           LOGIN BUTTON
+           BUTTON CONNEXION
         ========================= */
 
         .login-button {
             background: #287bff;
-
             color: white;
 
             border: none;
@@ -110,7 +104,6 @@
 
         .login-button:hover {
             background: #1769e0;
-
             transform: translateY(-1px);
 
             box-shadow:
@@ -127,7 +120,6 @@
             min-height: 100vh;
 
             display: flex;
-
             align-items: center;
             justify-content: center;
 
@@ -138,7 +130,6 @@
 
         .hero-image {
             position: absolute;
-
             inset: 0;
 
             width: 100%;
@@ -157,7 +148,6 @@
             content: "";
 
             position: absolute;
-
             inset: 0;
 
             background:
@@ -184,7 +174,6 @@
             color: #6da4ff;
 
             font-size: 13px;
-
             font-weight: bold;
 
             letter-spacing: 5px;
@@ -219,7 +208,7 @@
         }
 
         /* =========================
-           BUTTONS
+           BOUTONS
         ========================= */
 
         .buttons {
@@ -244,7 +233,6 @@
             padding: 16px 55px;
 
             font-size: 17px;
-
             font-weight: bold;
 
             cursor: pointer;
@@ -276,7 +264,6 @@
             padding: 16px 35px;
 
             font-size: 17px;
-
             font-weight: bold;
 
             cursor: pointer;
@@ -375,7 +362,7 @@
         }
 
         /* =========================
-           LOGIN MODAL
+           MODAL
         ========================= */
 
         .modal {
@@ -416,6 +403,22 @@
 
             box-shadow:
                 0 20px 80px rgba(0, 0, 0, 0.7);
+
+            animation: modalIn 0.2s ease;
+        }
+
+        @keyframes modalIn {
+
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+
         }
 
         .login-box h2 {
@@ -450,7 +453,14 @@
 
         .login-box input:focus {
             border-color: #287bff;
+
+            box-shadow:
+                0 0 0 2px rgba(40, 123, 255, 0.1);
         }
+
+        /* =========================
+           BOUTON PRINCIPAL
+        ========================= */
 
         .submit-login {
             width: 100%;
@@ -496,16 +506,70 @@
             color: white;
         }
 
+        /* =========================
+           MESSAGE
+        ========================= */
+
         .login-message {
             display: none;
-
-            color: #63a0ff;
 
             font-size: 13px;
 
             margin-top: 15px;
 
             text-align: center;
+
+            line-height: 1.5;
+        }
+
+        /* =========================
+           CODE VERIFICATION
+        ========================= */
+
+        .verification {
+            display: none;
+        }
+
+        .verification.active {
+            display: block;
+        }
+
+        .code-input {
+            text-align: center;
+
+            font-size: 25px;
+
+            font-weight: bold;
+
+            letter-spacing: 8px;
+        }
+
+        .verification-email {
+            color: #6da4ff;
+
+            word-break: break-word;
+
+            margin-bottom: 20px;
+        }
+
+        .resend-button {
+            width: 100%;
+
+            background: transparent;
+
+            color: #6da4ff;
+
+            border: none;
+
+            padding: 12px;
+
+            cursor: pointer;
+
+            font-size: 13px;
+        }
+
+        .resend-button:hover {
+            color: white;
         }
 
         /* =========================
@@ -604,15 +668,13 @@
 
     <main>
 
-        <!-- HERO -->
-
         <section
             class="hero"
             id="accueil">
 
             <img
                 class="hero-image"
-                src="image/Gemini_Generated_Image_91n1qb91n1qb91n1.jpg"
+                src="image/Gemini_Generated_Image_3yxzcq3yxzcq3yxz.jpg"
                 alt="Univers de Valdorian"
             >
 
@@ -657,7 +719,9 @@
         </section>
 
 
-        <!-- UNIVERS -->
+        <!-- =========================
+             UNIVERS
+        ========================= -->
 
         <section
             class="section"
@@ -675,8 +739,6 @@
 
 
             <div class="cards">
-
-                <!-- CARD 1 -->
 
                 <div class="card">
 
@@ -697,8 +759,6 @@
                 </div>
 
 
-                <!-- CARD 2 -->
-
                 <div class="card">
 
                     <div class="card-icon">
@@ -716,8 +776,6 @@
 
                 </div>
 
-
-                <!-- CARD 3 -->
 
                 <div class="card">
 
@@ -744,7 +802,7 @@
 
 
     <!-- =========================
-         FENÊTRE CONNEXION
+         CONNEXION
     ========================= -->
 
     <div
@@ -753,50 +811,114 @@
 
         <div class="login-box">
 
-            <h2>
-                Connexion
-            </h2>
+            <!-- ÉTAPE 1 -->
 
-            <p>
-                Connectez-vous à votre compte Valdorian.
-            </p>
+            <div id="loginStep">
+
+                <h2>
+                    Connexion
+                </h2>
+
+                <p>
+                    Entrez votre adresse e-mail pour continuer.
+                </p>
+
+                <input
+                    type="email"
+                    id="loginEmail"
+                    placeholder="Adresse e-mail"
+                    autocomplete="email"
+                >
+
+                <input
+                    type="password"
+                    id="loginPassword"
+                    placeholder="Mot de passe"
+                    autocomplete="current-password"
+                >
+
+                <button
+                    class="submit-login"
+                    onclick="sendVerificationCode()">
+
+                    Continuer
+
+                </button>
+
+                <button
+                    class="close-login"
+                    onclick="closeLogin()">
+
+                    Fermer
+
+                </button>
+
+                <div
+                    class="login-message"
+                    id="loginMessage">
+                </div>
+
+            </div>
 
 
-            <input
-                type="email"
-                id="loginEmail"
-                placeholder="Adresse e-mail"
-            >
-
-
-            <input
-                type="password"
-                id="loginPassword"
-                placeholder="Mot de passe"
-            >
-
-
-            <button
-                class="submit-login"
-                onclick="login()">
-
-                Se connecter
-
-            </button>
-
-
-            <button
-                class="close-login"
-                onclick="closeLogin()">
-
-                Fermer
-
-            </button>
-
+            <!-- ÉTAPE 2 -->
 
             <div
-                class="login-message"
-                id="loginMessage">
+                class="verification"
+                id="verificationStep">
+
+                <h2>
+                    Vérification
+                </h2>
+
+                <p>
+                    Un code de vérification sera envoyé à :
+                </p>
+
+                <p
+                    class="verification-email"
+                    id="verificationEmail">
+                </p>
+
+                <input
+                    class="code-input"
+                    type="text"
+                    id="verificationCode"
+                    placeholder="000000"
+                    maxlength="6"
+                    inputmode="numeric"
+                    autocomplete="one-time-code"
+                >
+
+                <button
+                    class="submit-login"
+                    onclick="verifyCode()">
+
+                    Vérifier le code
+
+                </button>
+
+                <button
+                    class="resend-button"
+                    onclick="resendCode()">
+
+                    Renvoyer le code
+
+                </button>
+
+                <button
+                    class="close-login"
+                    onclick="closeLogin()">
+
+                    Fermer
+
+                </button>
+
+                <div
+                    class="login-message"
+                    id="verificationMessage">
+                </div>
+
             </div>
 
         </div>
@@ -821,6 +943,15 @@
 
     <script>
 
+        let verificationCode = null;
+
+        let userEmail = "";
+
+
+        /* =========================
+           OUVRIR CONNEXION
+        ========================= */
+
         function openLogin() {
 
             document
@@ -829,6 +960,10 @@
 
         }
 
+
+        /* =========================
+           FERMER CONNEXION
+        ========================= */
 
         function closeLogin() {
 
@@ -839,30 +974,195 @@
         }
 
 
-        function login() {
+        /* =========================
+           VÉRIFIER EMAIL
+        ========================= */
+
+        function isValidEmail(email) {
+
+            const emailRegex =
+                /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+            return emailRegex.test(email);
+
+        }
+
+
+        /* =========================
+           ENVOI DU CODE
+        ========================= */
+
+        function sendVerificationCode() {
 
             const email =
-                document.getElementById("loginEmail").value;
+                document
+                    .getElementById("loginEmail")
+                    .value
+                    .trim();
 
             const password =
-                document.getElementById("loginPassword").value;
+                document
+                    .getElementById("loginPassword")
+                    .value;
 
             const message =
-                document.getElementById("loginMessage");
+                document
+                    .getElementById("loginMessage");
 
 
-            if (email === "" || password === "") {
+            if (!isValidEmail(email)) {
 
                 message.style.display = "block";
 
                 message.style.color = "#ff5c5c";
 
                 message.textContent =
-                    "Veuillez remplir tous les champs.";
+                    "Veuillez entrer une adresse e-mail valide.";
 
                 return;
 
             }
+
+
+            if (password.length < 6) {
+
+                message.style.display = "block";
+
+                message.style.color = "#ff5c5c";
+
+                message.textContent =
+                    "Le mot de passe doit contenir au moins 6 caractères.";
+
+                return;
+
+            }
+
+
+            /*
+             * POUR LE MOMENT :
+             *
+             * Le site est hébergé sur GitHub Pages.
+             * Il ne peut donc pas envoyer réellement
+             * un e-mail depuis ce JavaScript.
+             *
+             * Cette partie simule uniquement le passage
+             * à l'étape de vérification.
+             */
+
+            userEmail = email;
+
+
+            document
+                .getElementById("verificationEmail")
+                .textContent = email;
+
+
+            document
+                .getElementById("loginStep")
+                .style.display = "none";
+
+
+            document
+                .getElementById("verificationStep")
+                .classList.add("active");
+
+
+            /*
+             * CODE DE TEST UNIQUEMENT
+             *
+             * À supprimer lorsque le vrai système
+             * d'envoi d'e-mail sera connecté.
+             */
+
+            verificationCode =
+                Math.floor(
+                    100000 + Math.random() * 900000
+                ).toString();
+
+
+            console.log(
+                "CODE DE TEST :",
+                verificationCode
+            );
+
+        }
+
+
+        /* =========================
+           VÉRIFICATION DU CODE
+        ========================= */
+
+        function verifyCode() {
+
+            const enteredCode =
+                document
+                    .getElementById("verificationCode")
+                    .value
+                    .trim();
+
+            const message =
+                document
+                    .getElementById("verificationMessage");
+
+
+            if (enteredCode.length !== 6) {
+
+                message.style.display = "block";
+
+                message.style.color = "#ff5c5c";
+
+                message.textContent =
+                    "Le code doit contenir 6 chiffres.";
+
+                return;
+
+            }
+
+
+            if (enteredCode === verificationCode) {
+
+                message.style.display = "block";
+
+                message.style.color = "#63a0ff";
+
+                message.textContent =
+                    "Adresse e-mail vérifiée.";
+
+            } else {
+
+                message.style.display = "block";
+
+                message.style.color = "#ff5c5c";
+
+                message.textContent =
+                    "Code incorrect.";
+
+            }
+
+        }
+
+
+        /* =========================
+           RENVOYER LE CODE
+        ========================= */
+
+        function resendCode() {
+
+            verificationCode =
+                Math.floor(
+                    100000 + Math.random() * 900000
+                ).toString();
+
+
+            console.log(
+                "NOUVEAU CODE DE TEST :",
+                verificationCode
+            );
+
+
+            const message =
+                document
+                    .getElementById("verificationMessage");
 
 
             message.style.display = "block";
@@ -870,10 +1170,14 @@
             message.style.color = "#63a0ff";
 
             message.textContent =
-                "Connexion bientôt disponible.";
+                "Un nouveau code a été généré pour le test.";
 
         }
 
+
+        /* =========================
+           BOUTON JOUER
+        ========================= */
 
         function gameNotReady() {
 
@@ -883,6 +1187,10 @@
 
         }
 
+
+        /* =========================
+           FERMER EN CLIQUANT DEHORS
+        ========================= */
 
         document
             .getElementById("loginModal")
