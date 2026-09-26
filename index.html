@@ -407,6 +407,43 @@
         }
 
         /* ========================================
+           BOUTON COMBAT
+        ======================================== */
+
+        .combat-button {
+            display: inline-block;
+
+            margin-top: 18px;
+
+            width: fit-content;
+
+            padding: 10px 16px;
+
+            border-radius: 7px;
+
+            background: rgba(201, 162, 74, 0.12);
+            border: 1px solid rgba(201, 162, 74, 0.45);
+
+            color: #d7b764;
+
+            text-decoration: none;
+
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 1px;
+
+            transition:
+                0.2s;
+        }
+
+        .combat-button:hover {
+            background: #c9a24a;
+            color: #111;
+
+            transform: translateY(-2px);
+        }
+
+        /* ========================================
            FOOTER
         ======================================== */
 
@@ -844,6 +881,13 @@
                     Chaque élimination vous rapporte de l'argent,
                     permettant d'améliorer vos armes et votre progression.
                 </p>
+
+                <a
+                    href="interface/lors_combat.html"
+                    class="combat-button"
+                >
+                    ACCÉDER AU COMBAT
+                </a>
 
             </article>
 
