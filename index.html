@@ -1223,8 +1223,13 @@
 
     <script>
 
+        /* ========================================
+           CONFIGURATION WORKER
+        ======================================== */
+
         const API_URL =
             "https://valdorian-verification.u1429712535.workers.dev";
+
 
         let currentUser = null;
         let selectedAvatar = null;
@@ -1260,6 +1265,18 @@
                     showWarning
                 );
 
+            document
+                .getElementById("loginSection")
+                .style.display = "block";
+
+            document
+                .getElementById("verificationSection")
+                .classList.remove("active");
+
+            document
+                .getElementById("profileSection")
+                .classList.remove("active");
+
         }
 
 
@@ -1286,6 +1303,7 @@
                     "interface/play.html";
 
                 return false;
+
             }
 
             sessionStorage.setItem(
@@ -1296,6 +1314,7 @@
             openLoginModal(true);
 
             return false;
+
         }
 
 
@@ -1319,7 +1338,7 @@
 
 
         /* ========================================
-           ENVOYER CODE
+           ENVOYER LE CODE
         ======================================== */
 
         async function sendCode() {
@@ -1335,11 +1354,30 @@
                     .getElementById("passwordInput")
                     .value;
 
-
             const message =
                 document.getElementById(
                     "loginMessage"
                 );
+
+
+            if (!email) {
+
+                message.textContent =
+                    "Veuillez entrer votre adresse e-mail.";
+
+                return;
+
+            }
+
+
+            if (!password) {
+
+                message.textContent =
+                    "Veuillez entrer votre mot de passe.";
+
+                return;
+
+            }
 
 
             message.textContent =
@@ -1374,10 +1412,12 @@
                 if (!response.ok) {
 
                     message.textContent =
+                        data.error ||
                         data.message ||
-                        "Une erreur est survenue.";
+                        "Impossible d'envoyer le code.";
 
                     return;
+
                 }
 
 
@@ -1394,12 +1434,19 @@
                     .classList.add("active");
 
 
+                document
+                    .getElementById("codeInput")
+                    .focus();
+
             } catch (error) {
 
-                console.error(error);
+                console.error(
+                    "Erreur sendCode :",
+                    error
+                );
 
                 message.textContent =
-                    "Impossible de contacter le serveur.";
+                    "Impossible de contacter Valdorian.";
 
             }
 
@@ -1407,7 +1454,7 @@
 
 
         /* ========================================
-           RENVOYER CODE
+           RENVOYER LE CODE
         ======================================== */
 
         async function resendCode() {
@@ -1452,16 +1499,31 @@
                     await response.json();
 
 
+                if (!response.ok) {
+
+                    message.textContent =
+                        data.error ||
+                        data.message ||
+                        "Impossible de renvoyer le code.";
+
+                    return;
+
+                }
+
+
                 message.textContent =
                     data.message ||
-                    "Code envoyé.";
+                    "Nouveau code envoyé par e-mail.";
 
             } catch (error) {
 
-                console.error(error);
+                console.error(
+                    "Erreur resendCode :",
+                    error
+                );
 
                 message.textContent =
-                    "Impossible de contacter le serveur.";
+                    "Impossible de contacter Valdorian.";
 
             }
 
@@ -1469,7 +1531,7 @@
 
 
         /* ========================================
-           VERIFIER CODE
+           VERIFIER LE CODE
         ======================================== */
 
         async function verifyCode() {
@@ -1486,11 +1548,20 @@
                     .value
                     .trim();
 
-
             const message =
                 document.getElementById(
                     "verificationMessage"
                 );
+
+
+            if (!/^\d{6}$/.test(code)) {
+
+                message.textContent =
+                    "Le code doit contenir 6 chiffres.";
+
+                return;
+
+            }
 
 
             message.textContent =
@@ -1525,10 +1596,12 @@
                 if (!response.ok) {
 
                     message.textContent =
+                        data.error ||
                         data.message ||
                         "Code incorrect.";
 
                     return;
+
                 }
 
 
@@ -1543,23 +1616,6 @@
 
 
                 updateAccountButton();
-
-
-                document
-                    .getElementById(
-                        "verificationSection"
-                    )
-                    .classList.remove("active");
-
-
-                document
-                    .getElementById(
-                        "profileSection"
-                    )
-                    .classList.add("active");
-
-
-                loadProfile();
 
 
                 const playAfterLogin =
@@ -1577,14 +1633,32 @@
                     window.location.href =
                         "interface/play.html";
 
+                    return;
+
                 }
+
+
+                document
+                    .getElementById("verificationSection")
+                    .classList.remove("active");
+
+
+                document
+                    .getElementById("profileSection")
+                    .classList.add("active");
+
+
+                loadProfile();
 
             } catch (error) {
 
-                console.error(error);
+                console.error(
+                    "Erreur verifyCode :",
+                    error
+                );
 
                 message.textContent =
-                    "Impossible de contacter le serveur.";
+                    "Impossible de contacter Valdorian.";
 
             }
 
@@ -1599,17 +1673,21 @@
 
             openLoginModal(false);
 
+
             document
                 .getElementById("loginSection")
                 .style.display = "none";
+
 
             document
                 .getElementById("verificationSection")
                 .classList.remove("active");
 
+
             document
                 .getElementById("profileSection")
                 .classList.add("active");
+
 
             loadProfile();
 
@@ -1662,6 +1740,7 @@
                     const file =
                         this.files[0];
 
+
                     if (!file) {
                         return;
                     }
@@ -1679,6 +1758,7 @@
                         this.value = "";
 
                         return;
+
                     }
 
 
@@ -1686,19 +1766,21 @@
                         new FileReader();
 
 
-                    reader.onload = function (event) {
+                    reader.onload =
+                        function (event) {
 
-                        selectedAvatar =
-                            event.target.result;
+                            selectedAvatar =
+                                event.target.result;
 
-                        document
-                            .getElementById(
-                                "profileAvatar"
-                            )
-                            .src =
-                            selectedAvatar;
 
-                    };
+                            document
+                                .getElementById(
+                                    "profileAvatar"
+                                )
+                                .src =
+                                selectedAvatar;
+
+                        };
 
 
                     reader.readAsDataURL(file);
@@ -1767,9 +1849,9 @@
                                 displayName,
                                 username,
                                 avatar:
-                                    selectedAvatar
-                                    || currentUser.avatar
-                                    || null
+                                    selectedAvatar ||
+                                    currentUser.avatar ||
+                                    null
                             })
                         }
                     );
@@ -1782,10 +1864,12 @@
                 if (!response.ok) {
 
                     message.textContent =
+                        data.error ||
                         data.message ||
                         "Impossible d'enregistrer.";
 
                     return;
+
                 }
 
 
@@ -1806,7 +1890,10 @@
 
             } catch (error) {
 
-                console.error(error);
+                console.error(
+                    "Erreur saveProfile :",
+                    error
+                );
 
                 message.textContent =
                     "Erreur de connexion.";
@@ -1846,7 +1933,10 @@
 
             } catch (error) {
 
-                console.error(error);
+                console.error(
+                    "Erreur logout :",
+                    error
+                );
 
             }
 
@@ -1857,11 +1947,11 @@
 
 
             currentUser = null;
+
             selectedAvatar = null;
 
 
             updateAccountButton();
-
 
             closeLoginModal();
 
@@ -1895,6 +1985,8 @@
                     await fetch(
                         API_URL + "/profile",
                         {
+                            method: "GET",
+
                             headers: {
                                 "Authorization":
                                     "Bearer " + token
@@ -1914,6 +2006,7 @@
                     updateAccountButton();
 
                     return;
+
                 }
 
 
@@ -1929,7 +2022,10 @@
 
             } catch (error) {
 
-                console.error(error);
+                console.error(
+                    "Erreur checkSession :",
+                    error
+                );
 
                 currentUser = null;
 
@@ -1950,6 +2046,11 @@
                 document.getElementById(
                     "accountButton"
                 );
+
+
+            if (!button) {
+                return;
+            }
 
 
             if (currentUser) {
@@ -1998,6 +2099,7 @@
                     width="100"
                     height="100"
                 >
+
                     <rect
                         width="100"
                         height="100"
@@ -2015,6 +2117,7 @@
                     >
                         ${letter}
                     </text>
+
                 </svg>
             `;
 
@@ -2034,8 +2137,10 @@
             const div =
                 document.createElement("div");
 
+
             div.textContent =
                 text || "";
+
 
             return div.innerHTML;
 
