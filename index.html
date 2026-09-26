@@ -407,7 +407,7 @@
         }
 
         /* ========================================
-           BOUTON COMBAT
+           BOUTON
         ======================================== */
 
         .combat-button {
@@ -438,49 +438,6 @@
         .combat-button:hover {
             background: #c9a24a;
             color: #111;
-
-            transform: translateY(-2px);
-        }
-
-        /* ========================================
-           NOUVEAU BOUTON CHANGER DE CATÉGORIE
-        ======================================== */
-
-        .category-change-button {
-            display: inline-block;
-
-            margin-top: 10px;
-
-            width: fit-content;
-
-            padding: 10px 16px;
-
-            border-radius: 7px;
-
-            background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-
-            color: #aaa;
-
-            font-size: 11px;
-            font-weight: 900;
-            letter-spacing: 1px;
-
-            cursor: pointer;
-
-            transition:
-                background 0.2s,
-                border-color 0.2s,
-                color 0.2s,
-                transform 0.2s;
-        }
-
-        .category-change-button:hover {
-            background: rgba(201, 162, 74, 0.08);
-
-            border-color: #c9a24a;
-
-            color: #c9a24a;
 
             transform: translateY(-2px);
         }
@@ -936,11 +893,7 @@
 
             <!-- CREATURES -->
 
-            <article
-                class="game-card"
-                onclick="window.location.href='interaction/lors_créature.html'"
-                style="cursor: pointer;"
-            >
+            <article class="game-card">
 
                 <div class="card-icon">
                     👹
@@ -963,19 +916,9 @@
                 <a
                     href="interaction/lors_créature.html"
                     class="combat-button"
-                    onclick="event.stopPropagation();"
                 >
                     DÉCOUVRIR LES CRÉATURES
                 </a>
-
-                <!-- BOUTON POUR CHANGER DE CATÉGORIE -->
-
-                <button
-                    class="category-change-button"
-                    onclick="event.stopPropagation(); changerCategorie();"
-                >
-                    CHANGER DE CATÉGORIE
-                </button>
 
             </article>
 
@@ -1338,18 +1281,6 @@
 
         let currentUser = null;
         let selectedAvatar = null;
-
-
-        /* ========================================
-           CHANGER DE CATÉGORIE
-        ======================================== */
-
-        function changerCategorie() {
-
-            window.location.href =
-                "interaction/lors_créature.html";
-
-        }
 
 
         /* ========================================
