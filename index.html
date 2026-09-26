@@ -894,7 +894,11 @@
 
             <!-- CREATURES -->
 
-            <article class="game-card">
+            <article
+                class="game-card"
+                onclick="window.location.href='interaction/lors_créature.html'"
+                style="cursor: pointer;"
+            >
 
                 <div class="card-icon">
                     👹
@@ -909,10 +913,18 @@
                 </h3>
 
                 <p>
-                    Chaque zone possède ses propres créatures.
-                    Certaines phases peuvent transformer
-                    une région calme en véritable piège.
+                    Découvrez les différentes créatures de Valdorian,
+                    leurs caractéristiques, leurs armes,
+                    leurs capacités et leur comportement.
                 </p>
+
+                <a
+                    href="interaction/lors_créature.html"
+                    class="combat-button"
+                    onclick="event.stopPropagation();"
+                >
+                    DÉCOUVRIR LES CRÉATURES
+                </a>
 
             </article>
 

@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Lore des créatures — Valdorian</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #08090c;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* ========================================
+           HEADER
+        ======================================== */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 72px;
+            z-index: 1000;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 45px;
+
+            background: rgba(7, 8, 11, 0.86);
+            backdrop-filter: blur(14px);
+
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: 4px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #c9a24a;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        nav a {
+            color: #d4d4d4;
+            text-decoration: none;
+
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 1px;
+
+            transition: 0.2s;
+        }
+
+        nav a:hover {
+            color: #c9a24a;
+        }
+
+        /* ========================================
+           HERO
+        ======================================== */
+
+        .hero {
+            min-height: 65vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+
+            padding: 120px 25px 80px;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(201, 162, 74, 0.13),
+                    transparent 40%
+                ),
+                linear-gradient(
+                    180deg,
+                    #111318,
+                    #08090c
+                );
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+
+            max-width: 900px;
+
+            text-align: center;
+        }
+
+        .status {
+            display: inline-block;
+
+            padding: 8px 16px;
+            margin-bottom: 25px;
+
+            border: 1px solid rgba(201, 162, 74, 0.55);
+            border-radius: 50px;
+
+            color: #d7b764;
+
+            background: rgba(201, 162, 74, 0.06);
+
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: clamp(55px, 10vw, 120px);
+
+            line-height: 0.9;
+
+            font-weight: 1000;
+
+            letter-spacing: 7px;
+
+            text-shadow:
+                0 15px 45px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero h1 span {
+            color: #c9a24a;
+        }
+
+        .hero p {
+            max-width: 700px;
+
+            margin: 30px auto 0;
+
+            color: #8f9198;
+
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        /* ========================================
+           MAIN
+        ======================================== */
+
+        main {
+            max-width: 1250px;
+
+            margin: auto;
+
+            padding: 80px 25px 120px;
+        }
+
+        .section-title {
+            text-align: center;
+
+            margin-bottom: 55px;
+        }
+
+        .section-title small {
+            color: #c9a24a;
+
+            font-size: 11px;
+            font-weight: 900;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+        }
+
+        .section-title h2 {
+            margin-top: 12px;
+
+            font-size: clamp(30px, 5vw, 48px);
+
+            letter-spacing: 1px;
+        }
+
+        .section-title p {
+            max-width: 700px;
+
+            margin: 15px auto 0;
+
+            color: #85878d;
+
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* ========================================
+           CREATURE GRID
+        ======================================== */
+
+        .creature-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+        .creature-card {
+            position: relative;
+
+            min-height: 500px;
+
+            padding: 30px;
+
+            display: flex;
+            flex-direction: column;
+
+            border-radius: 18px;
+
+            border: 1px solid rgba(255, 255, 255, 0.08);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.055),
+                    rgba(255, 255, 255, 0.012)
+                );
+
+            overflow: hidden;
+
+            transition:
+                transform 0.25s,
+                border-color 0.25s,
+                background 0.25s;
+        }
+
+        .creature-card::before {
+            content: "";
+
+            position: absolute;
+
+            width: 250px;
+            height: 250px;
+
+            top: -120px;
+            right: -120px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(201, 162, 74, 0.08);
+
+            transition: 0.3s;
+        }
+
+        .creature-card:hover {
+            transform: translateY(-8px);
+
+            border-color:
+                rgba(201, 162, 74, 0.4);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(201, 162, 74, 0.08),
+                    rgba(255, 255, 255, 0.02)
+                );
+        }
+
+        .creature-card:hover::before {
+            transform: scale(1.35);
+        }
+
+        .creature-number {
+            position: relative;
+            z-index: 2;
+
+            color:
+                rgba(201, 162, 74, 0.6);
+
+            font-size: 11px;
+            font-weight: 900;
+
+            letter-spacing: 3px;
+
+            margin-bottom: 12px;
+        }
+
+        .creature-icon {
+            position: relative;
+            z-index: 2;
+
+            font-size: 58px;
+
+            margin-bottom: 25px;
+        }
+
+        .creature-card h3 {
+            position: relative;
+            z-index: 2;
+
+            font-size: 29px;
+
+            margin-bottom: 8px;
+        }
+
+        .creature-type {
+            position: relative;
+            z-index: 2;
+
+            color: #c9a24a;
+
+            font-size: 11px;
+            font-weight: 900;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 20px;
+        }
+
+        .creature-description {
+            position: relative;
+            z-index: 2;
+
+            color: #9a9ba1;
+
+            font-size: 13px;
+
+            line-height: 1.75;
+
+            margin-bottom: 25px;
+        }
+
+        .info-list {
+            position: relative;
+            z-index: 2;
+
+            list-style: none;
+
+            display: flex;
+            flex-direction: column;
+
+            gap: 9px;
+        }
+
+        .info-list li {
+            color: #c2c3c7;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+
+            padding-left: 15px;
+
+            position: relative;
+        }
+
+        .info-list li::before {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            top: 7px;
+
+            width: 5px;
+            height: 5px;
+
+            border-radius: 50%;
+
+            background: #c9a24a;
+        }
+
+        .danger-badge {
+            display: inline-block;
+
+            margin-top: auto;
+
+            padding-top: 22px;
+
+            color: #d7b764;
+
+            font-size: 10px;
+            font-weight: 900;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+        }
+
+        /* ========================================
+           LORE COMPLET
+        ======================================== */
+
+        .lore-section {
+            margin-top: 110px;
+        }
+
+        .lore-box {
+            padding: 45px;
+
+            border-radius: 20px;
+
+            border:
+                1px solid rgba(201, 162, 74, 0.18);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(201, 162, 74, 0.055),
+                    rgba(255, 255, 255, 0.015)
+                );
+
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.25);
+        }
+
+        .lore-box h3 {
+            color: #c9a24a;
+
+            font-size: 12px;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 18px;
+        }
+
+        .lore-box h2 {
+            font-size: 34px;
+
+            margin-bottom: 25px;
+        }
+
+        .lore-box p {
+            color: #a0a1a7;
+
+            font-size: 14px;
+
+            line-height: 1.9;
+
+            margin-bottom: 18px;
+        }
+
+        /* ========================================
+           ZONES
+        ======================================== */
+
+        .zones-section {
+            margin-top: 120px;
+        }
+
+        .zone-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 20px;
+        }
+
+        .zone-card {
+            position: relative;
+
+            padding: 32px;
+
+            min-height: 300px;
+
+            border-radius: 18px;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.08);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.045),
+                    rgba(255, 255, 255, 0.012)
+                );
+
+            overflow: hidden;
+
+            transition: 0.25s;
+        }
+
+        .zone-card:hover {
+            transform: translateY(-5px);
+
+            border-color:
+                rgba(201, 162, 74, 0.35);
+        }
+
+        .zone-number {
+            color:
+                rgba(201, 162, 74, 0.55);
+
+            font-size: 11px;
+
+            font-weight: 900;
+
+            letter-spacing: 3px;
+
+            margin-bottom: 12px;
+        }
+
+        .zone-card h3 {
+            font-size: 25px;
+
+            margin-bottom: 15px;
+        }
+
+        .zone-card p {
+            color: #92949a;
+
+            font-size: 13px;
+
+            line-height: 1.75;
+        }
+
+        .zone-tag {
+            display: inline-block;
+
+            margin-top: 22px;
+
+            padding: 7px 11px;
+
+            border-radius: 5px;
+
+            background:
+                rgba(201, 162, 74, 0.08);
+
+            border:
+                1px solid rgba(201, 162, 74, 0.2);
+
+            color: #c9a24a;
+
+            font-size: 10px;
+
+            font-weight: 900;
+
+            letter-spacing: 1px;
+        }
+
+        /* ========================================
+           MORT
+        ======================================== */
+
+        .death-section {
+            margin-top: 120px;
+        }
+
+        .death-box {
+            padding: 45px;
+
+            border-radius: 20px;
+
+            border:
+                1px solid rgba(180, 50, 50, 0.2);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(130, 35, 35, 0.07),
+                    rgba(255, 255, 255, 0.01)
+                );
+        }
+
+        .death-box h2 {
+            font-size: 32px;
+
+            margin-bottom: 20px;
+        }
+
+        .death-box p {
+            color: #999ba1;
+
+            font-size: 14px;
+
+            line-height: 1.8;
+
+            margin-bottom: 20px;
+        }
+
+        .loss-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 15px;
+
+            margin-top: 25px;
+        }
+
+        .loss-card {
+            padding: 22px;
+
+            border-radius: 12px;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.07);
+
+            background:
+                rgba(0, 0, 0, 0.18);
+
+            text-align: center;
+        }
+
+        .loss-card strong {
+            display: block;
+
+            color: #c9a24a;
+
+            font-size: 27px;
+
+            margin-bottom: 7px;
+        }
+
+        .loss-card span {
+            color: #898b91;
+
+            font-size: 11px;
+        }
+
+        .protection-note {
+            margin-top: 25px;
+
+            padding: 17px 20px;
+
+            border-left:
+                3px solid #c9a24a;
+
+            background:
+                rgba(201, 162, 74, 0.05);
+
+            color: #aaa;
+
+            font-size: 12px;
+
+            line-height: 1.7;
+        }
+
+        /* ========================================
+           FOOTER
+        ======================================== */
+
+        footer {
+            padding: 35px 20px;
+
+            text-align: center;
+
+            color: #55565a;
+
+            font-size: 11px;
+
+            border-top:
+                1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        footer span {
+            color: #c9a24a;
+        }
+
+        /* ========================================
+           RESPONSIVE
+        ======================================== */
+
+        @media (max-width: 950px) {
+
+            header {
+                padding: 0 20px;
+            }
+
+            nav {
+                gap: 15px;
+            }
+
+            .creature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .zone-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .loss-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 650px) {
+
+            header {
+                height: 65px;
+            }
+
+            .logo {
+                font-size: 18px;
+                letter-spacing: 2px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hero {
+                min-height: 70vh;
+
+                padding:
+                    110px 20px 70px;
+            }
+
+            .hero h1 {
+                letter-spacing: 4px;
+            }
+
+            main {
+                padding:
+                    60px 20px 90px;
+            }
+
+            .lore-box,
+            .death-box {
+                padding: 28px 22px;
+            }
+
+            .zone-card {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ========================================
+         HEADER
+    ======================================== -->
+
+    <header>
+
+        <a
+            href="../index.html"
+            class="logo"
+        >
+            VALDOR<span>IAN</span>
+        </a>
+
+        <nav>
+
+            <a href="../index.html">
+                ACCUEIL
+            </a>
+
+            <a href="../index.html#univers">
+                UNIVERS
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ========================================
+         HERO
+    ======================================== -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="status">
+                LORE • CRÉATURES
+            </div>
+
+            <h1>
+                LES <span>CRÉATURES</span>
+            </h1>
+
+            <p>
+                Dans Valdorian, chaque région possède ses propres
+                dangers. Les créatures ne sont pas seulement des
+                ennemis : elles participent à l'évolution du monde,
+                aux risques des différentes zones et aux récompenses
+                que les joueurs peuvent obtenir.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================================
+         CONTENU
+    ======================================== -->
+
+    <main>
+
+
+        <!-- ========================================
+             CREATURES
+        ======================================== -->
+
+        <section>
+
+            <div class="section-title">
+
+                <small>
+                    Bestiaire
+                </small>
+
+                <h2>
+                    Les différents types de créatures
+                </h2>
+
+                <p>
+                    Trois grandes catégories de créatures sont
+                    actuellement connues dans le monde de Valdorian.
+                </p>
+
+            </div>
+
+
+            <div class="creature-grid">
+
+
+                <!-- ZERK -->
+
+                <article class="creature-card">
+
+                    <div class="creature-number">
+                        01 • ZERK
+                    </div>
+
+                    <div class="creature-icon">
+                        👹
+                    </div>
+
+                    <h3>
+                        Zerk
+                    </h3>
+
+                    <div class="creature-type">
+                        Chasseur léger
+                    </div>
+
+                    <p class="creature-description">
+                        Le Zerk est une créature grande et mince.
+                        Sa silhouette peut sembler fragile, mais
+                        sa mobilité en fait un adversaire dangereux.
+                        Il utilise principalement des équipements
+                        récupérés et assemblés à partir de morceaux
+                        de métal et de ferraille.
+                    </p>
+
+                    <ul class="info-list">
+
+                        <li>
+                            Taille : environ 1,30 m à 1,60 m
+                        </li>
+
+                        <li>
+                            Corps mince et grande silhouette
+                        </li>
+
+                        <li>
+                            Grandes oreilles
+                        </li>
+
+                        <li>
+                            Protection composée de morceaux de ferraille
+                        </li>
+
+                        <li>
+                            Armes variables selon les individus
+                        </li>
+
+                        <li>
+                            Peut utiliser une arbalète empoisonnée
+                        </li>
+
+                        <li>
+                            Peut utiliser des haches
+                        </li>
+
+                        <li>
+                            Peut utiliser un arc
+                        </li>
+
+                        <li>
+                            Peut utiliser des épées
+                        </li>
+
+                    </ul>
+
+                    <div class="danger-badge">
+                        Mobilité élevée
+                    </div>
+
+                </article>
+
+
+                <!-- ZIAK LOURD -->
+
+                <article class="creature-card">
+
+                    <div class="creature-number">
+                        02 • ZIAK LOURD
+                    </div>
+
+                    <div class="creature-icon">
+                        🛡️
+                    </div>
+
+                    <h3>
+                        Ziak lourd
+                    </h3>
+
+                    <div class="creature-type">
+                        Brute blindée
+                    </div>
+
+                    <p class="creature-description">
+                        Le Ziak lourd ressemble fortement au Ziak
+                        classique, mais sa constitution est beaucoup
+                        plus imposante. Son équipement et son poids
+                        le rendent lent, mais il possède une grande
+                        quantité de points de vie et inflige des
+                        dégâts importants.
+                    </p>
+
+                    <ul class="info-list">
+
+                        <li>
+                            Taille : environ 1,80 m à 2 m
+                        </li>
+
+                        <li>
+                            Apparence proche du Ziak normal
+                        </li>
+
+                        <li>
+                            Plus puissant que la version classique
+                        </li>
+
+                        <li>
+                            Déplacements plus lents
+                        </li>
+
+                        <li>
+                            Grande quantité de points de vie
+                        </li>
+
+                        <li>
+                            Porte un casque métallique
+                        </li>
+
+                        <li>
+                            Peut parfois porter un plastron fin
+                        </li>
+
+                        <li>
+                            Peut utiliser un gigantesque marteau
+                        </li>
+
+                        <li>
+                            Peut également utiliser des pointes
+                        </li>
+
+                    </ul>
+
+                    <div class="danger-badge">
+                        Résistance élevée
+                    </div>
+
+                </article>
+
+
+                <!-- ZYREN -->
+
+                <article class="creature-card">
+
+                    <div class="creature-number">
+                        03 • ZYREN
+                    </div>
+
+                    <div class="creature-icon">
+                        🔮
+                    </div>
+
+                    <h3>
+                        Zyren
+                    </h3>
+
+                    <div class="creature-type">
+                        Mage
+                    </div>
+
+                    <p class="creature-description">
+                        Le Zyren est une créature spécialisée dans
+                        les attaques magiques. Sa taille est proche
+                        de celle du joueur. Sa peau possède des
+                        teintes beige et marron tandis que ses
+                        vêtements sont sombres. Il ne porte aucune
+                        armure.
+                    </p>
+
+                    <ul class="info-list">
+
+                        <li>
+                            Taille proche de celle du joueur
+                        </li>
+
+                        <li>
+                            Couleurs beige et marron
+                        </li>
+
+                        <li>
+                            Vêtements sombres
+                        </li>
+
+                        <li>
+                            Aucune armure
+                        </li>
+
+                        <li>
+                            Arme : bâton avec une boule de cristal
+                        </li>
+
+                        <li>
+                            Très rapide
+                        </li>
+
+                        <li>
+                            Faible quantité de points de vie
+                        </li>
+
+                        <li>
+                            Peut soigner certains alliés
+                        </li>
+
+                        <li>
+                            Les soins sont très rares
+                        </li>
+
+                    </ul>
+
+                    <div class="danger-badge">
+                        Magie et mobilité
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             ATTAQUES ZYREN
+        ======================================== -->
+
+        <section class="lore-section">
+
+            <div class="section-title">
+
+                <small>
+                    Zyren
+                </small>
+
+                <h2>
+                    Techniques magiques
+                </h2>
+
+                <p>
+                    Le Zyren possède plusieurs techniques permettant
+                    de maintenir la pression sur ses adversaires.
+                </p>
+
+            </div>
+
+
+            <div class="lore-box">
+
+                <h3>
+                    Arsenal magique
+                </h3>
+
+                <h2>
+                    Les attaques du Zyren
+                </h2>
+
+
+                <p>
+                    <strong>Projectile rapide :</strong>
+                    le Zyren peut envoyer un projectile magique à
+                    grande vitesse. Cette attaque inflige des dégâts
+                    relativement faibles, mais sa rapidité la rend
+                    difficile à éviter.
+                </p>
+
+
+                <p>
+                    <strong>Sphère explosive :</strong>
+                    une sphère magique est projetée vers la cible.
+                    Elle se déplace plus lentement que le projectile
+                    rapide, mais provoque une explosion autour de son
+                    point d'impact.
+                </p>
+
+
+                <p>
+                    Plus la distance augmente, plus cette attaque
+                    laisse au joueur une possibilité de l'esquiver.
+                    Le danger principal vient de sa zone d'explosion.
+                </p>
+
+
+                <p>
+                    <strong>Soin :</strong>
+                    le Zyren peut parfois soigner une créature alliée.
+                    Cette capacité est extrêmement rare et ne se
+                    produit pas constamment.
+                </p>
+
+
+                <p>
+                    <strong>Rayons d'énergie :</strong>
+                    le Zyren peut créer jusqu'à quatre rayons
+                    d'énergie. Les dégâts initiaux sont très faibles,
+                    mais plus un rayon reste concentré sur un
+                    personnage, plus les dégâts augmentent.
+                </p>
+
+
+                <p>
+                    Les rayons restent actifs pendant une courte
+                    durée. Le joueur doit donc rapidement se déplacer
+                    afin d'empêcher le rayon de rester concentré sur
+                    lui.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             ZONES
+        ======================================== -->
+
+        <section class="zones-section">
+
+            <div class="section-title">
+
+                <small>
+                    Exploration
+                </small>
+
+                <h2>
+                    Les zones dangereuses
+                </h2>
+
+                <p>
+                    Toutes les régions de Valdorian ne présentent
+                    pas le même niveau de danger. Certaines sont
+                    accessibles immédiatement, tandis que d'autres
+                    nécessitent une progression particulière.
+                </p>
+
+            </div>
+
+
+            <div class="zone-grid">
+
+
+                <!-- ZONE 1 -->
+
+                <article class="zone-card">
+
+                    <div class="zone-number">
+                        ZONE 01
+                    </div>
+
+                    <h3>
+                        Zones à créatures basiques
+                    </h3>
+
+                    <p>
+                        Certaines régions sont principalement
+                        occupées par des créatures communes.
+                        Elles permettent aux joueurs de découvrir
+                        progressivement les mécaniques du monde
+                        et d'améliorer leur équipement.
+                    </p>
+
+                    <div class="zone-tag">
+                        DANGER MODÉRÉ
+                    </div>
+
+                </article>
+
+
+                <!-- ZONE 2 -->
+
+                <article class="zone-card">
+
+                    <div class="zone-number">
+                        ZONE 02
+                    </div>
+
+                    <h3>
+                        Environnements hostiles
+                    </h3>
+
+                    <p>
+                        Certaines zones deviennent dangereuses à
+                        cause de leur environnement. La lave,
+                        les obstacles, la mauvaise visibilité et
+                        les différents éléments présents autour du
+                        joueur peuvent rendre l'exploration beaucoup
+                        plus difficile.
+                    </p>
+
+                    <div class="zone-tag">
+                        ENVIRONNEMENT HOSTILE
+                    </div>
+
+                </article>
+
+
+                <!-- ZONE 3 -->
+
+                <article class="zone-card">
+
+                    <div class="zone-number">
+                        ZONE 03
+                    </div>
+
+                    <h3>
+                        Territoires avancés
+                    </h3>
+
+                    <p>
+                        Certaines régions sont réservées aux joueurs
+                        ayant atteint un niveau de progression
+                        suffisant. Les créatures y sont généralement
+                        plus dangereuses et les conditions
+                        d'exploration plus exigeantes.
+                    </p>
+
+                    <div class="zone-tag">
+                        PROGRESSION REQUISE
+                    </div>
+
+                </article>
+
+
+                <!-- ZONE 4 -->
+
+                <article class="zone-card">
+
+                    <div class="zone-number">
+                        ZONE 04
+                    </div>
+
+                    <h3>
+                        Zones verrouillées
+                    </h3>
+
+                    <p>
+                        Certaines régions sont totalement
+                        inaccessibles au début du jeu. Leur accès
+                        peut nécessiter des objets spéciaux ou
+                        atteindre un niveau de progression précis.
+                    </p>
+
+                    <div class="zone-tag">
+                        ACCÈS VERROUILLÉ
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             RISQUE / RECOMPENSE
+        ======================================== -->
+
+        <section class="lore-section">
+
+            <div class="section-title">
+
+                <small>
+                    Risque & récompense
+                </small>
+
+                <h2>
+                    Plus le danger augmente, plus les récompenses
+                    peuvent être importantes
+                </h2>
+
+                <p>
+                    Les zones difficiles offrent un risque plus
+                    important, mais peuvent également permettre
+                    d'obtenir un meilleur butin.
+                </p>
+
+            </div>
+
+
+            <div class="lore-box">
+
+                <h3>
+                    Exploration
+                </h3>
+
+                <h2>
+                    Le danger fait partie de la progression
+                </h2>
+
+                <p>
+                    Une zone plus dangereuse peut contenir des
+                    créatures plus puissantes, des environnements
+                    difficiles et davantage de contraintes pour
+                    le joueur.
+                </p>
+
+                <p>
+                    Ces zones peuvent cependant offrir des
+                    récompenses plus intéressantes. Le joueur doit
+                    donc décider jusqu'où il souhaite pousser son
+                    exploration avec son équipement actuel.
+                </p>
+
+                <p>
+                    Une mauvaise préparation peut transformer une
+                    expédition rentable en perte importante.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             MORT
+        ======================================== -->
+
+        <section class="death-section">
+
+            <div class="section-title">
+
+                <small>
+                    Conséquences
+                </small>
+
+                <h2>
+                    Que se passe-t-il à la mort ?
+                </h2>
+
+                <p>
+                    Mourir dans Valdorian entraîne une perte
+                    potentielle des ressources accumulées pendant
+                    l'exploration.
+                </p>
+
+            </div>
+
+
+            <div class="death-box">
+
+                <h2>
+                    Le prix de la défaite
+                </h2>
+
+                <p>
+                    Lorsque le joueur meurt, une partie de son argent
+                    peut être perdue. La quantité perdue est
+                    déterminée parmi plusieurs valeurs possibles.
+                </p>
+
+
+                <div class="loss-grid">
+
+                    <div class="loss-card">
+
+                        <strong>
+                            10 %
+                        </strong>
+
+                        <span>
+                            Perte possible de l'argent
+                        </span>
+
+                    </div>
+
+
+                    <div class="loss-card">
+
+                        <strong>
+                            20 %
+                        </strong>
+
+                        <span>
+                            Perte possible de l'argent
+                        </span>
+
+                    </div>
+
+
+                    <div class="loss-card">
+
+                        <strong>
+                            30 %
+                        </strong>
+
+                        <span>
+                            Perte possible de l'argent
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <p style="margin-top: 25px;">
+                    En plus de cette perte d'argent, le joueur
+                    possède également une chance de perdre un objet
+                    aléatoire présent dans son inventaire.
+                </p>
+
+
+                <div class="protection-note">
+
+                    <strong>
+                        Équipement protégé :
+                    </strong>
+
+                    les armes et les armures ne peuvent pas être
+                    perdues lors de cette perte aléatoire d'objet.
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             CONCLUSION LORE
+        ======================================== -->
+
+        <section class="lore-section">
+
+            <div class="lore-box">
+
+                <h3>
+                    Le monde de Valdorian
+                </h3>
+
+                <h2>
+                    Un monde où chaque expédition compte
+                </h2>
+
+                <p>
+                    Les créatures, les zones et les conséquences de
+                    la mort forment ensemble un système dans lequel
+                    chaque sortie peut devenir différente.
+                </p>
+
+                <p>
+                    Un joueur peut choisir d'explorer une région
+                    relativement sûre pour progresser tranquillement,
+                    ou tenter de s'aventurer dans une zone beaucoup
+                    plus dangereuse afin de rechercher un meilleur
+                    butin.
+                </p>
+
+                <p>
+                    La connaissance des créatures et de leur
+                    environnement devient donc aussi importante que
+                    l'équipement du joueur.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ========================================
+         FOOTER
+    ======================================== -->
+
+    <footer>
+
+        VALDORIAN
+        <span>•</span>
+        LORE DES CRÉATURES
+        <span>•</span>
+        UNIVERS EN DÉVELOPPEMENT
+
+    </footer>
+
+</body>
+</html>
