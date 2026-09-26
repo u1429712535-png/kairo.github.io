@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Lore des créatures — Valdorian</title>
+    <title>Valdorian</title>
 
     <style>
         * {
@@ -42,9 +42,8 @@
 
             padding: 0 45px;
 
-            background: rgba(7, 8, 11, 0.86);
+            background: rgba(7, 8, 11, 0.82);
             backdrop-filter: blur(14px);
-
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
@@ -53,7 +52,6 @@
             font-weight: 900;
             letter-spacing: 4px;
             color: white;
-            text-decoration: none;
         }
 
         .logo span {
@@ -63,36 +61,48 @@
         nav {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 35px;
         }
 
         nav a {
             color: #d4d4d4;
             text-decoration: none;
-
-            font-size: 13px;
-            font-weight: 800;
+            font-size: 14px;
+            font-weight: 700;
             letter-spacing: 1px;
-
-            padding: 10px 14px;
-            border-radius: 7px;
-
             transition: 0.2s;
         }
 
         nav a:hover {
             color: #c9a24a;
+        }
+
+        .account-button {
+            border: 1px solid rgba(201, 162, 74, 0.5);
             background: rgba(201, 162, 74, 0.08);
+            color: white;
+
+            padding: 10px 17px;
+            border-radius: 8px;
+
+            cursor: pointer;
+            font-weight: 700;
+
+            transition: 0.2s;
         }
 
-        nav a.active {
-            color: #111;
-            background: #c9a24a;
+        .account-button:hover {
+            background: rgba(201, 162, 74, 0.2);
+            border-color: #c9a24a;
         }
 
-        nav a.active:hover {
-            color: #111;
-            background: #e0bb65;
+        .account-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+            vertical-align: middle;
+            margin-right: 7px;
         }
 
         /* ========================================
@@ -100,7 +110,7 @@
         ======================================== */
 
         .hero {
-            min-height: 65vh;
+            min-height: 100vh;
 
             display: flex;
             align-items: center;
@@ -108,157 +118,205 @@
 
             position: relative;
 
-            padding: 120px 25px 80px;
-
-            background:
-                radial-gradient(
-                    circle at center,
-                    rgba(201, 162, 74, 0.13),
-                    transparent 40%
-                ),
+            background-image:
                 linear-gradient(
-                    180deg,
-                    #111318,
-                    #08090c
-                );
+                    rgba(5, 6, 8, 0.25),
+                    rgba(5, 6, 8, 0.88)
+                ),
+                url("image/Gemini_Generated_Image_3yxzcq3yxzcq3yxz.jpg");
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 180px;
+
+            background: linear-gradient(
+                transparent,
+                #08090c
+            );
         }
 
         .hero-content {
             position: relative;
             z-index: 2;
 
-            max-width: 900px;
-
             text-align: center;
+
+            margin-top: 60px;
         }
 
-        .status {
+        .status-badge {
             display: inline-block;
 
             padding: 8px 16px;
             margin-bottom: 25px;
 
-            border: 1px solid rgba(201, 162, 74, 0.55);
+            border: 1px solid rgba(201, 162, 74, 0.6);
             border-radius: 50px;
+
+            background: rgba(0, 0, 0, 0.35);
 
             color: #d7b764;
 
-            background: rgba(201, 162, 74, 0.06);
-
-            font-size: 11px;
-            font-weight: 900;
-            letter-spacing: 3px;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2px;
             text-transform: uppercase;
         }
 
-        .hero h1 {
-            font-size: clamp(55px, 10vw, 120px);
-
+        .hero-title {
+            font-size: clamp(65px, 11vw, 150px);
             line-height: 0.9;
 
             font-weight: 1000;
-
-            letter-spacing: 7px;
+            letter-spacing: 8px;
 
             text-shadow:
-                0 15px 45px rgba(0, 0, 0, 0.8);
+                0 10px 35px rgba(0, 0, 0, 0.8);
         }
 
-        .hero h1 span {
+        .hero-title span {
             color: #c9a24a;
         }
 
-        .hero p {
-            max-width: 700px;
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
 
-            margin: 30px auto 0;
+            margin-top: 45px;
+        }
 
-            color: #8f9198;
+        .hero-button {
+            min-width: 150px;
 
-            font-size: 15px;
-            line-height: 1.8;
+            padding: 15px 25px;
+
+            border-radius: 7px;
+
+            text-decoration: none;
+
+            font-size: 13px;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+
+            transition:
+                transform 0.2s,
+                background 0.2s,
+                border-color 0.2s;
+        }
+
+        .hero-button:hover {
+            transform: translateY(-3px);
+        }
+
+        .primary-button {
+            background: #c9a24a;
+            color: #101010;
+            border: 1px solid #c9a24a;
+        }
+
+        .primary-button:hover {
+            background: #e0bb65;
+        }
+
+        .secondary-button {
+            background: rgba(255, 255, 255, 0.04);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+
+        .secondary-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
         }
 
         /* ========================================
-           MAIN
+           UNIVERS
         ======================================== */
 
-        main {
-            max-width: 1250px;
+        .universe {
+            position: relative;
 
-            margin: auto;
+            padding: 100px 7% 130px;
 
-            padding: 80px 25px 120px;
+            background:
+                radial-gradient(
+                    circle at 50% 0%,
+                    rgba(201, 162, 74, 0.08),
+                    transparent 45%
+                ),
+                #08090c;
         }
 
-        .section-title {
+        .section-header {
             text-align: center;
-
-            margin-bottom: 55px;
+            margin-bottom: 60px;
         }
 
-        .section-title small {
+        .section-header small {
             color: #c9a24a;
-
             font-size: 11px;
             font-weight: 900;
-
             letter-spacing: 3px;
-
             text-transform: uppercase;
         }
 
-        .section-title h2 {
+        .section-header h2 {
             margin-top: 12px;
 
-            font-size: clamp(30px, 5vw, 48px);
-
-            letter-spacing: 1px;
+            font-size: clamp(30px, 4vw, 48px);
+            letter-spacing: 2px;
         }
 
-        .section-title p {
-            max-width: 700px;
-
+        .section-header p {
+            max-width: 600px;
             margin: 15px auto 0;
 
             color: #85878d;
-
             font-size: 14px;
             line-height: 1.7;
         }
 
         /* ========================================
-           CREATURE GRID
+           GAME CARDS
         ======================================== */
 
-        .creature-grid {
+        .game-grid {
+            max-width: 1250px;
+            margin: auto;
+
             display: grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
-
-            gap: 20px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
         }
 
-        .creature-card {
+        .game-card {
             position: relative;
 
-            min-height: 500px;
+            min-height: 235px;
 
             padding: 30px;
 
             display: flex;
             flex-direction: column;
-
-            border-radius: 18px;
+            justify-content: flex-end;
 
             border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
 
             background:
                 linear-gradient(
                     145deg,
                     rgba(255, 255, 255, 0.055),
-                    rgba(255, 255, 255, 0.012)
+                    rgba(255, 255, 255, 0.015)
                 );
 
             overflow: hidden;
@@ -269,30 +327,27 @@
                 background 0.25s;
         }
 
-        .creature-card::before {
+        .game-card::before {
             content: "";
 
             position: absolute;
+            top: -100px;
+            right: -100px;
 
-            width: 250px;
-            height: 250px;
-
-            top: -120px;
-            right: -120px;
+            width: 220px;
+            height: 220px;
 
             border-radius: 50%;
 
-            background:
-                rgba(201, 162, 74, 0.08);
+            background: rgba(201, 162, 74, 0.07);
 
             transition: 0.3s;
         }
 
-        .creature-card:hover {
-            transform: translateY(-8px);
+        .game-card:hover {
+            transform: translateY(-7px);
 
-            border-color:
-                rgba(201, 162, 74, 0.4);
+            border-color: rgba(201, 162, 74, 0.4);
 
             background:
                 linear-gradient(
@@ -302,380 +357,132 @@
                 );
         }
 
-        .creature-card:hover::before {
+        .game-card:hover::before {
             transform: scale(1.35);
         }
 
-        .creature-number {
-            position: relative;
-            z-index: 2;
-
-            color:
-                rgba(201, 162, 74, 0.6);
-
-            font-size: 11px;
-            font-weight: 900;
-
-            letter-spacing: 3px;
-
-            margin-bottom: 12px;
-        }
-
-        .creature-icon {
-            position: relative;
-            z-index: 2;
-
-            font-size: 58px;
-
-            margin-bottom: 25px;
-        }
-
-        .creature-card h3 {
-            position: relative;
-            z-index: 2;
-
-            font-size: 29px;
-
-            margin-bottom: 8px;
-        }
-
-        .creature-type {
-            position: relative;
-            z-index: 2;
-
-            color: #c9a24a;
-
-            font-size: 11px;
-            font-weight: 900;
-
-            letter-spacing: 2px;
-
-            text-transform: uppercase;
-
-            margin-bottom: 20px;
-        }
-
-        .creature-description {
-            position: relative;
-            z-index: 2;
-
-            color: #9a9ba1;
-
-            font-size: 13px;
-
-            line-height: 1.75;
-
-            margin-bottom: 25px;
-        }
-
-        .info-list {
-            position: relative;
-            z-index: 2;
-
-            list-style: none;
-
-            display: flex;
-            flex-direction: column;
-
-            gap: 9px;
-        }
-
-        .info-list li {
-            color: #c2c3c7;
-
-            font-size: 12px;
-
-            line-height: 1.5;
-
-            padding-left: 15px;
-
-            position: relative;
-        }
-
-        .info-list li::before {
-            content: "";
-
+        .card-icon {
             position: absolute;
 
-            left: 0;
-            top: 7px;
+            top: 28px;
+            right: 30px;
 
-            width: 5px;
-            height: 5px;
+            font-size: 38px;
 
-            border-radius: 50%;
-
-            background: #c9a24a;
+            filter: grayscale(10%);
         }
 
-        .danger-badge {
+        .card-number {
+            color: rgba(201, 162, 74, 0.55);
+
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 2px;
+
+            margin-bottom: 10px;
+        }
+
+        .game-card h3 {
+            font-size: 23px;
+            margin-bottom: 10px;
+
+            letter-spacing: 0.5px;
+        }
+
+        .game-card p {
+            color: #96979c;
+
+            font-size: 13px;
+            line-height: 1.65;
+
+            max-width: 380px;
+        }
+
+        /* ========================================
+           LARGE CARDS
+        ======================================== */
+
+        .game-card.large {
+            grid-column: span 2;
+        }
+
+        /* ========================================
+           BOUTON COMBAT
+        ======================================== */
+
+        .combat-button {
             display: inline-block;
 
-            margin-top: auto;
+            margin-top: 18px;
 
-            padding-top: 22px;
+            width: fit-content;
+
+            padding: 10px 16px;
+
+            border-radius: 7px;
+
+            background: rgba(201, 162, 74, 0.12);
+            border: 1px solid rgba(201, 162, 74, 0.45);
 
             color: #d7b764;
 
-            font-size: 10px;
-            font-weight: 900;
-
-            letter-spacing: 2px;
-
-            text-transform: uppercase;
-        }
-
-        /* ========================================
-           LORE
-        ======================================== */
-
-        .lore-section {
-            margin-top: 110px;
-        }
-
-        .lore-box {
-            padding: 45px;
-
-            border-radius: 20px;
-
-            border:
-                1px solid rgba(201, 162, 74, 0.18);
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(201, 162, 74, 0.055),
-                    rgba(255, 255, 255, 0.015)
-                );
-
-            box-shadow:
-                0 30px 80px rgba(0, 0, 0, 0.25);
-        }
-
-        .lore-box h3 {
-            color: #c9a24a;
-
-            font-size: 12px;
-
-            letter-spacing: 3px;
-
-            text-transform: uppercase;
-
-            margin-bottom: 18px;
-        }
-
-        .lore-box h2 {
-            font-size: 34px;
-
-            margin-bottom: 25px;
-        }
-
-        .lore-box p {
-            color: #a0a1a7;
-
-            font-size: 14px;
-
-            line-height: 1.9;
-
-            margin-bottom: 18px;
-        }
-
-        /* ========================================
-           ZONES
-        ======================================== */
-
-        .zones-section {
-            margin-top: 120px;
-        }
-
-        .zone-grid {
-            display: grid;
-
-            grid-template-columns:
-                repeat(2, 1fr);
-
-            gap: 20px;
-        }
-
-        .zone-card {
-            position: relative;
-
-            padding: 32px;
-
-            min-height: 300px;
-
-            border-radius: 18px;
-
-            border:
-                1px solid rgba(255, 255, 255, 0.08);
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(255, 255, 255, 0.045),
-                    rgba(255, 255, 255, 0.012)
-                );
-
-            overflow: hidden;
-
-            transition: 0.25s;
-        }
-
-        .zone-card:hover {
-            transform: translateY(-5px);
-
-            border-color:
-                rgba(201, 162, 74, 0.35);
-        }
-
-        .zone-number {
-            color:
-                rgba(201, 162, 74, 0.55);
+            text-decoration: none;
 
             font-size: 11px;
-
             font-weight: 900;
+            letter-spacing: 1px;
 
-            letter-spacing: 3px;
-
-            margin-bottom: 12px;
+            transition: 0.2s;
         }
 
-        .zone-card h3 {
-            font-size: 25px;
+        .combat-button:hover {
+            background: #c9a24a;
+            color: #111;
 
-            margin-bottom: 15px;
+            transform: translateY(-2px);
         }
 
-        .zone-card p {
-            color: #92949a;
+        /* ========================================
+           NOUVEAU BOUTON CHANGER DE CATÉGORIE
+        ======================================== */
 
-            font-size: 13px;
-
-            line-height: 1.75;
-        }
-
-        .zone-tag {
+        .category-change-button {
             display: inline-block;
 
-            margin-top: 22px;
+            margin-top: 10px;
 
-            padding: 7px 11px;
+            width: fit-content;
 
-            border-radius: 5px;
+            padding: 10px 16px;
 
-            background:
-                rgba(201, 162, 74, 0.08);
+            border-radius: 7px;
 
-            border:
-                1px solid rgba(201, 162, 74, 0.2);
-
-            color: #c9a24a;
-
-            font-size: 10px;
-
-            font-weight: 900;
-
-            letter-spacing: 1px;
-        }
-
-        /* ========================================
-           MORT
-        ======================================== */
-
-        .death-section {
-            margin-top: 120px;
-        }
-
-        .death-box {
-            padding: 45px;
-
-            border-radius: 20px;
-
-            border:
-                1px solid rgba(180, 50, 50, 0.2);
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(130, 35, 35, 0.07),
-                    rgba(255, 255, 255, 0.01)
-                );
-        }
-
-        .death-box h2 {
-            font-size: 32px;
-
-            margin-bottom: 20px;
-        }
-
-        .death-box p {
-            color: #999ba1;
-
-            font-size: 14px;
-
-            line-height: 1.8;
-
-            margin-bottom: 20px;
-        }
-
-        .loss-grid {
-            display: grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
-
-            gap: 15px;
-
-            margin-top: 25px;
-        }
-
-        .loss-card {
-            padding: 22px;
-
-            border-radius: 12px;
-
-            border:
-                1px solid rgba(255, 255, 255, 0.07);
-
-            background:
-                rgba(0, 0, 0, 0.18);
-
-            text-align: center;
-        }
-
-        .loss-card strong {
-            display: block;
-
-            color: #c9a24a;
-
-            font-size: 27px;
-
-            margin-bottom: 7px;
-        }
-
-        .loss-card span {
-            color: #898b91;
-
-            font-size: 11px;
-        }
-
-        .protection-note {
-            margin-top: 25px;
-
-            padding: 17px 20px;
-
-            border-left:
-                3px solid #c9a24a;
-
-            background:
-                rgba(201, 162, 74, 0.05);
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
 
             color: #aaa;
 
-            font-size: 12px;
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 1px;
 
-            line-height: 1.7;
+            cursor: pointer;
+
+            transition:
+                background 0.2s,
+                border-color 0.2s,
+                color 0.2s,
+                transform 0.2s;
+        }
+
+        .category-change-button:hover {
+            background: rgba(201, 162, 74, 0.08);
+
+            border-color: #c9a24a;
+
+            color: #c9a24a;
+
+            transform: translateY(-2px);
         }
 
         /* ========================================
@@ -683,7 +490,7 @@
         ======================================== */
 
         footer {
-            padding: 35px 20px;
+            padding: 30px 20px;
 
             text-align: center;
 
@@ -691,43 +498,257 @@
 
             font-size: 11px;
 
-            border-top:
-                1px solid rgba(255, 255, 255, 0.06);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
         }
 
-        footer span {
-            color: #c9a24a;
+        /* ========================================
+           MODAL
+        ======================================== */
+
+        .modal {
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 5000;
+
+            display: none;
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            background: rgba(0, 0, 0, 0.78);
+            backdrop-filter: blur(8px);
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-box {
+            width: 100%;
+            max-width: 440px;
+
+            max-height: 90vh;
+            overflow-y: auto;
+
+            padding: 30px;
+
+            border: 1px solid rgba(201, 162, 74, 0.25);
+            border-radius: 18px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #15171c,
+                    #0b0c0f
+                );
+
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.65);
+
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+
+            top: 15px;
+            right: 18px;
+
+            border: none;
+            background: transparent;
+
+            color: #777;
+
+            font-size: 25px;
+
+            cursor: pointer;
+        }
+
+        .close-modal:hover {
+            color: white;
+        }
+
+        .warning-container {
+            display: none;
+
+            text-align: center;
+
+            margin-bottom: 20px;
+        }
+
+        .warning-container.active {
+            display: block;
+        }
+
+        .warning-container img {
+            width: 96px;
+            height: 96px;
+
+            object-fit: contain;
+        }
+
+        .modal-title {
+            text-align: center;
+
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .modal-subtitle {
+            text-align: center;
+
+            color: #85878d;
+
+            font-size: 13px;
+            line-height: 1.6;
+
+            margin-bottom: 25px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+
+            color: #aaa;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            margin-bottom: 7px;
+        }
+
+        .input-group input {
+            width: 100%;
+
+            padding: 13px 14px;
+
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+
+            outline: none;
+
+            background: #090a0d;
+            color: white;
+
+            font-size: 14px;
+        }
+
+        .input-group input:focus {
+            border-color: rgba(201, 162, 74, 0.7);
+        }
+
+        .modal-button {
+            width: 100%;
+
+            padding: 13px;
+
+            border: none;
+            border-radius: 8px;
+
+            background: #c9a24a;
+            color: #111;
+
+            font-weight: 900;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .modal-button:hover {
+            background: #e0bb65;
+        }
+
+        .secondary-modal-button {
+            margin-top: 10px;
+
+            background: rgba(255, 255, 255, 0.07);
+            color: white;
+        }
+
+        .secondary-modal-button:hover {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .message {
+            min-height: 20px;
+
+            margin: 10px 0;
+
+            text-align: center;
+
+            color: #d7b764;
+
+            font-size: 12px;
+        }
+
+        .verification-section,
+        .profile-section {
+            display: none;
+        }
+
+        .verification-section.active,
+        .profile-section.active {
+            display: block;
+        }
+
+        .profile-avatar-wrapper {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-avatar {
+            width: 90px;
+            height: 90px;
+
+            border-radius: 50%;
+
+            object-fit: cover;
+
+            border: 2px solid rgba(201, 162, 74, 0.6);
+        }
+
+        .logout-button {
+            margin-top: 10px;
+
+            background: rgba(180, 50, 50, 0.12);
+            color: #e58b8b;
+        }
+
+        .logout-button:hover {
+            background: rgba(180, 50, 50, 0.2);
         }
 
         /* ========================================
            RESPONSIVE
         ======================================== */
 
-        @media (max-width: 950px) {
+        @media (max-width: 900px) {
 
             header {
                 padding: 0 20px;
             }
 
             nav {
-                gap: 5px;
+                gap: 15px;
             }
 
             nav a {
                 font-size: 11px;
-                padding: 8px 9px;
             }
 
-            .creature-grid {
-                grid-template-columns: 1fr;
+            .game-grid {
+                grid-template-columns: 1fr 1fr;
             }
 
-            .zone-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .loss-grid {
-                grid-template-columns: 1fr;
+            .game-card.large {
+                grid-column: span 2;
             }
         }
 
@@ -746,26 +767,42 @@
                 display: none;
             }
 
-            .hero {
-                min-height: 70vh;
-                padding: 110px 20px 70px;
+            .account-button {
+                padding: 8px 12px;
+                font-size: 11px;
             }
 
-            .hero h1 {
+            .hero-title {
                 letter-spacing: 4px;
             }
 
-            main {
-                padding: 60px 20px 90px;
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
             }
 
-            .lore-box,
-            .death-box {
-                padding: 28px 22px;
+            .hero-button {
+                width: 210px;
             }
 
-            .zone-card {
-                padding: 25px;
+            .universe {
+                padding: 75px 20px 90px;
+            }
+
+            .game-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .game-card.large {
+                grid-column: span 1;
+            }
+
+            .game-card {
+                min-height: 220px;
+            }
+
+            .modal-box {
+                padding: 25px 20px;
             }
         }
     </style>
@@ -779,31 +816,22 @@
 
     <header>
 
-        <a
-            href="../index.html"
-            class="logo"
-        >
+        <div class="logo">
             VALDOR<span>IAN</span>
-        </a>
+        </div>
 
         <nav>
-
-            <a href="../index.html">
-                ACCUEIL
-            </a>
-
-            <a href="../index.html#univers">
-                UNIVERS
-            </a>
-
-            <a
-                href="lors_créature.html"
-                class="active"
-            >
-                CRÉATURES
-            </a>
-
+            <a href="index.html">ACCUEIL</a>
+            <a href="#univers">UNIVERS</a>
         </nav>
+
+        <button
+            id="accountButton"
+            class="account-button"
+            onclick="handleAccountButton()"
+        >
+            COMPTE
+        </button>
 
     </header>
 
@@ -816,21 +844,32 @@
 
         <div class="hero-content">
 
-            <div class="status">
-                LORE • CRÉATURES
+            <div class="status-badge">
+                Développement en cours
             </div>
 
-            <h1>
-                LES <span>CRÉATURES</span>
+            <h1 class="hero-title">
+                VALDOR<span>IAN</span>
             </h1>
 
-            <p>
-                Dans Valdorian, chaque région possède ses propres
-                dangers. Les créatures ne sont pas seulement des
-                ennemis : elles participent à l'évolution du monde,
-                aux risques des différentes zones et aux récompenses
-                que les joueurs peuvent obtenir.
-            </p>
+            <div class="hero-buttons">
+
+                <a
+                    href="interface/play.html"
+                    class="hero-button primary-button"
+                    onclick="return handlePlay(event)"
+                >
+                    JOUER
+                </a>
+
+                <a
+                    href="#univers"
+                    class="hero-button secondary-button"
+                >
+                    DÉCOUVRIR
+                </a>
+
+            </div>
 
         </div>
 
@@ -838,666 +877,186 @@
 
 
     <!-- ========================================
-         CONTENU
+         UNIVERS
     ======================================== -->
 
-    <main>
+    <section
+        id="univers"
+        class="universe"
+    >
 
-        <!-- ========================================
-             CREATURES
-        ======================================== -->
+        <div class="section-header">
 
-        <section id="creatures">
+            <small>L'univers de Valdorian</small>
 
-            <div class="section-title">
+            <h2>Un monde qui évolue avec vous</h2>
 
-                <small>
-                    Bestiaire
-                </small>
+            <p>
+                Explorez, combattez, construisez et survivez
+                dans un monde influencé par ses créatures,
+                ses zones et ses phases.
+            </p>
 
-                <h2>
-                    Les différents types de créatures
-                </h2>
+        </div>
 
-                <p>
-                    Trois grandes catégories de créatures sont
-                    actuellement connues dans le monde de Valdorian.
-                </p>
 
-            </div>
+        <div class="game-grid">
 
+            <!-- COMBAT -->
 
-            <div class="creature-grid">
+            <article class="game-card large">
 
-                <!-- ZERK -->
-
-                <article class="creature-card">
-
-                    <div class="creature-number">
-                        01 • ZERK
-                    </div>
-
-                    <div class="creature-icon">
-                        👹
-                    </div>
-
-                    <h3>
-                        Zerk
-                    </h3>
-
-                    <div class="creature-type">
-                        Chasseur léger
-                    </div>
-
-                    <p class="creature-description">
-                        Le Zerk est une créature grande et mince.
-                        Sa silhouette peut sembler fragile, mais
-                        sa mobilité en fait un adversaire dangereux.
-                        Il utilise principalement des équipements
-                        récupérés et assemblés à partir de morceaux
-                        de métal et de ferraille.
-                    </p>
-
-                    <ul class="info-list">
-
-                        <li>
-                            Taille : environ 1,30 m à 1,60 m
-                        </li>
-
-                        <li>
-                            Corps mince et grande silhouette
-                        </li>
-
-                        <li>
-                            Grandes oreilles
-                        </li>
-
-                        <li>
-                            Protection composée de morceaux de ferraille
-                        </li>
-
-                        <li>
-                            Armes variables selon les individus
-                        </li>
-
-                        <li>
-                            Peut utiliser une arbalète empoisonnée
-                        </li>
-
-                        <li>
-                            Peut utiliser des haches
-                        </li>
-
-                        <li>
-                            Peut utiliser un arc
-                        </li>
-
-                        <li>
-                            Peut utiliser des épées
-                        </li>
-
-                    </ul>
-
-                    <div class="danger-badge">
-                        Mobilité élevée
-                    </div>
-
-                </article>
-
-
-                <!-- ZIAK LOURD -->
-
-                <article class="creature-card">
-
-                    <div class="creature-number">
-                        02 • ZIAK LOURD
-                    </div>
-
-                    <div class="creature-icon">
-                        🛡️
-                    </div>
-
-                    <h3>
-                        Ziak lourd
-                    </h3>
-
-                    <div class="creature-type">
-                        Brute blindée
-                    </div>
-
-                    <p class="creature-description">
-                        Le Ziak lourd ressemble fortement au Ziak
-                        classique, mais sa constitution est beaucoup
-                        plus imposante. Son équipement et son poids
-                        le rendent lent, mais il possède une grande
-                        quantité de points de vie et inflige des
-                        dégâts importants.
-                    </p>
-
-                    <ul class="info-list">
-
-                        <li>
-                            Taille : environ 1,80 m à 2 m
-                        </li>
-
-                        <li>
-                            Apparence proche du Ziak normal
-                        </li>
-
-                        <li>
-                            Plus puissant que la version classique
-                        </li>
-
-                        <li>
-                            Déplacements plus lents
-                        </li>
-
-                        <li>
-                            Grande quantité de points de vie
-                        </li>
-
-                        <li>
-                            Porte un casque métallique
-                        </li>
-
-                        <li>
-                            Peut parfois porter un plastron fin
-                        </li>
-
-                        <li>
-                            Peut utiliser un gigantesque marteau
-                        </li>
-
-                        <li>
-                            Peut également utiliser des pointes
-                        </li>
-
-                    </ul>
-
-                    <div class="danger-badge">
-                        Résistance élevée
-                    </div>
-
-                </article>
-
-
-                <!-- ZYREN -->
-
-                <article class="creature-card">
-
-                    <div class="creature-number">
-                        03 • ZYREN
-                    </div>
-
-                    <div class="creature-icon">
-                        🔮
-                    </div>
-
-                    <h3>
-                        Zyren
-                    </h3>
-
-                    <div class="creature-type">
-                        Mage
-                    </div>
-
-                    <p class="creature-description">
-                        Le Zyren est une créature spécialisée dans
-                        les attaques magiques. Sa taille est proche
-                        de celle du joueur. Sa peau possède des
-                        teintes beige et marron tandis que ses
-                        vêtements sont sombres. Il ne porte aucune
-                        armure.
-                    </p>
-
-                    <ul class="info-list">
-
-                        <li>
-                            Taille proche de celle du joueur
-                        </li>
-
-                        <li>
-                            Couleurs beige et marron
-                        </li>
-
-                        <li>
-                            Vêtements sombres
-                        </li>
-
-                        <li>
-                            Aucune armure
-                        </li>
-
-                        <li>
-                            Arme : bâton avec une boule de cristal
-                        </li>
-
-                        <li>
-                            Très rapide
-                        </li>
-
-                        <li>
-                            Faible quantité de points de vie
-                        </li>
-
-                        <li>
-                            Peut soigner certains alliés
-                        </li>
-
-                        <li>
-                            Les soins sont très rares
-                        </li>
-
-                    </ul>
-
-                    <div class="danger-badge">
-                        Magie et mobilité
-                    </div>
-
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- ========================================
-             ATTAQUES ZYREN
-        ======================================== -->
-
-        <section class="lore-section">
-
-            <div class="section-title">
-
-                <small>
-                    Zyren
-                </small>
-
-                <h2>
-                    Techniques magiques
-                </h2>
-
-                <p>
-                    Le Zyren possède plusieurs techniques permettant
-                    de maintenir la pression sur ses adversaires.
-                </p>
-
-            </div>
-
-
-            <div class="lore-box">
-
-                <h3>
-                    Arsenal magique
-                </h3>
-
-                <h2>
-                    Les attaques du Zyren
-                </h2>
-
-                <p>
-                    <strong>Projectile rapide :</strong>
-                    le Zyren peut envoyer un projectile magique à
-                    grande vitesse. Cette attaque inflige des dégâts
-                    relativement faibles, mais sa rapidité la rend
-                    difficile à éviter.
-                </p>
-
-                <p>
-                    <strong>Sphère explosive :</strong>
-                    une sphère magique est projetée vers la cible.
-                    Elle se déplace plus lentement que le projectile
-                    rapide, mais provoque une explosion autour de son
-                    point d'impact.
-                </p>
-
-                <p>
-                    Plus la distance augmente, plus cette attaque
-                    laisse au joueur une possibilité de l'esquiver.
-                    Le danger principal vient de sa zone d'explosion.
-                </p>
-
-                <p>
-                    <strong>Soin :</strong>
-                    le Zyren peut parfois soigner une créature alliée.
-                    Cette capacité est extrêmement rare et ne se
-                    produit pas constamment.
-                </p>
-
-                <p>
-                    <strong>Rayons d'énergie :</strong>
-                    le Zyren peut créer jusqu'à quatre rayons
-                    d'énergie. Les dégâts initiaux sont très faibles,
-                    mais plus un rayon reste concentré sur un
-                    personnage, plus les dégâts augmentent.
-                </p>
-
-                <p>
-                    Les rayons restent actifs pendant une courte
-                    durée. Le joueur doit donc rapidement se déplacer
-                    afin d'empêcher le rayon de rester concentré sur
-                    lui.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- ========================================
-             ZONES
-        ======================================== -->
-
-        <section class="zones-section">
-
-            <div class="section-title">
-
-                <small>
-                    Exploration
-                </small>
-
-                <h2>
-                    Les zones dangereuses
-                </h2>
-
-                <p>
-                    Toutes les régions de Valdorian ne présentent
-                    pas le même niveau de danger. Certaines sont
-                    accessibles immédiatement, tandis que d'autres
-                    nécessitent une progression particulière.
-                </p>
-
-            </div>
-
-
-            <div class="zone-grid">
-
-                <article class="zone-card">
-
-                    <div class="zone-number">
-                        ZONE 01
-                    </div>
-
-                    <h3>
-                        Zones à créatures basiques
-                    </h3>
-
-                    <p>
-                        Certaines régions sont principalement
-                        occupées par des créatures communes.
-                        Elles permettent aux joueurs de découvrir
-                        progressivement les mécaniques du monde
-                        et d'améliorer leur équipement.
-                    </p>
-
-                    <div class="zone-tag">
-                        DANGER MODÉRÉ
-                    </div>
-
-                </article>
-
-
-                <article class="zone-card">
-
-                    <div class="zone-number">
-                        ZONE 02
-                    </div>
-
-                    <h3>
-                        Environnements hostiles
-                    </h3>
-
-                    <p>
-                        Certaines zones deviennent dangereuses à
-                        cause de leur environnement. La lave,
-                        les obstacles, la mauvaise visibilité et
-                        les différents éléments présents autour du
-                        joueur peuvent rendre l'exploration beaucoup
-                        plus difficile.
-                    </p>
-
-                    <div class="zone-tag">
-                        ENVIRONNEMENT HOSTILE
-                    </div>
-
-                </article>
-
-
-                <article class="zone-card">
-
-                    <div class="zone-number">
-                        ZONE 03
-                    </div>
-
-                    <h3>
-                        Territoires avancés
-                    </h3>
-
-                    <p>
-                        Certaines régions sont réservées aux joueurs
-                        ayant atteint un niveau de progression
-                        suffisant. Les créatures y sont généralement
-                        plus dangereuses et les conditions
-                        d'exploration plus exigeantes.
-                    </p>
-
-                    <div class="zone-tag">
-                        PROGRESSION REQUISE
-                    </div>
-
-                </article>
-
-
-                <article class="zone-card">
-
-                    <div class="zone-number">
-                        ZONE 04
-                    </div>
-
-                    <h3>
-                        Zones verrouillées
-                    </h3>
-
-                    <p>
-                        Certaines régions sont totalement
-                        inaccessibles au début du jeu. Leur accès
-                        peut nécessiter des objets spéciaux ou
-                        atteindre un niveau de progression précis.
-                    </p>
-
-                    <div class="zone-tag">
-                        ACCÈS VERROUILLÉ
-                    </div>
-
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- ========================================
-             RISQUE / RECOMPENSE
-        ======================================== -->
-
-        <section class="lore-section">
-
-            <div class="section-title">
-
-                <small>
-                    Risque & récompense
-                </small>
-
-                <h2>
-                    Plus le danger augmente, plus les récompenses
-                    peuvent être importantes
-                </h2>
-
-                <p>
-                    Les zones difficiles offrent un risque plus
-                    important, mais peuvent également permettre
-                    d'obtenir un meilleur butin.
-                </p>
-
-            </div>
-
-
-            <div class="lore-box">
-
-                <h3>
-                    Exploration
-                </h3>
-
-                <h2>
-                    Le danger fait partie de la progression
-                </h2>
-
-                <p>
-                    Une zone plus dangereuse peut contenir des
-                    créatures plus puissantes, des environnements
-                    difficiles et davantage de contraintes pour
-                    le joueur.
-                </p>
-
-                <p>
-                    Ces zones peuvent cependant offrir des
-                    récompenses plus intéressantes. Le joueur doit
-                    donc décider jusqu'où il souhaite pousser son
-                    exploration avec son équipement actuel.
-                </p>
-
-                <p>
-                    Une mauvaise préparation peut transformer une
-                    expédition rentable en perte importante.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- ========================================
-             MORT
-        ======================================== -->
-
-        <section class="death-section">
-
-            <div class="section-title">
-
-                <small>
-                    Conséquences
-                </small>
-
-                <h2>
-                    Que se passe-t-il à la mort ?
-                </h2>
-
-                <p>
-                    Mourir dans Valdorian entraîne une perte
-                    potentielle des ressources accumulées pendant
-                    l'exploration.
-                </p>
-
-            </div>
-
-
-            <div class="death-box">
-
-                <h2>
-                    Le prix de la défaite
-                </h2>
-
-                <p>
-                    Lorsque le joueur meurt, une partie de son argent
-                    peut être perdue. La quantité perdue est
-                    déterminée parmi plusieurs valeurs possibles.
-                </p>
-
-
-                <div class="loss-grid">
-
-                    <div class="loss-card">
-                        <strong>10 %</strong>
-                        <span>Perte possible de l'argent</span>
-                    </div>
-
-                    <div class="loss-card">
-                        <strong>20 %</strong>
-                        <span>Perte possible de l'argent</span>
-                    </div>
-
-                    <div class="loss-card">
-                        <strong>30 %</strong>
-                        <span>Perte possible de l'argent</span>
-                    </div>
-
+                <div class="card-icon">
+                    ⚔️
                 </div>
 
-
-                <p style="margin-top: 25px;">
-                    En plus de cette perte d'argent, le joueur
-                    possède également une chance de perdre un objet
-                    aléatoire présent dans son inventaire.
-                </p>
-
-
-                <div class="protection-note">
-
-                    <strong>
-                        Équipement protégé :
-                    </strong>
-
-                    les armes et les armures ne peuvent pas être
-                    perdues lors de cette perte aléatoire d'objet.
-
+                <div class="card-number">
+                    01
                 </div>
 
-            </div>
-
-        </section>
-
-
-        <!-- ========================================
-             CONCLUSION
-        ======================================== -->
-
-        <section class="lore-section">
-
-            <div class="lore-box">
-
                 <h3>
-                    Le monde de Valdorian
+                    Combat
                 </h3>
 
-                <h2>
-                    Un monde où chaque expédition compte
-                </h2>
-
                 <p>
-                    Les créatures, les zones et les conséquences de
-                    la mort forment ensemble un système dans lequel
-                    chaque sortie peut devenir différente.
+                    Affrontez des vagues de monstres en mode survie.
+                    Chaque élimination vous rapporte de l'argent,
+                    permettant d'améliorer vos armes et votre progression.
                 </p>
 
-                <p>
-                    Un joueur peut choisir d'explorer une région
-                    relativement sûre pour progresser tranquillement,
-                    ou tenter de s'aventurer dans une zone beaucoup
-                    plus dangereuse afin de rechercher un meilleur
-                    butin.
-                </p>
+                <a
+                    href="interface/lors_combat.html"
+                    class="combat-button"
+                >
+                    ACCÉDER AU COMBAT
+                </a>
+
+            </article>
+
+
+            <!-- CREATURES -->
+
+            <article
+                class="game-card"
+                onclick="window.location.href='interaction/lors_créature.html'"
+                style="cursor: pointer;"
+            >
+
+                <div class="card-icon">
+                    👹
+                </div>
+
+                <div class="card-number">
+                    02
+                </div>
+
+                <h3>
+                    Créatures
+                </h3>
 
                 <p>
-                    La connaissance des créatures et de leur
-                    environnement devient donc aussi importante que
-                    l'équipement du joueur.
+                    Découvrez les différentes créatures de Valdorian,
+                    leurs caractéristiques, leurs armes,
+                    leurs capacités et leur comportement.
                 </p>
 
-            </div>
+                <a
+                    href="interaction/lors_créature.html"
+                    class="combat-button"
+                    onclick="event.stopPropagation();"
+                >
+                    DÉCOUVRIR LES CRÉATURES
+                </a>
 
-        </section>
+                <!-- BOUTON POUR CHANGER DE CATÉGORIE -->
 
-    </main>
+                <button
+                    class="category-change-button"
+                    onclick="event.stopPropagation(); changerCategorie();"
+                >
+                    CHANGER DE CATÉGORIE
+                </button>
+
+            </article>
+
+
+            <!-- MONDE -->
+
+            <article class="game-card">
+
+                <div class="card-icon">
+                    🌍
+                </div>
+
+                <div class="card-number">
+                    03
+                </div>
+
+                <h3>
+                    Monde
+                </h3>
+
+                <p>
+                    Explorez une vaste carte. Les distances comptent :
+                    certains trajets prennent du temps et nécessitent
+                    parfois un moyen de déplacement.
+                </p>
+
+            </article>
+
+
+            <!-- MAISON -->
+
+            <article class="game-card">
+
+                <div class="card-icon">
+                    🏠
+                </div>
+
+                <div class="card-number">
+                    04
+                </div>
+
+                <h3>
+                    Maison
+                </h3>
+
+                <p>
+                    Votre refuge vous permet de fabriquer des armes,
+                    améliorer votre équipement, vendre des objets
+                    et construire différentes installations.
+                </p>
+
+            </article>
+
+
+            <!-- PHASES -->
+
+            <article class="game-card">
+
+                <div class="card-icon">
+                    🌙
+                </div>
+
+                <div class="card-number">
+                    05
+                </div>
+
+                <h3>
+                    Phases
+                </h3>
+
+                <p>
+                    Les phases modifient le comportement du monde.
+                    Certains jours sont parfaits pour sortir,
+                    d'autres rendent même votre refuge vulnérable.
+                </p>
+
+            </article>
+
+        </div>
+
+    </section>
 
 
     <!-- ========================================
@@ -1505,14 +1064,1270 @@
     ======================================== -->
 
     <footer>
-
-        VALDORIAN
-        <span>•</span>
-        LORE DES CRÉATURES
-        <span>•</span>
-        UNIVERS EN DÉVELOPPEMENT
-
+        VALDORIAN • Univers en développement
     </footer>
+
+
+    <!-- ========================================
+         MODAL COMPTE
+    ======================================== -->
+
+    <div
+        id="loginModal"
+        class="modal"
+    >
+
+        <div class="modal-box">
+
+            <button
+                class="close-modal"
+                onclick="closeLoginModal()"
+            >
+                ×
+            </button>
+
+
+            <!-- AVERTISSEMENT -->
+
+            <div
+                id="warningContainer"
+                class="warning-container"
+            >
+
+                <img
+                    src="969291-attention.gif"
+                    alt="Attention"
+                >
+
+            </div>
+
+
+            <!-- CONNEXION -->
+
+            <div id="loginSection">
+
+                <h2 class="modal-title">
+                    Connexion
+                </h2>
+
+                <p class="modal-subtitle">
+                    Connectez-vous pour accéder à Valdorian.
+                </p>
+
+
+                <div class="input-group">
+
+                    <label for="emailInput">
+                        Adresse e-mail
+                    </label>
+
+                    <input
+                        id="emailInput"
+                        type="email"
+                        placeholder="votre@email.com"
+                        autocomplete="email"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="passwordInput">
+                        Mot de passe
+                    </label>
+
+                    <input
+                        id="passwordInput"
+                        type="password"
+                        placeholder="Votre mot de passe"
+                        autocomplete="new-password"
+                    >
+
+                </div>
+
+
+                <button
+                    class="modal-button"
+                    onclick="sendCode()"
+                >
+                    CONTINUER
+                </button>
+
+
+                <div
+                    id="loginMessage"
+                    class="message"
+                ></div>
+
+            </div>
+
+
+            <!-- VERIFICATION -->
+
+            <div
+                id="verificationSection"
+                class="verification-section"
+            >
+
+                <h2 class="modal-title">
+                    Vérification
+                </h2>
+
+                <p class="modal-subtitle">
+                    Un code de vérification vient d'être envoyé
+                    à votre adresse e-mail.
+                </p>
+
+
+                <div class="input-group">
+
+                    <label for="codeInput">
+                        Code à 6 chiffres
+                    </label>
+
+                    <input
+                        id="codeInput"
+                        type="text"
+                        inputmode="numeric"
+                        maxlength="6"
+                        placeholder="000000"
+                    >
+
+                </div>
+
+
+                <button
+                    class="modal-button"
+                    onclick="verifyCode()"
+                >
+                    VÉRIFIER
+                </button>
+
+
+                <button
+                    class="modal-button secondary-modal-button"
+                    onclick="resendCode()"
+                >
+                    Renvoyer le code
+                </button>
+
+
+                <div
+                    id="verificationMessage"
+                    class="message"
+                ></div>
+
+            </div>
+
+
+            <!-- PROFIL -->
+
+            <div
+                id="profileSection"
+                class="profile-section"
+            >
+
+                <h2 class="modal-title">
+                    Mon profil
+                </h2>
+
+                <p class="modal-subtitle">
+                    Gérez vos informations Valdorian.
+                </p>
+
+
+                <div class="profile-avatar-wrapper">
+
+                    <img
+                        id="profileAvatar"
+                        class="profile-avatar"
+                        src=""
+                        alt="Avatar"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="displayNameInput">
+                        Nom affiché
+                    </label>
+
+                    <input
+                        id="displayNameInput"
+                        type="text"
+                        maxlength="32"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="usernameInput">
+                        Nom d'utilisateur
+                    </label>
+
+                    <input
+                        id="usernameInput"
+                        type="text"
+                        maxlength="20"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="avatarInput">
+                        Avatar
+                    </label>
+
+                    <input
+                        id="avatarInput"
+                        type="file"
+                        accept="image/png,image/jpeg,image/webp"
+                    >
+
+                </div>
+
+
+                <button
+                    class="modal-button"
+                    onclick="saveProfile()"
+                >
+                    ENREGISTRER
+                </button>
+
+
+                <button
+                    class="modal-button logout-button"
+                    onclick="logout()"
+                >
+                    SE DÉCONNECTER
+                </button>
+
+
+                <div
+                    id="profileMessage"
+                    class="message"
+                ></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================
+         JAVASCRIPT
+    ======================================== -->
+
+    <script>
+
+        /* ========================================
+           CONFIGURATION WORKER
+        ======================================== */
+
+        const API_URL =
+            "https://valdorian-verification.u1429712535.workers.dev";
+
+
+        let currentUser = null;
+        let selectedAvatar = null;
+
+
+        /* ========================================
+           CHANGER DE CATÉGORIE
+        ======================================== */
+
+        function changerCategorie() {
+
+            window.location.href =
+                "interaction/lors_créature.html";
+
+        }
+
+
+        /* ========================================
+           TOKEN
+        ======================================== */
+
+        function getToken() {
+
+            return localStorage.getItem(
+                "valdorian_session"
+            );
+
+        }
+
+
+        /* ========================================
+           MODAL
+        ======================================== */
+
+        function openLoginModal(showWarning = false) {
+
+            document
+                .getElementById("loginModal")
+                .classList.add("active");
+
+            document
+                .getElementById("warningContainer")
+                .classList.toggle(
+                    "active",
+                    showWarning
+                );
+
+            document
+                .getElementById("loginSection")
+                .style.display = "block";
+
+            document
+                .getElementById("verificationSection")
+                .classList.remove("active");
+
+            document
+                .getElementById("profileSection")
+                .classList.remove("active");
+
+        }
+
+
+        function closeLoginModal() {
+
+            document
+                .getElementById("loginModal")
+                .classList.remove("active");
+
+        }
+
+
+        /* ========================================
+           BOUTON JOUER
+        ======================================== */
+
+        function handlePlay(event) {
+
+            event.preventDefault();
+
+            if (currentUser) {
+
+                window.location.href =
+                    "interface/play.html";
+
+                return false;
+
+            }
+
+            sessionStorage.setItem(
+                "valdorian_play_after_login",
+                "true"
+            );
+
+            openLoginModal(true);
+
+            return false;
+
+        }
+
+
+        /* ========================================
+           COMPTE
+        ======================================== */
+
+        function handleAccountButton() {
+
+            if (currentUser) {
+
+                openProfile();
+
+            } else {
+
+                openLoginModal(false);
+
+            }
+
+        }
+
+
+        /* ========================================
+           ENVOYER LE CODE
+        ======================================== */
+
+        async function sendCode() {
+
+            const email =
+                document
+                    .getElementById("emailInput")
+                    .value
+                    .trim();
+
+            const password =
+                document
+                    .getElementById("passwordInput")
+                    .value;
+
+            const message =
+                document.getElementById(
+                    "loginMessage"
+                );
+
+
+            if (!email) {
+
+                message.textContent =
+                    "Veuillez entrer votre adresse e-mail.";
+
+                return;
+
+            }
+
+
+            if (!password) {
+
+                message.textContent =
+                    "Veuillez entrer votre mot de passe.";
+
+                return;
+
+            }
+
+
+            message.textContent =
+                "Envoi du code...";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        API_URL + "/send-code",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+                                email,
+                                password
+                            })
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    message.textContent =
+                        data.error ||
+                        data.message ||
+                        "Impossible d'envoyer le code.";
+
+                    return;
+
+                }
+
+
+                message.textContent = "";
+
+
+                document
+                    .getElementById("loginSection")
+                    .style.display = "none";
+
+
+                document
+                    .getElementById("verificationSection")
+                    .classList.add("active");
+
+
+                document
+                    .getElementById("codeInput")
+                    .focus();
+
+            } catch (error) {
+
+                console.error(
+                    "Erreur sendCode :",
+                    error
+                );
+
+                message.textContent =
+                    "Impossible de contacter Valdorian.";
+
+            }
+
+        }
+
+
+        /* ========================================
+           RENVOYER LE CODE
+        ======================================== */
+
+        async function resendCode() {
+
+            const email =
+                document
+                    .getElementById("emailInput")
+                    .value
+                    .trim();
+
+            const message =
+                document.getElementById(
+                    "verificationMessage"
+                );
+
+
+            message.textContent =
+                "Envoi du nouveau code...";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        API_URL + "/resend-code",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+                                email
+                            })
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    message.textContent =
+                        data.error ||
+                        data.message ||
+                        "Impossible de renvoyer le code.";
+
+                    return;
+
+                }
+
+
+                message.textContent =
+                    data.message ||
+                    "Nouveau code envoyé par e-mail.";
+
+            } catch (error) {
+
+                console.error(
+                    "Erreur resendCode :",
+                    error
+                );
+
+                message.textContent =
+                    "Impossible de contacter Valdorian.";
+
+            }
+
+        }
+
+
+        /* ========================================
+           VERIFIER LE CODE
+        ======================================== */
+
+        async function verifyCode() {
+
+            const email =
+                document
+                    .getElementById("emailInput")
+                    .value
+                    .trim();
+
+            const code =
+                document
+                    .getElementById("codeInput")
+                    .value
+                    .trim();
+
+            const message =
+                document.getElementById(
+                    "verificationMessage"
+                );
+
+
+            if (!/^\d{6}$/.test(code)) {
+
+                message.textContent =
+                    "Le code doit contenir 6 chiffres.";
+
+                return;
+
+            }
+
+
+            message.textContent =
+                "Vérification...";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        API_URL + "/verify-code",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+                                email,
+                                code
+                            })
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    message.textContent =
+                        data.error ||
+                        data.message ||
+                        "Code incorrect.";
+
+                    return;
+
+                }
+
+
+                localStorage.setItem(
+                    "valdorian_session",
+                    data.token
+                );
+
+
+                currentUser =
+                    data.user;
+
+
+                updateAccountButton();
+
+
+                const playAfterLogin =
+                    sessionStorage.getItem(
+                        "valdorian_play_after_login"
+                    );
+
+
+                if (playAfterLogin === "true") {
+
+                    sessionStorage.removeItem(
+                        "valdorian_play_after_login"
+                    );
+
+                    window.location.href =
+                        "interface/play.html";
+
+                    return;
+
+                }
+
+
+                document
+                    .getElementById("verificationSection")
+                    .classList.remove("active");
+
+
+                document
+                    .getElementById("profileSection")
+                    .classList.add("active");
+
+
+                loadProfile();
+
+            } catch (error) {
+
+                console.error(
+                    "Erreur verifyCode :",
+                    error
+                );
+
+                message.textContent =
+                    "Impossible de contacter Valdorian.";
+
+            }
+
+        }
+
+
+        /* ========================================
+           PROFIL
+        ======================================== */
+
+        function openProfile() {
+
+            openLoginModal(false);
+
+
+            document
+                .getElementById("loginSection")
+                .style.display = "none";
+
+
+            document
+                .getElementById("verificationSection")
+                .classList.remove("active");
+
+
+            document
+                .getElementById("profileSection")
+                .classList.add("active");
+
+
+            loadProfile();
+
+        }
+
+
+        function loadProfile() {
+
+            if (!currentUser) {
+                return;
+            }
+
+
+            document
+                .getElementById("displayNameInput")
+                .value =
+                currentUser.displayName ||
+                currentUser.username ||
+                "";
+
+
+            document
+                .getElementById("usernameInput")
+                .value =
+                currentUser.username ||
+                "";
+
+
+            document
+                .getElementById("profileAvatar")
+                .src =
+                currentUser.avatar ||
+                createDefaultAvatar(
+                    currentUser.username
+                );
+
+        }
+
+
+        /* ========================================
+           AVATAR
+        ======================================== */
+
+        document
+            .getElementById("avatarInput")
+            .addEventListener(
+                "change",
+                function () {
+
+                    const file =
+                        this.files[0];
+
+
+                    if (!file) {
+                        return;
+                    }
+
+
+                    if (file.size > 500000) {
+
+                        document
+                            .getElementById(
+                                "profileMessage"
+                            )
+                            .textContent =
+                            "Image trop volumineuse. Maximum 500 Ko.";
+
+                        this.value = "";
+
+                        return;
+
+                    }
+
+
+                    const reader =
+                        new FileReader();
+
+
+                    reader.onload =
+                        function (event) {
+
+                            selectedAvatar =
+                                event.target.result;
+
+
+                            document
+                                .getElementById(
+                                    "profileAvatar"
+                                )
+                                .src =
+                                selectedAvatar;
+
+                        };
+
+
+                    reader.readAsDataURL(file);
+
+                }
+            );
+
+
+        /* ========================================
+           SAUVEGARDER PROFIL
+        ======================================== */
+
+        async function saveProfile() {
+
+            if (!currentUser) {
+                return;
+            }
+
+
+            const displayName =
+                document
+                    .getElementById(
+                        "displayNameInput"
+                    )
+                    .value
+                    .trim();
+
+
+            const username =
+                document
+                    .getElementById(
+                        "usernameInput"
+                    )
+                    .value
+                    .trim();
+
+
+            const message =
+                document.getElementById(
+                    "profileMessage"
+                );
+
+
+            message.textContent =
+                "Enregistrement...";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        API_URL + "/profile",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json",
+
+                                "Authorization":
+                                    "Bearer " +
+                                    getToken()
+                            },
+
+                            body: JSON.stringify({
+                                displayName,
+                                username,
+                                avatar:
+                                    selectedAvatar ||
+                                    currentUser.avatar ||
+                                    null
+                            })
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    message.textContent =
+                        data.error ||
+                        data.message ||
+                        "Impossible d'enregistrer.";
+
+                    return;
+
+                }
+
+
+                currentUser =
+                    data.user;
+
+
+                selectedAvatar = null;
+
+
+                updateAccountButton();
+
+                loadProfile();
+
+
+                message.textContent =
+                    "Profil enregistré.";
+
+            } catch (error) {
+
+                console.error(
+                    "Erreur saveProfile :",
+                    error
+                );
+
+                message.textContent =
+                    "Erreur de connexion.";
+
+            }
+
+        }
+
+
+        /* ========================================
+           LOGOUT
+        ======================================== */
+
+        async function logout() {
+
+            const token =
+                getToken();
+
+
+            try {
+
+                if (token) {
+
+                    await fetch(
+                        API_URL + "/logout",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Authorization":
+                                    "Bearer " + token
+                            }
+                        }
+                    );
+
+                }
+
+            } catch (error) {
+
+                console.error(
+                    "Erreur logout :",
+                    error
+                );
+
+            }
+
+
+            localStorage.removeItem(
+                "valdorian_session"
+            );
+
+
+            currentUser = null;
+
+            selectedAvatar = null;
+
+
+            updateAccountButton();
+
+            closeLoginModal();
+
+        }
+
+
+        /* ========================================
+           SESSION
+        ======================================== */
+
+        async function checkSession() {
+
+            const token =
+                getToken();
+
+
+            if (!token) {
+
+                currentUser = null;
+
+                updateAccountButton();
+
+                return;
+
+            }
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        API_URL + "/profile",
+                        {
+                            method: "GET",
+
+                            headers: {
+                                "Authorization":
+                                    "Bearer " + token
+                            }
+                        }
+                    );
+
+
+                if (!response.ok) {
+
+                    localStorage.removeItem(
+                        "valdorian_session"
+                    );
+
+                    currentUser = null;
+
+                    updateAccountButton();
+
+                    return;
+
+                }
+
+
+                const data =
+                    await response.json();
+
+
+                currentUser =
+                    data.user;
+
+
+                updateAccountButton();
+
+            } catch (error) {
+
+                console.error(
+                    "Erreur checkSession :",
+                    error
+                );
+
+                currentUser = null;
+
+                updateAccountButton();
+
+            }
+
+        }
+
+
+        /* ========================================
+           BOUTON COMPTE
+        ======================================== */
+
+        function updateAccountButton() {
+
+            const button =
+                document.getElementById(
+                    "accountButton"
+                );
+
+
+            if (!button) {
+                return;
+            }
+
+
+            if (currentUser) {
+
+                const avatar =
+                    currentUser.avatar ||
+                    createDefaultAvatar(
+                        currentUser.username
+                    );
+
+
+                button.innerHTML =
+                    `<img
+                        src="${avatar}"
+                        class="account-avatar"
+                        alt=""
+                    >${escapeHtml(
+                        currentUser.username
+                    )}`;
+
+            } else {
+
+                button.textContent =
+                    "COMPTE";
+
+            }
+
+        }
+
+
+        /* ========================================
+           AVATAR PAR DEFAUT
+        ======================================== */
+
+        function createDefaultAvatar(username) {
+
+            const letter =
+                (username || "V")
+                    .charAt(0)
+                    .toUpperCase();
+
+
+            const svg = `
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="100"
+                    height="100"
+                >
+
+                    <rect
+                        width="100"
+                        height="100"
+                        rx="50"
+                        fill="#c9a24a"
+                    />
+
+                    <text
+                        x="50"
+                        y="62"
+                        text-anchor="middle"
+                        font-size="50"
+                        font-family="Arial"
+                        fill="#111"
+                    >
+                        ${letter}
+                    </text>
+
+                </svg>
+            `;
+
+
+            return "data:image/svg+xml;charset=UTF-8," +
+                encodeURIComponent(svg);
+
+        }
+
+
+        /* ========================================
+           SECURITE AFFICHAGE
+        ======================================== */
+
+        function escapeHtml(text) {
+
+            const div =
+                document.createElement("div");
+
+
+            div.textContent =
+                text || "";
+
+
+            return div.innerHTML;
+
+        }
+
+
+        /* ========================================
+           INITIALISATION
+        ======================================== */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            async function () {
+
+                await checkSession();
+
+
+                const params =
+                    new URLSearchParams(
+                        window.location.search
+                    );
+
+
+                if (
+                    params.get("login") === "true"
+                ) {
+
+                    if (currentUser) {
+
+                        openProfile();
+
+                    } else {
+
+                        openLoginModal(false);
+
+                    }
+
+
+                    history.replaceState(
+                        {},
+                        document.title,
+                        window.location.pathname
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* ========================================
+           FERMER MODAL EN CLIQUANT A COTE
+        ======================================== */
+
+        document
+            .getElementById("loginModal")
+            .addEventListener(
+                "click",
+                function (event) {
+
+                    if (event.target === this) {
+
+                        closeLoginModal();
+
+                    }
+
+                }
+            );
+
+    </script>
 
 </body>
 </html>
