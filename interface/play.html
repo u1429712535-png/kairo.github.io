@@ -8,7 +8,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0">
 
-    <title>Valdorian - Jeu</title>
+    <title>Valdorian - Bientôt disponible</title>
 
     <style>
 
@@ -111,8 +111,6 @@
         }
 
 
-        /* IMAGE */
-
         .icon-container {
             width: 128px;
             height: 128px;
@@ -157,8 +155,6 @@
         }
 
 
-        /* TEXTE */
-
         .badge {
             display: inline-block;
 
@@ -187,17 +183,6 @@
         }
 
 
-        .warning-badge {
-            background:
-                rgba(255, 180, 60, 0.08);
-
-            border-color:
-                rgba(255, 180, 60, 0.25);
-
-            color: #ffc15c;
-        }
-
-
         h1 {
             font-size:
                 clamp(35px, 6vw, 58px);
@@ -212,11 +197,6 @@
 
         .highlight {
             color: #6fa5ff;
-        }
-
-
-        .warning-highlight {
-            color: #ffc15c;
         }
 
 
@@ -310,98 +290,37 @@
         }
 
 
-        /* BOUTONS */
-
-        .buttons {
-            display: flex;
-
-            justify-content: center;
-
-            gap: 12px;
-
-            flex-wrap: wrap;
+        .back-button {
+            display: inline-block;
 
             margin-top: 35px;
-        }
-
-
-        .back-button,
-        .login-button {
-            display: inline-block;
 
             padding: 12px 22px;
 
             border-radius: 9px;
 
-            font-size: 14px;
+            background: white;
 
-            font-weight: bold;
+            color: black;
 
             text-decoration: none;
 
-            cursor: pointer;
+            font-size: 14px;
+
+            font-weight: bold;
 
             transition: 0.2s;
         }
 
 
-        .back-button {
-            background: white;
-
-            color: black;
-        }
-
-
-        .login-button {
-            background:
-                #6fa5ff;
-
-            color: white;
-
-            border: none;
-
-            box-shadow:
-                0 8px 25px
-                rgba(76, 141, 255, 0.2);
-        }
-
-
-        .back-button:hover,
-        .login-button:hover {
-            transform: translateY(-3px);
-        }
-
-
         .back-button:hover {
+            transform: translateY(-3px);
+
             background: #e5e5e5;
 
             box-shadow:
                 0 10px 25px
                 rgba(0, 0, 0, 0.3);
-        }
-
-
-        .login-button:hover {
-            background: #568ff0;
-
-            box-shadow:
-                0 12px 30px
-                rgba(76, 141, 255, 0.3);
-        }
-
-
-        /* CACHER LA PAGE AVANT LA VERIFICATION */
-
-        #loading {
-            text-align: center;
-            color: #777f8c;
-            font-size: 14px;
-        }
-
-
-        #gameContent,
-        #loginRequired {
-            display: none;
         }
 
 
@@ -412,15 +331,15 @@
             }
 
             .icon-container {
-                width: 128px;
-                height: 128px;
+                width: 110px;
+                height: 110px;
 
                 border-radius: 25px;
             }
 
             .icon-container img {
-                width: 96px;
-                height: 96px;
+                width: 82px;
+                height: 82px;
             }
 
             h1 {
@@ -436,27 +355,7 @@
 
 <body>
 
-
-    <!-- CHARGEMENT -->
-
-    <div
-        class="container"
-        id="loading">
-
-        Vérification de votre session...
-
-    </div>
-
-
-
-    <!-- ==========================
-         PAGE JEU
-    =========================== -->
-
-    <main
-        class="container"
-        id="gameContent">
-
+    <main class="container">
 
         <div class="icon-container">
 
@@ -473,10 +372,7 @@
 
 
         <h1>
-            Bientôt
-            <span class="highlight">
-                disponible
-            </span>
+            Bientôt <span class="highlight">disponible</span>
         </h1>
 
 
@@ -487,20 +383,15 @@
 
             <br><br>
 
-            L'aventure sera bientôt prête pour
-            <strong>2027</strong>.
-
-            Une nouvelle histoire se prépare,
-            avec ses royaumes, ses combats,
-            ses mystères et ses dangers.
+            L'aventure sera bientôt prête pour <strong>2027</strong>.
+            Une nouvelle histoire se prépare, avec ses royaumes,
+            ses combats, ses mystères et ses dangers.
 
             <br><br>
 
-            Ne rate pas ta chance de découvrir
-            Valdorian dès son lancement.
-
-            Chaque détail est actuellement travaillé
-            pour donner vie à cet univers.
+            Ne rate pas ta chance de découvrir Valdorian
+            dès son lancement. Chaque détail est actuellement
+            travaillé pour donner vie à cet univers.
 
             <br><br>
 
@@ -530,240 +421,16 @@
         </div>
 
 
-        <div class="buttons">
+        <a
+            href="../index.html"
+            class="back-button">
 
-            <a
-                href="../index.html"
-                class="back-button">
+            Retour à Valdorian
 
-                Retour à Valdorian
-
-            </a>
-
-        </div>
+        </a>
 
 
     </main>
-
-
-
-    <!-- ==========================
-         NON CONNECTÉ
-    =========================== -->
-
-    <main
-        class="container"
-        id="loginRequired">
-
-
-        <div class="icon-container">
-
-            <img
-                src="../image/243490-attention.gif"
-                alt="Attention">
-
-        </div>
-
-
-        <div class="badge warning-badge">
-            Accès requis
-        </div>
-
-
-        <h1>
-            Connexion
-            <span class="warning-highlight">
-                requise
-            </span>
-        </h1>
-
-
-        <p class="description">
-
-            Tu dois être connecté à ton compte
-            Valdorian pour accéder à cette page.
-
-            <br><br>
-
-            Connecte-toi à ton compte pour continuer
-            et découvrir l'aventure qui se prépare
-            pour <strong>2027</strong>.
-
-        </p>
-
-
-        <div class="divider"></div>
-
-
-        <div class="status">
-
-            <span class="status-dot"></span>
-
-            <span>
-                Authentification nécessaire
-            </span>
-
-        </div>
-
-
-        <div class="buttons">
-
-            <a
-                href="../index.html?login=true"
-                class="login-button">
-
-                Se connecter
-
-            </a>
-
-
-            <a
-                href="../index.html"
-                class="back-button">
-
-                Retour
-
-            </a>
-
-        </div>
-
-
-    </main>
-
-
-
-    <script>
-
-        const API_URL =
-            "https://valdorian-verification.u1429712535.workers.dev";
-
-
-        async function checkAccess() {
-
-            const token =
-                localStorage.getItem(
-                    "valdorian_session"
-                );
-
-
-            /* Aucun token */
-
-            if (!token) {
-
-                showLoginRequired();
-
-                return;
-
-            }
-
-
-            try {
-
-                const response =
-                    await fetch(
-                        `${API_URL}/profile`,
-                        {
-                            method: "GET",
-
-                            headers: {
-                                "Authorization":
-                                    `Bearer ${token}`
-                            }
-                        }
-                    );
-
-
-                const data =
-                    await response.json();
-
-
-                /* Session invalide */
-
-                if (
-                    !response.ok ||
-                    !data.success
-                ) {
-
-                    localStorage.removeItem(
-                        "valdorian_session"
-                    );
-
-                    showLoginRequired();
-
-                    return;
-
-                }
-
-
-                /* Session valide */
-
-                showGame();
-
-
-            } catch (error) {
-
-                console.error(
-                    "Erreur de vérification :",
-                    error
-                );
-
-                /*
-                 * En cas de problème serveur,
-                 * on demande de se connecter
-                 * plutôt que de laisser passer.
-                 */
-
-                showLoginRequired();
-
-            }
-
-        }
-
-
-
-        function showGame() {
-
-            document
-                .getElementById("loading")
-                .style.display = "none";
-
-
-            document
-                .getElementById("loginRequired")
-                .style.display = "none";
-
-
-            document
-                .getElementById("gameContent")
-                .style.display = "block";
-
-        }
-
-
-
-        function showLoginRequired() {
-
-            document
-                .getElementById("loading")
-                .style.display = "none";
-
-
-            document
-                .getElementById("gameContent")
-                .style.display = "none";
-
-
-            document
-                .getElementById("loginRequired")
-                .style.display = "block";
-
-        }
-
-
-        checkAccess();
-
-    </script>
-
 
 </body>
 
