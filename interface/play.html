@@ -18,6 +18,7 @@
             box-sizing: border-box;
         }
 
+
         body {
             min-height: 100vh;
 
@@ -40,11 +41,13 @@
                     #050608 100%
                 );
 
-            overflow: hidden;
+            overflow-x: hidden;
         }
 
 
-        /* Lumière d'ambiance */
+        /* ================================
+           LUMIERE D'AMBIANCE
+        ================================= */
 
         body::before {
             content: "";
@@ -68,6 +71,10 @@
             pointer-events: none;
         }
 
+
+        /* ================================
+           CONTAINER
+        ================================= */
 
         .container {
             width: min(90%, 700px);
@@ -93,6 +100,10 @@
 
             animation:
                 appear 0.8s ease;
+
+            position: relative;
+
+            z-index: 2;
         }
 
 
@@ -100,16 +111,24 @@
 
             from {
                 opacity: 0;
-                transform: translateY(20px);
+
+                transform:
+                    translateY(20px);
             }
 
             to {
                 opacity: 1;
-                transform: translateY(0);
+
+                transform:
+                    translateY(0);
             }
 
         }
 
+
+        /* ================================
+           ICONE
+        ================================= */
 
         .icon-container {
             width: 128px;
@@ -119,6 +138,7 @@
                 0 auto 30px;
 
             display: flex;
+
             align-items: center;
             justify-content: center;
 
@@ -155,10 +175,15 @@
         }
 
 
+        /* ================================
+           BADGE
+        ================================= */
+
         .badge {
             display: inline-block;
 
-            padding: 7px 13px;
+            padding:
+                7px 13px;
 
             margin-bottom: 18px;
 
@@ -183,6 +208,10 @@
         }
 
 
+        /* ================================
+           TITRE
+        ================================= */
+
         h1 {
             font-size:
                 clamp(35px, 6vw, 58px);
@@ -200,6 +229,10 @@
         }
 
 
+        /* ================================
+           DESCRIPTION
+        ================================= */
+
         .description {
             max-width: 560px;
 
@@ -212,6 +245,10 @@
             line-height: 1.8;
         }
 
+
+        /* ================================
+           DIVIDER
+        ================================= */
 
         .divider {
             width: 70px;
@@ -229,6 +266,10 @@
                 );
         }
 
+
+        /* ================================
+           STATUS
+        ================================= */
 
         .status {
             display: flex;
@@ -268,16 +309,24 @@
             0%,
             100% {
                 opacity: 0.5;
-                transform: scale(1);
+
+                transform:
+                    scale(1);
             }
 
             50% {
                 opacity: 1;
-                transform: scale(1.25);
+
+                transform:
+                    scale(1.25);
             }
 
         }
 
+
+        /* ================================
+           DEVELOPER
+        ================================= */
 
         .developer {
             margin-top: 18px;
@@ -290,18 +339,37 @@
         }
 
 
-        .back-button {
-            display: inline-block;
+        /* ================================
+           BOUTONS
+        ================================= */
+
+        .buttons {
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 12px;
+
+            flex-wrap: wrap;
 
             margin-top: 35px;
+        }
 
-            padding: 12px 22px;
+
+        .button {
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            min-width: 170px;
+
+            padding:
+                12px 22px;
 
             border-radius: 9px;
-
-            background: white;
-
-            color: black;
 
             text-decoration: none;
 
@@ -309,12 +377,23 @@
 
             font-weight: bold;
 
-            transition: 0.2s;
+            transition:
+                0.2s;
+
+            cursor: pointer;
+        }
+
+
+        .back-button {
+            background: white;
+
+            color: black;
         }
 
 
         .back-button:hover {
-            transform: translateY(-3px);
+            transform:
+                translateY(-3px);
 
             background: #e5e5e5;
 
@@ -324,26 +403,146 @@
         }
 
 
+        .login-button {
+            background:
+                #6fa5ff;
+
+            color: white;
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.12);
+        }
+
+
+        .login-button:hover {
+            transform:
+                translateY(-3px);
+
+            background:
+                #82b2ff;
+
+            box-shadow:
+                0 10px 25px
+                rgba(76, 141, 255, 0.25);
+        }
+
+
+        /* ================================
+           ZONE CONNEXION
+        ================================= */
+
+        #loginRequired {
+            display: none;
+        }
+
+
+        #gameContent {
+            display: none;
+        }
+
+
+        /* ================================
+           WARNING GIF
+        ================================= */
+
+        .warning-container {
+            width: 128px;
+            height: 128px;
+
+            margin:
+                0 auto 30px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 30px;
+
+            background:
+                rgba(255, 255, 255, 0.05);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.1);
+
+            box-shadow:
+                0 0 40px
+                rgba(76, 141, 255, 0.15);
+
+            overflow: hidden;
+        }
+
+
+        .warning-container img {
+            width: 96px;
+            height: 96px;
+
+            object-fit: contain;
+        }
+
+
+        /* ================================
+           ERREUR
+        ================================= */
+
+        #errorMessage {
+            display: none;
+
+            color: #ff7474;
+
+            margin-top: 20px;
+
+            font-size: 13px;
+        }
+
+
+        /* ================================
+           MOBILE
+        ================================= */
+
         @media (max-width: 600px) {
 
             .container {
-                padding: 40px 22px;
+                padding:
+                    40px 22px;
             }
 
-            .icon-container {
+
+            .icon-container,
+            .warning-container {
                 width: 110px;
                 height: 110px;
 
                 border-radius: 25px;
             }
 
-            .icon-container img {
+
+            .icon-container img,
+            .warning-container img {
                 width: 82px;
                 height: 82px;
             }
 
+
             h1 {
                 letter-spacing: 2px;
+            }
+
+
+            .description {
+                font-size: 15px;
+            }
+
+
+            .buttons {
+                flex-direction: column;
+            }
+
+
+            .button {
+                width: 100%;
             }
 
         }
@@ -355,7 +554,15 @@
 
 <body>
 
-    <main class="container">
+
+    <!-- ==================================================
+         CONTENU SI UTILISATEUR CONNECTE
+    =================================================== -->
+
+    <main
+        class="container"
+        id="gameContent">
+
 
         <div class="icon-container">
 
@@ -367,12 +574,19 @@
 
 
         <div class="badge">
+
             Développement en cours
+
         </div>
 
 
         <h1>
-            Bientôt <span class="highlight">disponible</span>
+
+            Bientôt
+            <span class="highlight">
+                disponible
+            </span>
+
         </h1>
 
 
@@ -383,15 +597,20 @@
 
             <br><br>
 
-            L'aventure sera bientôt prête pour <strong>2027</strong>.
-            Une nouvelle histoire se prépare, avec ses royaumes,
-            ses combats, ses mystères et ses dangers.
+            L'aventure sera bientôt prête pour
+            <strong>2027</strong>.
+
+            Une nouvelle histoire se prépare,
+            avec ses royaumes, ses combats,
+            ses mystères et ses dangers.
 
             <br><br>
 
-            Ne rate pas ta chance de découvrir Valdorian
-            dès son lancement. Chaque détail est actuellement
-            travaillé pour donner vie à cet univers.
+            Ne rate pas ta chance de découvrir
+            Valdorian dès son lancement.
+
+            Chaque détail est actuellement travaillé
+            pour donner vie à cet univers.
 
             <br><br>
 
@@ -417,20 +636,303 @@
 
 
         <div class="developer">
-            Développé avec passion par un développeur indépendant.
+
+            Développé avec passion
+            par un développeur indépendant.
+
         </div>
 
 
-        <a
-            href="../index.html"
-            class="back-button">
+        <div class="buttons">
 
-            Retour à Valdorian
 
-        </a>
+            <!-- RETOUR -->
+
+            <a
+                href="../index.html"
+                class="button back-button">
+
+                Retour à Valdorian
+
+            </a>
+
+
+        </div>
 
 
     </main>
+
+
+
+    <!-- ==================================================
+         CONTENU SI UTILISATEUR NON CONNECTE
+    =================================================== -->
+
+    <main
+        class="container"
+        id="loginRequired">
+
+
+        <div class="warning-container">
+
+            <img
+                src="../969291-attention.gif"
+                alt="Attention">
+
+        </div>
+
+
+        <div class="badge">
+
+            Connexion requise
+
+        </div>
+
+
+        <h1>
+
+            Accès
+            <span class="highlight">
+                restreint
+            </span>
+
+        </h1>
+
+
+        <p class="description">
+
+            Tu dois être connecté à ton compte
+            Valdorian pour accéder à cette page.
+
+            <br><br>
+
+            Connecte-toi pour continuer
+            vers l'aventure.
+
+        </p>
+
+
+        <div class="divider"></div>
+
+
+        <div class="buttons">
+
+
+            <!-- CONNEXION -->
+
+            <a
+                href="../index.html?login=true"
+                class="button login-button">
+
+                Se connecter
+
+            </a>
+
+
+            <!-- RETOUR -->
+
+            <a
+                href="../index.html"
+                class="button back-button">
+
+                Retour
+
+            </a>
+
+
+        </div>
+
+
+        <div
+            id="errorMessage">
+
+            Votre session est invalide ou expirée.
+
+        </div>
+
+
+    </main>
+
+
+
+    <script>
+
+        /* ================================================
+           CONFIGURATION
+        ================================================= */
+
+        const API_URL =
+            "https://valdorian-verification.u1429712535.workers.dev";
+
+
+        /* ================================================
+           ELEMENTS
+        ================================================= */
+
+        const gameContent =
+            document.getElementById(
+                "gameContent"
+            );
+
+
+        const loginRequired =
+            document.getElementById(
+                "loginRequired"
+            );
+
+
+        const errorMessage =
+            document.getElementById(
+                "errorMessage"
+            );
+
+
+        /* ================================================
+           TOKEN
+        ================================================= */
+
+        function getToken() {
+
+            return localStorage.getItem(
+                "valdorian_session"
+            );
+
+        }
+
+
+        /* ================================================
+           VERIFICATION SESSION
+        ================================================= */
+
+        async function checkSession() {
+
+            const token =
+                getToken();
+
+
+            /*
+             * Aucun token
+             */
+
+            if (!token) {
+
+                showLoginRequired();
+
+                return;
+
+            }
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        API_URL + "/profile",
+                        {
+                            method: "GET",
+
+                            headers: {
+                                "Authorization":
+                                    "Bearer " + token
+                            }
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                /*
+                 * Session valide
+                 */
+
+                if (
+                    response.ok &&
+                    data.success
+                ) {
+
+                    showGame();
+
+                    return;
+
+                }
+
+
+                /*
+                 * Session invalide
+                 */
+
+                localStorage.removeItem(
+                    "valdorian_session"
+                );
+
+
+                showLoginRequired();
+
+                errorMessage.style.display =
+                    "block";
+
+            } catch (error) {
+
+                console.error(
+                    "Erreur session :",
+                    error
+                );
+
+
+                /*
+                 * En cas d'erreur réseau,
+                 * on ne donne pas accès.
+                 */
+
+                showLoginRequired();
+
+            }
+
+        }
+
+
+        /* ================================================
+           AFFICHER PAGE JEU
+        ================================================= */
+
+        function showGame() {
+
+            loginRequired.style.display =
+                "none";
+
+
+            gameContent.style.display =
+                "block";
+
+        }
+
+
+        /* ================================================
+           AFFICHER CONNEXION
+        ================================================= */
+
+        function showLoginRequired() {
+
+            gameContent.style.display =
+                "none";
+
+
+            loginRequired.style.display =
+                "block";
+
+        }
+
+
+        /* ================================================
+           LANCEMENT
+        ================================================= */
+
+        checkSession();
+
+    </script>
+
 
 </body>
 

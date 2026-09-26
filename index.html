@@ -1,669 +1,1888 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0">
-
-    <title>Valdorian - Jeu</title>
+    <title>Valdorian</title>
 
     <style>
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #08090c;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* ========================================
+           HEADER
+        ======================================== */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 72px;
+            z-index: 1000;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 45px;
+
+            background: rgba(7, 8, 11, 0.82);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: 4px;
+            color: white;
+        }
+
+        .logo span {
+            color: #c9a24a;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+        }
+
+        nav a {
+            color: #d4d4d4;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: 0.2s;
+        }
+
+        nav a:hover {
+            color: #c9a24a;
+        }
+
+        .account-button {
+            border: 1px solid rgba(201, 162, 74, 0.5);
+            background: rgba(201, 162, 74, 0.08);
+            color: white;
+
+            padding: 10px 17px;
+            border-radius: 8px;
+
+            cursor: pointer;
+            font-weight: 700;
+
+            transition: 0.2s;
+        }
+
+        .account-button:hover {
+            background: rgba(201, 162, 74, 0.2);
+            border-color: #c9a24a;
+        }
+
+        .account-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+            vertical-align: middle;
+            margin-right: 7px;
+        }
+
+        /* ========================================
+           HERO
+        ======================================== */
+
+        .hero {
             min-height: 100vh;
 
             display: flex;
             align-items: center;
             justify-content: center;
 
-            font-family:
-                Arial,
-                Helvetica,
-                sans-serif;
+            position: relative;
 
-            color: white;
+            background-image:
+                linear-gradient(
+                    rgba(5, 6, 8, 0.25),
+                    rgba(5, 6, 8, 0.88)
+                ),
+                url("image/Gemini_Generated_Image_3yxzcq3yxzcq3yxz.jpg");
 
-            background:
-                radial-gradient(
-                    circle at 50% 35%,
-                    #17243a 0%,
-                    #0a0d14 40%,
-                    #050608 100%
-                );
-
-            overflow: hidden;
+            background-size: cover;
+            background-position: center;
         }
 
-
-        /* Lumière d'ambiance */
-
-        body::before {
+        .hero::after {
             content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 180px;
 
-            position: fixed;
-
-            width: 500px;
-            height: 500px;
-
-            top: -250px;
-            left: 50%;
-
-            transform: translateX(-50%);
-
-            background: #4c8dff;
-
-            opacity: 0.08;
-
-            filter: blur(100px);
-
-            pointer-events: none;
+            background: linear-gradient(
+                transparent,
+                #08090c
+            );
         }
 
-
-        .container {
-            width: min(90%, 700px);
+        .hero-content {
+            position: relative;
+            z-index: 2;
 
             text-align: center;
 
-            padding: 55px 35px;
-
-            background:
-                rgba(12, 14, 20, 0.78);
-
-            border:
-                1px solid
-                rgba(255, 255, 255, 0.1);
-
-            border-radius: 24px;
-
-            box-shadow:
-                0 30px 100px
-                rgba(0, 0, 0, 0.55);
-
-            backdrop-filter: blur(18px);
-
-            animation:
-                appear 0.8s ease;
+            margin-top: 60px;
         }
 
-
-        @keyframes appear {
-
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-
-        }
-
-
-        /* IMAGE */
-
-        .icon-container {
-            width: 128px;
-            height: 128px;
-
-            margin:
-                0 auto 30px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 30px;
-
-            background:
-                rgba(255, 255, 255, 0.05);
-
-            border:
-                1px solid
-                rgba(255, 255, 255, 0.1);
-
-            box-shadow:
-                0 0 40px
-                rgba(76, 141, 255, 0.15);
-
-            overflow: hidden;
-        }
-
-
-        .icon-container img {
-            width: 96px;
-            height: 96px;
-
-            object-fit: contain;
-
-            image-rendering: auto;
-
-            filter:
-                drop-shadow(
-                    0 10px 20px
-                    rgba(0, 0, 0, 0.45)
-                );
-        }
-
-
-        /* TEXTE */
-
-        .badge {
+        .status-badge {
             display: inline-block;
 
-            padding: 7px 13px;
+            padding: 8px 16px;
+            margin-bottom: 25px;
 
-            margin-bottom: 18px;
-
+            border: 1px solid rgba(201, 162, 74, 0.6);
             border-radius: 50px;
 
-            background:
-                rgba(76, 141, 255, 0.1);
+            background: rgba(0, 0, 0, 0.35);
 
-            border:
-                1px solid
-                rgba(76, 141, 255, 0.25);
-
-            color: #79aaff;
+            color: #d7b764;
 
             font-size: 12px;
-
-            font-weight: bold;
-
-            letter-spacing: 1.5px;
-
+            font-weight: 800;
+            letter-spacing: 2px;
             text-transform: uppercase;
         }
 
+        .hero-title {
+            font-size: clamp(65px, 11vw, 150px);
+            line-height: 0.9;
 
-        .warning-badge {
-            background:
-                rgba(255, 180, 60, 0.08);
+            font-weight: 1000;
+            letter-spacing: 8px;
 
-            border-color:
-                rgba(255, 180, 60, 0.25);
-
-            color: #ffc15c;
+            text-shadow:
+                0 10px 35px rgba(0, 0, 0, 0.8);
         }
 
+        .hero-title span {
+            color: #c9a24a;
+        }
 
-        h1 {
-            font-size:
-                clamp(35px, 6vw, 58px);
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
 
+            margin-top: 45px;
+        }
+
+        .hero-button {
+            min-width: 150px;
+
+            padding: 15px 25px;
+
+            border-radius: 7px;
+
+            text-decoration: none;
+
+            font-size: 13px;
             font-weight: 900;
+            letter-spacing: 1.5px;
 
-            letter-spacing: 4px;
+            transition:
+                transform 0.2s,
+                background 0.2s,
+                border-color 0.2s;
+        }
+
+        .hero-button:hover {
+            transform: translateY(-3px);
+        }
+
+        .primary-button {
+            background: #c9a24a;
+            color: #101010;
+            border: 1px solid #c9a24a;
+        }
+
+        .primary-button:hover {
+            background: #e0bb65;
+        }
+
+        .secondary-button {
+            background: rgba(255, 255, 255, 0.04);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+
+        .secondary-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* ========================================
+           UNIVERS
+        ======================================== */
+
+        .universe {
+            position: relative;
+
+            padding: 100px 7% 130px;
+
+            background:
+                radial-gradient(
+                    circle at 50% 0%,
+                    rgba(201, 162, 74, 0.08),
+                    transparent 45%
+                ),
+                #08090c;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header small {
+            color: #c9a24a;
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .section-header h2 {
+            margin-top: 12px;
+
+            font-size: clamp(30px, 4vw, 48px);
+            letter-spacing: 2px;
+        }
+
+        .section-header p {
+            max-width: 600px;
+            margin: 15px auto 0;
+
+            color: #85878d;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* ========================================
+           GAME CARDS
+        ======================================== */
+
+        .game-grid {
+            max-width: 1250px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .game-card {
+            position: relative;
+
+            min-height: 235px;
+
+            padding: 30px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.055),
+                    rgba(255, 255, 255, 0.015)
+                );
+
+            overflow: hidden;
+
+            transition:
+                transform 0.25s,
+                border-color 0.25s,
+                background 0.25s;
+        }
+
+        .game-card::before {
+            content: "";
+
+            position: absolute;
+            top: -100px;
+            right: -100px;
+
+            width: 220px;
+            height: 220px;
+
+            border-radius: 50%;
+
+            background: rgba(201, 162, 74, 0.07);
+
+            transition: 0.3s;
+        }
+
+        .game-card:hover {
+            transform: translateY(-7px);
+
+            border-color: rgba(201, 162, 74, 0.4);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(201, 162, 74, 0.08),
+                    rgba(255, 255, 255, 0.02)
+                );
+        }
+
+        .game-card:hover::before {
+            transform: scale(1.35);
+        }
+
+        .card-icon {
+            position: absolute;
+
+            top: 28px;
+            right: 30px;
+
+            font-size: 38px;
+
+            filter: grayscale(10%);
+        }
+
+        .card-number {
+            color: rgba(201, 162, 74, 0.55);
+
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 2px;
+
+            margin-bottom: 10px;
+        }
+
+        .game-card h3 {
+            font-size: 23px;
+            margin-bottom: 10px;
+
+            letter-spacing: 0.5px;
+        }
+
+        .game-card p {
+            color: #96979c;
+
+            font-size: 13px;
+            line-height: 1.65;
+
+            max-width: 380px;
+        }
+
+        /* ========================================
+           LARGE CARDS
+        ======================================== */
+
+        .game-card.large {
+            grid-column: span 2;
+        }
+
+        /* ========================================
+           FOOTER
+        ======================================== */
+
+        footer {
+            padding: 30px 20px;
+
+            text-align: center;
+
+            color: #55565a;
+
+            font-size: 11px;
+
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        /* ========================================
+           MODAL
+        ======================================== */
+
+        .modal {
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 5000;
+
+            display: none;
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            background: rgba(0, 0, 0, 0.78);
+            backdrop-filter: blur(8px);
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-box {
+            width: 100%;
+            max-width: 440px;
+
+            max-height: 90vh;
+            overflow-y: auto;
+
+            padding: 30px;
+
+            border: 1px solid rgba(201, 162, 74, 0.25);
+            border-radius: 18px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #15171c,
+                    #0b0c0f
+                );
+
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.65);
+
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+
+            top: 15px;
+            right: 18px;
+
+            border: none;
+            background: transparent;
+
+            color: #777;
+
+            font-size: 25px;
+
+            cursor: pointer;
+        }
+
+        .close-modal:hover {
+            color: white;
+        }
+
+        .warning-container {
+            display: none;
+
+            text-align: center;
 
             margin-bottom: 20px;
         }
 
-
-        .highlight {
-            color: #6fa5ff;
+        .warning-container.active {
+            display: block;
         }
 
+        .warning-container img {
+            width: 96px;
+            height: 96px;
 
-        .warning-highlight {
-            color: #ffc15c;
+            object-fit: contain;
         }
 
+        .modal-title {
+            text-align: center;
 
-        .description {
-            max-width: 560px;
-
-            margin: 0 auto;
-
-            color: #9da3ad;
-
-            font-size: 16px;
-
-            line-height: 1.8;
+            font-size: 24px;
+            margin-bottom: 8px;
         }
 
+        .modal-subtitle {
+            text-align: center;
 
-        .divider {
-            width: 70px;
-            height: 2px;
-
-            margin:
-                30px auto;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    transparent,
-                    #6fa5ff,
-                    transparent
-                );
-        }
-
-
-        .status {
-            display: flex;
-
-            align-items: center;
-            justify-content: center;
-
-            gap: 10px;
-
-            margin-top: 28px;
-
-            color: #777f8c;
+            color: #85878d;
 
             font-size: 13px;
+            line-height: 1.6;
+
+            margin-bottom: 25px;
         }
 
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-
-            border-radius: 50%;
-
-            background: #6fa5ff;
-
-            box-shadow:
-                0 0 12px
-                rgba(111, 165, 255, 0.8);
-
-            animation:
-                pulse 1.8s infinite;
+        .input-group {
+            margin-bottom: 15px;
         }
 
+        .input-group label {
+            display: block;
 
-        @keyframes pulse {
-
-            0%,
-            100% {
-                opacity: 0.5;
-                transform: scale(1);
-            }
-
-            50% {
-                opacity: 1;
-                transform: scale(1.25);
-            }
-
-        }
-
-
-        .developer {
-            margin-top: 18px;
-
-            color: #555d6a;
+            color: #aaa;
 
             font-size: 12px;
+            font-weight: 700;
 
-            font-style: italic;
+            margin-bottom: 7px;
         }
 
+        .input-group input {
+            width: 100%;
 
-        /* BOUTONS */
+            padding: 13px 14px;
 
-        .buttons {
-            display: flex;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
 
-            justify-content: center;
+            outline: none;
 
-            gap: 12px;
-
-            flex-wrap: wrap;
-
-            margin-top: 35px;
-        }
-
-
-        .back-button,
-        .login-button {
-            display: inline-block;
-
-            padding: 12px 22px;
-
-            border-radius: 9px;
+            background: #090a0d;
+            color: white;
 
             font-size: 14px;
+        }
 
-            font-weight: bold;
+        .input-group input:focus {
+            border-color: rgba(201, 162, 74, 0.7);
+        }
 
-            text-decoration: none;
+        .modal-button {
+            width: 100%;
+
+            padding: 13px;
+
+            border: none;
+            border-radius: 8px;
+
+            background: #c9a24a;
+            color: #111;
+
+            font-weight: 900;
 
             cursor: pointer;
 
             transition: 0.2s;
         }
 
-
-        .back-button {
-            background: white;
-
-            color: black;
+        .modal-button:hover {
+            background: #e0bb65;
         }
 
+        .secondary-modal-button {
+            margin-top: 10px;
 
-        .login-button {
-            background:
-                #6fa5ff;
-
+            background: rgba(255, 255, 255, 0.07);
             color: white;
-
-            border: none;
-
-            box-shadow:
-                0 8px 25px
-                rgba(76, 141, 255, 0.2);
         }
 
-
-        .back-button:hover,
-        .login-button:hover {
-            transform: translateY(-3px);
+        .secondary-modal-button:hover {
+            background: rgba(255, 255, 255, 0.12);
         }
 
+        .message {
+            min-height: 20px;
 
-        .back-button:hover {
-            background: #e5e5e5;
+            margin: 10px 0;
 
-            box-shadow:
-                0 10px 25px
-                rgba(0, 0, 0, 0.3);
-        }
-
-
-        .login-button:hover {
-            background: #568ff0;
-
-            box-shadow:
-                0 12px 30px
-                rgba(76, 141, 255, 0.3);
-        }
-
-
-        /* CACHER LA PAGE AVANT LA VERIFICATION */
-
-        #loading {
             text-align: center;
 
-            color: #777f8c;
+            color: #d7b764;
 
-            font-size: 14px;
+            font-size: 12px;
         }
 
-
-        #gameContent,
-        #loginRequired {
+        .verification-section,
+        .profile-section {
             display: none;
         }
 
+        .verification-section.active,
+        .profile-section.active {
+            display: block;
+        }
 
-        @media (max-width: 600px) {
+        .profile-avatar-wrapper {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-            .container {
-                padding: 40px 22px;
+        .profile-avatar {
+            width: 90px;
+            height: 90px;
+
+            border-radius: 50%;
+
+            object-fit: cover;
+
+            border: 2px solid rgba(201, 162, 74, 0.6);
+        }
+
+        .logout-button {
+            margin-top: 10px;
+
+            background: rgba(180, 50, 50, 0.12);
+            color: #e58b8b;
+        }
+
+        .logout-button:hover {
+            background: rgba(180, 50, 50, 0.2);
+        }
+
+        /* ========================================
+           RESPONSIVE
+        ======================================== */
+
+        @media (max-width: 900px) {
+
+            header {
+                padding: 0 20px;
             }
 
-            .icon-container {
-                width: 128px;
-                height: 128px;
-
-                border-radius: 25px;
+            nav {
+                gap: 15px;
             }
 
-            .icon-container img {
-                width: 96px;
-                height: 96px;
+            nav a {
+                font-size: 11px;
             }
 
-            h1 {
+            .game-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .game-card.large {
+                grid-column: span 2;
+            }
+        }
+
+        @media (max-width: 650px) {
+
+            header {
+                height: 65px;
+            }
+
+            .logo {
+                font-size: 18px;
                 letter-spacing: 2px;
             }
 
+            nav {
+                display: none;
+            }
+
+            .account-button {
+                padding: 8px 12px;
+                font-size: 11px;
+            }
+
+            .hero-title {
+                letter-spacing: 4px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero-button {
+                width: 210px;
+            }
+
+            .universe {
+                padding: 75px 20px 90px;
+            }
+
+            .game-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .game-card.large {
+                grid-column: span 1;
+            }
+
+            .game-card {
+                min-height: 220px;
+            }
+
+            .modal-box {
+                padding: 25px 20px;
+            }
         }
-
     </style>
-
 </head>
-
 
 <body>
 
+    <!-- ========================================
+         HEADER
+    ======================================== -->
 
-    <!-- CHARGEMENT -->
+    <header>
+
+        <div class="logo">
+            VALDOR<span>IAN</span>
+        </div>
+
+        <nav>
+            <a href="index.html">ACCUEIL</a>
+            <a href="#univers">UNIVERS</a>
+        </nav>
+
+        <button
+            id="accountButton"
+            class="account-button"
+            onclick="handleAccountButton()"
+        >
+            COMPTE
+        </button>
+
+    </header>
+
+
+    <!-- ========================================
+         HERO
+    ======================================== -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="status-badge">
+                Développement en cours
+            </div>
+
+            <h1 class="hero-title">
+                VALDOR<span>IAN</span>
+            </h1>
+
+            <div class="hero-buttons">
+
+                <a
+                    href="interface/play.html"
+                    class="hero-button primary-button"
+                    onclick="return handlePlay(event)"
+                >
+                    JOUER
+                </a>
+
+                <a
+                    href="#univers"
+                    class="hero-button secondary-button"
+                >
+                    DÉCOUVRIR
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================================
+         UNIVERS
+    ======================================== -->
+
+    <section
+        id="univers"
+        class="universe"
+    >
+
+        <div class="section-header">
+
+            <small>L'univers de Valdorian</small>
+
+            <h2>Un monde qui évolue avec vous</h2>
+
+            <p>
+                Explorez, combattez, construisez et survivez
+                dans un monde influencé par ses créatures,
+                ses zones et ses phases.
+            </p>
+
+        </div>
+
+
+        <div class="game-grid">
+
+            <!-- COMBAT -->
+
+            <article class="game-card large">
+
+                <div class="card-icon">
+                    ⚔️
+                </div>
+
+                <div class="card-number">
+                    01
+                </div>
+
+                <h3>
+                    Combat
+                </h3>
+
+                <p>
+                    Affrontez des vagues de monstres en mode survie.
+                    Chaque élimination vous rapporte de l'argent,
+                    permettant d'améliorer vos armes et votre progression.
+                </p>
+
+            </article>
+
+
+            <!-- CREATURES -->
+
+            <article class="game-card">
+
+                <div class="card-icon">
+                    👹
+                </div>
+
+                <div class="card-number">
+                    02
+                </div>
+
+                <h3>
+                    Créatures
+                </h3>
+
+                <p>
+                    Chaque zone possède ses propres créatures.
+                    Certaines phases peuvent transformer
+                    une région calme en véritable piège.
+                </p>
+
+            </article>
+
+
+            <!-- MONDE -->
+
+            <article class="game-card">
+
+                <div class="card-icon">
+                    🌍
+                </div>
+
+                <div class="card-number">
+                    03
+                </div>
+
+                <h3>
+                    Monde
+                </h3>
+
+                <p>
+                    Explorez une vaste carte. Les distances comptent :
+                    certains trajets prennent du temps et nécessitent
+                    parfois un moyen de déplacement.
+                </p>
+
+            </article>
+
+
+            <!-- MAISON -->
+
+            <article class="game-card">
+
+                <div class="card-icon">
+                    🏠
+                </div>
+
+                <div class="card-number">
+                    04
+                </div>
+
+                <h3>
+                    Maison
+                </h3>
+
+                <p>
+                    Votre refuge vous permet de fabriquer des armes,
+                    améliorer votre équipement, vendre des objets
+                    et construire différentes installations.
+                </p>
+
+            </article>
+
+
+            <!-- PHASES -->
+
+            <article class="game-card">
+
+                <div class="card-icon">
+                    🌙
+                </div>
+
+                <div class="card-number">
+                    05
+                </div>
+
+                <h3>
+                    Phases
+                </h3>
+
+                <p>
+                    Les phases modifient le comportement du monde.
+                    Certains jours sont parfaits pour sortir,
+                    d'autres rendent même votre refuge vulnérable.
+                </p>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================================
+         FOOTER
+    ======================================== -->
+
+    <footer>
+        VALDORIAN • Univers en développement
+    </footer>
+
+
+    <!-- ========================================
+         MODAL COMPTE
+    ======================================== -->
 
     <div
-        class="container"
-        id="loading">
+        id="loginModal"
+        class="modal"
+    >
 
-        Vérification de votre session...
+        <div class="modal-box">
+
+            <button
+                class="close-modal"
+                onclick="closeLoginModal()"
+            >
+                ×
+            </button>
+
+
+            <!-- AVERTISSEMENT -->
+
+            <div
+                id="warningContainer"
+                class="warning-container"
+            >
+
+                <img
+                    src="969291-attention.gif"
+                    alt="Attention"
+                >
+
+            </div>
+
+
+            <!-- CONNEXION -->
+
+            <div
+                id="loginSection"
+            >
+
+                <h2 class="modal-title">
+                    Connexion
+                </h2>
+
+                <p class="modal-subtitle">
+                    Connectez-vous pour accéder à Valdorian.
+                </p>
+
+
+                <div class="input-group">
+
+                    <label for="emailInput">
+                        Adresse e-mail
+                    </label>
+
+                    <input
+                        id="emailInput"
+                        type="email"
+                        placeholder="votre@email.com"
+                        autocomplete="email"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="passwordInput">
+                        Mot de passe
+                    </label>
+
+                    <input
+                        id="passwordInput"
+                        type="password"
+                        placeholder="Votre mot de passe"
+                        autocomplete="new-password"
+                    >
+
+                </div>
+
+
+                <button
+                    class="modal-button"
+                    onclick="sendCode()"
+                >
+                    CONTINUER
+                </button>
+
+
+                <div
+                    id="loginMessage"
+                    class="message"
+                ></div>
+
+            </div>
+
+
+            <!-- VERIFICATION -->
+
+            <div
+                id="verificationSection"
+                class="verification-section"
+            >
+
+                <h2 class="modal-title">
+                    Vérification
+                </h2>
+
+                <p class="modal-subtitle">
+                    Un code de vérification vient d'être envoyé
+                    à votre adresse e-mail.
+                </p>
+
+
+                <div class="input-group">
+
+                    <label for="codeInput">
+                        Code à 6 chiffres
+                    </label>
+
+                    <input
+                        id="codeInput"
+                        type="text"
+                        inputmode="numeric"
+                        maxlength="6"
+                        placeholder="000000"
+                    >
+
+                </div>
+
+
+                <button
+                    class="modal-button"
+                    onclick="verifyCode()"
+                >
+                    VÉRIFIER
+                </button>
+
+
+                <button
+                    class="modal-button secondary-modal-button"
+                    onclick="resendCode()"
+                >
+                    Renvoyer le code
+                </button>
+
+
+                <div
+                    id="verificationMessage"
+                    class="message"
+                ></div>
+
+            </div>
+
+
+            <!-- PROFIL -->
+
+            <div
+                id="profileSection"
+                class="profile-section"
+            >
+
+                <h2 class="modal-title">
+                    Mon profil
+                </h2>
+
+                <p class="modal-subtitle">
+                    Gérez vos informations Valdorian.
+                </p>
+
+
+                <div class="profile-avatar-wrapper">
+
+                    <img
+                        id="profileAvatar"
+                        class="profile-avatar"
+                        src=""
+                        alt="Avatar"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="displayNameInput">
+                        Nom affiché
+                    </label>
+
+                    <input
+                        id="displayNameInput"
+                        type="text"
+                        maxlength="32"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="usernameInput">
+                        Nom d'utilisateur
+                    </label>
+
+                    <input
+                        id="usernameInput"
+                        type="text"
+                        maxlength="20"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="avatarInput">
+                        Avatar
+                    </label>
+
+                    <input
+                        id="avatarInput"
+                        type="file"
+                        accept="image/png,image/jpeg,image/webp"
+                    >
+
+                </div>
+
+
+                <button
+                    class="modal-button"
+                    onclick="saveProfile()"
+                >
+                    ENREGISTRER
+                </button>
+
+
+                <button
+                    class="modal-button logout-button"
+                    onclick="logout()"
+                >
+                    SE DÉCONNECTER
+                </button>
+
+
+                <div
+                    id="profileMessage"
+                    class="message"
+                ></div>
+
+            </div>
+
+        </div>
 
     </div>
 
 
-
-    <!-- ==========================
-         PAGE JEU
-    =========================== -->
-
-    <main
-        class="container"
-        id="gameContent">
-
-
-        <div class="icon-container">
-
-            <img
-                src="../image/243490-adminroleicon.png"
-                alt="Valdorian">
-
-        </div>
-
-
-        <div class="badge">
-            Développement en cours
-        </div>
-
-
-        <h1>
-            Bientôt
-            <span class="highlight">
-                disponible
-            </span>
-        </h1>
-
-
-        <p class="description">
-
-            Le monde de Valdorian est actuellement
-            en préparation.
-
-            <br><br>
-
-            L'aventure sera bientôt prête pour
-            <strong>2027</strong>.
-
-            Une nouvelle histoire se prépare,
-            avec ses royaumes, ses combats,
-            ses mystères et ses dangers.
-
-            <br><br>
-
-            Ne rate pas ta chance de découvrir
-            Valdorian dès son lancement.
-
-            Chaque détail est actuellement travaillé
-            pour donner vie à cet univers.
-
-            <br><br>
-
-            <strong>
-                L'aventure commence bientôt...
-            </strong>
-
-        </p>
-
-
-        <div class="divider"></div>
-
-
-        <div class="status">
-
-            <span class="status-dot"></span>
-
-            <span>
-                Le développement continue
-            </span>
-
-        </div>
-
-
-        <div class="developer">
-
-            Développé avec passion par un
-            développeur indépendant.
-
-        </div>
-
-
-        <div class="buttons">
-
-            <a
-                href="../index.html"
-                class="back-button">
-
-                Retour à Valdorian
-
-            </a>
-
-        </div>
-
-
-    </main>
-
-
-
-    <!-- ==========================
-         NON CONNECTÉ
-    =========================== -->
-
-    <main
-        class="container"
-        id="loginRequired">
-
-
-        <div class="icon-container">
-
-            <img
-                src="../969291-attention.gif"
-                alt="Attention">
-
-        </div>
-
-
-        <div class="badge warning-badge">
-
-            Accès requis
-
-        </div>
-
-
-        <h1>
-
-            Connexion
-            <span class="warning-highlight">
-
-                requise
-
-            </span>
-
-        </h1>
-
-
-        <p class="description">
-
-            Tu dois être connecté à ton compte
-            Valdorian pour accéder à cette page.
-
-            <br><br>
-
-            Connecte-toi à ton compte pour continuer
-            et découvrir l'aventure qui se prépare
-            pour <strong>2027</strong>.
-
-        </p>
-
-
-        <div class="divider"></div>
-
-
-        <div class="status">
-
-            <span class="status-dot"></span>
-
-            <span>
-                Authentification nécessaire
-            </span>
-
-        </div>
-
-
-        <div class="buttons">
-
-
-            <a
-                href="../index.html?login=true"
-                class="login-button">
-
-                Se connecter
-
-            </a>
-
-
-            <a
-                href="../index.html"
-                class="back-button">
-
-                Retour
-
-            </a>
-
-
-        </div>
-
-
-    </main>
-
-
+    <!-- ========================================
+         JAVASCRIPT
+    ======================================== -->
 
     <script>
 
         const API_URL =
             "https://valdorian-verification.u1429712535.workers.dev";
 
+        let currentUser = null;
+        let selectedAvatar = null;
 
-        async function checkAccess() {
 
-            const token =
-                localStorage.getItem(
-                    "valdorian_session"
+        /* ========================================
+           TOKEN
+        ======================================== */
+
+        function getToken() {
+
+            return localStorage.getItem(
+                "valdorian_session"
+            );
+
+        }
+
+
+        /* ========================================
+           MODAL
+        ======================================== */
+
+        function openLoginModal(showWarning = false) {
+
+            document
+                .getElementById("loginModal")
+                .classList.add("active");
+
+            document
+                .getElementById("warningContainer")
+                .classList.toggle(
+                    "active",
+                    showWarning
+                );
+
+        }
+
+
+        function closeLoginModal() {
+
+            document
+                .getElementById("loginModal")
+                .classList.remove("active");
+
+        }
+
+
+        /* ========================================
+           BOUTON JOUER
+        ======================================== */
+
+        function handlePlay(event) {
+
+            event.preventDefault();
+
+            if (currentUser) {
+
+                window.location.href =
+                    "interface/play.html";
+
+                return false;
+            }
+
+            sessionStorage.setItem(
+                "valdorian_play_after_login",
+                "true"
+            );
+
+            openLoginModal(true);
+
+            return false;
+        }
+
+
+        /* ========================================
+           COMPTE
+        ======================================== */
+
+        function handleAccountButton() {
+
+            if (currentUser) {
+
+                openProfile();
+
+            } else {
+
+                openLoginModal(false);
+
+            }
+
+        }
+
+
+        /* ========================================
+           ENVOYER CODE
+        ======================================== */
+
+        async function sendCode() {
+
+            const email =
+                document
+                    .getElementById("emailInput")
+                    .value
+                    .trim();
+
+            const password =
+                document
+                    .getElementById("passwordInput")
+                    .value;
+
+
+            const message =
+                document.getElementById(
+                    "loginMessage"
                 );
 
 
-            /* Aucun token */
+            message.textContent =
+                "Envoi du code...";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        API_URL + "/send-code",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+                                email,
+                                password
+                            })
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    message.textContent =
+                        data.message ||
+                        "Une erreur est survenue.";
+
+                    return;
+                }
+
+
+                message.textContent = "";
+
+
+                document
+                    .getElementById("loginSection")
+                    .style.display = "none";
+
+
+                document
+                    .getElementById("verificationSection")
+                    .classList.add("active");
+
+
+            } catch (error) {
+
+                console.error(error);
+
+                message.textContent =
+                    "Impossible de contacter le serveur.";
+
+            }
+
+        }
+
+
+        /* ========================================
+           RENVOYER CODE
+        ======================================== */
+
+        async function resendCode() {
+
+            const email =
+                document
+                    .getElementById("emailInput")
+                    .value
+                    .trim();
+
+            const message =
+                document.getElementById(
+                    "verificationMessage"
+                );
+
+
+            message.textContent =
+                "Envoi du nouveau code...";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        API_URL + "/resend-code",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+                                email
+                            })
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                message.textContent =
+                    data.message ||
+                    "Code envoyé.";
+
+            } catch (error) {
+
+                console.error(error);
+
+                message.textContent =
+                    "Impossible de contacter le serveur.";
+
+            }
+
+        }
+
+
+        /* ========================================
+           VERIFIER CODE
+        ======================================== */
+
+        async function verifyCode() {
+
+            const email =
+                document
+                    .getElementById("emailInput")
+                    .value
+                    .trim();
+
+            const code =
+                document
+                    .getElementById("codeInput")
+                    .value
+                    .trim();
+
+
+            const message =
+                document.getElementById(
+                    "verificationMessage"
+                );
+
+
+            message.textContent =
+                "Vérification...";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        API_URL + "/verify-code",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+                                email,
+                                code
+                            })
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    message.textContent =
+                        data.message ||
+                        "Code incorrect.";
+
+                    return;
+                }
+
+
+                localStorage.setItem(
+                    "valdorian_session",
+                    data.token
+                );
+
+
+                currentUser =
+                    data.user;
+
+
+                updateAccountButton();
+
+
+                document
+                    .getElementById(
+                        "verificationSection"
+                    )
+                    .classList.remove("active");
+
+
+                document
+                    .getElementById(
+                        "profileSection"
+                    )
+                    .classList.add("active");
+
+
+                loadProfile();
+
+
+                const playAfterLogin =
+                    sessionStorage.getItem(
+                        "valdorian_play_after_login"
+                    );
+
+
+                if (playAfterLogin === "true") {
+
+                    sessionStorage.removeItem(
+                        "valdorian_play_after_login"
+                    );
+
+                    window.location.href =
+                        "interface/play.html";
+
+                }
+
+            } catch (error) {
+
+                console.error(error);
+
+                message.textContent =
+                    "Impossible de contacter le serveur.";
+
+            }
+
+        }
+
+
+        /* ========================================
+           PROFIL
+        ======================================== */
+
+        function openProfile() {
+
+            openLoginModal(false);
+
+            document
+                .getElementById("loginSection")
+                .style.display = "none";
+
+            document
+                .getElementById("verificationSection")
+                .classList.remove("active");
+
+            document
+                .getElementById("profileSection")
+                .classList.add("active");
+
+            loadProfile();
+
+        }
+
+
+        function loadProfile() {
+
+            if (!currentUser) {
+                return;
+            }
+
+
+            document
+                .getElementById("displayNameInput")
+                .value =
+                currentUser.displayName ||
+                currentUser.username ||
+                "";
+
+
+            document
+                .getElementById("usernameInput")
+                .value =
+                currentUser.username ||
+                "";
+
+
+            document
+                .getElementById("profileAvatar")
+                .src =
+                currentUser.avatar ||
+                createDefaultAvatar(
+                    currentUser.username
+                );
+
+        }
+
+
+        /* ========================================
+           AVATAR
+        ======================================== */
+
+        document
+            .getElementById("avatarInput")
+            .addEventListener(
+                "change",
+                function () {
+
+                    const file =
+                        this.files[0];
+
+                    if (!file) {
+                        return;
+                    }
+
+
+                    if (file.size > 500000) {
+
+                        document
+                            .getElementById(
+                                "profileMessage"
+                            )
+                            .textContent =
+                            "Image trop volumineuse. Maximum 500 Ko.";
+
+                        this.value = "";
+
+                        return;
+                    }
+
+
+                    const reader =
+                        new FileReader();
+
+
+                    reader.onload = function (event) {
+
+                        selectedAvatar =
+                            event.target.result;
+
+                        document
+                            .getElementById(
+                                "profileAvatar"
+                            )
+                            .src =
+                            selectedAvatar;
+
+                    };
+
+
+                    reader.readAsDataURL(file);
+
+                }
+            );
+
+
+        /* ========================================
+           SAUVEGARDER PROFIL
+        ======================================== */
+
+        async function saveProfile() {
+
+            if (!currentUser) {
+                return;
+            }
+
+
+            const displayName =
+                document
+                    .getElementById(
+                        "displayNameInput"
+                    )
+                    .value
+                    .trim();
+
+
+            const username =
+                document
+                    .getElementById(
+                        "usernameInput"
+                    )
+                    .value
+                    .trim();
+
+
+            const message =
+                document.getElementById(
+                    "profileMessage"
+                );
+
+
+            message.textContent =
+                "Enregistrement...";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        API_URL + "/profile",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json",
+
+                                "Authorization":
+                                    "Bearer " +
+                                    getToken()
+                            },
+
+                            body: JSON.stringify({
+                                displayName,
+                                username,
+                                avatar:
+                                    selectedAvatar
+                                    || currentUser.avatar
+                                    || null
+                            })
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    message.textContent =
+                        data.message ||
+                        "Impossible d'enregistrer.";
+
+                    return;
+                }
+
+
+                currentUser =
+                    data.user;
+
+
+                selectedAvatar = null;
+
+
+                updateAccountButton();
+
+                loadProfile();
+
+
+                message.textContent =
+                    "Profil enregistré.";
+
+            } catch (error) {
+
+                console.error(error);
+
+                message.textContent =
+                    "Erreur de connexion.";
+
+            }
+
+        }
+
+
+        /* ========================================
+           LOGOUT
+        ======================================== */
+
+        async function logout() {
+
+            const token =
+                getToken();
+
+
+            try {
+
+                if (token) {
+
+                    await fetch(
+                        API_URL + "/logout",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Authorization":
+                                    "Bearer " + token
+                            }
+                        }
+                    );
+
+                }
+
+            } catch (error) {
+
+                console.error(error);
+
+            }
+
+
+            localStorage.removeItem(
+                "valdorian_session"
+            );
+
+
+            currentUser = null;
+            selectedAvatar = null;
+
+
+            updateAccountButton();
+
+
+            closeLoginModal();
+
+        }
+
+
+        /* ========================================
+           SESSION
+        ======================================== */
+
+        async function checkSession() {
+
+            const token =
+                getToken();
+
 
             if (!token) {
 
-                showLoginRequired();
+                currentUser = null;
+
+                updateAccountButton();
 
                 return;
 
@@ -674,111 +1893,219 @@
 
                 const response =
                     await fetch(
-                        `${API_URL}/profile`,
+                        API_URL + "/profile",
                         {
-                            method: "GET",
-
                             headers: {
                                 "Authorization":
-                                    `Bearer ${token}`
+                                    "Bearer " + token
                             }
                         }
                     );
+
+
+                if (!response.ok) {
+
+                    localStorage.removeItem(
+                        "valdorian_session"
+                    );
+
+                    currentUser = null;
+
+                    updateAccountButton();
+
+                    return;
+                }
 
 
                 const data =
                     await response.json();
 
 
-                /* Session invalide */
-
-                if (
-                    !response.ok ||
-                    !data.success
-                ) {
-
-                    localStorage.removeItem(
-                        "valdorian_session"
-                    );
-
-                    showLoginRequired();
-
-                    return;
-
-                }
+                currentUser =
+                    data.user;
 
 
-                /* Session valide */
-
-                showGame();
-
+                updateAccountButton();
 
             } catch (error) {
 
-                console.error(
-                    "Erreur de vérification :",
-                    error
-                );
+                console.error(error);
 
+                currentUser = null;
 
-                /*
-                 * En cas de problème serveur,
-                 * on demande de se connecter
-                 * plutôt que de laisser passer.
-                 */
-
-                showLoginRequired();
+                updateAccountButton();
 
             }
 
         }
 
 
+        /* ========================================
+           BOUTON COMPTE
+        ======================================== */
 
-        function showGame() {
+        function updateAccountButton() {
 
-            document
-                .getElementById("loading")
-                .style.display = "none";
-
-
-            document
-                .getElementById("loginRequired")
-                .style.display = "none";
+            const button =
+                document.getElementById(
+                    "accountButton"
+                );
 
 
-            document
-                .getElementById("gameContent")
-                .style.display = "block";
+            if (currentUser) {
+
+                const avatar =
+                    currentUser.avatar ||
+                    createDefaultAvatar(
+                        currentUser.username
+                    );
+
+
+                button.innerHTML =
+                    `<img
+                        src="${avatar}"
+                        class="account-avatar"
+                        alt=""
+                    >${escapeHtml(
+                        currentUser.username
+                    )}`;
+
+            } else {
+
+                button.textContent =
+                    "COMPTE";
+
+            }
 
         }
 
 
+        /* ========================================
+           AVATAR PAR DEFAUT
+        ======================================== */
 
-        function showLoginRequired() {
+        function createDefaultAvatar(username) {
 
-            document
-                .getElementById("loading")
-                .style.display = "none";
-
-
-            document
-                .getElementById("gameContent")
-                .style.display = "none";
+            const letter =
+                (username || "V")
+                    .charAt(0)
+                    .toUpperCase();
 
 
-            document
-                .getElementById("loginRequired")
-                .style.display = "block";
+            const svg = `
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="100"
+                    height="100"
+                >
+                    <rect
+                        width="100"
+                        height="100"
+                        rx="50"
+                        fill="#c9a24a"
+                    />
+
+                    <text
+                        x="50"
+                        y="62"
+                        text-anchor="middle"
+                        font-size="50"
+                        font-family="Arial"
+                        fill="#111"
+                    >
+                        ${letter}
+                    </text>
+                </svg>
+            `;
+
+
+            return "data:image/svg+xml;charset=UTF-8," +
+                encodeURIComponent(svg);
 
         }
 
 
-        checkAccess();
+        /* ========================================
+           SECURITE AFFICHAGE
+        ======================================== */
+
+        function escapeHtml(text) {
+
+            const div =
+                document.createElement("div");
+
+            div.textContent =
+                text || "";
+
+            return div.innerHTML;
+
+        }
+
+
+        /* ========================================
+           INITIALISATION
+        ======================================== */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            async function () {
+
+                await checkSession();
+
+
+                const params =
+                    new URLSearchParams(
+                        window.location.search
+                    );
+
+
+                if (
+                    params.get("login") === "true"
+                ) {
+
+                    if (currentUser) {
+
+                        openProfile();
+
+                    } else {
+
+                        openLoginModal(false);
+
+                    }
+
+
+                    history.replaceState(
+                        {},
+                        document.title,
+                        window.location.pathname
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* ========================================
+           FERMER MODAL EN CLIQUANT A COTE
+        ======================================== */
+
+        document
+            .getElementById("loginModal")
+            .addEventListener(
+                "click",
+                function (event) {
+
+                    if (event.target === this) {
+
+                        closeLoginModal();
+
+                    }
+
+                }
+            );
 
     </script>
 
-
 </body>
-
 </html>
