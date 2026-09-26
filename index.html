@@ -24,10 +24,6 @@
             overflow-x: hidden;
         }
 
-        /* ========================================
-           HEADER
-        ======================================== */
-
         header {
             position: fixed;
             top: 0;
@@ -104,10 +100,6 @@
             vertical-align: middle;
             margin-right: 7px;
         }
-
-        /* ========================================
-           HERO
-        ======================================== */
 
         .hero {
             min-height: 100vh;
@@ -238,10 +230,6 @@
             border-color: rgba(255, 255, 255, 0.5);
         }
 
-        /* ========================================
-           UNIVERS
-        ======================================== */
-
         .universe {
             position: relative;
 
@@ -284,10 +272,6 @@
             font-size: 14px;
             line-height: 1.7;
         }
-
-        /* ========================================
-           GAME CARDS
-        ======================================== */
 
         .game-grid {
             max-width: 1250px;
@@ -398,17 +382,9 @@
             max-width: 380px;
         }
 
-        /* ========================================
-           LARGE CARDS
-        ======================================== */
-
         .game-card.large {
             grid-column: span 2;
         }
-
-        /* ========================================
-           BOUTON
-        ======================================== */
 
         .combat-button {
             display: inline-block;
@@ -442,10 +418,6 @@
             transform: translateY(-2px);
         }
 
-        /* ========================================
-           FOOTER
-        ======================================== */
-
         footer {
             padding: 30px 20px;
 
@@ -457,10 +429,6 @@
 
             border-top: 1px solid rgba(255, 255, 255, 0.06);
         }
-
-        /* ========================================
-           MODAL
-        ======================================== */
 
         .modal {
             position: fixed;
@@ -682,10 +650,6 @@
             background: rgba(180, 50, 50, 0.2);
         }
 
-        /* ========================================
-           RESPONSIVE
-        ======================================== */
-
         @media (max-width: 900px) {
 
             header {
@@ -767,967 +731,881 @@
 
 <body>
 
-    <!-- ========================================
-         HEADER
-    ======================================== -->
+<header>
 
-    <header>
+    <div class="logo">
+        VALDOR<span>IAN</span>
+    </div>
 
-        <div class="logo">
+    <nav>
+        <a href="index.html">ACCUEIL</a>
+        <a href="#univers">UNIVERS</a>
+    </nav>
+
+    <button
+        id="accountButton"
+        class="account-button"
+        onclick="handleAccountButton()"
+    >
+        COMPTE
+    </button>
+
+</header>
+
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="status-badge">
+            Développement en cours
+        </div>
+
+        <h1 class="hero-title">
             VALDOR<span>IAN</span>
-        </div>
+        </h1>
 
-        <nav>
-            <a href="index.html">ACCUEIL</a>
-            <a href="#univers">UNIVERS</a>
-        </nav>
+        <div class="hero-buttons">
 
-        <button
-            id="accountButton"
-            class="account-button"
-            onclick="handleAccountButton()"
-        >
-            COMPTE
-        </button>
-
-    </header>
-
-
-    <!-- ========================================
-         HERO
-    ======================================== -->
-
-    <section class="hero">
-
-        <div class="hero-content">
-
-            <div class="status-badge">
-                Développement en cours
-            </div>
-
-            <h1 class="hero-title">
-                VALDOR<span>IAN</span>
-            </h1>
-
-            <div class="hero-buttons">
-
-                <a
-                    href="interface/play.html"
-                    class="hero-button primary-button"
-                    onclick="return handlePlay(event)"
-                >
-                    JOUER
-                </a>
-
-                <a
-                    href="#univers"
-                    class="hero-button secondary-button"
-                >
-                    DÉCOUVRIR
-                </a>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ========================================
-         UNIVERS
-    ======================================== -->
-
-    <section
-        id="univers"
-        class="universe"
-    >
-
-        <div class="section-header">
-
-            <small>L'univers de Valdorian</small>
-
-            <h2>Un monde qui évolue avec vous</h2>
-
-            <p>
-                Explorez, combattez, construisez et survivez
-                dans un monde influencé par ses créatures,
-                ses zones et ses phases.
-            </p>
-
-        </div>
-
-
-        <div class="game-grid">
-
-            <!-- COMBAT -->
-
-            <article class="game-card large">
-
-                <div class="card-icon">
-                    ⚔️
-                </div>
-
-                <div class="card-number">
-                    01
-                </div>
-
-                <h3>
-                    Combat
-                </h3>
-
-                <p>
-                    Affrontez des vagues de monstres en mode survie.
-                    Chaque élimination vous rapporte de l'argent,
-                    permettant d'améliorer vos armes et votre progression.
-                </p>
-
-                <a
-                    href="interface/lors_combat.html"
-                    class="combat-button"
-                >
-                    ACCÉDER AU COMBAT
-                </a>
-
-            </article>
-
-
-            <!-- CREATURES -->
-
-            <article class="game-card">
-
-                <div class="card-icon">
-                    👹
-                </div>
-
-                <div class="card-number">
-                    02
-                </div>
-
-                <h3>
-                    Créatures
-                </h3>
-
-                <p>
-                    Découvrez les différentes créatures de Valdorian,
-                    leurs caractéristiques, leurs armes,
-                    leurs capacités et leur comportement.
-                </p>
-
-                <!-- CORRECTION :
-                     le fichier est dans /interface/ -->
-
-                <a
-                    href="interface/lors_créature.html"
-                    class="combat-button"
-                >
-                    DÉCOUVRIR LES CRÉATURES
-                </a>
-
-            </article>
-
-
-            <!-- MONDE -->
-
-            <article class="game-card">
-
-                <div class="card-icon">
-                    🌍
-                </div>
-
-                <div class="card-number">
-                    03
-                </div>
-
-                <h3>
-                    Monde
-                </h3>
-
-                <p>
-                    Explorez une vaste carte. Les distances comptent :
-                    certains trajets prennent du temps et nécessitent
-                    parfois un moyen de déplacement.
-                </p>
-
-            </article>
-
-
-            <!-- MAISON -->
-
-            <article class="game-card">
-
-                <div class="card-icon">
-                    🏠
-                </div>
-
-                <div class="card-number">
-                    04
-                </div>
-
-                <h3>
-                    Maison
-                </h3>
-
-                <p>
-                    Votre refuge vous permet de fabriquer des armes,
-                    améliorer votre équipement, vendre des objets
-                    et construire différentes installations.
-                </p>
-
-            </article>
-
-
-            <!-- PHASES -->
-
-            <article class="game-card">
-
-                <div class="card-icon">
-                    🌙
-                </div>
-
-                <div class="card-number">
-                    05
-                </div>
-
-                <h3>
-                    Phases
-                </h3>
-
-                <p>
-                    Les phases modifient le comportement du monde.
-                    Certains jours sont parfaits pour sortir,
-                    d'autres rendent même votre refuge vulnérable.
-                </p>
-
-            </article>
-
-        </div>
-
-    </section>
-
-
-    <!-- ========================================
-         FOOTER
-    ======================================== -->
-
-    <footer>
-        VALDORIAN • Univers en développement
-    </footer>
-
-
-    <!-- ========================================
-         MODAL COMPTE
-    ======================================== -->
-
-    <div
-        id="loginModal"
-        class="modal"
-    >
-
-        <div class="modal-box">
-
-            <button
-                class="close-modal"
-                onclick="closeLoginModal()"
+            <a
+                href="interface/play.html"
+                class="hero-button primary-button"
+                onclick="return handlePlay(event)"
             >
-                ×
-            </button>
+                JOUER
+            </a>
 
-
-            <!-- AVERTISSEMENT -->
-
-            <div
-                id="warningContainer"
-                class="warning-container"
+            <a
+                href="#univers"
+                class="hero-button secondary-button"
             >
-
-                <img
-                    src="969291-attention.gif"
-                    alt="Attention"
-                >
-
-            </div>
-
-
-            <!-- CONNEXION -->
-
-            <div id="loginSection">
-
-                <h2 class="modal-title">
-                    Connexion
-                </h2>
-
-                <p class="modal-subtitle">
-                    Connectez-vous pour accéder à Valdorian.
-                </p>
-
-
-                <div class="input-group">
-
-                    <label for="emailInput">
-                        Adresse e-mail
-                    </label>
-
-                    <input
-                        id="emailInput"
-                        type="email"
-                        placeholder="votre@email.com"
-                        autocomplete="email"
-                    >
-
-                </div>
-
-
-                <div class="input-group">
-
-                    <label for="passwordInput">
-                        Mot de passe
-                    </label>
-
-                    <input
-                        id="passwordInput"
-                        type="password"
-                        placeholder="Votre mot de passe"
-                        autocomplete="new-password"
-                    >
-
-                </div>
-
-
-                <button
-                    class="modal-button"
-                    onclick="sendCode()"
-                >
-                    CONTINUER
-                </button>
-
-
-                <div
-                    id="loginMessage"
-                    class="message"
-                ></div>
-
-            </div>
-
-
-            <!-- VERIFICATION -->
-
-            <div
-                id="verificationSection"
-                class="verification-section"
-            >
-
-                <h2 class="modal-title">
-                    Vérification
-                </h2>
-
-                <p class="modal-subtitle">
-                    Un code de vérification vient d'être envoyé
-                    à votre adresse e-mail.
-                </p>
-
-
-                <div class="input-group">
-
-                    <label for="codeInput">
-                        Code à 6 chiffres
-                    </label>
-
-                    <input
-                        id="codeInput"
-                        type="text"
-                        inputmode="numeric"
-                        maxlength="6"
-                        placeholder="000000"
-                    >
-
-                </div>
-
-
-                <button
-                    class="modal-button"
-                    onclick="verifyCode()"
-                >
-                    VÉRIFIER
-                </button>
-
-
-                <button
-                    class="modal-button secondary-modal-button"
-                    onclick="resendCode()"
-                >
-                    Renvoyer le code
-                </button>
-
-
-                <div
-                    id="verificationMessage"
-                    class="message"
-                ></div>
-
-            </div>
-
-
-            <!-- PROFIL -->
-
-            <div
-                id="profileSection"
-                class="profile-section"
-            >
-
-                <h2 class="modal-title">
-                    Mon profil
-                </h2>
-
-                <p class="modal-subtitle">
-                    Gérez vos informations Valdorian.
-                </p>
-
-
-                <div class="profile-avatar-wrapper">
-
-                    <img
-                        id="profileAvatar"
-                        class="profile-avatar"
-                        src=""
-                        alt="Avatar"
-                    >
-
-                </div>
-
-
-                <div class="input-group">
-
-                    <label for="displayNameInput">
-                        Nom affiché
-                    </label>
-
-                    <input
-                        id="displayNameInput"
-                        type="text"
-                        maxlength="32"
-                    >
-
-                </div>
-
-
-                <div class="input-group">
-
-                    <label for="usernameInput">
-                        Nom d'utilisateur
-                    </label>
-
-                    <input
-                        id="usernameInput"
-                        type="text"
-                        maxlength="20"
-                    >
-
-                </div>
-
-
-                <div class="input-group">
-
-                    <label for="avatarInput">
-                        Avatar
-                    </label>
-
-                    <input
-                        id="avatarInput"
-                        type="file"
-                        accept="image/png,image/jpeg,image/webp"
-                    >
-
-                </div>
-
-
-                <button
-                    class="modal-button"
-                    onclick="saveProfile()"
-                >
-                    ENREGISTRER
-                </button>
-
-
-                <button
-                    class="modal-button logout-button"
-                    onclick="logout()"
-                >
-                    SE DÉCONNECTER
-                </button>
-
-
-                <div
-                    id="profileMessage"
-                    class="message"
-                ></div>
-
-            </div>
+                DÉCOUVRIR
+            </a>
 
         </div>
 
     </div>
 
-
-    <!-- ========================================
-         JAVASCRIPT
-    ======================================== -->
-
-    <script>
-
-        /* ========================================
-           CONFIGURATION WORKER
-        ======================================== */
-
-        const API_URL =
-            "https://valdorian-verification.u1429712535.workers.dev";
+</section>
 
 
-        let currentUser = null;
-        let selectedAvatar = null;
+<section
+    id="univers"
+    class="universe"
+>
+
+    <div class="section-header">
+
+        <small>L'univers de Valdorian</small>
+
+        <h2>Un monde qui évolue avec vous</h2>
+
+        <p>
+            Explorez, combattez, construisez et survivez
+            dans un monde influencé par ses créatures,
+            ses zones et ses phases.
+        </p>
+
+    </div>
 
 
-        /* ========================================
-           TOKEN
-        ======================================== */
+    <div class="game-grid">
 
-        function getToken() {
+        <article class="game-card large">
 
-            return localStorage.getItem(
-                "valdorian_session"
+            <div class="card-icon">
+                ⚔️
+            </div>
+
+            <div class="card-number">
+                01
+            </div>
+
+            <h3>
+                Combat
+            </h3>
+
+            <p>
+                Affrontez des vagues de monstres en mode survie.
+                Chaque élimination vous rapporte de l'argent,
+                permettant d'améliorer vos armes et votre progression.
+            </p>
+
+            <a
+                href="interface/lors_combat.html"
+                class="combat-button"
+            >
+                ACCÉDER AU COMBAT
+            </a>
+
+        </article>
+
+
+        <article class="game-card">
+
+            <div class="card-icon">
+                👹
+            </div>
+
+            <div class="card-number">
+                02
+            </div>
+
+            <h3>
+                Créatures
+            </h3>
+
+            <p>
+                Découvrez les différentes créatures de Valdorian,
+                leurs caractéristiques, leurs armes,
+                leurs capacités et leur comportement.
+            </p>
+
+            <a
+                href="interface/lors_créature.html"
+                class="combat-button"
+            >
+                DÉCOUVRIR LES CRÉATURES
+            </a>
+
+        </article>
+
+
+        <article class="game-card">
+
+            <div class="card-icon">
+                🌍
+            </div>
+
+            <div class="card-number">
+                03
+            </div>
+
+            <h3>
+                Monde
+            </h3>
+
+            <p>
+                Explorez une vaste carte. Les distances comptent :
+                certains trajets prennent du temps et nécessitent
+                parfois un moyen de déplacement.
+            </p>
+
+        </article>
+
+
+        <article class="game-card">
+
+            <div class="card-icon">
+                🏠
+            </div>
+
+            <div class="card-number">
+                04
+            </div>
+
+            <h3>
+                Maison
+            </h3>
+
+            <p>
+                Votre refuge vous permet de fabriquer des armes,
+                améliorer votre équipement, vendre des objets
+                et construire différentes installations.
+            </p>
+
+        </article>
+
+
+        <article class="game-card">
+
+            <div class="card-icon">
+                🌙
+            </div>
+
+            <div class="card-number">
+                05
+            </div>
+
+            <h3>
+                Phases
+            </h3>
+
+            <p>
+                Les phases modifient le comportement du monde.
+                Certains jours sont parfaits pour sortir,
+                d'autres rendent même votre refuge vulnérable.
+            </p>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<footer>
+    VALDORIAN • Univers en développement
+</footer>
+
+
+<div
+    id="loginModal"
+    class="modal"
+>
+
+    <div class="modal-box">
+
+        <button
+            class="close-modal"
+            onclick="closeLoginModal()"
+        >
+            ×
+        </button>
+
+
+        <div
+            id="warningContainer"
+            class="warning-container"
+        >
+
+            <img
+                src="969291-attention.gif"
+                alt="Attention"
+            >
+
+        </div>
+
+
+        <!-- CONNEXION -->
+
+        <div id="loginSection">
+
+            <h2 class="modal-title">
+                Connexion
+            </h2>
+
+            <p class="modal-subtitle">
+                Connectez-vous pour accéder à Valdorian.
+            </p>
+
+
+            <div class="input-group">
+
+                <label for="emailInput">
+                    Adresse e-mail
+                </label>
+
+                <input
+                    id="emailInput"
+                    type="email"
+                    placeholder="votre@email.com"
+                    autocomplete="email"
+                >
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label for="passwordInput">
+                    Mot de passe
+                </label>
+
+                <input
+                    id="passwordInput"
+                    type="password"
+                    placeholder="Votre mot de passe"
+                    autocomplete="current-password"
+                >
+
+            </div>
+
+
+            <button
+                class="modal-button"
+                onclick="sendCode()"
+            >
+                CONTINUER
+            </button>
+
+
+            <div
+                id="loginMessage"
+                class="message"
+            ></div>
+
+        </div>
+
+
+        <!-- VERIFICATION -->
+
+        <div
+            id="verificationSection"
+            class="verification-section"
+        >
+
+            <h2 class="modal-title">
+                Vérification
+            </h2>
+
+            <p class="modal-subtitle">
+                Un code de vérification vient d'être envoyé
+                à votre adresse e-mail.
+            </p>
+
+
+            <div class="input-group">
+
+                <label for="codeInput">
+                    Code à 6 chiffres
+                </label>
+
+                <input
+                    id="codeInput"
+                    type="text"
+                    inputmode="numeric"
+                    maxlength="6"
+                    placeholder="000000"
+                >
+
+            </div>
+
+
+            <button
+                class="modal-button"
+                onclick="verifyCode()"
+            >
+                VÉRIFIER
+            </button>
+
+
+            <button
+                class="modal-button secondary-modal-button"
+                onclick="resendCode()"
+            >
+                Renvoyer le code
+            </button>
+
+
+            <div
+                id="verificationMessage"
+                class="message"
+            ></div>
+
+        </div>
+
+
+        <!-- PROFIL -->
+
+        <div
+            id="profileSection"
+            class="profile-section"
+        >
+
+            <h2 class="modal-title">
+                Mon profil
+            </h2>
+
+            <p class="modal-subtitle">
+                Gérez vos informations Valdorian.
+            </p>
+
+
+            <div class="profile-avatar-wrapper">
+
+                <img
+                    id="profileAvatar"
+                    class="profile-avatar"
+                    src=""
+                    alt="Avatar"
+                >
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label for="displayNameInput">
+                    Nom affiché
+                </label>
+
+                <input
+                    id="displayNameInput"
+                    type="text"
+                    maxlength="32"
+                >
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label for="usernameInput">
+                    Nom d'utilisateur
+                </label>
+
+                <input
+                    id="usernameInput"
+                    type="text"
+                    maxlength="20"
+                >
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label for="avatarInput">
+                    Avatar
+                </label>
+
+                <input
+                    id="avatarInput"
+                    type="file"
+                    accept="image/png,image/jpeg,image/webp"
+                >
+
+            </div>
+
+
+            <button
+                class="modal-button"
+                onclick="saveProfile()"
+            >
+                ENREGISTRER
+            </button>
+
+
+            <button
+                class="modal-button logout-button"
+                onclick="logout()"
+            >
+                SE DÉCONNECTER
+            </button>
+
+
+            <div
+                id="profileMessage"
+                class="message"
+            ></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    const API_URL =
+        "https://valdorian-verification.u1429712535.workers.dev";
+
+
+    let currentUser = null;
+    let selectedAvatar = null;
+
+
+    function getToken() {
+
+        return localStorage.getItem(
+            "valdorian_session"
+        );
+
+    }
+
+
+    function openLoginModal(showWarning = false) {
+
+        document
+            .getElementById("loginModal")
+            .classList.add("active");
+
+        document
+            .getElementById("warningContainer")
+            .classList.toggle(
+                "active",
+                showWarning
             );
 
-        }
+        document
+            .getElementById("loginSection")
+            .style.display = "block";
+
+        document
+            .getElementById("verificationSection")
+            .classList.remove("active");
+
+        document
+            .getElementById("profileSection")
+            .classList.remove("active");
+
+        document
+            .getElementById("loginMessage")
+            .textContent = "";
+
+        document
+            .getElementById("verificationMessage")
+            .textContent = "";
+
+    }
 
 
-        /* ========================================
-           MODAL
-        ======================================== */
+    function closeLoginModal() {
 
-        function openLoginModal(showWarning = false) {
+        document
+            .getElementById("loginModal")
+            .classList.remove("active");
 
-            document
-                .getElementById("loginModal")
-                .classList.add("active");
-
-            document
-                .getElementById("warningContainer")
-                .classList.toggle(
-                    "active",
-                    showWarning
-                );
-
-            document
-                .getElementById("loginSection")
-                .style.display = "block";
-
-            document
-                .getElementById("verificationSection")
-                .classList.remove("active");
-
-            document
-                .getElementById("profileSection")
-                .classList.remove("active");
-
-        }
+    }
 
 
-        function closeLoginModal() {
+    function handlePlay(event) {
 
-            document
-                .getElementById("loginModal")
-                .classList.remove("active");
+        event.preventDefault();
 
-        }
+        if (currentUser) {
 
-
-        /* ========================================
-           BOUTON JOUER
-        ======================================== */
-
-        function handlePlay(event) {
-
-            event.preventDefault();
-
-            if (currentUser) {
-
-                window.location.href =
-                    "interface/play.html";
-
-                return false;
-
-            }
-
-            sessionStorage.setItem(
-                "valdorian_play_after_login",
-                "true"
-            );
-
-            openLoginModal(true);
+            window.location.href =
+                "interface/play.html";
 
             return false;
 
         }
 
+        sessionStorage.setItem(
+            "valdorian_play_after_login",
+            "true"
+        );
 
-        /* ========================================
-           COMPTE
-        ======================================== */
+        openLoginModal(true);
 
-        function handleAccountButton() {
+        return false;
 
-            if (currentUser) {
+    }
 
-                openProfile();
 
-            } else {
+    function handleAccountButton() {
 
-                openLoginModal(false);
+        if (currentUser) {
 
-            }
+            openProfile();
 
-        }
-
-
-        /* ========================================
-           ENVOYER LE CODE
-        ======================================== */
-
-        async function sendCode() {
-
-            const email =
-                document
-                    .getElementById("emailInput")
-                    .value
-                    .trim();
-
-            const password =
-                document
-                    .getElementById("passwordInput")
-                    .value;
-
-            const message =
-                document.getElementById(
-                    "loginMessage"
-                );
-
-
-            if (!email) {
-
-                message.textContent =
-                    "Veuillez entrer votre adresse e-mail.";
-
-                return;
-
-            }
-
-
-            if (!password) {
-
-                message.textContent =
-                    "Veuillez entrer votre mot de passe.";
-
-                return;
-
-            }
-
-
-            message.textContent =
-                "Envoi du code...";
-
-
-            try {
-
-                const response =
-                    await fetch(
-                        API_URL + "/send-code",
-                        {
-                            method: "POST",
-
-                            headers: {
-                                "Content-Type":
-                                    "application/json"
-                            },
-
-                            body: JSON.stringify({
-                                email,
-                                password
-                            })
-                        }
-                    );
-
-
-                const data =
-                    await response.json();
-
-
-                if (!response.ok) {
-
-                    message.textContent =
-                        data.error ||
-                        data.message ||
-                        "Impossible d'envoyer le code.";
-
-                    return;
-
-                }
-
-
-                message.textContent = "";
-
-
-                document
-                    .getElementById("loginSection")
-                    .style.display = "none";
-
-
-                document
-                    .getElementById("verificationSection")
-                    .classList.add("active");
-
-
-                document
-                    .getElementById("codeInput")
-                    .focus();
-
-            } catch (error) {
-
-                console.error(
-                    "Erreur sendCode :",
-                    error
-                );
-
-                message.textContent =
-                    "Impossible de contacter Valdorian.";
-
-            }
-
-        }
-
-
-        /* ========================================
-           RENVOYER LE CODE
-        ======================================== */
-
-        async function resendCode() {
-
-            const email =
-                document
-                    .getElementById("emailInput")
-                    .value
-                    .trim();
-
-            const message =
-                document.getElementById(
-                    "verificationMessage"
-                );
-
-
-            message.textContent =
-                "Envoi du nouveau code...";
-
-
-            try {
-
-                const response =
-                    await fetch(
-                        API_URL + "/resend-code",
-                        {
-                            method: "POST",
-
-                            headers: {
-                                "Content-Type":
-                                    "application/json"
-                            },
-
-                            body: JSON.stringify({
-                                email
-                            })
-                        }
-                    );
-
-
-                const data =
-                    await response.json();
-
-
-                if (!response.ok) {
-
-                    message.textContent =
-                        data.error ||
-                        data.message ||
-                        "Impossible de renvoyer le code.";
-
-                    return;
-
-                }
-
-
-                message.textContent =
-                    data.message ||
-                    "Nouveau code envoyé par e-mail.";
-
-            } catch (error) {
-
-                console.error(
-                    "Erreur resendCode :",
-                    error
-                );
-
-                message.textContent =
-                    "Impossible de contacter Valdorian.";
-
-            }
-
-        }
-
-
-        /* ========================================
-           VERIFIER LE CODE
-        ======================================== */
-
-        async function verifyCode() {
-
-            const email =
-                document
-                    .getElementById("emailInput")
-                    .value
-                    .trim();
-
-            const code =
-                document
-                    .getElementById("codeInput")
-                    .value
-                    .trim();
-
-            const message =
-                document.getElementById(
-                    "verificationMessage"
-                );
-
-
-            if (!/^\d{6}$/.test(code)) {
-
-                message.textContent =
-                    "Le code doit contenir 6 chiffres.";
-
-                return;
-
-            }
-
-
-            message.textContent =
-                "Vérification...";
-
-
-            try {
-
-                const response =
-                    await fetch(
-                        API_URL + "/verify-code",
-                        {
-                            method: "POST",
-
-                            headers: {
-                                "Content-Type":
-                                    "application/json"
-                            },
-
-                            body: JSON.stringify({
-                                email,
-                                code
-                            })
-                        }
-                    );
-
-
-                const data =
-                    await response.json();
-
-
-                if (!response.ok) {
-
-                    message.textContent =
-                        data.error ||
-                        data.message ||
-                        "Code incorrect.";
-
-                    return;
-
-                }
-
-
-                localStorage.setItem(
-                    "valdorian_session",
-                    data.token
-                );
-
-
-                currentUser =
-                    data.user;
-
-
-                updateAccountButton();
-
-
-                const playAfterLogin =
-                    sessionStorage.getItem(
-                        "valdorian_play_after_login"
-                    );
-
-
-                if (playAfterLogin === "true") {
-
-                    sessionStorage.removeItem(
-                        "valdorian_play_after_login"
-                    );
-
-                    window.location.href =
-                        "interface/play.html";
-
-                    return;
-
-                }
-
-
-                document
-                    .getElementById("verificationSection")
-                    .classList.remove("active");
-
-
-                document
-                    .getElementById("profileSection")
-                    .classList.add("active");
-
-
-                loadProfile();
-
-            } catch (error) {
-
-                console.error(
-                    "Erreur verifyCode :",
-                    error
-                );
-
-                message.textContent =
-                    "Impossible de contacter Valdorian.";
-
-            }
-
-        }
-
-
-        /* ========================================
-           PROFIL
-        ======================================== */
-
-        function openProfile() {
+        } else {
 
             openLoginModal(false);
+
+        }
+
+    }
+
+
+    async function sendCode() {
+
+        const email =
+            document
+                .getElementById("emailInput")
+                .value
+                .trim()
+                .toLowerCase();
+
+        const password =
+            document
+                .getElementById("passwordInput")
+                .value;
+
+        const message =
+            document.getElementById(
+                "loginMessage"
+            );
+
+
+        if (!email) {
+
+            message.textContent =
+                "Veuillez entrer votre adresse e-mail.";
+
+            return;
+
+        }
+
+
+        if (!password) {
+
+            message.textContent =
+                "Veuillez entrer votre mot de passe.";
+
+            return;
+
+        }
+
+
+        message.textContent =
+            "Vérification du compte...";
+
+
+        try {
+
+            const response =
+                await fetch(
+                    API_URL + "/send-code",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            email,
+                            password
+                        })
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                message.textContent =
+                    data.error ||
+                    data.message ||
+                    "Adresse e-mail ou mot de passe incorrect.";
+
+                return;
+
+            }
+
+
+            message.textContent = "";
 
 
             document
                 .getElementById("loginSection")
                 .style.display = "none";
+
+
+            document
+                .getElementById("verificationSection")
+                .classList.add("active");
+
+
+            document
+                .getElementById("codeInput")
+                .value = "";
+
+
+            document
+                .getElementById("codeInput")
+                .focus();
+
+        } catch (error) {
+
+            console.error(
+                "Erreur sendCode :",
+                error
+            );
+
+            message.textContent =
+                "Impossible de contacter Valdorian.";
+
+        }
+
+    }
+
+
+    async function resendCode() {
+
+        const email =
+            document
+                .getElementById("emailInput")
+                .value
+                .trim()
+                .toLowerCase();
+
+        const message =
+            document.getElementById(
+                "verificationMessage"
+            );
+
+
+        message.textContent =
+            "Envoi du nouveau code...";
+
+
+        try {
+
+            const response =
+                await fetch(
+                    API_URL + "/resend-code",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            email
+                        })
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                message.textContent =
+                    data.error ||
+                    data.message ||
+                    "Impossible de renvoyer le code.";
+
+                return;
+
+            }
+
+
+            message.textContent =
+                data.message ||
+                "Nouveau code envoyé par e-mail.";
+
+        } catch (error) {
+
+            console.error(
+                "Erreur resendCode :",
+                error
+            );
+
+            message.textContent =
+                "Impossible de contacter Valdorian.";
+
+        }
+
+    }
+
+
+    async function verifyCode() {
+
+        const email =
+            document
+                .getElementById("emailInput")
+                .value
+                .trim()
+                .toLowerCase();
+
+        const code =
+            document
+                .getElementById("codeInput")
+                .value
+                .trim();
+
+        const message =
+            document.getElementById(
+                "verificationMessage"
+            );
+
+
+        if (!/^\d{6}$/.test(code)) {
+
+            message.textContent =
+                "Le code doit contenir 6 chiffres.";
+
+            return;
+
+        }
+
+
+        message.textContent =
+            "Vérification...";
+
+
+        try {
+
+            const response =
+                await fetch(
+                    API_URL + "/verify-code",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            email,
+                            code
+                        })
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                message.textContent =
+                    data.error ||
+                    data.message ||
+                    "Code incorrect.";
+
+                return;
+
+            }
+
+
+            if (!data.token || !data.user) {
+
+                message.textContent =
+                    "Réponse du serveur invalide.";
+
+                return;
+
+            }
+
+
+            localStorage.setItem(
+                "valdorian_session",
+                data.token
+            );
+
+
+            currentUser =
+                data.user;
+
+
+            updateAccountButton();
+
+
+            const playAfterLogin =
+                sessionStorage.getItem(
+                    "valdorian_play_after_login"
+                );
+
+
+            if (playAfterLogin === "true") {
+
+                sessionStorage.removeItem(
+                    "valdorian_play_after_login"
+                );
+
+                window.location.href =
+                    "interface/play.html";
+
+                return;
+
+            }
 
 
             document
@@ -1742,284 +1620,336 @@
 
             loadProfile();
 
-        }
+        } catch (error) {
 
-
-        function loadProfile() {
-
-            if (!currentUser) {
-                return;
-            }
-
-
-            document
-                .getElementById("displayNameInput")
-                .value =
-                currentUser.displayName ||
-                currentUser.username ||
-                "";
-
-
-            document
-                .getElementById("usernameInput")
-                .value =
-                currentUser.username ||
-                "";
-
-
-            document
-                .getElementById("profileAvatar")
-                .src =
-                currentUser.avatar ||
-                createDefaultAvatar(
-                    currentUser.username
-                );
-
-        }
-
-
-        /* ========================================
-           AVATAR
-        ======================================== */
-
-        document
-            .getElementById("avatarInput")
-            .addEventListener(
-                "change",
-                function () {
-
-                    const file =
-                        this.files[0];
-
-
-                    if (!file) {
-                        return;
-                    }
-
-
-                    if (file.size > 500000) {
-
-                        document
-                            .getElementById(
-                                "profileMessage"
-                            )
-                            .textContent =
-                            "Image trop volumineuse. Maximum 500 Ko.";
-
-                        this.value = "";
-
-                        return;
-
-                    }
-
-
-                    const reader =
-                        new FileReader();
-
-
-                    reader.onload =
-                        function (event) {
-
-                            selectedAvatar =
-                                event.target.result;
-
-
-                            document
-                                .getElementById(
-                                    "profileAvatar"
-                                )
-                                .src =
-                                selectedAvatar;
-
-                        };
-
-
-                    reader.readAsDataURL(file);
-
-                }
+            console.error(
+                "Erreur verifyCode :",
+                error
             );
 
-
-        /* ========================================
-           SAUVEGARDER PROFIL
-        ======================================== */
-
-        async function saveProfile() {
-
-            if (!currentUser) {
-                return;
-            }
-
-
-            const displayName =
-                document
-                    .getElementById(
-                        "displayNameInput"
-                    )
-                    .value
-                    .trim();
-
-
-            const username =
-                document
-                    .getElementById(
-                        "usernameInput"
-                    )
-                    .value
-                    .trim();
-
-
-            const message =
-                document.getElementById(
-                    "profileMessage"
-                );
-
-
             message.textContent =
-                "Enregistrement...";
+                "Impossible de contacter Valdorian.";
+
+        }
+
+    }
 
 
-            try {
+    function openProfile() {
 
-                const response =
-                    await fetch(
-                        API_URL + "/profile",
-                        {
-                            method: "POST",
-
-                            headers: {
-                                "Content-Type":
-                                    "application/json",
-
-                                "Authorization":
-                                    "Bearer " +
-                                    getToken()
-                            },
-
-                            body: JSON.stringify({
-                                displayName,
-                                username,
-                                avatar:
-                                    selectedAvatar ||
-                                    currentUser.avatar ||
-                                    null
-                            })
-                        }
-                    );
+        openLoginModal(false);
 
 
-                const data =
-                    await response.json();
+        document
+            .getElementById("loginSection")
+            .style.display = "none";
 
 
-                if (!response.ok) {
+        document
+            .getElementById("verificationSection")
+            .classList.remove("active");
 
-                    message.textContent =
-                        data.error ||
-                        data.message ||
-                        "Impossible d'enregistrer.";
+
+        document
+            .getElementById("profileSection")
+            .classList.add("active");
+
+
+        loadProfile();
+
+    }
+
+
+    function loadProfile() {
+
+        if (!currentUser) {
+            return;
+        }
+
+
+        document
+            .getElementById("displayNameInput")
+            .value =
+            currentUser.displayName ||
+            currentUser.username ||
+            "";
+
+
+        document
+            .getElementById("usernameInput")
+            .value =
+            currentUser.username ||
+            "";
+
+
+        document
+            .getElementById("profileAvatar")
+            .src =
+            currentUser.avatar ||
+            createDefaultAvatar(
+                currentUser.username
+            );
+
+    }
+
+
+    document
+        .getElementById("avatarInput")
+        .addEventListener(
+            "change",
+            function () {
+
+                const file =
+                    this.files[0];
+
+
+                if (!file) {
+                    return;
+                }
+
+
+                if (file.size > 500000) {
+
+                    document
+                        .getElementById(
+                            "profileMessage"
+                        )
+                        .textContent =
+                        "Image trop volumineuse. Maximum 500 Ko.";
+
+                    this.value = "";
 
                     return;
 
                 }
 
 
-                currentUser =
-                    data.user;
+                const reader =
+                    new FileReader();
 
 
-                selectedAvatar = null;
+                reader.onload =
+                    function (event) {
+
+                        selectedAvatar =
+                            event.target.result;
 
 
-                updateAccountButton();
+                        document
+                            .getElementById(
+                                "profileAvatar"
+                            )
+                            .src =
+                            selectedAvatar;
 
-                loadProfile();
+                    };
 
 
-                message.textContent =
-                    "Profil enregistré.";
-
-            } catch (error) {
-
-                console.error(
-                    "Erreur saveProfile :",
-                    error
-                );
-
-                message.textContent =
-                    "Erreur de connexion.";
+                reader.readAsDataURL(file);
 
             }
+        );
 
+
+    async function saveProfile() {
+
+        if (!currentUser) {
+            return;
         }
 
 
-        /* ========================================
-           LOGOUT
-        ======================================== */
+        const displayName =
+            document
+                .getElementById(
+                    "displayNameInput"
+                )
+                .value
+                .trim();
 
-        async function logout() {
 
-            const token =
-                getToken();
+        const username =
+            document
+                .getElementById(
+                    "usernameInput"
+                )
+                .value
+                .trim();
 
 
-            try {
+        const message =
+            document.getElementById(
+                "profileMessage"
+            );
 
-                if (token) {
 
-                    await fetch(
-                        API_URL + "/logout",
-                        {
-                            method: "POST",
+        message.textContent =
+            "Enregistrement...";
 
-                            headers: {
-                                "Authorization":
-                                    "Bearer " + token
-                            }
-                        }
-                    );
 
-                }
+        try {
 
-            } catch (error) {
+            const response =
+                await fetch(
+                    API_URL + "/profile",
+                    {
+                        method: "POST",
 
-                console.error(
-                    "Erreur logout :",
-                    error
+                        headers: {
+                            "Content-Type":
+                                "application/json",
+
+                            "Authorization":
+                                "Bearer " +
+                                getToken()
+                        },
+
+                        body: JSON.stringify({
+                            displayName,
+                            username,
+                            avatar:
+                                selectedAvatar ||
+                                currentUser.avatar ||
+                                null
+                        })
+                    }
                 );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                message.textContent =
+                    data.error ||
+                    data.message ||
+                    "Impossible d'enregistrer.";
+
+                return;
 
             }
 
 
-            localStorage.removeItem(
-                "valdorian_session"
-            );
+            currentUser =
+                data.user;
 
-
-            currentUser = null;
 
             selectedAvatar = null;
 
 
             updateAccountButton();
 
-            closeLoginModal();
+            loadProfile();
+
+
+            message.textContent =
+                "Profil enregistré.";
+
+        } catch (error) {
+
+            console.error(
+                "Erreur saveProfile :",
+                error
+            );
+
+            message.textContent =
+                "Erreur de connexion.";
+
+        }
+
+    }
+
+
+    async function logout() {
+
+        const token =
+            getToken();
+
+
+        try {
+
+            if (token) {
+
+                await fetch(
+                    API_URL + "/logout",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Authorization":
+                                "Bearer " + token
+                        }
+                    }
+                );
+
+            }
+
+        } catch (error) {
+
+            console.error(
+                "Erreur logout :",
+                error
+            );
 
         }
 
 
-        /* ========================================
-           SESSION
-        ======================================== */
-
-        async function checkSession() {
-
-            const token =
-                getToken();
+        localStorage.removeItem(
+            "valdorian_session"
+        );
 
 
-            if (!token) {
+        currentUser = null;
+
+        selectedAvatar = null;
+
+
+        updateAccountButton();
+
+        closeLoginModal();
+
+    }
+
+
+    async function checkSession() {
+
+        const token =
+            getToken();
+
+
+        if (!token) {
+
+            currentUser = null;
+
+            updateAccountButton();
+
+            return;
+
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    API_URL + "/profile",
+                    {
+                        method: "GET",
+
+                        headers: {
+                            "Authorization":
+                                "Bearer " + token
+                        }
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                localStorage.removeItem(
+                    "valdorian_session"
+                );
 
                 currentUser = null;
 
@@ -2030,211 +1960,180 @@
             }
 
 
-            try {
-
-                const response =
-                    await fetch(
-                        API_URL + "/profile",
-                        {
-                            method: "GET",
-
-                            headers: {
-                                "Authorization":
-                                    "Bearer " + token
-                            }
-                        }
-                    );
+            const data =
+                await response.json();
 
 
-                if (!response.ok) {
+            currentUser =
+                data.user;
 
-                    localStorage.removeItem(
-                        "valdorian_session"
-                    );
 
-                    currentUser = null;
+            updateAccountButton();
 
-                    updateAccountButton();
+        } catch (error) {
 
-                    return;
+            console.error(
+                "Erreur checkSession :",
+                error
+            );
+
+            currentUser = null;
+
+            updateAccountButton();
+
+        }
+
+    }
+
+
+    function updateAccountButton() {
+
+        const button =
+            document.getElementById(
+                "accountButton"
+            );
+
+
+        if (!button) {
+            return;
+        }
+
+
+        if (currentUser) {
+
+            const avatar =
+                currentUser.avatar ||
+                createDefaultAvatar(
+                    currentUser.username
+                );
+
+
+            button.innerHTML =
+                `<img
+                    src="${avatar}"
+                    class="account-avatar"
+                    alt=""
+                >${escapeHtml(
+                    currentUser.username
+                )}`;
+
+        } else {
+
+            button.textContent =
+                "COMPTE";
+
+        }
+
+    }
+
+
+    function createDefaultAvatar(username) {
+
+        const letter =
+            (username || "V")
+                .charAt(0)
+                .toUpperCase();
+
+
+        const svg = `
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="100"
+                height="100"
+            >
+
+                <rect
+                    width="100"
+                    height="100"
+                    rx="50"
+                    fill="#c9a24a"
+                />
+
+                <text
+                    x="50"
+                    y="62"
+                    text-anchor="middle"
+                    font-size="50"
+                    font-family="Arial"
+                    fill="#111"
+                >
+                    ${letter}
+                </text>
+
+            </svg>
+        `;
+
+
+        return "data:image/svg+xml;charset=UTF-8," +
+            encodeURIComponent(svg);
+
+    }
+
+
+    function escapeHtml(text) {
+
+        const div =
+            document.createElement("div");
+
+
+        div.textContent =
+            text || "";
+
+
+        return div.innerHTML;
+
+    }
+
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        async function () {
+
+            await checkSession();
+
+
+            const params =
+                new URLSearchParams(
+                    window.location.search
+                );
+
+
+            if (
+                params.get("login") === "true"
+            ) {
+
+                if (currentUser) {
+
+                    openProfile();
+
+                } else {
+
+                    openLoginModal(false);
 
                 }
 
 
-                const data =
-                    await response.json();
-
-
-                currentUser =
-                    data.user;
-
-
-                updateAccountButton();
-
-            } catch (error) {
-
-                console.error(
-                    "Erreur checkSession :",
-                    error
+                history.replaceState(
+                    {},
+                    document.title,
+                    window.location.pathname
                 );
 
-                currentUser = null;
-
-                updateAccountButton();
-
             }
 
         }
+    );
 
 
-        /* ========================================
-           BOUTON COMPTE
-        ======================================== */
+    document
+        .getElementById("loginModal")
+        .addEventListener(
+            "click",
+            function (event) {
 
-        function updateAccountButton() {
+                if (event.target === this) {
 
-            const button =
-                document.getElementById(
-                    "accountButton"
-                );
-
-
-            if (!button) {
-                return;
-            }
-
-
-            if (currentUser) {
-
-                const avatar =
-                    currentUser.avatar ||
-                    createDefaultAvatar(
-                        currentUser.username
-                    );
-
-
-                button.innerHTML =
-                    `<img
-                        src="${avatar}"
-                        class="account-avatar"
-                        alt=""
-                    >${escapeHtml(
-                        currentUser.username
-                    )}`;
-
-            } else {
-
-                button.textContent =
-                    "COMPTE";
-
-            }
-
-        }
-
-
-        /* ========================================
-           AVATAR PAR DEFAUT
-        ======================================== */
-
-        function createDefaultAvatar(username) {
-
-            const letter =
-                (username || "V")
-                    .charAt(0)
-                    .toUpperCase();
-
-
-            const svg = `
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="100"
-                    height="100"
-                >
-
-                    <rect
-                        width="100"
-                        height="100"
-                        rx="50"
-                        fill="#c9a24a"
-                    />
-
-                    <text
-                        x="50"
-                        y="62"
-                        text-anchor="middle"
-                        font-size="50"
-                        font-family="Arial"
-                        fill="#111"
-                    >
-                        ${letter}
-                    </text>
-
-                </svg>
-            `;
-
-
-            return "data:image/svg+xml;charset=UTF-8," +
-                encodeURIComponent(svg);
-
-        }
-
-
-        /* ========================================
-           SECURITE AFFICHAGE
-        ======================================== */
-
-        function escapeHtml(text) {
-
-            const div =
-                document.createElement("div");
-
-
-            div.textContent =
-                text || "";
-
-
-            return div.innerHTML;
-
-        }
-
-
-        /* ========================================
-           INITIALISATION
-        ======================================== */
-
-        document.addEventListener(
-            "DOMContentLoaded",
-            async function () {
-
-                await checkSession();
-
-
-                const params =
-                    new URLSearchParams(
-                        window.location.search
-                    );
-
-
-                if (
-                    params.get("login") === "true"
-                ) {
-
-                    if (currentUser) {
-
-                        openProfile();
-
-                    } else {
-
-                        openLoginModal(false);
-
-                    }
-
-
-                    history.replaceState(
-                        {},
-                        document.title,
-                        window.location.pathname
-                    );
+                    closeLoginModal();
 
                 }
 
@@ -2242,26 +2141,37 @@
         );
 
 
-        /* ========================================
-           FERMER MODAL EN CLIQUANT A COTE
-        ======================================== */
+    document
+        .getElementById("passwordInput")
+        .addEventListener(
+            "keydown",
+            function (event) {
 
-        document
-            .getElementById("loginModal")
-            .addEventListener(
-                "click",
-                function (event) {
+                if (event.key === "Enter") {
 
-                    if (event.target === this) {
-
-                        closeLoginModal();
-
-                    }
+                    sendCode();
 
                 }
-            );
 
-    </script>
+            }
+        );
+
+
+    document
+        .getElementById("codeInput")
+        .addEventListener(
+            "input",
+            function () {
+
+                this.value =
+                    this.value
+                        .replace(/\D/g, "")
+                        .slice(0, 6);
+
+            }
+        );
+
+</script>
 
 </body>
 </html>
