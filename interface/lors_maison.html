@@ -1,0 +1,1723 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Lore de la maison — Valdorian</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #08090c;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* ========================================
+           HEADER
+        ======================================== */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 72px;
+            z-index: 1000;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 45px;
+
+            background: rgba(7, 8, 11, 0.86);
+            backdrop-filter: blur(14px);
+
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: 4px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #c9a24a;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        nav a {
+            color: #d4d4d4;
+            text-decoration: none;
+
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 1px;
+
+            transition: 0.2s;
+        }
+
+        nav a:hover {
+            color: #c9a24a;
+        }
+
+        /* ========================================
+           HERO
+        ======================================== */
+
+        .hero {
+            min-height: 65vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+
+            padding: 120px 25px 80px;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(201, 162, 74, 0.13),
+                    transparent 40%
+                ),
+                linear-gradient(
+                    180deg,
+                    #111318,
+                    #08090c
+                );
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+
+            max-width: 900px;
+
+            text-align: center;
+        }
+
+        .status {
+            display: inline-block;
+
+            padding: 8px 16px;
+            margin-bottom: 25px;
+
+            border: 1px solid rgba(201, 162, 74, 0.55);
+            border-radius: 50px;
+
+            color: #d7b764;
+
+            background: rgba(201, 162, 74, 0.06);
+
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: clamp(55px, 10vw, 120px);
+
+            line-height: 0.9;
+
+            font-weight: 1000;
+
+            letter-spacing: 7px;
+
+            text-shadow:
+                0 15px 45px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero h1 span {
+            color: #c9a24a;
+        }
+
+        .hero p {
+            max-width: 700px;
+
+            margin: 30px auto 0;
+
+            color: #8f9198;
+
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        /* ========================================
+           MAIN
+        ======================================== */
+
+        main {
+            max-width: 1250px;
+
+            margin: auto;
+
+            padding: 80px 25px 120px;
+        }
+
+        .section-title {
+            text-align: center;
+
+            margin-bottom: 55px;
+        }
+
+        .section-title small {
+            color: #c9a24a;
+
+            font-size: 11px;
+            font-weight: 900;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+        }
+
+        .section-title h2 {
+            margin-top: 12px;
+
+            font-size: clamp(30px, 5vw, 48px);
+
+            letter-spacing: 1px;
+        }
+
+        .section-title p {
+            max-width: 700px;
+
+            margin: 15px auto 0;
+
+            color: #85878d;
+
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* ========================================
+           INTRO
+        ======================================== */
+
+        .intro-box {
+            padding: 45px;
+
+            border-radius: 20px;
+
+            border:
+                1px solid rgba(201, 162, 74, 0.18);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(201, 162, 74, 0.055),
+                    rgba(255, 255, 255, 0.015)
+                );
+
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.25);
+        }
+
+        .intro-box h3 {
+            color: #c9a24a;
+
+            font-size: 12px;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 18px;
+        }
+
+        .intro-box h2 {
+            font-size: 34px;
+
+            margin-bottom: 25px;
+        }
+
+        .intro-box p {
+            color: #a0a1a7;
+
+            font-size: 14px;
+
+            line-height: 1.9;
+
+            margin-bottom: 18px;
+        }
+
+        /* ========================================
+           FONCTIONS
+        ======================================== */
+
+        .functions-section {
+            margin-top: 110px;
+        }
+
+        .function-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+        .function-card {
+            position: relative;
+
+            min-height: 280px;
+
+            padding: 30px;
+
+            display: flex;
+            flex-direction: column;
+
+            border-radius: 18px;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.08);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.055),
+                    rgba(255, 255, 255, 0.012)
+                );
+
+            overflow: hidden;
+
+            transition:
+                transform 0.25s,
+                border-color 0.25s,
+                background 0.25s;
+        }
+
+        .function-card::before {
+            content: "";
+
+            position: absolute;
+
+            width: 180px;
+            height: 180px;
+
+            top: -90px;
+            right: -90px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(201, 162, 74, 0.07);
+
+            transition: 0.3s;
+        }
+
+        .function-card:hover {
+            transform: translateY(-7px);
+
+            border-color:
+                rgba(201, 162, 74, 0.4);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(201, 162, 74, 0.08),
+                    rgba(255, 255, 255, 0.02)
+                );
+        }
+
+        .function-card:hover::before {
+            transform: scale(1.3);
+        }
+
+        .function-number {
+            position: relative;
+            z-index: 2;
+
+            color:
+                rgba(201, 162, 74, 0.6);
+
+            font-size: 11px;
+
+            font-weight: 900;
+
+            letter-spacing: 3px;
+
+            margin-bottom: 15px;
+        }
+
+        .function-icon {
+            position: relative;
+            z-index: 2;
+
+            font-size: 42px;
+
+            margin-bottom: 18px;
+        }
+
+        .function-card h3 {
+            position: relative;
+            z-index: 2;
+
+            font-size: 24px;
+
+            margin-bottom: 12px;
+        }
+
+        .function-card p {
+            position: relative;
+            z-index: 2;
+
+            color: #96979c;
+
+            font-size: 13px;
+
+            line-height: 1.75;
+        }
+
+        /* ========================================
+           INVENTAIRE
+        ======================================== */
+
+        .inventory-section {
+            margin-top: 120px;
+        }
+
+        .inventory-box {
+            padding: 45px;
+
+            border-radius: 20px;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.08);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.045),
+                    rgba(255, 255, 255, 0.012)
+                );
+        }
+
+        .inventory-box h3 {
+            color: #c9a24a;
+
+            font-size: 12px;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 18px;
+        }
+
+        .inventory-box h2 {
+            font-size: 32px;
+
+            margin-bottom: 20px;
+        }
+
+        .inventory-box p {
+            color: #999ba1;
+
+            font-size: 14px;
+
+            line-height: 1.85;
+
+            margin-bottom: 18px;
+        }
+
+        .inventory-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 12px;
+
+            margin-top: 30px;
+        }
+
+        .inventory-item {
+            padding: 20px;
+
+            border-radius: 12px;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.07);
+
+            background:
+                rgba(0, 0, 0, 0.18);
+
+            text-align: center;
+        }
+
+        .inventory-item strong {
+            display: block;
+
+            color: #c9a24a;
+
+            font-size: 27px;
+
+            margin-bottom: 8px;
+        }
+
+        .inventory-item span {
+            color: #898b91;
+
+            font-size: 11px;
+
+            line-height: 1.5;
+        }
+
+        /* ========================================
+           REPARATION
+        ======================================== */
+
+        .repair-section {
+            margin-top: 120px;
+        }
+
+        .repair-box {
+            padding: 45px;
+
+            border-radius: 20px;
+
+            border:
+                1px solid rgba(201, 162, 74, 0.18);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(201, 162, 74, 0.055),
+                    rgba(255, 255, 255, 0.012)
+                );
+        }
+
+        .repair-box h3 {
+            color: #c9a24a;
+
+            font-size: 12px;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 18px;
+        }
+
+        .repair-box h2 {
+            font-size: 32px;
+
+            margin-bottom: 22px;
+        }
+
+        .repair-box p {
+            color: #999ba1;
+
+            font-size: 14px;
+
+            line-height: 1.85;
+
+            margin-bottom: 18px;
+        }
+
+        .repair-note {
+            margin-top: 25px;
+
+            padding: 17px 20px;
+
+            border-left:
+                3px solid #c9a24a;
+
+            background:
+                rgba(201, 162, 74, 0.05);
+
+            color: #aaa;
+
+            font-size: 12px;
+
+            line-height: 1.7;
+        }
+
+        /* ========================================
+           AMELIORATIONS
+        ======================================== */
+
+        .upgrade-section {
+            margin-top: 120px;
+        }
+
+        .upgrade-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 20px;
+        }
+
+        .upgrade-card {
+            position: relative;
+
+            padding: 32px;
+
+            min-height: 270px;
+
+            border-radius: 18px;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.08);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.045),
+                    rgba(255, 255, 255, 0.012)
+                );
+
+            overflow: hidden;
+
+            transition: 0.25s;
+        }
+
+        .upgrade-card:hover {
+            transform: translateY(-5px);
+
+            border-color:
+                rgba(201, 162, 74, 0.35);
+        }
+
+        .upgrade-number {
+            color:
+                rgba(201, 162, 74, 0.55);
+
+            font-size: 11px;
+
+            font-weight: 900;
+
+            letter-spacing: 3px;
+
+            margin-bottom: 14px;
+        }
+
+        .upgrade-card h3 {
+            font-size: 25px;
+
+            margin-bottom: 15px;
+        }
+
+        .upgrade-card p {
+            color: #92949a;
+
+            font-size: 13px;
+
+            line-height: 1.75;
+        }
+
+        .upgrade-tag {
+            display: inline-block;
+
+            margin-top: 22px;
+
+            padding: 7px 11px;
+
+            border-radius: 5px;
+
+            background:
+                rgba(201, 162, 74, 0.08);
+
+            border:
+                1px solid rgba(201, 162, 74, 0.2);
+
+            color: #c9a24a;
+
+            font-size: 10px;
+
+            font-weight: 900;
+
+            letter-spacing: 1px;
+        }
+
+        /* ========================================
+           PROGRESSION
+        ======================================== */
+
+        .progression-section {
+            margin-top: 120px;
+        }
+
+        .progression-box {
+            padding: 45px;
+
+            border-radius: 20px;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.08);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.045),
+                    rgba(255, 255, 255, 0.012)
+                );
+        }
+
+        .progression-box h3 {
+            color: #c9a24a;
+
+            font-size: 12px;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 18px;
+        }
+
+        .progression-box h2 {
+            font-size: 32px;
+
+            margin-bottom: 22px;
+        }
+
+        .progression-box p {
+            color: #999ba1;
+
+            font-size: 14px;
+
+            line-height: 1.85;
+
+            margin-bottom: 18px;
+        }
+
+        /* ========================================
+           ATTAQUES
+        ======================================== */
+
+        .attack-section {
+            margin-top: 120px;
+        }
+
+        .attack-box {
+            padding: 45px;
+
+            border-radius: 20px;
+
+            border:
+                1px solid rgba(180, 50, 50, 0.25);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(130, 35, 35, 0.07),
+                    rgba(255, 255, 255, 0.01)
+                );
+        }
+
+        .attack-box h3 {
+            color: #d07878;
+
+            font-size: 12px;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 18px;
+        }
+
+        .attack-box h2 {
+            font-size: 32px;
+
+            margin-bottom: 22px;
+        }
+
+        .attack-box p {
+            color: #999ba1;
+
+            font-size: 14px;
+
+            line-height: 1.85;
+
+            margin-bottom: 18px;
+        }
+
+        .attack-warning {
+            margin-top: 25px;
+
+            padding: 18px 20px;
+
+            border-left:
+                3px solid #b43b3b;
+
+            background:
+                rgba(180, 50, 50, 0.06);
+
+            color: #aaa;
+
+            font-size: 12px;
+
+            line-height: 1.75;
+        }
+
+        /* ========================================
+           CONCLUSION
+        ======================================== */
+
+        .conclusion-section {
+            margin-top: 120px;
+        }
+
+        .conclusion-box {
+            padding: 45px;
+
+            border-radius: 20px;
+
+            text-align: center;
+
+            border:
+                1px solid rgba(201, 162, 74, 0.18);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(201, 162, 74, 0.055),
+                    rgba(255, 255, 255, 0.012)
+                );
+        }
+
+        .conclusion-box h3 {
+            color: #c9a24a;
+
+            font-size: 12px;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 18px;
+        }
+
+        .conclusion-box h2 {
+            font-size: 34px;
+
+            margin-bottom: 22px;
+        }
+
+        .conclusion-box p {
+            max-width: 800px;
+
+            margin: auto auto 18px;
+
+            color: #999ba1;
+
+            font-size: 14px;
+
+            line-height: 1.85;
+        }
+
+        /* ========================================
+           FOOTER
+        ======================================== */
+
+        footer {
+            padding: 35px 20px;
+
+            text-align: center;
+
+            color: #55565a;
+
+            font-size: 11px;
+
+            border-top:
+                1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        footer span {
+            color: #c9a24a;
+        }
+
+        /* ========================================
+           RESPONSIVE
+        ======================================== */
+
+        @media (max-width: 950px) {
+
+            header {
+                padding: 0 20px;
+            }
+
+            nav {
+                gap: 15px;
+            }
+
+            .function-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .inventory-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .upgrade-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 650px) {
+
+            header {
+                height: 65px;
+            }
+
+            .logo {
+                font-size: 18px;
+                letter-spacing: 2px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hero {
+                min-height: 70vh;
+
+                padding:
+                    110px 20px 70px;
+            }
+
+            .hero h1 {
+                letter-spacing: 4px;
+            }
+
+            main {
+                padding:
+                    60px 20px 90px;
+            }
+
+            .intro-box,
+            .inventory-box,
+            .repair-box,
+            .progression-box,
+            .attack-box,
+            .conclusion-box {
+                padding: 28px 22px;
+            }
+
+            .function-grid,
+            .inventory-grid,
+            .upgrade-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .upgrade-card {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ========================================
+         HEADER
+    ======================================== -->
+
+    <header>
+
+        <a
+            href="../index.html"
+            class="logo"
+        >
+            VALDOR<span>IAN</span>
+        </a>
+
+        <nav>
+
+            <a href="../index.html">
+                ACCUEIL
+            </a>
+
+            <a href="../index.html#univers">
+                UNIVERS
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ========================================
+         HERO
+    ======================================== -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="status">
+                LORE • MAISON
+            </div>
+
+            <h1>
+                LA <span>MAISON</span>
+            </h1>
+
+            <p>
+                La maison est le refuge principal du joueur.
+                C'est ici qu'il peut organiser son équipement,
+                gérer ses ressources, réparer ses armes et préparer
+                sa prochaine aventure.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================================
+         CONTENU
+    ======================================== -->
+
+    <main>
+
+
+        <!-- ========================================
+             INTRODUCTION
+        ======================================== -->
+
+        <section>
+
+            <div class="section-title">
+
+                <small>
+                    Refuge principal
+                </small>
+
+                <h2>
+                    Un endroit pour se préparer
+                </h2>
+
+                <p>
+                    Après une expédition, la maison devient le
+                    principal point de retour du joueur.
+                </p>
+
+            </div>
+
+
+            <div class="intro-box">
+
+                <h3>
+                    La maison
+                </h3>
+
+                <h2>
+                    Le centre de gestion de l'aventure
+                </h2>
+
+                <p>
+                    La maison est le refuge principal du joueur
+                    dans Valdorian. Elle permet de prendre une
+                    pause entre deux aventures et de préparer
+                    l'équipement nécessaire avant de repartir
+                    explorer le monde.
+                </p>
+
+                <p>
+                    Depuis cet endroit, le joueur peut organiser
+                    son inventaire, stocker ses ressources,
+                    gérer différents éléments du jeu et préparer
+                    son personnage en fonction de la prochaine
+                    expédition.
+                </p>
+
+                <p>
+                    La maison devient donc progressivement un
+                    élément important de la progression. Plus le
+                    joueur avance dans son aventure, plus il peut
+                    développer son refuge et lui donner de nouvelles
+                    fonctions.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             FONCTIONS
+        ======================================== -->
+
+        <section class="functions-section">
+
+            <div class="section-title">
+
+                <small>
+                    Gestion
+                </small>
+
+                <h2>
+                    Les fonctions principales
+                </h2>
+
+                <p>
+                    La maison regroupe plusieurs systèmes permettant
+                    au joueur de gérer son aventure.
+                </p>
+
+            </div>
+
+
+            <div class="function-grid">
+
+
+                <article class="function-card">
+
+                    <div class="function-number">
+                        01 • INVENTAIRE
+                    </div>
+
+                    <div class="function-icon">
+                        🎒
+                    </div>
+
+                    <h3>
+                        Organiser l'inventaire
+                    </h3>
+
+                    <p>
+                        Le joueur peut trier et organiser les objets
+                        qu'il possède afin de préparer son équipement
+                        avant de repartir en exploration.
+                    </p>
+
+                </article>
+
+
+                <article class="function-card">
+
+                    <div class="function-number">
+                        02 • STOCKAGE
+                    </div>
+
+                    <div class="function-icon">
+                        📦
+                    </div>
+
+                    <h3>
+                        Stocker les ressources
+                    </h3>
+
+                    <p>
+                        Les ressources récupérées pendant les
+                        expéditions peuvent être conservées dans
+                        la maison afin de ne pas avoir à tout
+                        transporter pendant chaque aventure.
+                    </p>
+
+                </article>
+
+
+                <article class="function-card">
+
+                    <div class="function-number">
+                        03 • ÉQUIPEMENT
+                    </div>
+
+                    <div class="function-icon">
+                        ⚔️
+                    </div>
+
+                    <h3>
+                        Gérer son équipement
+                    </h3>
+
+                    <p>
+                        Le joueur peut choisir les armes, objets
+                        et différents éléments qu'il souhaite
+                        emporter avant de quitter son refuge.
+                    </p>
+
+                </article>
+
+
+                <article class="function-card">
+
+                    <div class="function-number">
+                        04 • RÉPARATION
+                    </div>
+
+                    <div class="function-icon">
+                        🔧
+                    </div>
+
+                    <h3>
+                        Réparer ses armes
+                    </h3>
+
+                    <p>
+                        Les armes utilisées pendant les aventures
+                        peuvent nécessiter des réparations.
+                        La maison permet au joueur de les remettre
+                        en état avant une nouvelle expédition.
+                    </p>
+
+                </article>
+
+
+                <article class="function-card">
+
+                    <div class="function-number">
+                        05 • RESSOURCES
+                    </div>
+
+                    <div class="function-icon">
+                        🪵
+                    </div>
+
+                    <h3>
+                        Gérer ses ressources
+                    </h3>
+
+                    <p>
+                        Les différentes ressources récupérées dans
+                        le monde peuvent être conservées et utilisées
+                        plus tard pour différents besoins du joueur
+                        et de sa maison.
+                    </p>
+
+                </article>
+
+
+                <article class="function-card">
+
+                    <div class="function-number">
+                        06 • PRÉPARATION
+                    </div>
+
+                    <div class="function-icon">
+                        🗺️
+                    </div>
+
+                    <h3>
+                        Préparer une expédition
+                    </h3>
+
+                    <p>
+                        Avant de repartir, le joueur peut préparer
+                        son équipement, vérifier ses ressources et
+                        choisir ce qu'il souhaite emporter avec lui.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             INVENTAIRE
+        ======================================== -->
+
+        <section class="inventory-section">
+
+            <div class="section-title">
+
+                <small>
+                    Stockage
+                </small>
+
+                <h2>
+                    Garder ce qui a été trouvé
+                </h2>
+
+                <p>
+                    Toutes les ressources ne sont pas destinées à
+                    être transportées pendant une expédition.
+                </p>
+
+            </div>
+
+
+            <div class="inventory-box">
+
+                <h3>
+                    Gestion des ressources
+                </h3>
+
+                <h2>
+                    La maison comme réserve
+                </h2>
+
+                <p>
+                    Les ressources trouvées dans les différentes
+                    régions du monde peuvent être rapportées à la
+                    maison puis stockées.
+                </p>
+
+                <p>
+                    Cela permet au joueur de conserver certains
+                    matériaux pour une utilisation future au lieu
+                    de les transporter constamment pendant ses
+                    déplacements.
+                </p>
+
+                <div class="inventory-grid">
+
+                    <div class="inventory-item">
+
+                        <strong>
+                            🪵
+                        </strong>
+
+                        <span>
+                            Matériaux
+                        </span>
+
+                    </div>
+
+
+                    <div class="inventory-item">
+
+                        <strong>
+                            ⚙️
+                        </strong>
+
+                        <span>
+                            Composants
+                        </span>
+
+                    </div>
+
+
+                    <div class="inventory-item">
+
+                        <strong>
+                            💰
+                        </strong>
+
+                        <span>
+                            Ressources de valeur
+                        </span>
+
+                    </div>
+
+
+                    <div class="inventory-item">
+
+                        <strong>
+                            📦
+                        </strong>
+
+                        <span>
+                            Objets trouvés
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             REPARATION
+        ======================================== -->
+
+        <section class="repair-section">
+
+            <div class="section-title">
+
+                <small>
+                    Entretien
+                </small>
+
+                <h2>
+                    Entretenir son équipement
+                </h2>
+
+                <p>
+                    Une bonne préparation peut faire la différence
+                    avant de repartir dans une zone dangereuse.
+                </p>
+
+            </div>
+
+
+            <div class="repair-box">
+
+                <h3>
+                    Atelier
+                </h3>
+
+                <h2>
+                    Réparer avant de repartir
+                </h2>
+
+                <p>
+                    Les armes utilisées au cours des aventures
+                    peuvent subir une usure. La maison permet au
+                    joueur de les entretenir et de les réparer.
+                </p>
+
+                <p>
+                    Les ressources nécessaires aux réparations
+                    doivent être obtenues dans le monde puis
+                    ramenées au refuge.
+                </p>
+
+                <p>
+                    Avec la progression du joueur, les possibilités
+                    liées à l'entretien et à la gestion de
+                    l'équipement peuvent évoluer.
+                </p>
+
+                <div class="repair-note">
+
+                    <strong>
+                        Préparation :
+                    </strong>
+
+                    partir avec un équipement correctement entretenu
+                    permet au joueur de mieux se préparer aux dangers
+                    rencontrés pendant son exploration.
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             AMELIORATIONS
+        ======================================== -->
+
+        <section class="upgrade-section">
+
+            <div class="section-title">
+
+                <small>
+                    Évolution
+                </small>
+
+                <h2>
+                    Une maison qui grandit avec le joueur
+                </h2>
+
+                <p>
+                    La maison n'est pas figée. Elle peut évoluer
+                    au fur et à mesure de la progression.
+                </p>
+
+            </div>
+
+
+            <div class="upgrade-grid">
+
+
+                <article class="upgrade-card">
+
+                    <div class="upgrade-number">
+                        AMÉLIORATION 01
+                    </div>
+
+                    <h3>
+                        Agrandir la maison
+                    </h3>
+
+                    <p>
+                        Le joueur peut améliorer la structure de
+                        son refuge afin de disposer de davantage
+                        d'espace et de nouvelles possibilités
+                        de gestion.
+                    </p>
+
+                    <div class="upgrade-tag">
+                        AGRANDISSEMENT
+                    </div>
+
+                </article>
+
+
+                <article class="upgrade-card">
+
+                    <div class="upgrade-number">
+                        AMÉLIORATION 02
+                    </div>
+
+                    <h3>
+                        Ajouter de nouveaux éléments
+                    </h3>
+
+                    <p>
+                        De nouveaux objets et installations peuvent
+                        être ajoutés à la maison afin d'améliorer
+                        progressivement les possibilités offertes
+                        au joueur.
+                    </p>
+
+                    <div class="upgrade-tag">
+                        NOUVELLES INSTALLATIONS
+                    </div>
+
+                </article>
+
+
+                <article class="upgrade-card">
+
+                    <div class="upgrade-number">
+                        AMÉLIORATION 03
+                    </div>
+
+                    <h3>
+                        Améliorer les capacités
+                    </h3>
+
+                    <p>
+                        Certaines améliorations peuvent permettre
+                        de mieux gérer les ressources, l'équipement
+                        ou les différentes activités disponibles
+                        dans le refuge.
+                    </p>
+
+                    <div class="upgrade-tag">
+                        PROGRESSION
+                    </div>
+
+                </article>
+
+
+                <article class="upgrade-card">
+
+                    <div class="upgrade-number">
+                        AMÉLIORATION 04
+                    </div>
+
+                    <h3>
+                        Développer son refuge
+                    </h3>
+
+                    <p>
+                        La maison évolue avec le joueur. Plus
+                        l'aventure progresse, plus le refuge peut
+                        devenir important dans la préparation des
+                        futures expéditions.
+                    </p>
+
+                    <div class="upgrade-tag">
+                        ÉVOLUTION DU MONDE
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             PROGRESSION
+        ======================================== -->
+
+        <section class="progression-section">
+
+            <div class="section-title">
+
+                <small>
+                    Progression
+                </small>
+
+                <h2>
+                    Le monde avance avec vous
+                </h2>
+
+                <p>
+                    La progression du joueur influence également
+                    l'évolution de son environnement.
+                </p>
+
+            </div>
+
+
+            <div class="progression-box">
+
+                <h3>
+                    Monde évolutif
+                </h3>
+
+                <h2>
+                    Une maison qui accompagne l'aventure
+                </h2>
+
+                <p>
+                    Dans Valdorian, le joueur ne reste pas
+                    constamment au même stade. Plus il progresse,
+                    plus le monde évolue autour de lui.
+                </p>
+
+                <p>
+                    La maison suit cette progression. De nouvelles
+                    possibilités peuvent apparaître et certaines
+                    améliorations deviennent accessibles au fur et
+                    à mesure que l'aventure avance.
+                </p>
+
+                <p>
+                    Le refuge représente ainsi un point de repère
+                    dans un monde qui devient progressivement plus
+                    vaste, plus complexe et plus dangereux.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             ATTAQUES DE LA MAISON
+        ======================================== -->
+
+        <section class="attack-section">
+
+            <div class="section-title">
+
+                <small>
+                    Danger
+                </small>
+
+                <h2>
+                    La maison n'est pas totalement sûre
+                </h2>
+
+                <p>
+                    Même le refuge principal peut devenir une zone
+                    dangereuse pendant certaines phases.
+                </p>
+
+            </div>
+
+
+            <div class="attack-box">
+
+                <h3>
+                    Menace
+                </h3>
+
+                <h2>
+                    Le joueur peut être attaqué chez lui
+                </h2>
+
+                <p>
+                    La maison est un refuge, mais elle ne constitue
+                    pas une protection absolue contre les dangers
+                    du monde.
+                </p>
+
+                <p>
+                    Pendant certaines phases, des créatures ou
+                    d'autres menaces peuvent atteindre le refuge
+                    et attaquer le joueur directement chez lui.
+                </p>
+
+                <p>
+                    Le joueur doit donc tenir compte de l'évolution
+                    du monde même lorsqu'il se trouve dans sa maison.
+                    Un refuge qui semblait parfaitement sûr peut
+                    devenir vulnérable lorsque les conditions
+                    changent.
+                </p>
+
+                <div class="attack-warning">
+
+                    <strong>
+                        Attention :
+                    </strong>
+
+                    la maison permet de se préparer, mais le joueur
+                    ne peut pas considérer son refuge comme un endroit
+                    totalement à l'abri des événements du monde.
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             CONCLUSION
+        ======================================== -->
+
+        <section class="conclusion-section">
+
+            <div class="conclusion-box">
+
+                <h3>
+                    Le refuge du joueur
+                </h3>
+
+                <h2>
+                    Une maison qui fait partie de l'aventure
+                </h2>
+
+                <p>
+                    La maison n'est pas simplement un endroit où
+                    revenir après une expédition. Elle constitue
+                    le centre de préparation, de stockage et
+                    d'évolution du joueur.
+                </p>
+
+                <p>
+                    Plus l'aventure progresse, plus le refuge peut
+                    évoluer et offrir de nouvelles possibilités.
+                    Mais dans un monde qui change constamment,
+                    même cet endroit peut parfois devenir dangereux.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ========================================
+         FOOTER
+    ======================================== -->
+
+    <footer>
+
+        VALDORIAN
+        <span>•</span>
+        LORE DE LA MAISON
+        <span>•</span>
+        UNIVERS EN DÉVELOPPEMENT
+
+    </footer>
+
+</body>
+</html>
