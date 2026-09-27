@@ -1,0 +1,2419 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Lore du monde — Valdorian</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #08090c;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* ========================================
+           HEADER
+        ======================================== */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 72px;
+            z-index: 1000;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 45px;
+
+            background: rgba(7, 8, 11, 0.86);
+            backdrop-filter: blur(14px);
+
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: 4px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #c9a24a;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        nav a {
+            color: #d4d4d4;
+            text-decoration: none;
+
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 1px;
+
+            transition: 0.2s;
+        }
+
+        nav a:hover {
+            color: #c9a24a;
+        }
+
+        /* ========================================
+           HERO
+        ======================================== */
+
+        .hero {
+            min-height: 70vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+
+            padding: 120px 25px 80px;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(201, 162, 74, 0.13),
+                    transparent 40%
+                ),
+                linear-gradient(
+                    180deg,
+                    #111318,
+                    #08090c
+                );
+        }
+
+        .hero::before {
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(201, 162, 74, 0.025),
+                    transparent
+                );
+
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+
+            max-width: 950px;
+
+            text-align: center;
+        }
+
+        .status {
+            display: inline-block;
+
+            padding: 8px 16px;
+            margin-bottom: 25px;
+
+            border: 1px solid rgba(201, 162, 74, 0.55);
+            border-radius: 50px;
+
+            color: #d7b764;
+
+            background: rgba(201, 162, 74, 0.06);
+
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: clamp(55px, 10vw, 120px);
+
+            line-height: 0.9;
+
+            font-weight: 1000;
+
+            letter-spacing: 7px;
+
+            text-shadow:
+                0 15px 45px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero h1 span {
+            color: #c9a24a;
+        }
+
+        .hero p {
+            max-width: 800px;
+
+            margin: 30px auto 0;
+
+            color: #8f9198;
+
+            font-size: 15px;
+            line-height: 1.9;
+        }
+
+        /* ========================================
+           MAIN
+        ======================================== */
+
+        main {
+            max-width: 1250px;
+
+            margin: auto;
+
+            padding: 80px 25px 120px;
+        }
+
+        .section-title {
+            text-align: center;
+
+            margin-bottom: 55px;
+        }
+
+        .section-title small {
+            color: #c9a24a;
+
+            font-size: 11px;
+            font-weight: 900;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+        }
+
+        .section-title h2 {
+            margin-top: 12px;
+
+            font-size: clamp(30px, 5vw, 48px);
+
+            letter-spacing: 1px;
+        }
+
+        .section-title p {
+            max-width: 760px;
+
+            margin: 15px auto 0;
+
+            color: #85878d;
+
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        /* ========================================
+           INTRODUCTION
+        ======================================== */
+
+        .intro-box {
+            padding: 45px;
+
+            border-radius: 20px;
+
+            border:
+                1px solid rgba(201, 162, 74, 0.18);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(201, 162, 74, 0.055),
+                    rgba(255, 255, 255, 0.015)
+                );
+
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.25);
+        }
+
+        .intro-box h3 {
+            color: #c9a24a;
+
+            font-size: 12px;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 18px;
+        }
+
+        .intro-box h2 {
+            font-size: 34px;
+
+            margin-bottom: 25px;
+        }
+
+        .intro-box p {
+            color: #a0a1a7;
+
+            font-size: 14px;
+
+            line-height: 1.9;
+
+            margin-bottom: 18px;
+        }
+
+        .intro-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ========================================
+           REGIONS
+        ======================================== */
+
+        .regions-section {
+            margin-top: 120px;
+        }
+
+        .region-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 20px;
+        }
+
+        .region-card {
+            position: relative;
+
+            min-height: 300px;
+
+            padding: 32px;
+
+            border-radius: 18px;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.08);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.045),
+                    rgba(255, 255, 255, 0.012)
+                );
+
+            overflow: hidden;
+
+            transition:
+                transform 0.25s,
+                border-color 0.25s,
+                background 0.25s;
+        }
+
+        .region-card::before {
+            content: "";
+
+            position: absolute;
+
+            width: 180px;
+            height: 180px;
+
+            right: -80px;
+            top: -80px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(201, 162, 74, 0.055);
+
+            transition: 0.3s;
+        }
+
+        .region-card:hover {
+            transform: translateY(-6px);
+
+            border-color:
+                rgba(201, 162, 74, 0.35);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(201, 162, 74, 0.07),
+                    rgba(255, 255, 255, 0.015)
+                );
+        }
+
+        .region-card:hover::before {
+            transform: scale(1.3);
+        }
+
+        .region-number {
+            position: relative;
+            z-index: 2;
+
+            color:
+                rgba(201, 162, 74, 0.6);
+
+            font-size: 11px;
+
+            font-weight: 900;
+
+            letter-spacing: 3px;
+
+            margin-bottom: 14px;
+        }
+
+        .region-icon {
+            position: relative;
+            z-index: 2;
+
+            font-size: 38px;
+
+            margin-bottom: 17px;
+        }
+
+        .region-card h3 {
+            position: relative;
+            z-index: 2;
+
+            font-size: 24px;
+
+            margin-bottom: 13px;
+        }
+
+        .region-card p {
+            position: relative;
+            z-index: 2;
+
+            color: #92949a;
+
+            font-size: 13px;
+
+            line-height: 1.8;
+        }
+
+        .region-tag {
+            position: relative;
+            z-index: 2;
+
+            display: inline-block;
+
+            margin-top: 20px;
+
+            padding: 7px 11px;
+
+            border-radius: 5px;
+
+            background:
+                rgba(201, 162, 74, 0.08);
+
+            border:
+                1px solid rgba(201, 162, 74, 0.2);
+
+            color: #c9a24a;
+
+            font-size: 10px;
+
+            font-weight: 900;
+
+            letter-spacing: 1px;
+        }
+
+        /* ========================================
+           IDENTITE DES REGIONS
+        ======================================== */
+
+        .identity-section {
+            margin-top: 120px;
+        }
+
+        .identity-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+        .identity-card {
+            padding: 30px;
+
+            border-radius: 16px;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.07);
+
+            background:
+                rgba(255, 255, 255, 0.025);
+
+            transition: 0.25s;
+        }
+
+        .identity-card:hover {
+            transform: translateY(-5px);
+
+            border-color:
+                rgba(201, 162, 74, 0.3);
+        }
+
+        .identity-icon {
+            font-size: 35px;
+
+            margin-bottom: 18px;
+        }
+
+        .identity-card h3 {
+            font-size: 19px;
+
+            margin-bottom: 12px;
+        }
+
+        .identity-card p {
+            color: #92949a;
+
+            font-size: 13px;
+
+            line-height: 1.8;
+        }
+
+        /* ========================================
+           DANGER
+        ======================================== */
+
+        .danger-section {
+            margin-top: 120px;
+        }
+
+        .danger-box {
+            padding: 45px;
+
+            border-radius: 20px;
+
+            border:
+                1px solid rgba(180, 50, 50, 0.2);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(130, 35, 35, 0.065),
+                    rgba(255, 255, 255, 0.01)
+                );
+        }
+
+        .danger-box h3 {
+            color: #d7b764;
+
+            font-size: 12px;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 18px;
+        }
+
+        .danger-box h2 {
+            font-size: 34px;
+
+            margin-bottom: 25px;
+        }
+
+        .danger-box p {
+            color: #a0a1a7;
+
+            font-size: 14px;
+
+            line-height: 1.9;
+
+            margin-bottom: 18px;
+        }
+
+        .danger-list {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 15px;
+
+            margin-top: 30px;
+        }
+
+        .danger-item {
+            padding: 22px;
+
+            border-radius: 12px;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.07);
+
+            background:
+                rgba(0, 0, 0, 0.18);
+        }
+
+        .danger-item strong {
+            display: block;
+
+            color: #c9a24a;
+
+            font-size: 16px;
+
+            margin-bottom: 8px;
+        }
+
+        .danger-item span {
+            color: #92949a;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+        }
+
+        /* ========================================
+           RESSOURCES
+        ======================================== */
+
+        .resources-section {
+            margin-top: 120px;
+        }
+
+        .resource-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+        .resource-card {
+            padding: 30px;
+
+            border-radius: 16px;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.07);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.04),
+                    rgba(255, 255, 255, 0.012)
+                );
+
+            transition: 0.25s;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+
+            border-color:
+                rgba(201, 162, 74, 0.3);
+        }
+
+        .resource-icon {
+            font-size: 36px;
+
+            margin-bottom: 18px;
+        }
+
+        .resource-card h3 {
+            font-size: 20px;
+
+            margin-bottom: 12px;
+        }
+
+        .resource-card p {
+            color: #92949a;
+
+            font-size: 13px;
+
+            line-height: 1.8;
+        }
+
+        .rarity {
+            display: inline-block;
+
+            margin-top: 18px;
+
+            padding: 6px 10px;
+
+            border-radius: 5px;
+
+            font-size: 10px;
+
+            font-weight: 900;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+        }
+
+        .rarity-common {
+            color: #aaa;
+
+            background:
+                rgba(255, 255, 255, 0.05);
+        }
+
+        .rarity-rare {
+            color: #6fa8dc;
+
+            background:
+                rgba(111, 168, 220, 0.08);
+        }
+
+        .rarity-very-rare {
+            color: #c9a24a;
+
+            background:
+                rgba(201, 162, 74, 0.09);
+        }
+
+        /* ========================================
+           EXPLORATION
+        ======================================== */
+
+        .exploration-section {
+            margin-top: 120px;
+        }
+
+        .exploration-box {
+            padding: 45px;
+
+            border-radius: 20px;
+
+            border:
+                1px solid rgba(201, 162, 74, 0.18);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(201, 162, 74, 0.05),
+                    rgba(255, 255, 255, 0.015)
+                );
+        }
+
+        .exploration-box h3 {
+            color: #c9a24a;
+
+            font-size: 12px;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 18px;
+        }
+
+        .exploration-box h2 {
+            font-size: 34px;
+
+            margin-bottom: 25px;
+        }
+
+        .exploration-box p {
+            color: #a0a1a7;
+
+            font-size: 14px;
+
+            line-height: 1.9;
+
+            margin-bottom: 18px;
+        }
+
+        .discovery-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 15px;
+
+            margin-top: 30px;
+        }
+
+        .discovery-card {
+            padding: 22px;
+
+            border-radius: 12px;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.07);
+
+            background:
+                rgba(0, 0, 0, 0.15);
+        }
+
+        .discovery-card strong {
+            display: block;
+
+            color: #d7b764;
+
+            font-size: 16px;
+
+            margin-bottom: 8px;
+        }
+
+        .discovery-card span {
+            color: #92949a;
+
+            font-size: 12px;
+
+            line-height: 1.7;
+        }
+
+        /* ========================================
+           ZONES VERROUILLEES
+        ======================================== */
+
+        .locked-section {
+            margin-top: 120px;
+        }
+
+        .locked-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+        .locked-card {
+            padding: 30px;
+
+            border-radius: 16px;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.07);
+
+            background:
+                rgba(255, 255, 255, 0.025);
+
+            transition: 0.25s;
+        }
+
+        .locked-card:hover {
+            transform: translateY(-5px);
+
+            border-color:
+                rgba(201, 162, 74, 0.3);
+        }
+
+        .locked-icon {
+            font-size: 34px;
+
+            margin-bottom: 18px;
+        }
+
+        .locked-card h3 {
+            font-size: 19px;
+
+            margin-bottom: 12px;
+        }
+
+        .locked-card p {
+            color: #92949a;
+
+            font-size: 13px;
+
+            line-height: 1.8;
+        }
+
+        /* ========================================
+           DISTANCE
+        ======================================== */
+
+        .distance-section {
+            margin-top: 120px;
+        }
+
+        .distance-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 20px;
+        }
+
+        .distance-card {
+            padding: 32px;
+
+            border-radius: 16px;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.07);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.04),
+                    rgba(255, 255, 255, 0.01)
+                );
+        }
+
+        .distance-card h3 {
+            font-size: 22px;
+
+            margin-bottom: 13px;
+        }
+
+        .distance-card p {
+            color: #92949a;
+
+            font-size: 13px;
+
+            line-height: 1.8;
+        }
+
+        .distance-card strong {
+            color: #c9a24a;
+        }
+
+        /* ========================================
+           RECOMPENSES
+        ======================================== */
+
+        .reward-section {
+            margin-top: 120px;
+        }
+
+        .reward-box {
+            padding: 45px;
+
+            border-radius: 20px;
+
+            border:
+                1px solid rgba(201, 162, 74, 0.18);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(201, 162, 74, 0.055),
+                    rgba(255, 255, 255, 0.015)
+                );
+        }
+
+        .reward-box h3 {
+            color: #c9a24a;
+
+            font-size: 12px;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 18px;
+        }
+
+        .reward-box h2 {
+            font-size: 34px;
+
+            margin-bottom: 25px;
+        }
+
+        .reward-box p {
+            color: #a0a1a7;
+
+            font-size: 14px;
+
+            line-height: 1.9;
+
+            margin-bottom: 18px;
+        }
+
+        .reward-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 15px;
+
+            margin-top: 30px;
+        }
+
+        .reward-card {
+            padding: 22px;
+
+            border-radius: 12px;
+
+            text-align: center;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.07);
+
+            background:
+                rgba(0, 0, 0, 0.16);
+        }
+
+        .reward-card strong {
+            display: block;
+
+            color: #c9a24a;
+
+            font-size: 26px;
+
+            margin-bottom: 7px;
+        }
+
+        .reward-card span {
+            color: #898b91;
+
+            font-size: 11px;
+
+            line-height: 1.5;
+        }
+
+        /* ========================================
+           MORT DEFINITIVE
+        ======================================== */
+
+        .death-section {
+            margin-top: 120px;
+        }
+
+        .death-box {
+            padding: 45px;
+
+            border-radius: 20px;
+
+            border:
+                1px solid rgba(180, 50, 50, 0.25);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(130, 35, 35, 0.09),
+                    rgba(255, 255, 255, 0.01)
+                );
+
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.2);
+        }
+
+        .death-box h3 {
+            color: #d06b6b;
+
+            font-size: 12px;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 18px;
+        }
+
+        .death-box h2 {
+            font-size: 36px;
+
+            margin-bottom: 25px;
+        }
+
+        .death-box p {
+            color: #a0a1a7;
+
+            font-size: 14px;
+
+            line-height: 1.9;
+
+            margin-bottom: 18px;
+        }
+
+        .death-warning {
+            margin-top: 30px;
+
+            padding: 22px;
+
+            border-left:
+                3px solid #b43b3b;
+
+            background:
+                rgba(180, 50, 50, 0.07);
+
+            color: #b9b9bd;
+
+            font-size: 13px;
+
+            line-height: 1.8;
+        }
+
+        .death-steps {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 15px;
+
+            margin-top: 30px;
+        }
+
+        .death-step {
+            padding: 24px;
+
+            border-radius: 12px;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.07);
+
+            background:
+                rgba(0, 0, 0, 0.18);
+
+            text-align: center;
+        }
+
+        .death-step strong {
+            display: block;
+
+            color: #d06b6b;
+
+            font-size: 25px;
+
+            margin-bottom: 9px;
+        }
+
+        .death-step span {
+            color: #898b91;
+
+            font-size: 11px;
+
+            line-height: 1.6;
+        }
+
+        /* ========================================
+           PHILOSOPHIE DU MONDE
+        ======================================== */
+
+        .final-section {
+            margin-top: 120px;
+        }
+
+        .final-box {
+            padding: 50px;
+
+            border-radius: 22px;
+
+            text-align: center;
+
+            border:
+                1px solid rgba(201, 162, 74, 0.2);
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(201, 162, 74, 0.08),
+                    transparent 60%
+                ),
+                linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.035),
+                    rgba(255, 255, 255, 0.01)
+                );
+        }
+
+        .final-box h3 {
+            color: #c9a24a;
+
+            font-size: 12px;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 18px;
+        }
+
+        .final-box h2 {
+            font-size: clamp(30px, 5vw, 45px);
+
+            margin-bottom: 25px;
+        }
+
+        .final-box p {
+            max-width: 800px;
+
+            margin: 0 auto 18px;
+
+            color: #9b9da3;
+
+            font-size: 14px;
+
+            line-height: 1.9;
+        }
+
+        /* ========================================
+           FOOTER
+        ======================================== */
+
+        footer {
+            padding: 35px 20px;
+
+            text-align: center;
+
+            color: #55565a;
+
+            font-size: 11px;
+
+            border-top:
+                1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        footer span {
+            color: #c9a24a;
+        }
+
+        /* ========================================
+           RESPONSIVE
+        ======================================== */
+
+        @media (max-width: 950px) {
+
+            header {
+                padding: 0 20px;
+            }
+
+            nav {
+                gap: 15px;
+            }
+
+            .region-grid,
+            .danger-list,
+            .discovery-grid,
+            .distance-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .identity-grid,
+            .resource-grid,
+            .locked-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .reward-grid,
+            .death-steps {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 650px) {
+
+            header {
+                height: 65px;
+            }
+
+            .logo {
+                font-size: 18px;
+                letter-spacing: 2px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hero {
+                min-height: 70vh;
+
+                padding:
+                    110px 20px 70px;
+            }
+
+            .hero h1 {
+                letter-spacing: 4px;
+            }
+
+            main {
+                padding:
+                    60px 20px 90px;
+            }
+
+            .intro-box,
+            .danger-box,
+            .exploration-box,
+            .reward-box,
+            .death-box,
+            .final-box {
+                padding: 28px 22px;
+            }
+
+            .region-card,
+            .identity-card,
+            .resource-card,
+            .locked-card,
+            .distance-card {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ========================================
+         HEADER
+    ======================================== -->
+
+    <header>
+
+        <a
+            href="../index.html"
+            class="logo"
+        >
+            VALDOR<span>IAN</span>
+        </a>
+
+        <nav>
+
+            <a href="../index.html">
+                ACCUEIL
+            </a>
+
+            <a href="../index.html#univers">
+                UNIVERS
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ========================================
+         HERO
+    ======================================== -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="status">
+                LORE • LE MONDE
+            </div>
+
+            <h1>
+                LE <span>MONDE</span>
+            </h1>
+
+            <p>
+                Valdorian est un monde vaste composé de nombreuses
+                régions différentes. Chaque territoire possède sa propre
+                identité, son terrain, ses ressources, ses dangers et
+                ses possibilités d'exploration. Une région peut sembler
+                calme à première vue, tandis qu'une autre peut devenir
+                extrêmement dangereuse sans même être très éloignée.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================================
+         CONTENU
+    ======================================== -->
+
+    <main>
+
+
+        <!-- ========================================
+             INTRODUCTION
+        ======================================== -->
+
+        <section>
+
+            <div class="intro-box">
+
+                <h3>
+                    Le monde de Valdorian
+                </h3>
+
+                <h2>
+                    Un monde vaste et changeant
+                </h2>
+
+                <p>
+                    Le monde de Valdorian est composé de nombreuses
+                    régions qui ne se ressemblent pas. Chaque zone
+                    possède sa propre identité et propose une manière
+                    différente d'explorer le monde.
+                </p>
+
+                <p>
+                    Le terrain, les créatures présentes, les ressources
+                    disponibles, les conditions environnementales et
+                    les possibilités de découverte peuvent changer
+                    complètement d'une région à une autre.
+                </p>
+
+                <p>
+                    Certaines zones sont relativement tranquilles et
+                    permettent de prendre le temps d'explorer. D'autres
+                    sont constamment menacées par des créatures ou des
+                    conditions environnementales dangereuses.
+                </p>
+
+                <p>
+                    La distance ne détermine cependant pas toujours
+                    le danger. Une région extrêmement dangereuse peut
+                    se trouver relativement proche d'une zone sûre,
+                    tandis qu'un endroit éloigné peut être beaucoup
+                    plus calme.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             REGIONS
+        ======================================== -->
+
+        <section class="regions-section">
+
+            <div class="section-title">
+
+                <small>
+                    Géographie
+                </small>
+
+                <h2>
+                    Des régions aux identités différentes
+                </h2>
+
+                <p>
+                    Les régions de Valdorian sont définies par leur
+                    environnement et par ce que le joueur peut y
+                    rencontrer.
+                </p>
+
+            </div>
+
+
+            <div class="region-grid">
+
+
+                <article class="region-card">
+
+                    <div class="region-number">
+                        RÉGION • 01
+                    </div>
+
+                    <div class="region-icon">
+                        🌲
+                    </div>
+
+                    <h3>
+                        Régions calmes
+                    </h3>
+
+                    <p>
+                        Certaines régions sont relativement paisibles.
+                        Les créatures y sont moins nombreuses ou moins
+                        puissantes et les conditions environnementales
+                        permettent généralement une exploration plus
+                        tranquille.
+                    </p>
+
+                    <div class="region-tag">
+                        EXPLORATION
+                    </div>
+
+                </article>
+
+
+                <article class="region-card">
+
+                    <div class="region-number">
+                        RÉGION • 02
+                    </div>
+
+                    <div class="region-icon">
+                        ☠️
+                    </div>
+
+                    <h3>
+                        Régions infestées
+                    </h3>
+
+                    <p>
+                        Certaines zones sont occupées par un grand
+                        nombre de créatures. Leur présence rend
+                        l'exploration beaucoup plus risquée et oblige
+                        le joueur à surveiller constamment son
+                        environnement.
+                    </p>
+
+                    <div class="region-tag">
+                        FORTE PRÉSENCE
+                    </div>
+
+                </article>
+
+
+                <article class="region-card">
+
+                    <div class="region-number">
+                        RÉGION • 03
+                    </div>
+
+                    <div class="region-icon">
+                        🌋
+                    </div>
+
+                    <h3>
+                        Terrains extrêmes
+                    </h3>
+
+                    <p>
+                        Certaines régions possèdent un terrain
+                        particulièrement dangereux. La lave, les
+                        zones toxiques ou d'autres éléments peuvent
+                        rendre le déplacement difficile même en
+                        l'absence de créatures.
+                    </p>
+
+                    <div class="region-tag">
+                        TERRAIN HOSTILE
+                    </div>
+
+                </article>
+
+
+                <article class="region-card">
+
+                    <div class="region-number">
+                        RÉGION • 04
+                    </div>
+
+                    <div class="region-icon">
+                        🌫️
+                    </div>
+
+                    <h3>
+                        Régions difficiles à lire
+                    </h3>
+
+                    <p>
+                        La visibilité peut également devenir une
+                        menace. Certaines zones sont plongées dans
+                        l'obscurité, dans la brume ou dans des
+                        conditions réduisant fortement la capacité
+                        du joueur à observer son environnement.
+                    </p>
+
+                    <div class="region-tag">
+                        VISIBILITÉ RÉDUITE
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             IDENTITE DES ZONES
+        ======================================== -->
+
+        <section class="identity-section">
+
+            <div class="section-title">
+
+                <small>
+                    Identité des zones
+                </small>
+
+                <h2>
+                    Une région ne se résume pas à son terrain
+                </h2>
+
+                <p>
+                    Plusieurs éléments permettent de différencier
+                    une région d'une autre.
+                </p>
+
+            </div>
+
+
+            <div class="identity-grid">
+
+
+                <article class="identity-card">
+
+                    <div class="identity-icon">
+                        👹
+                    </div>
+
+                    <h3>
+                        Les créatures
+                    </h3>
+
+                    <p>
+                        Une région peut accueillir certaines espèces
+                        de créatures plutôt que d'autres. Leur nombre,
+                        leur puissance et leur fréquence peuvent
+                        fortement varier selon les territoires.
+                    </p>
+
+                </article>
+
+
+                <article class="identity-card">
+
+                    <div class="identity-icon">
+                        🌿
+                    </div>
+
+                    <h3>
+                        Les ressources
+                    </h3>
+
+                    <p>
+                        Les ressources disponibles ne sont pas
+                        identiques partout. Certaines régions sont
+                        riches en ressources communes tandis que
+                        d'autres peuvent contenir des matériaux plus
+                        rares.
+                    </p>
+
+                </article>
+
+
+                <article class="identity-card">
+
+                    <div class="identity-icon">
+                        🌋
+                    </div>
+
+                    <h3>
+                        Les conditions
+                    </h3>
+
+                    <p>
+                        L'environnement peut modifier directement
+                        l'exploration : visibilité réduite, lave,
+                        poison, air toxique ou autres conditions
+                        particulières peuvent transformer une région.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             DANGER
+        ======================================== -->
+
+        <section class="danger-section">
+
+            <div class="danger-box">
+
+                <h3>
+                    Danger
+                </h3>
+
+                <h2>
+                    Le danger peut prendre plusieurs formes
+                </h2>
+
+                <p>
+                    Une région dangereuse n'est pas nécessairement une
+                    région remplie de créatures puissantes. Le danger
+                    peut venir de nombreux éléments différents et
+                    parfois de plusieurs éléments simultanément.
+                </p>
+
+                <p>
+                    Le joueur doit donc observer son environnement et
+                    comprendre les particularités de chaque région
+                    avant de s'y aventurer trop profondément.
+                </p>
+
+
+                <div class="danger-list">
+
+
+                    <div class="danger-item">
+
+                        <strong>
+                            Créatures puissantes
+                        </strong>
+
+                        <span>
+                            Certaines régions peuvent abriter des
+                            créatures plus résistantes, plus nombreuses
+                            ou possédant des capacités particulières.
+                        </span>
+
+                    </div>
+
+
+                    <div class="danger-item">
+
+                        <strong>
+                            Forte population
+                        </strong>
+
+                        <span>
+                            Même des créatures relativement faibles
+                            deviennent dangereuses lorsqu'elles sont
+                            présentes en grand nombre.
+                        </span>
+
+                    </div>
+
+
+                    <div class="danger-item">
+
+                        <strong>
+                            Terrain dangereux
+                        </strong>
+
+                        <span>
+                            La lave, les obstacles et les terrains
+                            difficiles peuvent rendre les déplacements
+                            beaucoup plus risqués.
+                        </span>
+
+                    </div>
+
+
+                    <div class="danger-item">
+
+                        <strong>
+                            Conditions particulières
+                        </strong>
+
+                        <span>
+                            Poison, air toxique, mauvaise visibilité
+                            ou autres effets peuvent affecter
+                            directement l'exploration.
+                        </span>
+
+                    </div>
+
+
+                    <div class="danger-item">
+
+                        <strong>
+                            Ressources rares
+                        </strong>
+
+                        <span>
+                            Les régions contenant des ressources
+                            particulièrement intéressantes peuvent
+                            également attirer davantage de dangers.
+                        </span>
+
+                    </div>
+
+
+                    <div class="danger-item">
+
+                        <strong>
+                            Isolement
+                        </strong>
+
+                        <span>
+                            Certaines zones peuvent demander beaucoup
+                            de temps pour être traversées et compliquer
+                            le retour vers des endroits plus sûrs.
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             RESSOURCES
+        ======================================== -->
+
+        <section class="resources-section">
+
+            <div class="section-title">
+
+                <small>
+                    Ressources
+                </small>
+
+                <h2>
+                    Ce que le monde peut offrir
+                </h2>
+
+                <p>
+                    Les régions ne possèdent pas toutes les mêmes
+                    ressources. Leur quantité et leur rareté peuvent
+                    varier considérablement.
+                </p>
+
+            </div>
+
+
+            <div class="resource-grid">
+
+
+                <article class="resource-card">
+
+                    <div class="resource-icon">
+                        🪵
+                    </div>
+
+                    <h3>
+                        Ressources communes
+                    </h3>
+
+                    <p>
+                        Certaines ressources sont facilement trouvables
+                        dans plusieurs régions. Elles constituent une
+                        partie importante des matériaux que le joueur
+                        peut récupérer pendant son exploration.
+                    </p>
+
+                    <div class="rarity rarity-common">
+                        COMMUN
+                    </div>
+
+                </article>
+
+
+                <article class="resource-card">
+
+                    <div class="resource-icon">
+                        💎
+                    </div>
+
+                    <h3>
+                        Ressources rares
+                    </h3>
+
+                    <p>
+                        Certaines ressources apparaissent beaucoup
+                        moins souvent. Elles peuvent être concentrées
+                        dans certaines régions ou nécessiter une
+                        exploration plus approfondie.
+                    </p>
+
+                    <div class="rarity rarity-rare">
+                        RARE
+                    </div>
+
+                </article>
+
+
+                <article class="resource-card">
+
+                    <div class="resource-icon">
+                        ✨
+                    </div>
+
+                    <h3>
+                        Ressources très rares
+                    </h3>
+
+                    <p>
+                        Les ressources les plus difficiles à trouver
+                        peuvent être extrêmement peu présentes dans
+                        le monde. Leur découverte peut nécessiter de
+                        s'aventurer dans des régions particulièrement
+                        dangereuses.
+                    </p>
+
+                    <div class="rarity rarity-very-rare">
+                        TRÈS RARE
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             EXPLORATION
+        ======================================== -->
+
+        <section class="exploration-section">
+
+            <div class="exploration-box">
+
+                <h3>
+                    Exploration
+                </h3>
+
+                <h2>
+                    Le monde ne se résume pas au combat
+                </h2>
+
+                <p>
+                    Explorer Valdorian ne consiste pas uniquement à
+                    combattre des créatures. Le joueur peut également
+                    prendre le temps de fouiller certains endroits
+                    et rechercher ce qui se trouve autour de lui.
+                </p>
+
+                <p>
+                    Des bâtiments, des objets abandonnés ou des
+                    éléments placés dans l'environnement peuvent
+                    contenir des ressources utiles ou simplement
+                    raconter quelque chose sur le monde.
+                </p>
+
+                <p>
+                    Une expédition peut donc prendre une direction
+                    complètement différente selon ce que le joueur
+                    décide d'examiner.
+                </p>
+
+
+                <div class="discovery-grid">
+
+
+                    <div class="discovery-card">
+
+                        <strong>
+                            🏚️ Bâtiments
+                        </strong>
+
+                        <span>
+                            Certains bâtiments peuvent être explorés
+                            et fouillés afin de découvrir ce qu'ils
+                            contiennent.
+                        </span>
+
+                    </div>
+
+
+                    <div class="discovery-card">
+
+                        <strong>
+                            ⛺ Tentes
+                        </strong>
+
+                        <span>
+                            Des tentes peuvent être abandonnées dans
+                            certaines régions et contenir différents
+                            objets ou ressources.
+                        </span>
+
+                    </div>
+
+
+                    <div class="discovery-card">
+
+                        <strong>
+                            📦 Coffres
+                        </strong>
+
+                        <span>
+                            Des coffres peuvent être découverts au
+                            cours de l'exploration et offrir des
+                            ressources ou objets intéressants.
+                        </span>
+
+                    </div>
+
+
+                    <div class="discovery-card">
+
+                        <strong>
+                            🔎 Endroits cachés
+                        </strong>
+
+                        <span>
+                            Certains éléments peuvent être difficiles
+                            à remarquer et récompenser les joueurs
+                            qui prennent le temps d'observer leur
+                            environnement.
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             ZONES VERROUILLEES
+        ======================================== -->
+
+        <section class="locked-section">
+
+            <div class="section-title">
+
+                <small>
+                    Accès
+                </small>
+
+                <h2>
+                    Certaines régions doivent être débloquées
+                </h2>
+
+                <p>
+                    Toutes les régions du monde ne sont pas accessibles
+                    immédiatement.
+                </p>
+
+            </div>
+
+
+            <div class="locked-grid">
+
+
+                <article class="locked-card">
+
+                    <div class="locked-icon">
+                        🔒
+                    </div>
+
+                    <h3>
+                        Niveau requis
+                    </h3>
+
+                    <p>
+                        Certaines régions peuvent nécessiter que le
+                        joueur atteigne un certain niveau avant de
+                        pouvoir y accéder.
+                    </p>
+
+                </article>
+
+
+                <article class="locked-card">
+
+                    <div class="locked-icon">
+                        🗝️
+                    </div>
+
+                    <h3>
+                        Objets particuliers
+                    </h3>
+
+                    <p>
+                        Certains passages ou territoires peuvent
+                        nécessiter des objets spécifiques pour être
+                        ouverts ou traversés.
+                    </p>
+
+                </article>
+
+
+                <article class="locked-card">
+
+                    <div class="locked-icon">
+                        🧭
+                    </div>
+
+                    <h3>
+                        Progression
+                    </h3>
+
+                    <p>
+                        L'accès à certaines parties du monde peut
+                        également dépendre de la progression générale
+                        de l'aventure.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             DISTANCE
+        ======================================== -->
+
+        <section class="distance-section">
+
+            <div class="section-title">
+
+                <small>
+                    Voyage
+                </small>
+
+                <h2>
+                    La distance ne définit pas le danger
+                </h2>
+
+                <p>
+                    Une région proche peut être beaucoup plus
+                    dangereuse qu'une région éloignée.
+                </p>
+
+            </div>
+
+
+            <div class="distance-grid">
+
+
+                <article class="distance-card">
+
+                    <h3>
+                        Une région proche peut être mortelle
+                    </h3>
+
+                    <p>
+                        La proximité d'une zone avec le point de départ
+                        ne garantit pas sa sécurité. Une région peut
+                        se trouver relativement proche tout en abritant
+                        des créatures puissantes ou des conditions
+                        particulièrement dangereuses.
+                    </p>
+
+                </article>
+
+
+                <article class="distance-card">
+
+                    <h3>
+                        Une région éloignée peut demander du temps
+                    </h3>
+
+                    <p>
+                        Certaines régions peuvent nécessiter beaucoup
+                        de temps pour être atteintes ou traversées.
+                        <strong>Le temps de voyage et le danger sont
+                        deux choses différentes.</strong>
+                    </p>
+
+                </article>
+
+
+                <article class="distance-card">
+
+                    <h3>
+                        L'exploration peut s'allonger
+                    </h3>
+
+                    <p>
+                        Fouiller plusieurs bâtiments, rechercher des
+                        ressources ou explorer des endroits cachés peut
+                        considérablement augmenter la durée d'une
+                        expédition.
+                    </p>
+
+                </article>
+
+
+                <article class="distance-card">
+
+                    <h3>
+                        Le retour fait partie du voyage
+                    </h3>
+
+                    <p>
+                        Aller dans une région éloignée ne représente
+                        qu'une partie de l'expédition. Le joueur doit
+                        également prendre en compte le chemin du retour
+                        et les dangers rencontrés sur celui-ci.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             RECOMPENSES
+        ======================================== -->
+
+        <section class="reward-section">
+
+            <div class="reward-box">
+
+                <h3>
+                    Risque & récompense
+                </h3>
+
+                <h2>
+                    Les régions dangereuses peuvent offrir davantage
+                </h2>
+
+                <p>
+                    Les régions les plus dangereuses peuvent proposer
+                    des récompenses plus intéressantes. Plus une zone
+                    demande de préparation et présente de risques,
+                    plus elle peut devenir intéressante pour un joueur
+                    suffisamment préparé.
+                </p>
+
+                <p>
+                    Cela ne signifie cependant pas que chaque zone
+                    dangereuse contient systématiquement une récompense
+                    exceptionnelle. Le joueur doit accepter une part
+                    d'incertitude lorsqu'il décide de s'aventurer
+                    plus loin.
+                </p>
+
+
+                <div class="reward-grid">
+
+
+                    <div class="reward-card">
+
+                        <strong>
+                            ⚔️
+                        </strong>
+
+                        <span>
+                            Créatures plus dangereuses
+                        </span>
+
+                    </div>
+
+
+                    <div class="reward-card">
+
+                        <strong>
+                            💎
+                        </strong>
+
+                        <span>
+                            Ressources potentiellement plus rares
+                        </span>
+
+                    </div>
+
+
+                    <div class="reward-card">
+
+                        <strong>
+                            📦
+                        </strong>
+
+                        <span>
+                            Possibilités de découverte plus intéressantes
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             MORT DEFINITIVE
+        ======================================== -->
+
+        <section class="death-section">
+
+            <div class="section-title">
+
+                <small>
+                    Conséquence ultime
+                </small>
+
+                <h2>
+                    La mort est définitive
+                </h2>
+
+                <p>
+                    Dans Valdorian, mourir ne signifie pas simplement
+                    retourner à un point de sauvegarde.
+                </p>
+
+            </div>
+
+
+            <div class="death-box">
+
+                <h3>
+                    Fin de l'aventure
+                </h3>
+
+                <h2>
+                    Une mort signifie la fin du personnage
+                </h2>
+
+                <p>
+                    Lorsqu'un personnage meurt, son aventure prend fin.
+                    Le joueur ne reprend pas simplement le contrôle du
+                    même personnage quelques instants plus tard.
+                </p>
+
+                <p>
+                    La progression de cette aventure est terminée et
+                    le joueur doit recommencer avec un nouveau
+                    personnage.
+                </p>
+
+                <p>
+                    Chaque expédition possède donc une véritable
+                    conséquence. Explorer une région inconnue, chercher
+                    une ressource rare ou s'approcher d'une zone
+                    dangereuse représente toujours une décision qui
+                    peut avoir un impact définitif.
+                </p>
+
+
+                <div class="death-warning">
+
+                    <strong>
+                        ⚠️ Une nouvelle aventure commence après la mort.
+                    </strong>
+
+                    Le joueur crée un nouveau personnage et repart
+                    pour une nouvelle aventure. Le monde reste vaste,
+                    mais l'histoire du personnage précédent est terminée.
+
+                </div>
+
+
+                <div class="death-steps">
+
+
+                    <div class="death-step">
+
+                        <strong>
+                            01
+                        </strong>
+
+                        <span>
+                            Le personnage meurt
+                        </span>
+
+                    </div>
+
+
+                    <div class="death-step">
+
+                        <strong>
+                            02
+                        </strong>
+
+                        <span>
+                            L'aventure de ce personnage prend fin
+                        </span>
+
+                    </div>
+
+
+                    <div class="death-step">
+
+                        <strong>
+                            03
+                        </strong>
+
+                        <span>
+                            Un nouveau personnage commence une nouvelle aventure
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             CONCLUSION
+        ======================================== -->
+
+        <section class="final-section">
+
+            <div class="final-box">
+
+                <h3>
+                    Le monde de Valdorian
+                </h3>
+
+                <h2>
+                    Chaque voyage peut devenir une nouvelle aventure
+                </h2>
+
+                <p>
+                    Valdorian est pensé comme un monde dans lequel
+                    l'exploration possède autant d'importance que le
+                    combat. Les régions peuvent être calmes, hostiles,
+                    riches, pauvres, proches, éloignées, accessibles
+                    ou verrouillées.
+                </p>
+
+                <p>
+                    Le joueur doit apprendre à reconnaître les
+                    différentes identités du monde, à comprendre les
+                    dangers qui l'entourent et à décider jusqu'où il
+                    souhaite pousser son exploration.
+                </p>
+
+                <p>
+                    Les ressources rares, les bâtiments abandonnés,
+                    les coffres, les créatures et les régions inconnues
+                    créent de nombreuses raisons de continuer à
+                    explorer.
+                </p>
+
+                <p>
+                    Mais dans Valdorian, chaque aventure possède une
+                    véritable conséquence : lorsque le personnage
+                    meurt, son histoire se termine et une nouvelle
+                    aventure doit commencer.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ========================================
+         FOOTER
+    ======================================== -->
+
+    <footer>
+
+        VALDORIAN
+        <span>•</span>
+        LORE DU MONDE
+        <span>•</span>
+        UNIVERS EN DÉVELOPPEMENT
+
+    </footer>
+
+</body>
+</html>
