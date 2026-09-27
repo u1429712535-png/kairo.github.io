@@ -307,6 +307,57 @@
             margin-bottom: 12px;
         }
 
+        /* ========================================
+           IMAGE DU ZERK
+        ======================================== */
+
+        .creature-image {
+            position: relative;
+            z-index: 2;
+
+            width: 100%;
+            height: 380px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 25px;
+
+            overflow: hidden;
+        }
+
+        .creature-image img {
+            width: 180px;
+            height: 380px;
+
+            object-fit: contain;
+
+            display: block;
+
+            filter:
+                drop-shadow(
+                    0 15px 25px rgba(0, 0, 0, 0.65)
+                );
+
+            transition:
+                transform 0.3s ease,
+                filter 0.3s ease;
+        }
+
+        .creature-card:hover .creature-image img {
+            transform: scale(1.04);
+
+            filter:
+                drop-shadow(
+                    0 20px 35px rgba(201, 162, 74, 0.25)
+                );
+        }
+
+        /* ========================================
+           ANCIEN STYLE ICON
+        ======================================== */
+
         .creature-icon {
             position: relative;
             z-index: 2;
@@ -754,6 +805,15 @@
             .behavior-card {
                 padding: 23px;
             }
+
+            .creature-image {
+                height: 300px;
+            }
+
+            .creature-image img {
+                width: 142px;
+                height: 300px;
+            }
         }
     </style>
 </head>
@@ -865,8 +925,11 @@
                         01 • ZERK
                     </div>
 
-                    <div class="creature-icon">
-                        👹
+                    <div class="creature-image">
+                        <img
+                            src="Screenshot 2026-09-27 18.54.19.png"
+                            alt="Monstre Zerk"
+                        >
                     </div>
 
                     <h3>
@@ -1363,8 +1426,6 @@
             <div class="technique-grid">
 
 
-                <!-- PROJECTILE -->
-
                 <article class="technique-card">
 
                     <div class="technique-number">
@@ -1386,8 +1447,6 @@
                 </article>
 
 
-                <!-- SPHERE -->
-
                 <article class="technique-card">
 
                     <div class="technique-number">
@@ -1408,8 +1467,6 @@
 
                 </article>
 
-
-                <!-- SOIN -->
 
                 <article class="technique-card">
 
@@ -1433,8 +1490,6 @@
                 </article>
 
 
-                <!-- RAYONS -->
-
                 <article class="technique-card">
 
                     <div class="technique-number">
@@ -1454,8 +1509,6 @@
 
                 </article>
 
-
-                <!-- CONCENTRATION -->
 
                 <article class="technique-card">
 
@@ -1477,8 +1530,6 @@
 
                 </article>
 
-
-                <!-- DISTANCE -->
 
                 <article class="technique-card">
 
@@ -1531,7 +1582,6 @@
 
 
             <div class="behavior-box">
-
 
                 <article class="behavior-card">
 
@@ -1624,7 +1674,6 @@
 
 
             <div class="detail-grid">
-
 
                 <article class="detail-card">
 
