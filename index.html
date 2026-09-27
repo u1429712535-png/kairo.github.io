@@ -1,23 +1,12 @@
-<!-- ============================================================
-     FICHIER : interface/phases.html
-     ============================================================ -->
-
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>Valdorian — Phases</title>
+    <title>Valdorian</title>
 
     <style>
-
         * {
             margin: 0;
             padding: 0;
@@ -35,18 +24,12 @@
             overflow-x: hidden;
         }
 
-        /* =====================================================
-           HEADER
-        ===================================================== */
-
         header {
             position: fixed;
             top: 0;
             left: 0;
-
             width: 100%;
             height: 72px;
-
             z-index: 1000;
 
             display: flex;
@@ -55,23 +38,16 @@
 
             padding: 0 45px;
 
-            background: rgba(7, 8, 11, 0.88);
-
+            background: rgba(7, 8, 11, 0.82);
             backdrop-filter: blur(14px);
-
-            border-bottom:
-                1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .logo {
-            color: white;
-
-            text-decoration: none;
-
             font-size: 24px;
             font-weight: 900;
-
             letter-spacing: 4px;
+            color: white;
         }
 
         .logo span {
@@ -81,20 +57,15 @@
         nav {
             display: flex;
             align-items: center;
-
-            gap: 30px;
+            gap: 35px;
         }
 
         nav a {
-            color: #cfcfd2;
-
+            color: #d4d4d4;
             text-decoration: none;
-
-            font-size: 13px;
-            font-weight: 800;
-
+            font-size: 14px;
+            font-weight: 700;
             letter-spacing: 1px;
-
             transition: 0.2s;
         }
 
@@ -102,303 +73,228 @@
             color: #c9a24a;
         }
 
-        .back-button {
-            padding: 9px 15px;
+        .account-button {
+            border: 1px solid rgba(201, 162, 74, 0.5);
+            background: rgba(201, 162, 74, 0.08);
+            color: white;
 
-            border-radius: 7px;
+            padding: 10px 17px;
+            border-radius: 8px;
 
-            border:
-                1px solid rgba(201, 162, 74, 0.45);
-
-            background:
-                rgba(201, 162, 74, 0.08);
-
-            color: #d7b764;
-
-            text-decoration: none;
-
-            font-size: 11px;
-            font-weight: 900;
-
-            letter-spacing: 1px;
+            cursor: pointer;
+            font-weight: 700;
 
             transition: 0.2s;
         }
 
-        .back-button:hover {
-            background: #c9a24a;
-
-            color: #111;
-
-            transform: translateY(-2px);
+        .account-button:hover {
+            background: rgba(201, 162, 74, 0.2);
+            border-color: #c9a24a;
         }
 
-        /* =====================================================
-           HERO
-        ===================================================== */
+        .account-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+            vertical-align: middle;
+            margin-right: 7px;
+        }
 
         .hero {
-            position: relative;
-
-            min-height: 620px;
+            min-height: 100vh;
 
             display: flex;
             align-items: center;
             justify-content: center;
 
-            padding: 120px 25px 100px;
+            position: relative;
 
-            overflow: hidden;
-
-            background:
-                radial-gradient(
-                    circle at 50% 40%,
-                    rgba(201, 162, 74, 0.15),
-                    transparent 38%
-                ),
-                radial-gradient(
-                    circle at 15% 70%,
-                    rgba(80, 110, 160, 0.08),
-                    transparent 30%
-                ),
+            background-image:
                 linear-gradient(
-                    180deg,
-                    #0b0d12,
-                    #08090c
-                );
-        }
+                    rgba(5, 6, 8, 0.25),
+                    rgba(5, 6, 8, 0.88)
+                ),
+                url("image/Gemini_Generated_Image_3yxzcq3yxzcq3yxz.jpg");
 
-        .hero::before {
-            content: "";
-
-            position: absolute;
-
-            inset: 0;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    transparent 49.8%,
-                    rgba(201, 162, 74, 0.06) 50%,
-                    transparent 50.2%
-                );
-
-            background-size: 80px 80px;
-
-            opacity: 0.35;
+            background-size: cover;
+            background-position: center;
         }
 
         .hero::after {
             content: "";
-
             position: absolute;
-
             bottom: 0;
             left: 0;
-
             width: 100%;
-            height: 150px;
+            height: 180px;
 
-            background:
-                linear-gradient(
-                    transparent,
-                    #08090c
-                );
+            background: linear-gradient(
+                transparent,
+                #08090c
+            );
         }
 
         .hero-content {
             position: relative;
-
             z-index: 2;
 
-            max-width: 900px;
-
             text-align: center;
+
+            margin-top: 60px;
         }
 
-        .phase-symbol {
-            width: 90px;
-            height: 90px;
+        .status-badge {
+            display: inline-block;
 
-            margin: 0 auto 25px;
+            padding: 8px 16px;
+            margin-bottom: 25px;
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            border: 1px solid rgba(201, 162, 74, 0.6);
+            border-radius: 50px;
 
-            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.35);
 
-            border:
-                1px solid rgba(201, 162, 74, 0.45);
+            color: #d7b764;
 
-            background:
-                radial-gradient(
-                    circle,
-                    rgba(201, 162, 74, 0.18),
-                    rgba(201, 162, 74, 0.03)
-                );
-
-            box-shadow:
-                0 0 50px rgba(201, 162, 74, 0.08);
-
-            font-size: 38px;
-        }
-
-        .eyebrow {
-            color: #c9a24a;
-
-            font-size: 11px;
-            font-weight: 900;
-
-            letter-spacing: 4px;
-
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2px;
             text-transform: uppercase;
         }
 
-        .hero h1 {
-            margin-top: 14px;
-
-            font-size: clamp(48px, 8vw, 100px);
-
-            line-height: 0.95;
-
-            letter-spacing: 5px;
+        .hero-title {
+            font-size: clamp(65px, 11vw, 150px);
+            line-height: 0.9;
 
             font-weight: 1000;
+            letter-spacing: 8px;
 
             text-shadow:
-                0 15px 45px rgba(0, 0, 0, 0.7);
+                0 10px 35px rgba(0, 0, 0, 0.8);
         }
 
-        .hero h1 span {
+        .hero-title span {
             color: #c9a24a;
         }
 
-        .hero-description {
-            max-width: 700px;
-
-            margin: 28px auto 0;
-
-            color: #96979c;
-
-            font-size: 15px;
-
-            line-height: 1.8;
-        }
-
-        .hero-info {
+        .hero-buttons {
             display: flex;
-
             justify-content: center;
+            gap: 15px;
 
-            flex-wrap: wrap;
-
-            gap: 10px;
-
-            margin-top: 35px;
+            margin-top: 45px;
         }
 
-        .info-pill {
-            padding: 9px 15px;
+        .hero-button {
+            min-width: 150px;
 
-            border-radius: 50px;
+            padding: 15px 25px;
 
-            background:
-                rgba(255, 255, 255, 0.035);
+            border-radius: 7px;
 
-            border:
-                1px solid rgba(255, 255, 255, 0.1);
+            text-decoration: none;
 
-            color: #bcbec3;
+            font-size: 13px;
+            font-weight: 900;
+            letter-spacing: 1.5px;
 
-            font-size: 11px;
-            font-weight: 800;
-
-            letter-spacing: 1px;
+            transition:
+                transform 0.2s,
+                background 0.2s,
+                border-color 0.2s;
         }
 
-        /* =====================================================
-           MAIN
-        ===================================================== */
+        .hero-button:hover {
+            transform: translateY(-3px);
+        }
 
-        main {
+        .primary-button {
+            background: #c9a24a;
+            color: #101010;
+            border: 1px solid #c9a24a;
+        }
+
+        .primary-button:hover {
+            background: #e0bb65;
+        }
+
+        .secondary-button {
+            background: rgba(255, 255, 255, 0.04);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+
+        .secondary-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .universe {
             position: relative;
 
-            padding: 20px 7% 120px;
+            padding: 100px 7% 130px;
 
             background:
                 radial-gradient(
                     circle at 50% 0%,
-                    rgba(201, 162, 74, 0.07),
-                    transparent 38%
+                    rgba(201, 162, 74, 0.08),
+                    transparent 45%
                 ),
                 #08090c;
         }
 
-        .section {
-            max-width: 1200px;
-
-            margin: 0 auto;
-
-            padding-top: 70px;
-        }
-
-        .section-title {
+        .section-header {
             text-align: center;
-
-            margin-bottom: 45px;
+            margin-bottom: 60px;
         }
 
-        .section-title small {
+        .section-header small {
             color: #c9a24a;
-
             font-size: 11px;
             font-weight: 900;
-
             letter-spacing: 3px;
-
             text-transform: uppercase;
         }
 
-        .section-title h2 {
+        .section-header h2 {
             margin-top: 12px;
 
             font-size: clamp(30px, 4vw, 48px);
-
             letter-spacing: 2px;
         }
 
-        .section-title p {
-            max-width: 680px;
-
+        .section-header p {
+            max-width: 600px;
             margin: 15px auto 0;
 
             color: #85878d;
-
             font-size: 14px;
-
             line-height: 1.7;
         }
 
-        /* =====================================================
-           EXPLICATION
-        ===================================================== */
+        .game-grid {
+            max-width: 1250px;
+            margin: auto;
 
-        .explanation {
             display: grid;
-
-            grid-template-columns: 1.2fr 0.8fr;
-
-            gap: 20px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
         }
 
-        .explanation-card {
+        .game-card {
+            position: relative;
+
+            min-height: 235px;
+
             padding: 30px;
 
-            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
 
-            border:
-                1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
 
             background:
                 linear-gradient(
@@ -406,121 +302,8 @@
                     rgba(255, 255, 255, 0.055),
                     rgba(255, 255, 255, 0.015)
                 );
-        }
-
-        .explanation-card h3 {
-            margin-bottom: 15px;
-
-            font-size: 22px;
-        }
-
-        .explanation-card p {
-            color: #96979c;
-
-            font-size: 13px;
-
-            line-height: 1.8;
-        }
-
-        .timeline {
-            display: flex;
-
-            flex-direction: column;
-
-            gap: 14px;
-        }
-
-        .timeline-item {
-            display: flex;
-
-            align-items: center;
-
-            gap: 15px;
-
-            padding: 15px;
-
-            border-radius: 10px;
-
-            background:
-                rgba(0, 0, 0, 0.2);
-
-            border:
-                1px solid rgba(255, 255, 255, 0.06);
-        }
-
-        .timeline-number {
-            min-width: 35px;
-            height: 35px;
-
-            display: flex;
-
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 50%;
-
-            background:
-                rgba(201, 162, 74, 0.12);
-
-            border:
-                1px solid rgba(201, 162, 74, 0.3);
-
-            color: #d7b764;
-
-            font-size: 11px;
-            font-weight: 900;
-        }
-
-        .timeline-item strong {
-            display: block;
-
-            font-size: 13px;
-
-            margin-bottom: 4px;
-        }
-
-        .timeline-item span {
-            color: #777980;
-
-            font-size: 11px;
-        }
-
-        /* =====================================================
-           PHASE CARDS
-        ===================================================== */
-
-        .phase-grid {
-            display: grid;
-
-            grid-template-columns: repeat(2, 1fr);
-
-            gap: 18px;
-        }
-
-        .phase-card {
-            position: relative;
-
-            min-height: 330px;
-
-            padding: 30px;
-
-            display: flex;
-
-            flex-direction: column;
 
             overflow: hidden;
-
-            border-radius: 17px;
-
-            border:
-                1px solid rgba(255, 255, 255, 0.08);
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(255, 255, 255, 0.055),
-                    rgba(255, 255, 255, 0.012)
-                );
 
             transition:
                 transform 0.25s,
@@ -528,30 +311,27 @@
                 background 0.25s;
         }
 
-        .phase-card::before {
+        .game-card::before {
             content: "";
 
             position: absolute;
-
             top: -100px;
             right: -100px;
 
-            width: 230px;
-            height: 230px;
+            width: 220px;
+            height: 220px;
 
             border-radius: 50%;
 
-            background:
-                rgba(201, 162, 74, 0.06);
+            background: rgba(201, 162, 74, 0.07);
 
             transition: 0.3s;
         }
 
-        .phase-card:hover {
+        .game-card:hover {
             transform: translateY(-7px);
 
-            border-color:
-                rgba(201, 162, 74, 0.38);
+            border-color: rgba(201, 162, 74, 0.4);
 
             background:
                 linear-gradient(
@@ -561,385 +341,85 @@
                 );
         }
 
-        .phase-card:hover::before {
+        .game-card:hover::before {
             transform: scale(1.35);
         }
 
-        .phase-icon {
-            position: relative;
-
-            z-index: 2;
-
-            width: 55px;
-            height: 55px;
-
-            display: flex;
-
-            align-items: center;
-            justify-content: center;
-
-            margin-bottom: 25px;
-
-            border-radius: 12px;
-
-            background:
-                rgba(201, 162, 74, 0.1);
-
-            border:
-                1px solid rgba(201, 162, 74, 0.25);
-
-            font-size: 25px;
-        }
-
-        .phase-tag {
+        .card-icon {
             position: absolute;
 
-            top: 25px;
-            right: 25px;
+            top: 28px;
+            right: 30px;
 
-            padding: 6px 10px;
+            font-size: 38px;
 
-            border-radius: 50px;
+            filter: grayscale(10%);
+        }
 
-            font-size: 9px;
+        .card-number {
+            color: rgba(201, 162, 74, 0.55);
+
+            font-size: 11px;
             font-weight: 900;
-
-            letter-spacing: 1px;
-
-            text-transform: uppercase;
-        }
-
-        .tag-calme {
-            color: #8ecf9a;
-
-            background:
-                rgba(90, 180, 105, 0.08);
-
-            border:
-                1px solid rgba(90, 180, 105, 0.25);
-        }
-
-        .tag-special {
-            color: #d7b764;
-
-            background:
-                rgba(201, 162, 74, 0.08);
-
-            border:
-                1px solid rgba(201, 162, 74, 0.25);
-        }
-
-        .tag-danger {
-            color: #e58b8b;
-
-            background:
-                rgba(180, 50, 50, 0.08);
-
-            border:
-                1px solid rgba(180, 50, 50, 0.3);
-        }
-
-        .tag-extreme {
-            color: #eaa66b;
-
-            background:
-                rgba(210, 100, 40, 0.08);
-
-            border:
-                1px solid rgba(210, 100, 40, 0.3);
-        }
-
-        .phase-card h3 {
-            position: relative;
-
-            z-index: 2;
-
-            font-size: 24px;
-
-            margin-bottom: 12px;
-        }
-
-        .phase-card p {
-            position: relative;
-
-            z-index: 2;
-
-            color: #96979c;
-
-            font-size: 13px;
-
-            line-height: 1.7;
-        }
-
-        .phase-effects {
-            position: relative;
-
-            z-index: 2;
-
-            margin-top: auto;
-
-            padding-top: 25px;
-        }
-
-        .phase-effects-title {
-            color: #c9a24a;
-
-            font-size: 10px;
-            font-weight: 900;
-
             letter-spacing: 2px;
 
             margin-bottom: 10px;
-
-            text-transform: uppercase;
         }
 
-        .effect-list {
-            display: flex;
+        .game-card h3 {
+            font-size: 23px;
+            margin-bottom: 10px;
 
-            flex-wrap: wrap;
-
-            gap: 7px;
+            letter-spacing: 0.5px;
         }
 
-        .effect {
-            padding: 7px 9px;
-
-            border-radius: 6px;
-
-            background:
-                rgba(255, 255, 255, 0.04);
-
-            border:
-                1px solid rgba(255, 255, 255, 0.07);
-
-            color: #b5b6ba;
-
-            font-size: 10px;
-        }
-
-        /* =====================================================
-           IMPACT
-        ===================================================== */
-
-        .impact-table {
-            border-radius: 16px;
-
-            overflow: hidden;
-
-            border:
-                1px solid rgba(255, 255, 255, 0.08);
-
-            background:
-                rgba(255, 255, 255, 0.025);
-        }
-
-        .impact-row {
-            display: grid;
-
-            grid-template-columns:
-                1.2fr 1fr 1fr 1.2fr;
-
-            border-bottom:
-                1px solid rgba(255, 255, 255, 0.06);
-        }
-
-        .impact-row:last-child {
-            border-bottom: none;
-        }
-
-        .impact-row > div {
-            padding: 17px 18px;
-
-            border-right:
-                1px solid rgba(255, 255, 255, 0.05);
-
-            font-size: 12px;
-        }
-
-        .impact-row > div:last-child {
-            border-right: none;
-        }
-
-        .impact-header {
-            background:
-                rgba(201, 162, 74, 0.08);
-
-            color: #d7b764;
-
-            font-size: 10px !important;
-            font-weight: 900;
-
-            letter-spacing: 1px;
-
-            text-transform: uppercase;
-        }
-
-        .impact-name {
-            color: white;
-
-            font-weight: 800;
-        }
-
-        .impact-light {
-            color: #8ecf9a;
-        }
-
-        .impact-medium {
-            color: #d7b764;
-        }
-
-        .impact-high {
-            color: #e58b8b;
-        }
-
-        /* =====================================================
-           REFUGE
-        ===================================================== */
-
-        .refuge-section {
-            display: grid;
-
-            grid-template-columns: 1fr 1fr;
-
-            gap: 18px;
-        }
-
-        .refuge-card {
-            padding: 30px;
-
-            border-radius: 16px;
-
-            border:
-                1px solid rgba(255, 255, 255, 0.08);
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(255, 255, 255, 0.055),
-                    rgba(255, 255, 255, 0.015)
-                );
-        }
-
-        .refuge-card.danger {
-            border-color:
-                rgba(180, 50, 50, 0.22);
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(180, 50, 50, 0.08),
-                    rgba(255, 255, 255, 0.015)
-                );
-        }
-
-        .refuge-icon {
-            font-size: 35px;
-
-            margin-bottom: 18px;
-        }
-
-        .refuge-card h3 {
-            font-size: 21px;
-
-            margin-bottom: 12px;
-        }
-
-        .refuge-card p {
+        .game-card p {
             color: #96979c;
 
             font-size: 13px;
+            line-height: 1.65;
 
-            line-height: 1.8;
+            max-width: 380px;
         }
 
-        .refuge-points {
-            margin-top: 20px;
-
-            display: flex;
-
-            flex-direction: column;
-
-            gap: 9px;
+        .game-card.large {
+            grid-column: span 2;
         }
 
-        .refuge-point {
-            display: flex;
+        .combat-button {
+            display: inline-block;
 
-            align-items: center;
+            margin-top: 18px;
 
-            gap: 9px;
+            width: fit-content;
 
-            color: #aaa;
+            padding: 10px 16px;
 
-            font-size: 12px;
-        }
+            border-radius: 7px;
 
-        .refuge-point::before {
-            content: "◆";
+            background: rgba(201, 162, 74, 0.12);
+            border: 1px solid rgba(201, 162, 74, 0.45);
 
-            color: #c9a24a;
+            color: #d7b764;
 
-            font-size: 7px;
-        }
+            text-decoration: none;
 
-        /* =====================================================
-           CONSEILS
-        ===================================================== */
-
-        .tips {
-            display: grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
-
-            gap: 15px;
-        }
-
-        .tip {
-            padding: 24px;
-
-            border-radius: 14px;
-
-            border:
-                1px solid rgba(255, 255, 255, 0.07);
-
-            background:
-                rgba(255, 255, 255, 0.025);
-        }
-
-        .tip-number {
-            color:
-                rgba(201, 162, 74, 0.6);
-
-            font-size: 10px;
+            font-size: 11px;
             font-weight: 900;
+            letter-spacing: 1px;
 
-            letter-spacing: 2px;
-
-            margin-bottom: 12px;
+            transition: 0.2s;
         }
 
-        .tip h3 {
-            font-size: 16px;
+        .combat-button:hover {
+            background: #c9a24a;
+            color: #111;
 
-            margin-bottom: 9px;
+            transform: translateY(-2px);
         }
-
-        .tip p {
-            color: #85878d;
-
-            font-size: 12px;
-
-            line-height: 1.7;
-        }
-
-        /* =====================================================
-           FOOTER
-        ===================================================== */
 
         footer {
-            padding: 35px 20px;
+            padding: 30px 20px;
 
             text-align: center;
 
@@ -947,17 +427,228 @@
 
             font-size: 11px;
 
-            border-top:
-                1px solid rgba(255, 255, 255, 0.06);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
         }
 
-        footer span {
-            color: #c9a24a;
+        .modal {
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 5000;
+
+            display: none;
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            background: rgba(0, 0, 0, 0.78);
+            backdrop-filter: blur(8px);
         }
 
-        /* =====================================================
-           RESPONSIVE
-        ===================================================== */
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-box {
+            width: 100%;
+            max-width: 440px;
+
+            max-height: 90vh;
+            overflow-y: auto;
+
+            padding: 30px;
+
+            border: 1px solid rgba(201, 162, 74, 0.25);
+            border-radius: 18px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #15171c,
+                    #0b0c0f
+                );
+
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.65);
+
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+
+            top: 15px;
+            right: 18px;
+
+            border: none;
+            background: transparent;
+
+            color: #777;
+
+            font-size: 25px;
+
+            cursor: pointer;
+        }
+
+        .close-modal:hover {
+            color: white;
+        }
+
+        .warning-container {
+            display: none;
+
+            text-align: center;
+
+            margin-bottom: 20px;
+        }
+
+        .warning-container.active {
+            display: block;
+        }
+
+        .warning-container img {
+            width: 96px;
+            height: 96px;
+
+            object-fit: contain;
+        }
+
+        .modal-title {
+            text-align: center;
+
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .modal-subtitle {
+            text-align: center;
+
+            color: #85878d;
+
+            font-size: 13px;
+            line-height: 1.6;
+
+            margin-bottom: 25px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+
+            color: #aaa;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            margin-bottom: 7px;
+        }
+
+        .input-group input {
+            width: 100%;
+
+            padding: 13px 14px;
+
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+
+            outline: none;
+
+            background: #090a0d;
+            color: white;
+
+            font-size: 14px;
+        }
+
+        .input-group input:focus {
+            border-color: rgba(201, 162, 74, 0.7);
+        }
+
+        .modal-button {
+            width: 100%;
+
+            padding: 13px;
+
+            border: none;
+            border-radius: 8px;
+
+            background: #c9a24a;
+            color: #111;
+
+            font-weight: 900;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .modal-button:hover {
+            background: #e0bb65;
+        }
+
+        .secondary-modal-button {
+            margin-top: 10px;
+
+            background: rgba(255, 255, 255, 0.07);
+            color: white;
+        }
+
+        .secondary-modal-button:hover {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .message {
+            min-height: 20px;
+
+            margin: 10px 0;
+
+            text-align: center;
+
+            color: #d7b764;
+
+            font-size: 12px;
+        }
+
+        .verification-section,
+        .profile-section {
+            display: none;
+        }
+
+        .verification-section.active,
+        .profile-section.active {
+            display: block;
+        }
+
+        .profile-avatar-wrapper {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-avatar {
+            width: 90px;
+            height: 90px;
+
+            border-radius: 50%;
+
+            object-fit: cover;
+
+            border: 2px solid rgba(201, 162, 74, 0.6);
+        }
+
+        .logout-button {
+            margin-top: 10px;
+
+            background: rgba(180, 50, 50, 0.12);
+            color: #e58b8b;
+        }
+
+        .logout-button:hover {
+            background: rgba(180, 50, 50, 0.2);
+        }
 
         @media (max-width: 900px) {
 
@@ -970,30 +661,15 @@
             }
 
             nav a {
-                font-size: 10px;
+                font-size: 11px;
             }
 
-            .explanation,
-            .refuge-section {
-                grid-template-columns: 1fr;
-            }
-
-            .phase-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .tips {
+            .game-grid {
                 grid-template-columns: 1fr 1fr;
             }
 
-            .impact-row {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .impact-row > div:nth-child(2),
-            .impact-row > div:nth-child(3) {
-                border-bottom:
-                    1px solid rgba(255, 255, 255, 0.05);
+            .game-card.large {
+                grid-column: span 2;
             }
         }
 
@@ -1005,7 +681,6 @@
 
             .logo {
                 font-size: 18px;
-
                 letter-spacing: 2px;
             }
 
@@ -1013,149 +688,99 @@
                 display: none;
             }
 
-            .back-button {
-                padding: 8px 11px;
-
-                font-size: 9px;
+            .account-button {
+                padding: 8px 12px;
+                font-size: 11px;
             }
 
-            .hero {
-                min-height: 570px;
-
-                padding-left: 20px;
-                padding-right: 20px;
+            .hero-title {
+                letter-spacing: 4px;
             }
 
-            .hero h1 {
-                letter-spacing: 3px;
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
             }
 
-            .hero-description {
-                font-size: 13px;
+            .hero-button {
+                width: 210px;
             }
 
-            main {
-                padding-left: 20px;
-                padding-right: 20px;
+            .universe {
+                padding: 75px 20px 90px;
             }
 
-            .section {
-                padding-top: 55px;
-            }
-
-            .phase-card {
-                min-height: 350px;
-            }
-
-            .tips {
+            .game-grid {
                 grid-template-columns: 1fr;
             }
 
-            .impact-table {
-                overflow-x: auto;
+            .game-card.large {
+                grid-column: span 1;
             }
 
-            .impact-row {
-                min-width: 650px;
+            .game-card {
+                min-height: 220px;
+            }
+
+            .modal-box {
+                padding: 25px 20px;
             }
         }
-
     </style>
-
 </head>
-
 
 <body>
 
 <header>
 
-    <a
-        href="../index.html"
-        class="logo"
-    >
+    <div class="logo">
         VALDOR<span>IAN</span>
-    </a>
+    </div>
 
     <nav>
-
-        <a href="../index.html">
-            ACCUEIL
-        </a>
-
-        <a href="../index.html#univers">
-            UNIVERS
-        </a>
-
-        <a href="lors_combat.html">
-            COMBAT
-        </a>
-
-        <a href="lors_monde.html">
-            MONDE
-        </a>
-
-        <a href="phases.html">
-            PHASES
-        </a>
-
+        <a href="index.html">ACCUEIL</a>
+        <a href="#univers">UNIVERS</a>
     </nav>
 
-    <a
-        href="../index.html#univers"
-        class="back-button"
+    <button
+        id="accountButton"
+        class="account-button"
+        onclick="handleAccountButton()"
     >
-        RETOUR
-    </a>
+        COMPTE
+    </button>
 
 </header>
 
-
-<!-- =========================================================
-     HERO
-========================================================= -->
 
 <section class="hero">
 
     <div class="hero-content">
 
-        <div class="phase-symbol">
-            🌙
+        <div class="status-badge">
+            Développement en cours
         </div>
 
-        <div class="eyebrow">
-            Système dynamique
-        </div>
-
-        <h1>
-            LES <span>PHASES</span>
+        <h1 class="hero-title">
+            VALDOR<span>IAN</span>
         </h1>
 
-        <p class="hero-description">
+        <div class="hero-buttons">
 
-            Chaque journée dans Valdorian peut modifier le monde.
-            Certaines phases sont calmes et permettent de se préparer,
-            tandis que d'autres transforment complètement les dangers,
-            les créatures, les zones et les opportunités disponibles.
+            <a
+                href="interface/play.html"
+                class="hero-button primary-button"
+                onclick="return handlePlay(event)"
+            >
+                JOUER
+            </a>
 
-        </p>
-
-        <div class="hero-info">
-
-            <div class="info-pill">
-                🌍 MONDE DYNAMIQUE
-            </div>
-
-            <div class="info-pill">
-                ⚔️ DIFFICULTÉ VARIABLE
-            </div>
-
-            <div class="info-pill">
-                🎁 ÉVÉNEMENTS
-            </div>
-
-            <div class="info-pill">
-                🏠 REFUGE VULNÉRABLE
-            </div>
+            <a
+                href="#univers"
+                class="hero-button secondary-button"
+            >
+                DÉCOUVRIR
+            </a>
 
         </div>
 
@@ -1164,1302 +789,1409 @@
 </section>
 
 
-<main>
+<section
+    id="univers"
+    class="universe"
+>
 
-    <!-- =====================================================
-         INTRODUCTION
-    ===================================================== -->
+    <div class="section-header">
 
-    <section class="section">
+        <small>L'univers de Valdorian</small>
 
-        <div class="section-title">
+        <h2>Un monde qui évolue avec vous</h2>
 
-            <small>
-                Fonctionnement
-            </small>
+        <p>
+            Explorez, combattez, construisez et survivez
+            dans un monde influencé par ses créatures,
+            ses zones et ses phases.
+        </p>
 
-            <h2>
-                Une journée n'est jamais totalement identique
-            </h2>
+    </div>
+
+
+    <div class="game-grid">
+
+        <article class="game-card large">
+
+            <div class="card-icon">
+                ⚔️
+            </div>
+
+            <div class="card-number">
+                01
+            </div>
+
+            <h3>
+                Combat
+            </h3>
 
             <p>
-
-                Les phases représentent les différents états du monde.
-                Elles déterminent les événements, les dangers,
-                les récompenses et parfois même la façon dont
-                le joueur doit organiser sa journée.
-
+                Affrontez des vagues de monstres en mode survie.
+                Chaque élimination vous rapporte de l'argent,
+                permettant d'améliorer vos armes et votre progression.
             </p>
 
-        </div>
+            <a
+                href="interface/lors_combat.html"
+                class="combat-button"
+            >
+                ACCÉDER AU COMBAT
+            </a>
+
+        </article>
 
 
-        <div class="explanation">
+        <article class="game-card">
 
-            <div class="explanation-card">
-
-                <h3>
-                    🌍 Le monde évolue chaque jour
-                </h3>
-
-                <p>
-
-                    À chaque nouvelle journée, une phase peut être
-                    appliquée au monde. Son influence peut être très
-                    faible ou extrêmement importante.
-
-                </p>
-
-                <br>
-
-                <p>
-
-                    Une journée normale peut simplement modifier
-                    légèrement les ressources disponibles ou le
-                    comportement de certaines créatures.
-
-                    À l'inverse, une phase particulière peut
-                    transformer certaines régions, rendre des
-                    ennemis beaucoup plus dangereux ou déclencher
-                    des événements uniques.
-
-                </p>
-
-                <br>
-
-                <p>
-
-                    Le joueur doit donc apprendre à observer
-                    la situation avant de décider s'il souhaite
-                    explorer, combattre, récolter des ressources,
-                    accomplir une mission ou rester au refuge.
-
-                </p>
-
+            <div class="card-icon">
+                👹
             </div>
 
-
-            <div class="explanation-card">
-
-                <h3>
-                    📅 Une journée se construit autour de la phase
-                </h3>
-
-                <div class="timeline">
-
-                    <div class="timeline-item">
-
-                        <div class="timeline-number">
-                            01
-                        </div>
-
-                        <div>
-
-                            <strong>
-                                Début de journée
-                            </strong>
-
-                            <span>
-                                La phase est déterminée.
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="timeline-item">
-
-                        <div class="timeline-number">
-                            02
-                        </div>
-
-                        <div>
-
-                            <strong>
-                                Changements du monde
-                            </strong>
-
-                            <span>
-                                Zones, créatures et ressources évoluent.
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="timeline-item">
-
-                        <div class="timeline-number">
-                            03
-                        </div>
-
-                        <div>
-
-                            <strong>
-                                Opportunités
-                            </strong>
-
-                            <span>
-                                Missions, récompenses et événements peuvent apparaître.
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="timeline-item">
-
-                        <div class="timeline-number">
-                            04
-                        </div>
-
-                        <div>
-
-                            <strong>
-                                Fin de journée
-                            </strong>
-
-                            <span>
-                                Le monde se prépare pour la phase suivante.
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
+            <div class="card-number">
+                02
             </div>
 
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         TYPES DE PHASES
-    ===================================================== -->
-
-    <section class="section">
-
-        <div class="section-title">
-
-            <small>
-                Les différents états
-            </small>
-
-            <h2>
-                Chaque phase possède son propre impact
-            </h2>
+            <h3>
+                Créatures
+            </h3>
 
             <p>
-
-                Les phases ne sont pas uniquement des changements
-                visuels. Elles peuvent influencer la progression,
-                les ressources, les créatures, les zones et la sécurité
-                du refuge.
-
+                Découvrez les différentes créatures de Valdorian,
+                leurs caractéristiques, leurs armes,
+                leurs capacités et leur comportement.
             </p>
 
-        </div>
-
-
-        <div class="phase-grid">
-
-            <article class="phase-card">
-
-                <div class="phase-icon">
-                    ☀️
-                </div>
-
-                <div class="phase-tag tag-calme">
-                    Calme
-                </div>
-
-                <h3>
-                    Journée calme
-                </h3>
-
-                <p>
-
-                    Une journée relativement stable.
-                    Les dangers sont limités et le monde offre
-                    au joueur une occasion de se préparer.
-
-                </p>
-
-                <div class="phase-effects">
-
-                    <div class="phase-effects-title">
-                        Effets possibles
-                    </div>
-
-                    <div class="effect-list">
-
-                        <span class="effect">
-                            Ressources normales
-                        </span>
-
-                        <span class="effect">
-                            Créatures normales
-                        </span>
-
-                        <span class="effect">
-                            Exploration facilitée
-                        </span>
-
-                        <span class="effect">
-                            Refuge sécurisé
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <article class="phase-card">
-
-                <div class="phase-icon">
-                    🌿
-                </div>
-
-                <div class="phase-tag tag-special">
-                    Opportunité
-                </div>
-
-                <h3>
-                    Abondance
-                </h3>
-
-                <p>
-
-                    Certaines ressources deviennent plus nombreuses
-                    ou apparaissent dans des zones où elles sont
-                    habituellement difficiles à trouver.
-
-                </p>
-
-                <div class="phase-effects">
-
-                    <div class="phase-effects-title">
-                        Effets possibles
-                    </div>
-
-                    <div class="effect-list">
-
-                        <span class="effect">
-                            Ressources ↑
-                        </span>
-
-                        <span class="effect">
-                            Zones riches
-                        </span>
-
-                        <span class="effect">
-                            Farm facilité
-                        </span>
-
-                        <span class="effect">
-                            Ressources rares
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <article class="phase-card">
-
-                <div class="phase-icon">
-                    ✨
-                </div>
-
-                <div class="phase-tag tag-special">
-                    Événement
-                </div>
-
-                <h3>
-                    Journée spéciale
-                </h3>
-
-                <p>
-
-                    Un événement particulier apparaît dans le monde.
-                    Il peut s'agir d'une mission unique, d'une zone
-                    spéciale ou d'une récompense temporaire.
-
-                </p>
-
-                <div class="phase-effects">
-
-                    <div class="phase-effects-title">
-                        Effets possibles
-                    </div>
-
-                    <div class="effect-list">
-
-                        <span class="effect">
-                            Mission spéciale
-                        </span>
-
-                        <span class="effect">
-                            Récompense rare
-                        </span>
-
-                        <span class="effect">
-                            Zone spéciale
-                        </span>
-
-                        <span class="effect">
-                            Événement limité
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <article class="phase-card">
-
-                <div class="phase-icon">
-                    💎
-                </div>
-
-                <div class="phase-tag tag-special">
-                    Rare
-                </div>
-
-                <h3>
-                    Convergence
-                </h3>
-
-                <p>
-
-                    Une phase rare peut rendre certaines régions
-                    particulièrement intéressantes.
-
-                    Des ressources ou récompenses normalement
-                    difficiles à obtenir peuvent apparaître.
-
-                </p>
-
-                <div class="phase-effects">
-
-                    <div class="phase-effects-title">
-                        Effets possibles
-                    </div>
-
-                    <div class="effect-list">
-
-                        <span class="effect">
-                            Ressources rares
-                        </span>
-
-                        <span class="effect">
-                            Récompenses élevées
-                        </span>
-
-                        <span class="effect">
-                            Zone temporaire
-                        </span>
-
-                        <span class="effect">
-                            Exploration risquée
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <article class="phase-card">
-
-                <div class="phase-icon">
-                    🌑
-                </div>
-
-                <div class="phase-tag tag-danger">
-                    Dangereuse
-                </div>
-
-                <h3>
-                    Journée dangereuse
-                </h3>
-
-                <p>
-
-                    Certaines créatures deviennent plus agressives,
-                    certaines zones deviennent plus difficiles et
-                    les déplacements peuvent devenir beaucoup plus
-                    risqués.
-
-                </p>
-
-                <div class="phase-effects">
-
-                    <div class="phase-effects-title">
-                        Effets possibles
-                    </div>
-
-                    <div class="effect-list">
-
-                        <span class="effect">
-                            Difficulté ↑
-                        </span>
-
-                        <span class="effect">
-                            Créatures renforcées
-                        </span>
-
-                        <span class="effect">
-                            Zones dangereuses
-                        </span>
-
-                        <span class="effect">
-                            Nouvelles menaces
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <article class="phase-card">
-
-                <div class="phase-icon">
-                    ☠️
-                </div>
-
-                <div class="phase-tag tag-extreme">
-                    Critique
-                </div>
-
-                <h3>
-                    Cataclysme
-                </h3>
-
-                <p>
-
-                    Une phase extrêmement dangereuse qui peut
-                    modifier profondément le fonctionnement du monde.
-
-                    Les créatures, les zones et les déplacements
-                    deviennent beaucoup plus imprévisibles.
-
-                </p>
-
-                <div class="phase-effects">
-
-                    <div class="phase-effects-title">
-                        Effets possibles
-                    </div>
-
-                    <div class="effect-list">
-
-                        <span class="effect">
-                            Difficulté majeure
-                        </span>
-
-                        <span class="effect">
-                            Créatures spéciales
-                        </span>
-
-                        <span class="effect">
-                            Zones hostiles
-                        </span>
-
-                        <span class="effect">
-                            Refuge menacé
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         IMPACT
-    ===================================================== -->
-
-    <section class="section">
-
-        <div class="section-title">
-
-            <small>
-                Impact sur le gameplay
-            </small>
-
-            <h2>
-                Les phases peuvent modifier plusieurs systèmes
-            </h2>
+            <a
+                href="interface/lors_créature.html"
+                class="combat-button"
+            >
+                DÉCOUVRIR LES CRÉATURES
+            </a>
+
+        </article>
+
+
+        <article
+            class="game-card"
+            onclick="window.location.href='interface/lors_monde.html'"
+            style="cursor: pointer;"
+        >
+
+            <div class="card-icon">
+                🌍
+            </div>
+
+            <div class="card-number">
+                03
+            </div>
+
+            <h3>
+                Monde
+            </h3>
 
             <p>
-
-                Une phase peut affecter une seule partie du monde
-                ou plusieurs systèmes simultanément.
-
+                Explorez une vaste carte. Les distances comptent :
+                certaines régions peuvent être proches mais très
+                dangereuses, tandis que d'autres nécessitent de
+                longs déplacements et offrent des ressources rares.
             </p>
 
-        </div>
+            <a
+                href="interface/lors_monde.html"
+                class="combat-button"
+                onclick="event.stopPropagation();"
+            >
+                DÉCOUVRIR LE MONDE
+            </a>
+
+        </article>
 
 
-        <div class="impact-table">
+        <!-- MAISON -->
+        <article
+            class="game-card"
+            onclick="window.location.href='interface/lors_maison.html'"
+            style="cursor: pointer;"
+        >
 
-            <div class="impact-row">
-
-                <div class="impact-header">
-                    Système
-                </div>
-
-                <div class="impact-header">
-                    Faible
-                </div>
-
-                <div class="impact-header">
-                    Moyen
-                </div>
-
-                <div class="impact-header">
-                    Fort
-                </div>
-
+            <div class="card-icon">
+                🏠
             </div>
 
-
-            <div class="impact-row">
-
-                <div class="impact-name">
-                    Ressources
-                </div>
-
-                <div class="impact-light">
-                    Légère variation
-                </div>
-
-                <div class="impact-medium">
-                    Zones plus riches
-                </div>
-
-                <div class="impact-high">
-                    Ressources rares
-                </div>
-
+            <div class="card-number">
+                04
             </div>
 
-
-            <div class="impact-row">
-
-                <div class="impact-name">
-                    Créatures
-                </div>
-
-                <div class="impact-light">
-                    Comportement modifié
-                </div>
-
-                <div class="impact-medium">
-                    Résistance accrue
-                </div>
-
-                <div class="impact-high">
-                    Nouvelles créatures
-                </div>
-
-            </div>
-
-
-            <div class="impact-row">
-
-                <div class="impact-name">
-                    Zones
-                </div>
-
-                <div class="impact-light">
-                    Petites variations
-                </div>
-
-                <div class="impact-medium">
-                    Dangers renforcés
-                </div>
-
-                <div class="impact-high">
-                    Zone transformée
-                </div>
-
-            </div>
-
-
-            <div class="impact-row">
-
-                <div class="impact-name">
-                    Missions
-                </div>
-
-                <div class="impact-light">
-                    Missions normales
-                </div>
-
-                <div class="impact-medium">
-                    Missions spéciales
-                </div>
-
-                <div class="impact-high">
-                    Événement unique
-                </div>
-
-            </div>
-
-
-            <div class="impact-row">
-
-                <div class="impact-name">
-                    Refuge
-                </div>
-
-                <div class="impact-light">
-                    Aucun risque
-                </div>
-
-                <div class="impact-medium">
-                    Risque limité
-                </div>
-
-                <div class="impact-high">
-                    Attaque possible
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         REFUGE
-    ===================================================== -->
-
-    <section class="section">
-
-        <div class="section-title">
-
-            <small>
-                Le refuge
-            </small>
-
-            <h2>
-                Même votre maison peut être concernée
-            </h2>
+            <h3>
+                Maison
+            </h3>
 
             <p>
-
-                Certaines phases ne se limitent pas au monde extérieur.
-                Lorsque les conditions deviennent suffisamment
-                dangereuses, le refuge peut lui aussi être menacé.
-
+                Votre refuge vous permet de fabriquer des armes,
+                améliorer votre équipement, vendre des objets
+                et construire différentes installations.
             </p>
 
-        </div>
+            <a
+                href="interface/lors_maison.html"
+                class="combat-button"
+                onclick="event.stopPropagation();"
+            >
+                DÉCOUVRIR LA MAISON
+            </a>
+
+        </article>
 
 
-        <div class="refuge-section">
+        <article class="game-card">
 
-            <div class="refuge-card">
-
-                <div class="refuge-icon">
-                    🏠
-                </div>
-
-                <h3>
-                    Préparer son refuge
-                </h3>
-
-                <p>
-
-                    Les journées calmes permettent au joueur de
-                    fabriquer, améliorer son équipement, stocker
-                    des ressources et renforcer ses installations.
-
-                </p>
-
-                <div class="refuge-points">
-
-                    <div class="refuge-point">
-                        Fabriquer des armes
-                    </div>
-
-                    <div class="refuge-point">
-                        Améliorer les installations
-                    </div>
-
-                    <div class="refuge-point">
-                        Stocker les ressources
-                    </div>
-
-                    <div class="refuge-point">
-                        Préparer la prochaine sortie
-                    </div>
-
-                </div>
-
+            <div class="card-icon">
+                🌙
             </div>
 
-
-            <div class="refuge-card danger">
-
-                <div class="refuge-icon">
-                    🚨
-                </div>
-
-                <h3>
-                    Attaque du refuge
-                </h3>
-
-                <p>
-
-                    Certaines phases peuvent déclencher une attaque
-                    contre le refuge.
-
-                    Le joueur doit alors défendre ses installations
-                    et protéger ses ressources.
-
-                </p>
-
-                <div class="refuge-points">
-
-                    <div class="refuge-point">
-                        Apparition d'ennemis
-                    </div>
-
-                    <div class="refuge-point">
-                        Défense des installations
-                    </div>
-
-                    <div class="refuge-point">
-                        Risque de dégâts
-                    </div>
-
-                    <div class="refuge-point">
-                        Récompense en cas de défense réussie
-                    </div>
-
-                </div>
-
+            <div class="card-number">
+                05
             </div>
 
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         CONSEILS
-    ===================================================== -->
-
-    <section class="section">
-
-        <div class="section-title">
-
-            <small>
-                Adaptation
-            </small>
-
-            <h2>
-                Apprendre à lire une journée
-            </h2>
+            <h3>
+                Phases
+            </h3>
 
             <p>
-
-                La phase doit influencer les décisions du joueur
-                sans imposer une seule façon de jouer.
-
+                Les phases modifient le comportement du monde.
+                Certains jours sont parfaits pour sortir,
+                d'autres rendent même votre refuge vulnérable.
             </p>
 
-        </div>
+        </article>
 
+    </div>
 
-        <div class="tips">
-
-            <div class="tip">
-
-                <div class="tip-number">
-                    01
-                </div>
-
-                <h3>
-                    Observer
-                </h3>
-
-                <p>
-
-                    Identifier les changements du monde avant
-                    de partir explorer permet de mieux anticiper
-                    les dangers.
-
-                </p>
-
-            </div>
-
-
-            <div class="tip">
-
-                <div class="tip-number">
-                    02
-                </div>
-
-                <h3>
-                    Profiter
-                </h3>
-
-                <p>
-
-                    Une journée calme peut être utilisée pour
-                    accumuler des ressources, fabriquer du matériel
-                    ou préparer une expédition.
-
-                </p>
-
-            </div>
-
-
-            <div class="tip">
-
-                <div class="tip-number">
-                    03
-                </div>
-
-                <h3>
-                    S'adapter
-                </h3>
-
-                <p>
-
-                    Une journée dangereuse peut demander une autre
-                    stratégie : changer de zone, modifier son
-                    équipement ou rester au refuge.
-
-                </p>
-
-            </div>
-
-
-            <div class="tip">
-
-                <div class="tip-number">
-                    04
-                </div>
-
-                <h3>
-                    Explorer
-                </h3>
-
-                <p>
-
-                    Certaines phases rares peuvent rendre une région
-                    temporairement beaucoup plus intéressante
-                    grâce à ses récompenses.
-
-                </p>
-
-            </div>
-
-
-            <div class="tip">
-
-                <div class="tip-number">
-                    05
-                </div>
-
-                <h3>
-                    Se préparer
-                </h3>
-
-                <p>
-
-                    Les événements les plus dangereux peuvent
-                    nécessiter des ressources, des armes et un refuge
-                    suffisamment préparé.
-
-                </p>
-
-            </div>
-
-
-            <div class="tip">
-
-                <div class="tip-number">
-                    06
-                </div>
-
-                <h3>
-                    Prendre des risques
-                </h3>
-
-                <p>
-
-                    Les phases les plus dangereuses peuvent aussi
-                    offrir des récompenses supérieures à celles
-                    d'une journée normale.
-
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-</main>
+</section>
 
 
 <footer>
-
-    VALDORIAN
-
-    <span>•</span>
-
-    Système des phases
-
-    <span>•</span>
-
-    Univers en développement
-
+    VALDORIAN • Univers en développement
 </footer>
+
+
+<div
+    id="loginModal"
+    class="modal"
+>
+
+    <div class="modal-box">
+
+        <button
+            class="close-modal"
+            onclick="closeLoginModal()"
+        >
+            ×
+        </button>
+
+
+        <div
+            id="warningContainer"
+            class="warning-container"
+        >
+
+            <img
+                src="969291-attention.gif"
+                alt="Attention"
+            >
+
+        </div>
+
+
+        <div id="loginSection">
+
+            <h2 class="modal-title">
+                Connexion
+            </h2>
+
+            <p class="modal-subtitle">
+                Connectez-vous pour accéder à Valdorian.
+            </p>
+
+
+            <div class="input-group">
+
+                <label for="emailInput">
+                    Adresse e-mail
+                </label>
+
+                <input
+                    id="emailInput"
+                    type="email"
+                    placeholder="votre@email.com"
+                    autocomplete="email"
+                >
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label for="passwordInput">
+                    Mot de passe
+                </label>
+
+                <input
+                    id="passwordInput"
+                    type="password"
+                    placeholder="Votre mot de passe"
+                    autocomplete="current-password"
+                >
+
+            </div>
+
+
+            <button
+                class="modal-button"
+                onclick="sendCode()"
+            >
+                CONTINUER
+            </button>
+
+
+            <div
+                id="loginMessage"
+                class="message"
+            ></div>
+
+        </div>
+
+
+        <div
+            id="verificationSection"
+            class="verification-section"
+        >
+
+            <h2 class="modal-title">
+                Vérification
+            </h2>
+
+            <p class="modal-subtitle">
+                Un code de vérification vient d'être envoyé
+                à votre adresse e-mail.
+            </p>
+
+
+            <div class="input-group">
+
+                <label for="codeInput">
+                    Code à 6 chiffres
+                </label>
+
+                <input
+                    id="codeInput"
+                    type="text"
+                    inputmode="numeric"
+                    maxlength="6"
+                    placeholder="000000"
+                >
+
+            </div>
+
+
+            <button
+                class="modal-button"
+                onclick="verifyCode()"
+            >
+                VÉRIFIER
+            </button>
+
+
+            <button
+                class="modal-button secondary-modal-button"
+                onclick="resendCode()"
+            >
+                Renvoyer le code
+            </button>
+
+
+            <div
+                id="verificationMessage"
+                class="message"
+            ></div>
+
+        </div>
+
+
+        <div
+            id="profileSection"
+            class="profile-section"
+        >
+
+            <h2 class="modal-title">
+                Mon profil
+            </h2>
+
+            <p class="modal-subtitle">
+                Gérez vos informations Valdorian.
+            </p>
+
+
+            <div class="profile-avatar-wrapper">
+
+                <img
+                    id="profileAvatar"
+                    class="profile-avatar"
+                    src=""
+                    alt="Avatar"
+                >
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label for="displayNameInput">
+                    Nom affiché
+                </label>
+
+                <input
+                    id="displayNameInput"
+                    type="text"
+                    maxlength="32"
+                >
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label for="usernameInput">
+                    Nom d'utilisateur
+                </label>
+
+                <input
+                    id="usernameInput"
+                    type="text"
+                    maxlength="20"
+                >
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label for="avatarInput">
+                    Avatar
+                </label>
+
+                <input
+                    id="avatarInput"
+                    type="file"
+                    accept="image/png,image/jpeg,image/webp"
+                >
+
+            </div>
+
+
+            <button
+                class="modal-button"
+                onclick="saveProfile()"
+            >
+                ENREGISTRER
+            </button>
+
+
+            <button
+                class="modal-button logout-button"
+                onclick="logout()"
+            >
+                SE DÉCONNECTER
+            </button>
+
+
+            <div
+                id="profileMessage"
+                class="message"
+            ></div>
+
+        </div>
+
+    </div>
+
+</div>
 
 
 <script>
 
-    document.addEventListener(
-        "DOMContentLoaded",
-        function () {
+    const API_URL =
+        "https://valdorian-verification.u1429712535.workers.dev";
 
-            console.log(
-                "Valdorian — système des phases chargé."
+
+    let currentUser = null;
+    let selectedAvatar = null;
+
+
+    function getToken() {
+
+        return localStorage.getItem(
+            "valdorian_session"
+        );
+
+    }
+
+
+    function openLoginModal(showWarning = false) {
+
+        document
+            .getElementById("loginModal")
+            .classList.add("active");
+
+        document
+            .getElementById("warningContainer")
+            .classList.toggle(
+                "active",
+                showWarning
+            );
+
+        document
+            .getElementById("loginSection")
+            .style.display = "block";
+
+        document
+            .getElementById("verificationSection")
+            .classList.remove("active");
+
+        document
+            .getElementById("profileSection")
+            .classList.remove("active");
+
+        document
+            .getElementById("loginMessage")
+            .textContent = "";
+
+        document
+            .getElementById("verificationMessage")
+            .textContent = "";
+
+    }
+
+
+    function closeLoginModal() {
+
+        document
+            .getElementById("loginModal")
+            .classList.remove("active");
+
+    }
+
+
+    function handlePlay(event) {
+
+        event.preventDefault();
+
+        if (currentUser) {
+
+            window.location.href =
+                "interface/play.html";
+
+            return false;
+
+        }
+
+        sessionStorage.setItem(
+            "valdorian_play_after_login",
+            "true"
+        );
+
+        openLoginModal(true);
+
+        return false;
+
+    }
+
+
+    function handleAccountButton() {
+
+        if (currentUser) {
+
+            openProfile();
+
+        } else {
+
+            openLoginModal(false);
+
+        }
+
+    }
+
+
+    async function sendCode() {
+
+        const email =
+            document
+                .getElementById("emailInput")
+                .value
+                .trim()
+                .toLowerCase();
+
+        const password =
+            document
+                .getElementById("passwordInput")
+                .value;
+
+        const message =
+            document.getElementById(
+                "loginMessage"
+            );
+
+
+        if (!email) {
+
+            message.textContent =
+                "Veuillez entrer votre adresse e-mail.";
+
+            return;
+
+        }
+
+
+        if (!password) {
+
+            message.textContent =
+                "Veuillez entrer votre mot de passe.";
+
+            return;
+
+        }
+
+
+        message.textContent =
+            "Vérification du compte...";
+
+
+        try {
+
+            const response =
+                await fetch(
+                    API_URL + "/send-code",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            email,
+                            password
+                        })
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                message.textContent =
+                    data.error ||
+                    data.message ||
+                    "Adresse e-mail ou mot de passe incorrect.";
+
+                return;
+
+            }
+
+
+            message.textContent = "";
+
+
+            document
+                .getElementById("loginSection")
+                .style.display = "none";
+
+
+            document
+                .getElementById("verificationSection")
+                .classList.add("active");
+
+
+            document
+                .getElementById("codeInput")
+                .value = "";
+
+
+            document
+                .getElementById("codeInput")
+                .focus();
+
+        } catch (error) {
+
+            console.error(
+                "Erreur sendCode :",
+                error
+            );
+
+            message.textContent =
+                "Impossible de contacter Valdorian.";
+
+        }
+
+    }
+
+
+    async function resendCode() {
+
+        const email =
+            document
+                .getElementById("emailInput")
+                .value
+                .trim()
+                .toLowerCase();
+
+        const message =
+            document.getElementById(
+                "verificationMessage"
+            );
+
+
+        message.textContent =
+            "Envoi du nouveau code...";
+
+
+        try {
+
+            const response =
+                await fetch(
+                    API_URL + "/resend-code",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            email
+                        })
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                message.textContent =
+                    data.error ||
+                    data.message ||
+                    "Impossible de renvoyer le code.";
+
+                return;
+
+            }
+
+
+            message.textContent =
+                data.message ||
+                "Nouveau code envoyé par e-mail.";
+
+        } catch (error) {
+
+            console.error(
+                "Erreur resendCode :",
+                error
+            );
+
+            message.textContent =
+                "Impossible de contacter Valdorian.";
+
+        }
+
+    }
+
+
+    async function verifyCode() {
+
+        const email =
+            document
+                .getElementById("emailInput")
+                .value
+                .trim()
+                .toLowerCase();
+
+        const code =
+            document
+                .getElementById("codeInput")
+                .value
+                .trim();
+
+        const message =
+            document.getElementById(
+                "verificationMessage"
+            );
+
+
+        if (!/^\d{6}$/.test(code)) {
+
+            message.textContent =
+                "Le code doit contenir 6 chiffres.";
+
+            return;
+
+        }
+
+
+        message.textContent =
+            "Vérification...";
+
+
+        try {
+
+            const response =
+                await fetch(
+                    API_URL + "/verify-code",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            email,
+                            code
+                        })
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                message.textContent =
+                    data.error ||
+                    data.message ||
+                    "Code incorrect.";
+
+                return;
+
+            }
+
+
+            if (!data.token || !data.user) {
+
+                message.textContent =
+                    "Réponse du serveur invalide.";
+
+                return;
+
+            }
+
+
+            localStorage.setItem(
+                "valdorian_session",
+                data.token
+            );
+
+
+            currentUser =
+                data.user;
+
+
+            updateAccountButton();
+
+
+            const playAfterLogin =
+                sessionStorage.getItem(
+                    "valdorian_play_after_login"
+                );
+
+
+            if (playAfterLogin === "true") {
+
+                sessionStorage.removeItem(
+                    "valdorian_play_after_login"
+                );
+
+                window.location.href =
+                    "interface/play.html";
+
+                return;
+
+            }
+
+
+            document
+                .getElementById("verificationSection")
+                .classList.remove("active");
+
+
+            document
+                .getElementById("profileSection")
+                .classList.add("active");
+
+
+            loadProfile();
+
+        } catch (error) {
+
+            console.error(
+                "Erreur verifyCode :",
+                error
+            );
+
+            message.textContent =
+                "Impossible de contacter Valdorian.";
+
+        }
+
+    }
+
+
+    function openProfile() {
+
+        openLoginModal(false);
+
+
+        document
+            .getElementById("loginSection")
+            .style.display = "none";
+
+
+        document
+            .getElementById("verificationSection")
+            .classList.remove("active");
+
+
+        document
+            .getElementById("profileSection")
+            .classList.add("active");
+
+
+        loadProfile();
+
+    }
+
+
+    function loadProfile() {
+
+        if (!currentUser) {
+            return;
+        }
+
+
+        document
+            .getElementById("displayNameInput")
+            .value =
+            currentUser.displayName ||
+            currentUser.username ||
+            "";
+
+
+        document
+            .getElementById("usernameInput")
+            .value =
+            currentUser.username ||
+            "";
+
+
+        document
+            .getElementById("profileAvatar")
+            .src =
+            currentUser.avatar ||
+            createDefaultAvatar(
+                currentUser.username
+            );
+
+    }
+
+
+    document
+        .getElementById("avatarInput")
+        .addEventListener(
+            "change",
+            function () {
+
+                const file =
+                    this.files[0];
+
+
+                if (!file) {
+                    return;
+                }
+
+
+                if (file.size > 500000) {
+
+                    document
+                        .getElementById(
+                            "profileMessage"
+                        )
+                        .textContent =
+                        "Image trop volumineuse. Maximum 500 Ko.";
+
+                    this.value = "";
+
+                    return;
+
+                }
+
+
+                const reader =
+                    new FileReader();
+
+
+                reader.onload =
+                    function (event) {
+
+                        selectedAvatar =
+                            event.target.result;
+
+
+                        document
+                            .getElementById(
+                                "profileAvatar"
+                            )
+                            .src =
+                            selectedAvatar;
+
+                    };
+
+
+                reader.readAsDataURL(file);
+
+            }
+        );
+
+
+    async function saveProfile() {
+
+        if (!currentUser) {
+            return;
+        }
+
+
+        const displayName =
+            document
+                .getElementById(
+                    "displayNameInput"
+                )
+                .value
+                .trim();
+
+
+        const username =
+            document
+                .getElementById(
+                    "usernameInput"
+                )
+                .value
+                .trim();
+
+
+        const message =
+            document.getElementById(
+                "profileMessage"
+            );
+
+
+        message.textContent =
+            "Enregistrement...";
+
+
+        try {
+
+            const response =
+                await fetch(
+                    API_URL + "/profile",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json",
+
+                            "Authorization":
+                                "Bearer " +
+                                getToken()
+                        },
+
+                        body: JSON.stringify({
+                            displayName,
+                            username,
+                            avatar:
+                                selectedAvatar ||
+                                currentUser.avatar ||
+                                null
+                        })
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                message.textContent =
+                    data.error ||
+                    data.message ||
+                    "Impossible d'enregistrer.";
+
+                return;
+
+            }
+
+
+            currentUser =
+                data.user;
+
+
+            selectedAvatar = null;
+
+
+            updateAccountButton();
+
+            loadProfile();
+
+
+            message.textContent =
+                "Profil enregistré.";
+
+        } catch (error) {
+
+            console.error(
+                "Erreur saveProfile :",
+                error
+            );
+
+            message.textContent =
+                "Erreur de connexion.";
+
+        }
+
+    }
+
+
+    async function logout() {
+
+        const token =
+            getToken();
+
+
+        try {
+
+            if (token) {
+
+                await fetch(
+                    API_URL + "/logout",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Authorization":
+                                "Bearer " + token
+                        }
+                    }
+                );
+
+            }
+
+        } catch (error) {
+
+            console.error(
+                "Erreur logout :",
+                error
             );
 
         }
+
+
+        localStorage.removeItem(
+            "valdorian_session"
+        );
+
+
+        currentUser = null;
+
+        selectedAvatar = null;
+
+
+        updateAccountButton();
+
+        closeLoginModal();
+
+    }
+
+
+    async function checkSession() {
+
+        const token =
+            getToken();
+
+
+        if (!token) {
+
+            currentUser = null;
+
+            updateAccountButton();
+
+            return;
+
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    API_URL + "/profile",
+                    {
+                        method: "GET",
+
+                        headers: {
+                            "Authorization":
+                                "Bearer " + token
+                        }
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                localStorage.removeItem(
+                    "valdorian_session"
+                );
+
+                currentUser = null;
+
+                updateAccountButton();
+
+                return;
+
+            }
+
+
+            const data =
+                await response.json();
+
+
+            currentUser =
+                data.user;
+
+
+            updateAccountButton();
+
+        } catch (error) {
+
+            console.error(
+                "Erreur checkSession :",
+                error
+            );
+
+            currentUser = null;
+
+            updateAccountButton();
+
+        }
+
+    }
+
+
+    function updateAccountButton() {
+
+        const button =
+            document.getElementById(
+                "accountButton"
+            );
+
+
+        if (!button) {
+            return;
+        }
+
+
+        if (currentUser) {
+
+            const avatar =
+                currentUser.avatar ||
+                createDefaultAvatar(
+                    currentUser.username
+                );
+
+
+            button.innerHTML =
+                `<img
+                    src="${avatar}"
+                    class="account-avatar"
+                    alt=""
+                >${escapeHtml(
+                    currentUser.username
+                )}`;
+
+        } else {
+
+            button.textContent =
+                "COMPTE";
+
+        }
+
+    }
+
+
+    function createDefaultAvatar(username) {
+
+        const letter =
+            (username || "V")
+                .charAt(0)
+                .toUpperCase();
+
+
+        const svg = `
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="100"
+                height="100"
+            >
+
+                <rect
+                    width="100"
+                    height="100"
+                    rx="50"
+                    fill="#c9a24a"
+                />
+
+                <text
+                    x="50"
+                    y="62"
+                    text-anchor="middle"
+                    font-size="50"
+                    font-family="Arial"
+                    fill="#111"
+                >
+                    ${letter}
+                </text>
+
+            </svg>
+        `;
+
+
+        return "data:image/svg+xml;charset=UTF-8," +
+            encodeURIComponent(svg);
+
+    }
+
+
+    function escapeHtml(text) {
+
+        const div =
+            document.createElement("div");
+
+
+        div.textContent =
+            text || "";
+
+
+        return div.innerHTML;
+
+    }
+
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        async function () {
+
+            await checkSession();
+
+
+            const params =
+                new URLSearchParams(
+                    window.location.search
+                );
+
+
+            if (
+                params.get("login") === "true"
+            ) {
+
+                if (currentUser) {
+
+                    openProfile();
+
+                } else {
+
+                    openLoginModal(false);
+
+                }
+
+
+                history.replaceState(
+                    {},
+                    document.title,
+                    window.location.pathname
+                );
+
+            }
+
+        }
     );
+
+
+    document
+        .getElementById("loginModal")
+        .addEventListener(
+            "click",
+            function (event) {
+
+                if (event.target === this) {
+
+                    closeLoginModal();
+
+                }
+
+            }
+        );
+
+
+    document
+        .getElementById("passwordInput")
+        .addEventListener(
+            "keydown",
+            function (event) {
+
+                if (event.key === "Enter") {
+
+                    sendCode();
+
+                }
+
+            }
+        );
+
+
+    document
+        .getElementById("codeInput")
+        .addEventListener(
+            "input",
+            function () {
+
+                this.value =
+                    this.value
+                        .replace(/\D/g, "")
+                        .slice(0, 6);
+
+            }
+        );
 
 </script>
 
 </body>
 </html>
-
-
-<!-- ============================================================
-     INDEX.HTML
-     CARTE À AJOUTER TOUT EN BAS DE LA SECTION #univers
-     ============================================================
-
-     IMPORTANT :
-     Comme ton fichier phases.html se trouve dans /interface/,
-     le lien est :
-
-     interface/phases.html
-
-============================================================ -->
-
-
-<a
-    href="interface/phases.html"
-    class="univers-card phases-card"
->
-
-    <div class="univers-card-icon">
-        🌙
-    </div>
-
-    <div class="univers-card-content">
-
-        <div class="univers-card-tag">
-            SYSTÈME DYNAMIQUE
-        </div>
-
-        <h3>
-            PHASES
-        </h3>
-
-        <p>
-            Chaque journée transforme le monde.
-            Découvrez les événements, les changements
-            de difficulté, les opportunités rares et
-            les dangers pouvant atteindre le refuge.
-        </p>
-
-        <span class="univers-card-link">
-            EXPLORER LES PHASES →
-        </span>
-
-    </div>
-
-</a>
-
-
-<!-- ============================================================
-     CSS À AJOUTER DANS LE STYLE DE INDEX.HTML
-     ============================================================ -->
-
-<style>
-
-    .phases-card {
-
-        position: relative;
-
-        display: flex;
-
-        align-items: center;
-
-        gap: 25px;
-
-        width: 100%;
-
-        min-height: 210px;
-
-        padding: 30px;
-
-        overflow: hidden;
-
-        text-decoration: none;
-
-        color: white;
-
-        border-radius: 18px;
-
-        border:
-            1px solid rgba(201, 162, 74, 0.25);
-
-        background:
-            linear-gradient(
-                135deg,
-                rgba(201, 162, 74, 0.10),
-                rgba(255, 255, 255, 0.025)
-            );
-
-        transition:
-            transform 0.25s ease,
-            border-color 0.25s ease,
-            box-shadow 0.25s ease;
-    }
-
-
-    .phases-card::before {
-
-        content: "";
-
-        position: absolute;
-
-        width: 280px;
-        height: 280px;
-
-        right: -100px;
-        top: -130px;
-
-        border-radius: 50%;
-
-        background:
-            radial-gradient(
-                circle,
-                rgba(201, 162, 74, 0.16),
-                transparent 70%
-            );
-
-        transition: 0.35s;
-    }
-
-
-    .phases-card:hover {
-
-        transform: translateY(-7px);
-
-        border-color:
-            rgba(201, 162, 74, 0.60);
-
-        box-shadow:
-            0 20px 60px rgba(0, 0, 0, 0.35),
-            0 0 40px rgba(201, 162, 74, 0.08);
-    }
-
-
-    .phases-card:hover::before {
-
-        transform: scale(1.35);
-    }
-
-
-    .univers-card-icon {
-
-        position: relative;
-
-        z-index: 2;
-
-        flex-shrink: 0;
-
-        width: 80px;
-        height: 80px;
-
-        display: flex;
-
-        align-items: center;
-        justify-content: center;
-
-        border-radius: 18px;
-
-        background:
-            rgba(201, 162, 74, 0.10);
-
-        border:
-            1px solid rgba(201, 162, 74, 0.30);
-
-        font-size: 38px;
-
-        box-shadow:
-            0 0 35px rgba(201, 162, 74, 0.07);
-    }
-
-
-    .univers-card-content {
-
-        position: relative;
-
-        z-index: 2;
-
-        flex: 1;
-    }
-
-
-    .univers-card-tag {
-
-        margin-bottom: 8px;
-
-        color: #c9a24a;
-
-        font-size: 10px;
-
-        font-weight: 900;
-
-        letter-spacing: 3px;
-    }
-
-
-    .univers-card-content h3 {
-
-        margin-bottom: 10px;
-
-        color: white;
-
-        font-size: 28px;
-
-        letter-spacing: 2px;
-    }
-
-
-    .univers-card-content p {
-
-        max-width: 700px;
-
-        margin-bottom: 18px;
-
-        color: #85878d;
-
-        font-size: 13px;
-
-        line-height: 1.7;
-    }
-
-
-    .univers-card-link {
-
-        display: inline-block;
-
-        color: #d7b764;
-
-        font-size: 10px;
-
-        font-weight: 900;
-
-        letter-spacing: 2px;
-
-        transition: 0.2s;
-    }
-
-
-    .phases-card:hover .univers-card-link {
-
-        color: #ffffff;
-
-        transform: translateX(5px);
-    }
-
-
-    @media (max-width: 650px) {
-
-        .phases-card {
-
-            flex-direction: column;
-
-            align-items: flex-start;
-
-            padding: 25px;
-
-        }
-
-        .univers-card-icon {
-
-            width: 65px;
-            height: 65px;
-
-            font-size: 30px;
-        }
-
-        .univers-card-content h3 {
-
-            font-size: 23px;
-        }
-
-    }
-
-</style>
-
-
-<!-- ============================================================
-     SI TON #univers UTILISE UNE GRILLE :
-     ============================================================
-
-     Place simplement la carte ci-dessus comme dernier élément
-     de ta grille.
-
-     Exemple :
-
-     <div class="univers-grid">
-
-         ... autres cartes ...
-
-         <a href="interface/phases.html"
-            class="univers-card phases-card">
-
-             ...
-
-         </a>
-
-     </div>
-
-============================================================ -->
