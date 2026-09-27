@@ -155,7 +155,7 @@
         }
 
         .hero p {
-            max-width: 700px;
+            max-width: 750px;
 
             margin: 30px auto 0;
 
@@ -203,7 +203,7 @@
         }
 
         .section-title p {
-            max-width: 700px;
+            max-width: 750px;
 
             margin: 15px auto 0;
 
@@ -229,7 +229,7 @@
         .creature-card {
             position: relative;
 
-            min-height: 500px;
+            min-height: 620px;
 
             padding: 30px;
 
@@ -412,7 +412,7 @@
         }
 
         /* ========================================
-           LORE COMPLET
+           SECTION LORE
         ======================================== */
 
         .lore-section {
@@ -467,38 +467,88 @@
         }
 
         /* ========================================
-           ZONES
+           CREATURE DETAILS
         ======================================== */
 
-        .zones-section {
-            margin-top: 120px;
-        }
-
-        .zone-grid {
+        .detail-grid {
             display: grid;
 
             grid-template-columns:
                 repeat(2, 1fr);
 
             gap: 20px;
+
+            margin-top: 30px;
         }
 
-        .zone-card {
-            position: relative;
+        .detail-card {
+            padding: 28px;
 
-            padding: 32px;
-
-            min-height: 300px;
-
-            border-radius: 18px;
+            border-radius: 16px;
 
             border:
-                1px solid rgba(255, 255, 255, 0.08);
+                1px solid rgba(255, 255, 255, 0.07);
+
+            background:
+                rgba(255, 255, 255, 0.025);
+
+            transition: 0.25s;
+        }
+
+        .detail-card:hover {
+            border-color:
+                rgba(201, 162, 74, 0.3);
+
+            transform: translateY(-4px);
+        }
+
+        .detail-card h3 {
+            color: #d7b764;
+
+            font-size: 17px;
+
+            margin-bottom: 12px;
+        }
+
+        .detail-card p {
+            margin-bottom: 0;
+
+            color: #92949a;
+
+            font-size: 13px;
+
+            line-height: 1.8;
+        }
+
+        /* ========================================
+           TECHNIQUES
+        ======================================== */
+
+        .technique-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 20px;
+
+            margin-top: 30px;
+        }
+
+        .technique-card {
+            position: relative;
+
+            padding: 30px;
+
+            border-radius: 16px;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.07);
 
             background:
                 linear-gradient(
                     145deg,
-                    rgba(255, 255, 255, 0.045),
+                    rgba(255, 255, 255, 0.04),
                     rgba(255, 255, 255, 0.012)
                 );
 
@@ -507,161 +557,112 @@
             transition: 0.25s;
         }
 
-        .zone-card:hover {
+        .technique-card:hover {
             transform: translateY(-5px);
 
             border-color:
-                rgba(201, 162, 74, 0.35);
+                rgba(201, 162, 74, 0.3);
         }
 
-        .zone-number {
-            color:
-                rgba(201, 162, 74, 0.55);
+        .technique-card::after {
+            content: "";
 
-            font-size: 11px;
+            position: absolute;
 
-            font-weight: 900;
+            width: 120px;
+            height: 120px;
 
-            letter-spacing: 3px;
+            right: -50px;
+            bottom: -50px;
 
-            margin-bottom: 12px;
-        }
-
-        .zone-card h3 {
-            font-size: 25px;
-
-            margin-bottom: 15px;
-        }
-
-        .zone-card p {
-            color: #92949a;
-
-            font-size: 13px;
-
-            line-height: 1.75;
-        }
-
-        .zone-tag {
-            display: inline-block;
-
-            margin-top: 22px;
-
-            padding: 7px 11px;
-
-            border-radius: 5px;
+            border-radius: 50%;
 
             background:
-                rgba(201, 162, 74, 0.08);
+                rgba(201, 162, 74, 0.06);
+        }
 
-            border:
-                1px solid rgba(201, 162, 74, 0.2);
-
-            color: #c9a24a;
+        .technique-number {
+            color:
+                rgba(201, 162, 74, 0.6);
 
             font-size: 10px;
 
             font-weight: 900;
 
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+
+            margin-bottom: 12px;
+        }
+
+        .technique-card h3 {
+            font-size: 21px;
+
+            margin-bottom: 12px;
+        }
+
+        .technique-card p {
+            color: #92949a;
+
+            font-size: 13px;
+
+            line-height: 1.8;
         }
 
         /* ========================================
-           MORT
+           CREATURE BEHAVIOR
         ======================================== */
 
-        .death-section {
+        .behavior-section {
             margin-top: 120px;
         }
 
-        .death-box {
-            padding: 45px;
-
-            border-radius: 20px;
-
-            border:
-                1px solid rgba(180, 50, 50, 0.2);
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(130, 35, 35, 0.07),
-                    rgba(255, 255, 255, 0.01)
-                );
-        }
-
-        .death-box h2 {
-            font-size: 32px;
-
-            margin-bottom: 20px;
-        }
-
-        .death-box p {
-            color: #999ba1;
-
-            font-size: 14px;
-
-            line-height: 1.8;
-
-            margin-bottom: 20px;
-        }
-
-        .loss-grid {
+        .behavior-box {
             display: grid;
 
             grid-template-columns:
                 repeat(3, 1fr);
 
-            gap: 15px;
-
-            margin-top: 25px;
+            gap: 20px;
         }
 
-        .loss-card {
-            padding: 22px;
+        .behavior-card {
+            padding: 28px;
 
-            border-radius: 12px;
+            border-radius: 16px;
 
             border:
                 1px solid rgba(255, 255, 255, 0.07);
 
             background:
-                rgba(0, 0, 0, 0.18);
-
-            text-align: center;
+                rgba(255, 255, 255, 0.025);
         }
 
-        .loss-card strong {
-            display: block;
+        .behavior-icon {
+            font-size: 35px;
 
-            color: #c9a24a;
-
-            font-size: 27px;
-
-            margin-bottom: 7px;
+            margin-bottom: 18px;
         }
 
-        .loss-card span {
-            color: #898b91;
+        .behavior-card h3 {
+            font-size: 19px;
 
-            font-size: 11px;
+            margin-bottom: 12px;
         }
 
-        .protection-note {
-            margin-top: 25px;
+        .behavior-card p {
+            color: #92949a;
 
-            padding: 17px 20px;
+            font-size: 13px;
 
-            border-left:
-                3px solid #c9a24a;
+            line-height: 1.8;
+        }
 
-            background:
-                rgba(201, 162, 74, 0.05);
+        /* ========================================
+           CONCLUSION
+        ======================================== */
 
-            color: #aaa;
-
-            font-size: 12px;
-
-            line-height: 1.7;
+        .conclusion {
+            margin-top: 120px;
         }
 
         /* ========================================
@@ -703,11 +704,12 @@
                 grid-template-columns: 1fr;
             }
 
-            .zone-grid {
+            .detail-grid,
+            .technique-grid {
                 grid-template-columns: 1fr;
             }
 
-            .loss-grid {
+            .behavior-box {
                 grid-template-columns: 1fr;
             }
         }
@@ -743,13 +745,14 @@
                     60px 20px 90px;
             }
 
-            .lore-box,
-            .death-box {
+            .lore-box {
                 padding: 28px 22px;
             }
 
-            .zone-card {
-                padding: 25px;
+            .detail-card,
+            .technique-card,
+            .behavior-card {
+                padding: 23px;
             }
         }
     </style>
@@ -802,11 +805,12 @@
             </h1>
 
             <p>
-                Dans Valdorian, chaque région possède ses propres
-                dangers. Les créatures ne sont pas seulement des
-                ennemis : elles participent à l'évolution du monde,
-                aux risques des différentes zones et aux récompenses
-                que les joueurs peuvent obtenir.
+                Dans Valdorian, les créatures occupent une place
+                importante dans l'univers. Certaines chassent,
+                certaines protègent leur territoire et d'autres
+                utilisent des capacités particulières pour survivre.
+                Chaque espèce possède son propre comportement,
+                son équipement et ses méthodes de combat.
             </p>
 
         </div>
@@ -822,7 +826,7 @@
 
 
         <!-- ========================================
-             CREATURES
+             BESTIAIRE
         ======================================== -->
 
         <section>
@@ -834,12 +838,15 @@
                 </small>
 
                 <h2>
-                    Les différents types de créatures
+                    Les créatures de Valdorian
                 </h2>
 
                 <p>
-                    Trois grandes catégories de créatures sont
-                    actuellement connues dans le monde de Valdorian.
+                    Plusieurs espèces ont été identifiées dans le
+                    monde de Valdorian. Elles possèdent des
+                    caractéristiques très différentes et peuvent
+                    représenter des menaces totalement différentes
+                    pour les joueurs.
                 </p>
 
             </div>
@@ -848,7 +855,9 @@
             <div class="creature-grid">
 
 
-                <!-- ZERK -->
+                <!-- ========================================
+                     ZERK
+                ======================================== -->
 
                 <article class="creature-card">
 
@@ -869,12 +878,20 @@
                     </div>
 
                     <p class="creature-description">
-                        Le Zerk est une créature grande et mince.
-                        Sa silhouette peut sembler fragile, mais
-                        sa mobilité en fait un adversaire dangereux.
-                        Il utilise principalement des équipements
-                        récupérés et assemblés à partir de morceaux
-                        de métal et de ferraille.
+                        Le Zerk est une créature grande et mince,
+                        facilement reconnaissable à sa silhouette
+                        particulière et à ses grandes oreilles.
+                        Malgré son apparence relativement frêle,
+                        il est extrêmement mobile et peut rapidement
+                        réduire la distance qui le sépare d'une cible.
+                    </p>
+
+                    <p class="creature-description">
+                        Les Zerks utilisent principalement des
+                        équipements récupérés dans leur environnement.
+                        Leur matériel est souvent constitué de morceaux
+                        de métal, de ferraille et d'objets assemblés
+                        de manière rudimentaire.
                     </p>
 
                     <ul class="info-list">
@@ -884,7 +901,7 @@
                         </li>
 
                         <li>
-                            Corps mince et grande silhouette
+                            Corps mince et silhouette élancée
                         </li>
 
                         <li>
@@ -896,7 +913,7 @@
                         </li>
 
                         <li>
-                            Armes variables selon les individus
+                            Équipement variable selon les individus
                         </li>
 
                         <li>
@@ -924,7 +941,9 @@
                 </article>
 
 
-                <!-- ZIAK LOURD -->
+                <!-- ========================================
+                     ZIAK LOURD
+                ======================================== -->
 
                 <article class="creature-card">
 
@@ -947,10 +966,18 @@
                     <p class="creature-description">
                         Le Ziak lourd ressemble fortement au Ziak
                         classique, mais sa constitution est beaucoup
-                        plus imposante. Son équipement et son poids
-                        le rendent lent, mais il possède une grande
-                        quantité de points de vie et inflige des
-                        dégâts importants.
+                        plus imposante. Son corps massif et son
+                        équipement lourd en font une créature difficile
+                        à arrêter une fois qu'elle est engagée dans
+                        un combat.
+                    </p>
+
+                    <p class="creature-description">
+                        Contrairement au Zerk, le Ziak lourd ne mise
+                        pas sur sa vitesse. Il avance lentement mais
+                        possède une importante quantité de points de
+                        vie et peut infliger des dégâts considérables
+                        lorsqu'il parvient à atteindre sa cible.
                     </p>
 
                     <ul class="info-list">
@@ -960,15 +987,15 @@
                         </li>
 
                         <li>
-                            Apparence proche du Ziak normal
+                            Apparence proche du Ziak classique
                         </li>
 
                         <li>
-                            Plus puissant que la version classique
+                            Constitution beaucoup plus imposante
                         </li>
 
                         <li>
-                            Déplacements plus lents
+                            Déplacements relativement lents
                         </li>
 
                         <li>
@@ -981,6 +1008,10 @@
 
                         <li>
                             Peut parfois porter un plastron fin
+                        </li>
+
+                        <li>
+                            Possède une importante résistance
                         </li>
 
                         <li>
@@ -1000,7 +1031,9 @@
                 </article>
 
 
-                <!-- ZYREN -->
+                <!-- ========================================
+                     ZYREN
+                ======================================== -->
 
                 <article class="creature-card">
 
@@ -1023,10 +1056,17 @@
                     <p class="creature-description">
                         Le Zyren est une créature spécialisée dans
                         les attaques magiques. Sa taille est proche
-                        de celle du joueur. Sa peau possède des
-                        teintes beige et marron tandis que ses
-                        vêtements sont sombres. Il ne porte aucune
-                        armure.
+                        de celle du joueur et son apparence contraste
+                        fortement avec celle des créatures plus
+                        physiques.
+                    </p>
+
+                    <p class="creature-description">
+                        Sa peau possède des teintes beige et marron.
+                        Il porte des vêtements sombres et ne possède
+                        aucune armure visible. Son principal équipement
+                        est un bâton sur lequel se trouve une boule
+                        de cristal utilisée pour canaliser ses pouvoirs.
                     </p>
 
                     <ul class="info-list">
@@ -1036,7 +1076,7 @@
                         </li>
 
                         <li>
-                            Couleurs beige et marron
+                            Peau aux teintes beige et marron
                         </li>
 
                         <li>
@@ -1060,11 +1100,15 @@
                         </li>
 
                         <li>
+                            Utilise plusieurs techniques magiques
+                        </li>
+
+                        <li>
                             Peut soigner certains alliés
                         </li>
 
                         <li>
-                            Les soins sont très rares
+                            Les soins sont extrêmement rares
                         </li>
 
                     </ul>
@@ -1081,7 +1125,149 @@
 
 
         <!-- ========================================
-             ATTAQUES ZYREN
+             ZERK — LORE
+        ======================================== -->
+
+        <section class="lore-section">
+
+            <div class="section-title">
+
+                <small>
+                    Zerk
+                </small>
+
+                <h2>
+                    Une créature faite pour chasser
+                </h2>
+
+                <p>
+                    Le Zerk compense son manque de protection par une
+                    mobilité importante et un arsenal très variable.
+                </p>
+
+            </div>
+
+
+            <div class="lore-box">
+
+                <h3>
+                    Profil de la créature
+                </h3>
+
+                <h2>
+                    Le chasseur des terres sauvages
+                </h2>
+
+                <p>
+                    Le Zerk est avant tout un chasseur. Sa morphologie
+                    lui permet de se déplacer rapidement et de
+                    poursuivre une cible pendant une longue période.
+                    Il ne possède pas la résistance d'une créature
+                    lourdement équipée, mais sa vitesse lui permet
+                    d'éviter certains affrontements directs.
+                </p>
+
+                <p>
+                    Les Zerks semblent également avoir développé une
+                    certaine capacité à récupérer et réutiliser les
+                    objets trouvés dans leur environnement. Leur
+                    équipement n'est donc pas toujours identique.
+                    Deux Zerks peuvent utiliser des armes complètement
+                    différentes.
+                </p>
+
+                <p>
+                    Cette diversité rend leurs rencontres difficiles
+                    à prévoir. Un Zerk équipé d'un arc ne se comporte
+                    pas de la même manière qu'un Zerk utilisant une
+                    hache ou une arbalète empoisonnée.
+                </p>
+
+                <p>
+                    Leur apparence légère ne doit donc pas être
+                    considérée comme un signe de faiblesse. Leur
+                    principal avantage reste leur capacité à se
+                    déplacer rapidement et à maintenir la pression
+                    sur leur adversaire.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             ZIAK LOURD — LORE
+        ======================================== -->
+
+        <section class="lore-section">
+
+            <div class="section-title">
+
+                <small>
+                    Ziak lourd
+                </small>
+
+                <h2>
+                    Une force difficile à arrêter
+                </h2>
+
+                <p>
+                    Le Ziak lourd abandonne la vitesse au profit de la
+                    puissance, de la résistance et de la force brute.
+                </p>
+
+            </div>
+
+
+            <div class="lore-box">
+
+                <h3>
+                    Profil de la créature
+                </h3>
+
+                <h2>
+                    Le colosse blindé
+                </h2>
+
+                <p>
+                    Le Ziak lourd est une version beaucoup plus
+                    imposante du Ziak classique. Sa taille et sa
+                    corpulence lui donnent une présence particulièrement
+                    intimidante lorsqu'il apparaît sur le champ de
+                    bataille.
+                </p>
+
+                <p>
+                    Son équipement est principalement destiné à
+                    augmenter sa résistance. Le casque métallique
+                    protège sa tête tandis que certaines variantes
+                    peuvent porter un plastron relativement fin.
+                </p>
+
+                <p>
+                    Son arme principale peut être un gigantesque
+                    marteau. Une seule attaque bien placée peut alors
+                    infliger de lourds dégâts. D'autres individus
+                    peuvent également utiliser des armes équipées de
+                    pointes.
+                </p>
+
+                <p>
+                    Sa principale faiblesse reste sa vitesse. Le Ziak
+                    lourd est beaucoup plus lent que les créatures
+                    légères et magiques. Il devient donc particulièrement
+                    dangereux lorsqu'il parvient à coincer un joueur
+                    ou à réduire suffisamment la distance.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             ZYREN — LORE
         ======================================== -->
 
         <section class="lore-section">
@@ -1093,12 +1279,12 @@
                 </small>
 
                 <h2>
-                    Techniques magiques
+                    Le maître des énergies
                 </h2>
 
                 <p>
-                    Le Zyren possède plusieurs techniques permettant
-                    de maintenir la pression sur ses adversaires.
+                    Le Zyren utilise la magie pour attaquer à distance,
+                    contrôler le combat et parfois soutenir ses alliés.
                 </p>
 
             </div>
@@ -1107,61 +1293,41 @@
             <div class="lore-box">
 
                 <h3>
-                    Arsenal magique
+                    Profil de la créature
                 </h3>
 
                 <h2>
-                    Les attaques du Zyren
+                    Un mage rapide et imprévisible
                 </h2>
 
-
                 <p>
-                    <strong>Projectile rapide :</strong>
-                    le Zyren peut envoyer un projectile magique à
-                    grande vitesse. Cette attaque inflige des dégâts
-                    relativement faibles, mais sa rapidité la rend
-                    difficile à éviter.
+                    Le Zyren est une créature très différente des
+                    autres espèces connues. Il ne possède presque
+                    aucune protection physique et dispose d'une
+                    quantité de points de vie relativement faible.
                 </p>
 
-
                 <p>
-                    <strong>Sphère explosive :</strong>
-                    une sphère magique est projetée vers la cible.
-                    Elle se déplace plus lentement que le projectile
-                    rapide, mais provoque une explosion autour de son
-                    point d'impact.
+                    En contrepartie, il possède une grande mobilité
+                    et peut utiliser différentes formes d'énergie
+                    magique pour maintenir ses adversaires à distance.
                 </p>
 
-
                 <p>
-                    Plus la distance augmente, plus cette attaque
-                    laisse au joueur une possibilité de l'esquiver.
-                    Le danger principal vient de sa zone d'explosion.
+                    Son bâton équipé d'une boule de cristal semble
+                    être son principal outil de canalisation. La
+                    nature exacte du cristal reste encore inconnue,
+                    mais toutes les techniques connues du Zyren
+                    semblent être liées à cet équipement.
                 </p>
 
-
                 <p>
-                    <strong>Soin :</strong>
-                    le Zyren peut parfois soigner une créature alliée.
-                    Cette capacité est extrêmement rare et ne se
-                    produit pas constamment.
-                </p>
-
-
-                <p>
-                    <strong>Rayons d'énergie :</strong>
-                    le Zyren peut créer jusqu'à quatre rayons
-                    d'énergie. Les dégâts initiaux sont très faibles,
-                    mais plus un rayon reste concentré sur un
-                    personnage, plus les dégâts augmentent.
-                </p>
-
-
-                <p>
-                    Les rayons restent actifs pendant une courte
-                    durée. Le joueur doit donc rapidement se déplacer
-                    afin d'empêcher le rayon de rester concentré sur
-                    lui.
+                    Les Zyren peuvent également interagir avec les
+                    autres créatures. Dans de très rares situations,
+                    un Zyren peut utiliser sa magie afin de soigner
+                    un allié. Cette capacité n'est cependant pas
+                    systématique et reste particulièrement difficile
+                    à observer.
                 </p>
 
             </div>
@@ -1170,148 +1336,7 @@
 
 
         <!-- ========================================
-             ZONES
-        ======================================== -->
-
-        <section class="zones-section">
-
-            <div class="section-title">
-
-                <small>
-                    Exploration
-                </small>
-
-                <h2>
-                    Les zones dangereuses
-                </h2>
-
-                <p>
-                    Toutes les régions de Valdorian ne présentent
-                    pas le même niveau de danger. Certaines sont
-                    accessibles immédiatement, tandis que d'autres
-                    nécessitent une progression particulière.
-                </p>
-
-            </div>
-
-
-            <div class="zone-grid">
-
-
-                <!-- ZONE 1 -->
-
-                <article class="zone-card">
-
-                    <div class="zone-number">
-                        ZONE 01
-                    </div>
-
-                    <h3>
-                        Zones à créatures basiques
-                    </h3>
-
-                    <p>
-                        Certaines régions sont principalement
-                        occupées par des créatures communes.
-                        Elles permettent aux joueurs de découvrir
-                        progressivement les mécaniques du monde
-                        et d'améliorer leur équipement.
-                    </p>
-
-                    <div class="zone-tag">
-                        DANGER MODÉRÉ
-                    </div>
-
-                </article>
-
-
-                <!-- ZONE 2 -->
-
-                <article class="zone-card">
-
-                    <div class="zone-number">
-                        ZONE 02
-                    </div>
-
-                    <h3>
-                        Environnements hostiles
-                    </h3>
-
-                    <p>
-                        Certaines zones deviennent dangereuses à
-                        cause de leur environnement. La lave,
-                        les obstacles, la mauvaise visibilité et
-                        les différents éléments présents autour du
-                        joueur peuvent rendre l'exploration beaucoup
-                        plus difficile.
-                    </p>
-
-                    <div class="zone-tag">
-                        ENVIRONNEMENT HOSTILE
-                    </div>
-
-                </article>
-
-
-                <!-- ZONE 3 -->
-
-                <article class="zone-card">
-
-                    <div class="zone-number">
-                        ZONE 03
-                    </div>
-
-                    <h3>
-                        Territoires avancés
-                    </h3>
-
-                    <p>
-                        Certaines régions sont réservées aux joueurs
-                        ayant atteint un niveau de progression
-                        suffisant. Les créatures y sont généralement
-                        plus dangereuses et les conditions
-                        d'exploration plus exigeantes.
-                    </p>
-
-                    <div class="zone-tag">
-                        PROGRESSION REQUISE
-                    </div>
-
-                </article>
-
-
-                <!-- ZONE 4 -->
-
-                <article class="zone-card">
-
-                    <div class="zone-number">
-                        ZONE 04
-                    </div>
-
-                    <h3>
-                        Zones verrouillées
-                    </h3>
-
-                    <p>
-                        Certaines régions sont totalement
-                        inaccessibles au début du jeu. Leur accès
-                        peut nécessiter des objets spéciaux ou
-                        atteindre un niveau de progression précis.
-                    </p>
-
-                    <div class="zone-tag">
-                        ACCÈS VERROUILLÉ
-                    </div>
-
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- ========================================
-             RISQUE / RECOMPENSE
+             TECHNIQUES DU ZYREN
         ======================================== -->
 
         <section class="lore-section">
@@ -1319,51 +1344,161 @@
             <div class="section-title">
 
                 <small>
-                    Risque & récompense
+                    Zyren • Magie
                 </small>
 
                 <h2>
-                    Plus le danger augmente, plus les récompenses
-                    peuvent être importantes
+                    Les techniques du Zyren
                 </h2>
 
                 <p>
-                    Les zones difficiles offrent un risque plus
-                    important, mais peuvent également permettre
-                    d'obtenir un meilleur butin.
+                    Les pouvoirs du Zyren reposent principalement sur
+                    des attaques d'énergie et des techniques capables
+                    de maintenir le joueur sous pression.
                 </p>
 
             </div>
 
 
-            <div class="lore-box">
+            <div class="technique-grid">
 
-                <h3>
-                    Exploration
-                </h3>
 
-                <h2>
-                    Le danger fait partie de la progression
-                </h2>
+                <!-- PROJECTILE -->
 
-                <p>
-                    Une zone plus dangereuse peut contenir des
-                    créatures plus puissantes, des environnements
-                    difficiles et davantage de contraintes pour
-                    le joueur.
-                </p>
+                <article class="technique-card">
 
-                <p>
-                    Ces zones peuvent cependant offrir des
-                    récompenses plus intéressantes. Le joueur doit
-                    donc décider jusqu'où il souhaite pousser son
-                    exploration avec son équipement actuel.
-                </p>
+                    <div class="technique-number">
+                        TECHNIQUE 01
+                    </div>
 
-                <p>
-                    Une mauvaise préparation peut transformer une
-                    expédition rentable en perte importante.
-                </p>
+                    <h3>
+                        Projectile rapide
+                    </h3>
+
+                    <p>
+                        Le Zyren peut envoyer un projectile magique
+                        extrêmement rapide en direction de sa cible.
+                        Les dégâts de cette attaque restent relativement
+                        faibles, mais sa vitesse réduit fortement le
+                        temps disponible pour réagir.
+                    </p>
+
+                </article>
+
+
+                <!-- SPHERE -->
+
+                <article class="technique-card">
+
+                    <div class="technique-number">
+                        TECHNIQUE 02
+                    </div>
+
+                    <h3>
+                        Sphère explosive
+                    </h3>
+
+                    <p>
+                        Le Zyren peut créer une sphère magique qu'il
+                        projette vers sa cible. Contrairement au
+                        projectile rapide, la sphère se déplace plus
+                        lentement, mais elle provoque une explosion
+                        autour du point d'impact.
+                    </p>
+
+                </article>
+
+
+                <!-- SOIN -->
+
+                <article class="technique-card">
+
+                    <div class="technique-number">
+                        TECHNIQUE 03
+                    </div>
+
+                    <h3>
+                        Soin
+                    </h3>
+
+                    <p>
+                        Dans certaines situations extrêmement rares,
+                        le Zyren peut utiliser son énergie magique pour
+                        restaurer une partie des points de vie d'une
+                        créature alliée. Cette capacité n'est pas
+                        utilisée constamment et reste difficile à
+                        observer.
+                    </p>
+
+                </article>
+
+
+                <!-- RAYONS -->
+
+                <article class="technique-card">
+
+                    <div class="technique-number">
+                        TECHNIQUE 04
+                    </div>
+
+                    <h3>
+                        Rayons d'énergie
+                    </h3>
+
+                    <p>
+                        Le Zyren peut créer jusqu'à quatre rayons
+                        d'énergie. Les dégâts initiaux sont très faibles,
+                        mais plus un rayon reste concentré sur un
+                        personnage, plus les dégâts augmentent.
+                    </p>
+
+                </article>
+
+
+                <!-- CONCENTRATION -->
+
+                <article class="technique-card">
+
+                    <div class="technique-number">
+                        TECHNIQUE 05
+                    </div>
+
+                    <h3>
+                        Concentration magique
+                    </h3>
+
+                    <p>
+                        Les rayons du Zyren deviennent particulièrement
+                        dangereux lorsqu'ils restent concentrés sur
+                        une même cible. Le joueur doit donc constamment
+                        se déplacer afin d'empêcher l'énergie de
+                        continuer à s'accumuler.
+                    </p>
+
+                </article>
+
+
+                <!-- DISTANCE -->
+
+                <article class="technique-card">
+
+                    <div class="technique-number">
+                        TECHNIQUE 06
+                    </div>
+
+                    <h3>
+                        Pression à distance
+                    </h3>
+
+                    <p>
+                        Grâce à ses différents projectiles, le Zyren
+                        peut combattre sans s'approcher directement
+                        du joueur. Sa vitesse et ses attaques à distance
+                        lui permettent de contrôler l'espace autour de
+                        lui et de rendre son approche difficile.
+                    </p>
+
+                </article>
 
             </div>
 
@@ -1371,103 +1506,93 @@
 
 
         <!-- ========================================
-             MORT
+             COMPORTEMENT
         ======================================== -->
 
-        <section class="death-section">
+        <section class="behavior-section">
 
             <div class="section-title">
 
                 <small>
-                    Conséquences
+                    Comportement
                 </small>
 
                 <h2>
-                    Que se passe-t-il à la mort ?
+                    Des créatures aux styles différents
                 </h2>
 
                 <p>
-                    Mourir dans Valdorian entraîne une perte
-                    potentielle des ressources accumulées pendant
-                    l'exploration.
+                    Chaque créature possède une manière différente
+                    d'affronter les joueurs. Comprendre leur comportement
+                    permet de mieux anticiper leurs attaques.
                 </p>
 
             </div>
 
 
-            <div class="death-box">
-
-                <h2>
-                    Le prix de la défaite
-                </h2>
-
-                <p>
-                    Lorsque le joueur meurt, une partie de son argent
-                    peut être perdue. La quantité perdue est
-                    déterminée parmi plusieurs valeurs possibles.
-                </p>
+            <div class="behavior-box">
 
 
-                <div class="loss-grid">
+                <article class="behavior-card">
 
-                    <div class="loss-card">
-
-                        <strong>
-                            10 %
-                        </strong>
-
-                        <span>
-                            Perte possible de l'argent
-                        </span>
-
+                    <div class="behavior-icon">
+                        🏃
                     </div>
 
+                    <h3>
+                        Mobilité
+                    </h3>
 
-                    <div class="loss-card">
+                    <p>
+                        Certaines créatures, comme le Zerk et le Zyren,
+                        compensent leur faible résistance par une
+                        grande mobilité. Elles peuvent rapidement
+                        changer de position et rendre les attaques
+                        directes plus difficiles.
+                    </p>
 
-                        <strong>
-                            20 %
-                        </strong>
+                </article>
 
-                        <span>
-                            Perte possible de l'argent
-                        </span>
 
+                <article class="behavior-card">
+
+                    <div class="behavior-icon">
+                        ⚔️
                     </div>
 
+                    <h3>
+                        Combat rapproché
+                    </h3>
 
-                    <div class="loss-card">
+                    <p>
+                        Le Ziak lourd représente principalement une
+                        menace au corps à corps. Sa force et ses armes
+                        imposantes le rendent particulièrement dangereux
+                        lorsqu'il parvient à atteindre son adversaire.
+                    </p>
 
-                        <strong>
-                            30 %
-                        </strong>
+                </article>
 
-                        <span>
-                            Perte possible de l'argent
-                        </span>
 
+                <article class="behavior-card">
+
+                    <div class="behavior-icon">
+                        🔮
                     </div>
 
-                </div>
+                    <h3>
+                        Attaques magiques
+                    </h3>
 
+                    <p>
+                        Le Zyren utilise la magie pour attaquer à
+                        distance. Ses différentes techniques obligent
+                        le joueur à rester constamment attentif à ses
+                        déplacements et aux projectiles lancés autour
+                        de lui.
+                    </p>
 
-                <p style="margin-top: 25px;">
-                    En plus de cette perte d'argent, le joueur
-                    possède également une chance de perdre un objet
-                    aléatoire présent dans son inventaire.
-                </p>
-
-
-                <div class="protection-note">
-
-                    <strong>
-                        Équipement protégé :
-                    </strong>
-
-                    les armes et les armures ne peuvent pas être
-                    perdues lors de cette perte aléatoire d'objet.
-
-                </div>
+                </article>
 
             </div>
 
@@ -1475,39 +1600,139 @@
 
 
         <!-- ========================================
-             CONCLUSION LORE
+             COMPARAISON
         ======================================== -->
 
         <section class="lore-section">
 
-            <div class="lore-box">
+            <div class="section-title">
 
-                <h3>
-                    Le monde de Valdorian
-                </h3>
+                <small>
+                    Classification
+                </small>
 
                 <h2>
-                    Un monde où chaque expédition compte
+                    Trois créatures, trois menaces
                 </h2>
 
                 <p>
-                    Les créatures, les zones et les conséquences de
-                    la mort forment ensemble un système dans lequel
-                    chaque sortie peut devenir différente.
+                    Les trois espèces connues de Valdorian possèdent
+                    des caractéristiques très différentes.
+                </p>
+
+            </div>
+
+
+            <div class="detail-grid">
+
+
+                <article class="detail-card">
+
+                    <h3>
+                        Zerk — Vitesse
+                    </h3>
+
+                    <p>
+                        Le Zerk mise principalement sur sa mobilité.
+                        Il peut utiliser plusieurs types d'armes et
+                        son équipement varie d'un individu à l'autre.
+                        Son style de combat est imprévisible et
+                        agressif.
+                    </p>
+
+                </article>
+
+
+                <article class="detail-card">
+
+                    <h3>
+                        Ziak lourd — Force
+                    </h3>
+
+                    <p>
+                        Le Ziak lourd privilégie la puissance et la
+                        résistance. Il est lent mais possède beaucoup
+                        de points de vie et peut utiliser des armes
+                        extrêmement lourdes.
+                    </p>
+
+                </article>
+
+
+                <article class="detail-card">
+
+                    <h3>
+                        Zyren — Magie
+                    </h3>
+
+                    <p>
+                        Le Zyren est spécialisé dans les attaques
+                        magiques. Il possède peu de résistance physique
+                        mais compense cette faiblesse grâce à sa vitesse
+                        et à ses nombreuses techniques à distance.
+                    </p>
+
+                </article>
+
+
+                <article class="detail-card">
+
+                    <h3>
+                        Une menace différente
+                    </h3>
+
+                    <p>
+                        Aucune de ces créatures ne se bat de la même
+                        manière. Le Zerk chasse rapidement, le Ziak
+                        lourd cherche à imposer sa puissance et le
+                        Zyren utilise la magie pour garder ses ennemis
+                        sous pression.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             CONCLUSION
+        ======================================== -->
+
+        <section class="conclusion">
+
+            <div class="lore-box">
+
+                <h3>
+                    Le bestiaire de Valdorian
+                </h3>
+
+                <h2>
+                    Chaque créature possède son propre danger
+                </h2>
+
+                <p>
+                    Les créatures de Valdorian ne sont pas simplement
+                    des ennemis placés sur le chemin du joueur.
+                    Chacune possède une identité, une apparence,
+                    un équipement et une manière particulière de
+                    combattre.
                 </p>
 
                 <p>
-                    Un joueur peut choisir d'explorer une région
-                    relativement sûre pour progresser tranquillement,
-                    ou tenter de s'aventurer dans une zone beaucoup
-                    plus dangereuse afin de rechercher un meilleur
-                    butin.
+                    Le Zerk représente la mobilité et l'imprévisibilité.
+                    Le Ziak lourd représente la puissance physique et
+                    la résistance. Le Zyren représente quant à lui la
+                    magie, la vitesse et les attaques à distance.
                 </p>
 
                 <p>
-                    La connaissance des créatures et de leur
-                    environnement devient donc aussi importante que
-                    l'équipement du joueur.
+                    Au fil de l'évolution du monde de Valdorian,
+                    d'autres créatures pourront rejoindre ce bestiaire.
+                    Chaque nouvelle espèce pourra apporter son propre
+                    style de combat, ses propres capacités et une
+                    nouvelle manière d'interagir avec le joueur.
                 </p>
 
             </div>
