@@ -207,6 +207,32 @@
         }
     }
 
+    async function startFinalWorldReveal() {
+        const introScreen = document.getElementById("kairoImageReveal");
+        const finalScreen = document.getElementById("kairoFinalScreen");
+        const finalYesButton = document.getElementById("kairoFinalYes");
+
+        if (!introScreen || !finalScreen || !finalYesButton || finalYesButton.disabled) {
+            return;
+        }
+
+        finalYesButton.disabled = true;
+        window.clearTimeout(welcomeTypingTimer);
+        document.getElementById("kairoJourneyActions").hidden = true;
+        setMenuOpen(false);
+        introScreen.classList.add("kairo-crt-power-off");
+
+        await new Promise((resolve) => window.setTimeout(resolve, 700));
+        introScreen.classList.add("kairo-intro-dismissed");
+        introScreen.setAttribute("aria-hidden", "true");
+
+        finalScreen.hidden = false;
+        finalScreen.setAttribute("aria-hidden", "false");
+        await new Promise((resolve) => window.setTimeout(resolve, 3000));
+
+        finalScreen.classList.add("powering-on");
+    }
+
     function applySettings() {
         document.body.classList.toggle("kairo-reduced-effects", !settings.visualEffects);
         if (sensitivityInput && sensitivityValue) {
@@ -276,6 +302,7 @@
     });
 
     document.getElementById("kairoWelcomeNo")?.addEventListener("click", returnToGameMenu);
+    document.getElementById("kairoFinalYes")?.addEventListener("click", startFinalWorldReveal);
 
     if (menuToggle && menuOptions) {
         menuToggle.addEventListener("click", () => {

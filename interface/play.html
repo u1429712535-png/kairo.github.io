@@ -512,6 +512,106 @@
         }
 
 
+        #kairoImageReveal.kairo-crt-power-off {
+            transform-origin: center;
+            animation: kairoCrtPowerOff 0.7s steps(12, end) forwards;
+            pointer-events: none;
+        }
+
+
+        @keyframes kairoCrtPowerOff {
+            0% {
+                transform: scaleY(1);
+                filter: brightness(1);
+            }
+            72% {
+                transform: scaleY(0.008);
+                filter: brightness(2.5);
+            }
+            88% {
+                transform: scaleY(0.008);
+                filter: brightness(3);
+            }
+            100% {
+                transform: scaleY(0);
+                filter: brightness(0);
+            }
+        }
+
+
+        .kairo-final-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 999999;
+            overflow: hidden;
+            background: #000;
+        }
+
+
+        .kairo-final-screen[hidden] {
+            display: none;
+        }
+
+
+        .kairo-final-screen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transform: scaleY(0.002);
+            transform-origin: center;
+        }
+
+
+        .kairo-final-screen.powering-on img {
+            animation: kairoCrtPowerOnImage 1.8s ease-out forwards;
+        }
+
+
+        .kairo-final-screen::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.22) 100%);
+            opacity: 0;
+        }
+
+
+        .kairo-final-screen.powering-on::after {
+            animation: kairoCrtVignette 2.2s ease-out forwards;
+        }
+
+
+        @keyframes kairoCrtPowerOnImage {
+            0% {
+                opacity: 0;
+                transform: scaleY(0.002);
+                filter: brightness(8) saturate(0.2);
+            }
+            24% {
+                opacity: 1;
+                transform: scaleY(0.002);
+                filter: brightness(4) saturate(0.5);
+            }
+            48% {
+                opacity: 1;
+                transform: scaleY(1);
+                filter: brightness(1.8) saturate(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scaleY(1);
+                filter: brightness(1) saturate(1);
+            }
+        }
+
+
+        @keyframes kairoCrtVignette {
+            to { opacity: 1; }
+        }
+
+
         #kairoImageReveal > img {
             width: 100%;
             height: 100%;
@@ -1017,6 +1117,13 @@
         }
 
 
+        body.kairo-reduced-effects #kairoImageReveal.kairo-crt-power-off,
+        body.kairo-reduced-effects .kairo-final-screen.powering-on img,
+        body.kairo-reduced-effects .kairo-final-screen.powering-on::after {
+            animation-duration: 0.01ms;
+        }
+
+
         body.kairo-reduced-effects .kairo-glitch-button {
             animation: none;
         }
@@ -1051,6 +1158,9 @@
         @media (prefers-reduced-motion: reduce) {
             #kairoBlackScreen,
             #kairoImageReveal,
+            #kairoImageReveal.kairo-crt-power-off,
+            .kairo-final-screen.powering-on img,
+            .kairo-final-screen.powering-on::after,
             .kairo-boot-content,
             .kairo-type-caret,
             .kairo-glitch-button {
@@ -1206,7 +1316,7 @@
                     <button type="button" id="kairoWelcomeNo" data-i18n="no">Non</button>
                 </div>
                 <div class="kairo-welcome-actions" id="kairoJourneyActions" hidden>
-                    <button type="button" class="kairo-glitch-button" data-i18n="yes" disabled>Oui</button>
+                    <button type="button" class="kairo-glitch-button" id="kairoFinalYes" data-i18n="yes">Oui</button>
                 </div>
             </div>
         </main>
@@ -1287,6 +1397,10 @@
                 </label>
             </div>
         </section>
+    </div>
+
+    <div id="kairoFinalScreen" class="kairo-final-screen" aria-hidden="true" hidden>
+        <img src="../image/IMG_2128.webp" alt="Le monde de Valdorian">
     </div>
 
     <img
