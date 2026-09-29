@@ -186,6 +186,7 @@
 
     function returnToGameMenu() {
         window.clearTimeout(welcomeTypingTimer);
+        document.body.classList.remove("kairo-interface-active");
         const revealLayer = document.getElementById("kairoImageReveal");
         const gameContent = document.getElementById("gameContent");
         const loginRequired = document.getElementById("loginRequired");
@@ -466,6 +467,7 @@
             document.body.classList.add("kairo-cursor-active");
         }
 
+        document.body.classList.add("kairo-interface-active");
         blackScreen.classList.add("finished", "revealing");
         blackScreen.setAttribute("aria-hidden", "true");
         revealLayer.setAttribute("aria-hidden", "false");
