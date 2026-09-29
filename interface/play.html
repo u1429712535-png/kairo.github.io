@@ -543,6 +543,8 @@
             position: fixed;
             inset: 0;
             z-index: 999999;
+            display: grid;
+            place-items: center;
             overflow: hidden;
             background: #000;
         }
@@ -556,7 +558,9 @@
         .kairo-final-screen img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            max-width: min(100vw, 1280px);
+            max-height: min(100vh, 715px);
+            object-fit: contain;
             opacity: 0;
             transform: scaleY(0.002);
             transform-origin: center;
@@ -1331,7 +1335,7 @@
     </div>
 
     <div id="kairoFinalScreen" class="kairo-final-screen" aria-hidden="true" hidden>
-        <img src="../image/IMG_2135.webp" alt="Le monde de Valdorian">
+        <img src="../image/IMG_2137.webp" alt="Le monde de Valdorian">
     </div>
 
     <div class="kairo-game-menu">
