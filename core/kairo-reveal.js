@@ -10,7 +10,7 @@
     const settingsTitlebar = document.getElementById("kairoSettingsTitlebar");
     const sensitivityInput = document.getElementById("kairoSensitivity");
     const sensitivityValue = document.getElementById("kairoSensitivityValue");
-    const languageSelect = document.getElementById("kairoLanguage");
+    const languageButtons = [...document.querySelectorAll("[data-language]")];
     const visualEffectsInput = document.getElementById("kairoVisualEffects");
     const customCursor = document.getElementById("kairoCustomCursor");
     const saveKey = "valdorian_progress_save";
@@ -28,7 +28,11 @@
             settingsTitle: "Options",
             closeSettings: "Fermer les options",
             sensitivity: "Sensibilité de la souris",
+            decreaseSensitivity: "Diminuer la sensibilité",
+            increaseSensitivity: "Augmenter la sensibilité",
             language: "Langue",
+            chooseFrench: "Choisir le français",
+            chooseEnglish: "Choisir l’anglais",
             visualEffects: "Effets visuels",
             bootLabel: "VALDORIAN · CONNEXION ÉTABLIE",
             welcomeLead: (name) => `Bienvenue à toi, ${name}, dans Valdorian.`,
@@ -51,7 +55,11 @@
             settingsTitle: "Options",
             closeSettings: "Close options",
             sensitivity: "Mouse sensitivity",
+            decreaseSensitivity: "Decrease sensitivity",
+            increaseSensitivity: "Increase sensitivity",
             language: "Language",
+            chooseFrench: "Choose French",
+            chooseEnglish: "Choose English",
             visualEffects: "Visual effects",
             bootLabel: "VALDORIAN · CONNECTION ESTABLISHED",
             welcomeLead: (name) => `Welcome, ${name}, to Valdorian.`,
@@ -162,9 +170,9 @@
             sensitivityInput.value = String(settings.mouseSensitivity);
             sensitivityValue.value = `${settings.mouseSensitivity.toFixed(1)}×`;
         }
-        if (languageSelect) {
-            languageSelect.value = settings.language;
-        }
+        languageButtons.forEach((button) => {
+            button.setAttribute("aria-checked", String(button.dataset.language === settings.language));
+        });
         if (visualEffectsInput) {
             visualEffectsInput.checked = settings.visualEffects;
         }
@@ -295,10 +303,24 @@
         saveSettings();
     });
 
-    languageSelect?.addEventListener("change", () => {
-        settings.language = languageSelect.value;
-        saveSettings();
-        applyLanguage();
+    languageButtons.forEach((button, index) => {
+        button.addEventListener("click", () => {
+            settings.language = button.dataset.language === "en" ? "en" : "fr";
+            saveSettings();
+            applySettings();
+        });
+
+        button.addEventListener("keydown", (event) => {
+            if (!["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key)) {
+                return;
+            }
+
+            event.preventDefault();
+            const direction = ["ArrowRight", "ArrowDown"].includes(event.key) ? 1 : -1;
+            const nextButton = languageButtons[(index + direction + languageButtons.length) % languageButtons.length];
+            nextButton.focus();
+            nextButton.click();
+        });
     });
 
     visualEffectsInput?.addEventListener("change", () => {
