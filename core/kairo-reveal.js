@@ -3,10 +3,111 @@
     const menuOptions = document.getElementById("kairoMenuOptions");
     const saveButton = document.getElementById("kairoSaveButton");
     const quitButton = document.getElementById("kairoQuitButton");
+    const optionsButton = document.getElementById("kairoOptionsButton");
     const menuStatus = document.getElementById("kairoMenuStatus");
+    const settingsPanel = document.getElementById("kairoSettingsPanel");
+    const settingsClose = document.getElementById("kairoSettingsClose");
+    const settingsTitlebar = document.getElementById("kairoSettingsTitlebar");
+    const sensitivityInput = document.getElementById("kairoSensitivity");
+    const sensitivityValue = document.getElementById("kairoSensitivityValue");
+    const languageSelect = document.getElementById("kairoLanguage");
+    const visualEffectsInput = document.getElementById("kairoVisualEffects");
     const customCursor = document.getElementById("kairoCustomCursor");
     const saveKey = "valdorian_progress_save";
     const saveCooldown = 5 * 60 * 1000;
+    const settingsKey = "valdorian_settings";
+    const translations = {
+        fr: {
+            save: "Sauvegarder",
+            quit: "Quitter",
+            options: "Options",
+            openMenu: "Ouvrir le menu",
+            closeMenu: "Fermer le menu",
+            settingsTitle: "Options",
+            closeSettings: "Fermer les options",
+            sensitivity: "Sensibilité de la souris",
+            language: "Langue",
+            visualEffects: "Effets visuels",
+            saveUnavailable: "Aucune progression de jeu n’est disponible à sauvegarder pour le moment.",
+            saveWait: (minutes) => `Prochaine sauvegarde possible dans ${minutes} min.`,
+            saveDone: "Progression sauvegardée.",
+            saveFailed: "La sauvegarde a échoué. Vérifie l’espace de stockage disponible.",
+            quitPrompt: "Tu n’as pas sauvegardé depuis au moins 5 minutes. Quitter quand même ?"
+        },
+        en: {
+            save: "Save",
+            quit: "Quit",
+            options: "Options",
+            openMenu: "Open menu",
+            closeMenu: "Close menu",
+            settingsTitle: "Options",
+            closeSettings: "Close options",
+            sensitivity: "Mouse sensitivity",
+            language: "Language",
+            visualEffects: "Visual effects",
+            saveUnavailable: "There is no game progress available to save yet.",
+            saveWait: (minutes) => `Next save available in ${minutes} min.`,
+            saveDone: "Progress saved.",
+            saveFailed: "Save failed. Check available storage space.",
+            quitPrompt: "You have not saved in at least 5 minutes. Quit anyway?"
+        }
+    };
+
+    function loadSettings() {
+        try {
+            const storedSettings = JSON.parse(localStorage.getItem(settingsKey) || "{}");
+            const sensitivity = Number(storedSettings.mouseSensitivity);
+
+            return {
+                mouseSensitivity: Number.isFinite(sensitivity) ? Math.min(2, Math.max(0.5, sensitivity)) : 1,
+                language: storedSettings.language === "en" ? "en" : "fr",
+                visualEffects: storedSettings.visualEffects !== false
+            };
+        } catch {
+            return { mouseSensitivity: 1, language: "fr", visualEffects: true };
+        }
+    }
+
+    const settings = loadSettings();
+    window.valdorianSettings = settings;
+
+    function saveSettings() {
+        try {
+            localStorage.setItem(settingsKey, JSON.stringify(settings));
+        } catch {
+            return;
+        }
+    }
+
+    function translate(key, ...values) {
+        const message = translations[settings.language][key];
+        return typeof message === "function" ? message(...values) : message;
+    }
+
+    function applyLanguage() {
+        document.documentElement.lang = settings.language;
+        document.querySelectorAll("[data-i18n]").forEach((element) => {
+            element.textContent = translate(element.dataset.i18n);
+        });
+        document.querySelectorAll("[data-i18n-aria]").forEach((element) => {
+            element.setAttribute("aria-label", translate(element.dataset.i18nAria));
+        });
+    }
+
+    function applySettings() {
+        document.body.classList.toggle("kairo-reduced-effects", !settings.visualEffects);
+        if (sensitivityInput && sensitivityValue) {
+            sensitivityInput.value = String(settings.mouseSensitivity);
+            sensitivityValue.value = `${settings.mouseSensitivity.toFixed(1)}×`;
+        }
+        if (languageSelect) {
+            languageSelect.value = settings.language;
+        }
+        if (visualEffectsInput) {
+            visualEffectsInput.checked = settings.visualEffects;
+        }
+        applyLanguage();
+    }
 
     function getLastSaveTime() {
         try {
@@ -23,10 +124,39 @@
         }
 
         menuToggle.setAttribute("aria-expanded", String(isOpen));
-        menuToggle.setAttribute("aria-label", isOpen ? "Fermer le menu" : "Ouvrir le menu");
+        menuToggle.setAttribute("aria-label", translate(isOpen ? "closeMenu" : "openMenu"));
         menuOptions.setAttribute("aria-hidden", String(!isOpen));
         menuOptions.classList.toggle("open", isOpen);
     }
+
+    function openSettings() {
+        if (!settingsPanel) {
+            return;
+        }
+
+        setMenuOpen(false);
+        settingsPanel.hidden = false;
+        settingsPanel.setAttribute("aria-hidden", "false");
+        requestAnimationFrame(() => settingsPanel.classList.add("open"));
+        sensitivityInput?.focus();
+    }
+
+    function closeSettings() {
+        if (!settingsPanel) {
+            return;
+        }
+
+        settingsPanel.classList.remove("open");
+        settingsPanel.setAttribute("aria-hidden", "true");
+        window.setTimeout(() => {
+            if (settingsPanel.getAttribute("aria-hidden") === "true") {
+                settingsPanel.hidden = true;
+            }
+        }, 200);
+        optionsButton?.focus();
+    }
+
+    applySettings();
 
     if (menuToggle && menuOptions) {
         menuToggle.addEventListener("click", () => {
@@ -46,19 +176,88 @@
         });
     }
 
+    optionsButton?.addEventListener("click", openSettings);
+    settingsClose?.addEventListener("click", closeSettings);
+
+    document.getElementById("kairoImageReveal")?.addEventListener("contextmenu", (event) => {
+        event.preventDefault();
+        openSettings();
+    });
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && settingsPanel && !settingsPanel.hidden) {
+            closeSettings();
+        }
+    });
+
+    if (settingsPanel && settingsTitlebar) {
+        let dragOffset = null;
+
+        settingsTitlebar.addEventListener("pointerdown", (event) => {
+            if (event.target.closest("button")) {
+                return;
+            }
+
+            const bounds = settingsPanel.getBoundingClientRect();
+            dragOffset = { x: event.clientX - bounds.left, y: event.clientY - bounds.top };
+            settingsPanel.style.left = `${bounds.left}px`;
+            settingsPanel.style.top = `${bounds.top}px`;
+            settingsPanel.style.transform = "none";
+            settingsTitlebar.setPointerCapture(event.pointerId);
+        });
+
+        settingsTitlebar.addEventListener("pointermove", (event) => {
+            if (!dragOffset) {
+                return;
+            }
+
+            const bounds = settingsPanel.getBoundingClientRect();
+            const left = Math.min(Math.max(8, event.clientX - dragOffset.x), window.innerWidth - bounds.width - 8);
+            const top = Math.min(Math.max(8, event.clientY - dragOffset.y), window.innerHeight - bounds.height - 8);
+            settingsPanel.style.left = `${left}px`;
+            settingsPanel.style.top = `${top}px`;
+        });
+
+        settingsTitlebar.addEventListener("pointerup", () => {
+            dragOffset = null;
+        });
+
+        settingsTitlebar.addEventListener("pointercancel", () => {
+            dragOffset = null;
+        });
+    }
+
+    sensitivityInput?.addEventListener("input", () => {
+        settings.mouseSensitivity = Number(sensitivityInput.value);
+        sensitivityValue.value = `${settings.mouseSensitivity.toFixed(1)}×`;
+        saveSettings();
+    });
+
+    languageSelect?.addEventListener("change", () => {
+        settings.language = languageSelect.value;
+        saveSettings();
+        applyLanguage();
+    });
+
+    visualEffectsInput?.addEventListener("change", () => {
+        settings.visualEffects = visualEffectsInput.checked;
+        saveSettings();
+        applySettings();
+    });
+
     if (saveButton && menuStatus) {
         saveButton.addEventListener("click", () => {
             const progress = window.valdorianProgress;
 
             if (!progress) {
-                menuStatus.textContent = "Aucune progression de jeu n’est disponible à sauvegarder pour le moment.";
+                menuStatus.textContent = translate("saveUnavailable");
                 return;
             }
 
             const remainingTime = saveCooldown - (Date.now() - getLastSaveTime());
 
             if (remainingTime > 0) {
-                menuStatus.textContent = `Prochaine sauvegarde possible dans ${Math.ceil(remainingTime / 60000)} min.`;
+                menuStatus.textContent = translate("saveWait", Math.ceil(remainingTime / 60000));
                 return;
             }
 
@@ -67,9 +266,9 @@
                     savedAt: Date.now(),
                     progress
                 }));
-                menuStatus.textContent = "Progression sauvegardée.";
+                menuStatus.textContent = translate("saveDone");
             } catch {
-                menuStatus.textContent = "La sauvegarde a échoué. Vérifie l’espace de stockage disponible.";
+                menuStatus.textContent = translate("saveFailed");
             }
         });
     }
@@ -77,7 +276,7 @@
     if (quitButton) {
         quitButton.addEventListener("click", () => {
             if (Date.now() - getLastSaveTime() >= saveCooldown) {
-                const shouldQuit = window.confirm("Tu n’as pas sauvegardé depuis au moins 5 minutes. Quitter quand même ?");
+                const shouldQuit = window.confirm(translate("quitPrompt"));
 
                 if (!shouldQuit) {
                     return;
