@@ -1228,55 +1228,106 @@
 
 
             list.innerHTML =
-                accounts.map(account => {
+                accounts.map((account, index) => `
+                    <div
+                        class="account-item"
+                        data-account-index="${index}"
+                        role="button"
+                        tabindex="0"
+                        title="Cliquer pour voir le profil complet"
+                    >
 
-                    const avatar =
-                        account.avatar ||
-                        createDefaultAvatar(
-                            account.username
-                        );
-
-
-                    return `
-                        <div
-                            class="account-item"
-                            role="button"
-                            tabindex="0"
-                            title="Cliquer pour voir le profil complet"
-                            onclick="openAccountProfile(${JSON.stringify(account).replace(/</g, "\\u003c").replace(/>/g, "\\u003e").replace(/&/g, "\\u0026").replace(/'/g, "\\u0027")})"
-                            onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openAccountProfile(${JSON.stringify(account).replace(/</g, "\\u003c").replace(/>/g, "\\u003e").replace(/&/g, "\\u0026").replace(/'/g, "\\u0027")}); }"
+                        <img
+                            class="account-avatar"
+                            alt="Avatar"
                         >
 
-                            <img
-                                class="account-avatar"
-                                src="${escapeHtml(avatar)}"
-                                alt="Avatar"
-                                onerror="this.src=createDefaultAvatar('${String(account.username || "V").replace(/'/g, "\\'")}')"
-                            >
+                        <div class="account-info">
 
-                            <div class="account-info">
+                            <strong>
+                                ${escapeHtml(
+                                    account.displayName ||
+                                    account.username ||
+                                    "Utilisateur"
+                                )}
+                            </strong>
 
-                                <strong>
-                                    ${escapeHtml(
-                                        account.displayName ||
-                                        account.username ||
-                                        "Utilisateur"
-                                    )}
-                                </strong>
-
-                                <span>
-                                    @${escapeHtml(
-                                        account.username ||
-                                        "inconnu"
-                                    )}
-                                </span>
-
-                            </div>
+                            <span>
+                                @${escapeHtml(
+                                    account.username ||
+                                    "inconnu"
+                                )}
+                            </span>
 
                         </div>
-                    `;
 
-                }).join("");
+                    </div>
+                `).join("");
+
+
+            list.onclick = function (event) {
+                const item =
+                    event.target.closest("[data-account-index]");
+
+                if (!item) {
+                    return;
+                }
+
+                const account =
+                    accounts[Number(item.dataset.accountIndex)];
+
+                if (account) {
+                    openAccountProfile(account);
+                }
+            };
+
+
+            list.onkeydown = function (event) {
+                if (
+                    event.key !== "Enter" &&
+                    event.key !== " "
+                ) {
+                    return;
+                }
+
+                const item =
+                    event.target.closest("[data-account-index]");
+
+                if (!item) {
+                    return;
+                }
+
+                event.preventDefault();
+
+                const account =
+                    accounts[Number(item.dataset.accountIndex)];
+
+                if (account) {
+                    openAccountProfile(account);
+                }
+            };
+
+
+            list.querySelectorAll(".account-item").forEach(item => {
+                const account =
+                    accounts[Number(item.dataset.accountIndex)];
+
+                const avatar =
+                    item.querySelector(".account-avatar");
+
+                avatar.src =
+                    account.avatar ||
+                    createDefaultAvatar(account.username);
+
+                avatar.addEventListener(
+                    "error",
+                    function () {
+                        avatar.src =
+                            createDefaultAvatar(account.username);
+                    },
+                    { once: true }
+                );
+            });
 
 
         } catch (error) {
