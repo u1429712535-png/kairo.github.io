@@ -21,7 +21,7 @@
     let welcomePhase = 1;
     const translations = {
         fr: {
-            save: "Sauvegarder (bientôt)",
+            save: "Sauvegarder",
             quit: "Quitter",
             options: "Options",
             openMenu: "Ouvrir le menu",
@@ -52,7 +52,7 @@
             quitPrompt: "Tu n’as pas sauvegardé depuis au moins 5 minutes. Quitter quand même ?"
         },
         en: {
-            save: "Save (coming soon)",
+            save: "Save",
             quit: "Quit",
             options: "Options",
             openMenu: "Open menu",
@@ -232,6 +232,15 @@
         await new Promise((resolve) => window.setTimeout(resolve, 3000));
 
         finalScreen.classList.add("powering-on");
+        window.valdorianProgress = {
+            stage: "refuge",
+            reachedAt: Date.now()
+        };
+        if (saveButton) {
+            saveButton.disabled = false;
+            saveButton.textContent = translate("save");
+            saveButton.removeAttribute("title");
+        }
     }
 
     function applySettings() {
@@ -406,7 +415,7 @@
         applySettings();
     });
 
-    if (saveButton && menuStatus && !saveButton.disabled) {
+    if (saveButton && menuStatus) {
         saveButton.addEventListener("click", () => {
             const progress = window.valdorianProgress;
 
