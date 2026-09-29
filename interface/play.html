@@ -2117,6 +2117,7 @@
                     data.success
                 ) {
                     if (data.user) {
+                        window.valdorianPlayerId = data.user.id;
                         window.valdorianPlayerName =
                             data.user.displayName ||
                             data.user.username ||
@@ -2136,6 +2137,15 @@
                             }
                         } catch (saveError) {
                             console.warn("Impossible de charger la sauvegarde :", saveError);
+                        }
+
+                        if (!savedGame) {
+                            try {
+                                const localSaveKey = `valdorian_progress_save:${encodeURIComponent(data.user.id)}`;
+                                savedGame = JSON.parse(localStorage.getItem(localSaveKey) || "null");
+                            } catch (localSaveError) {
+                                console.warn("Impossible de lire la sauvegarde locale :", localSaveError);
+                            }
                         }
 
                         if (savedGame) {
