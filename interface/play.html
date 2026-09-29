@@ -1707,6 +1707,8 @@
         const API_URL =
             "https://valdorian-verification.u1429712535.workers.dev";
 
+        window.valdorianApiUrl = API_URL;
+
 
         /* ================================================
            ELEMENTS
@@ -1998,6 +2000,26 @@
                             data.user.displayName ||
                             data.user.username ||
                             "voyageur";
+
+                        let savedGame = null;
+                        try {
+                            const saveResponse = await fetch(API_URL + "/save", {
+                                method: "GET",
+                                headers: {
+                                    "Authorization": "Bearer " + token
+                                }
+                            });
+                            if (saveResponse.ok) {
+                                const saveData = await saveResponse.json();
+                                savedGame = saveData.success ? saveData.save : null;
+                            }
+                        } catch (saveError) {
+                            console.warn("Impossible de charger la sauvegarde :", saveError);
+                        }
+
+                        if (savedGame && window.restoreKairoProgress?.(savedGame)) {
+                            return;
+                        }
 
                         await activateKairoScreen();
                         return;

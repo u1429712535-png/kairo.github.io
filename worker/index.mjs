@@ -584,6 +584,49 @@ export default {
             }
         }
 
+        if ((request.method === "GET" || request.method === "POST") && pathname === "/save") {
+            try {
+                const authenticated = await getSessionUser(request, env);
+                if (!authenticated) {
+                    return jsonResponse(request, { success: false, error: "Session invalide ou expirée." }, 401);
+                }
+                const restrictionResponse = await enforceModeration(
+                    request,
+                    env,
+                    authenticated.user,
+                    getSessionToken(request)
+                );
+                if (restrictionResponse) {
+                    return restrictionResponse;
+                }
+
+                const saveKey = `save:${encodeURIComponent(authenticated.user.id)}`;
+                if (request.method === "GET") {
+                    const save = await env.VALDORIAN_KV.get(saveKey, "json");
+                    return jsonResponse(request, { success: true, save });
+                }
+
+                const body = await request.json().catch(() => null);
+                const progress = body?.progress;
+                if (!progress || typeof progress !== "object" || Array.isArray(progress)) {
+                    return jsonResponse(request, { success: false, error: "Données de sauvegarde invalides." }, 400);
+                }
+                if (new TextEncoder().encode(JSON.stringify(progress)).byteLength > 32_768) {
+                    return jsonResponse(request, { success: false, error: "La sauvegarde est trop volumineuse." }, 413);
+                }
+
+                const save = {
+                    savedAt: Date.now(),
+                    progress
+                };
+                await env.VALDORIAN_KV.put(saveKey, JSON.stringify(save));
+                return jsonResponse(request, { success: true, save });
+            } catch (error) {
+                console.error("Erreur /save :", error);
+                return jsonResponse(request, { success: false, error: "Impossible d’enregistrer la progression." }, 500);
+            }
+        }
+
         if (request.method === "POST" && pathname === "/username-available") {
             try {
                 const body = await request.json();

@@ -208,6 +208,15 @@
         }
     }
 
+    function activateSaveProgress(progress) {
+        window.valdorianProgress = progress;
+        if (saveButton) {
+            saveButton.disabled = false;
+            saveButton.textContent = translate("save");
+            saveButton.removeAttribute("title");
+        }
+    }
+
     async function startFinalWorldReveal() {
         const introScreen = document.getElementById("kairoImageReveal");
         const finalScreen = document.getElementById("kairoFinalScreen");
@@ -237,15 +246,45 @@
             refugeButton.hidden = false;
         }
 
-        window.valdorianProgress = {
+        activateSaveProgress({
             stage: "refuge",
             reachedAt: Date.now()
-        };
-        if (saveButton) {
-            saveButton.disabled = false;
-            saveButton.textContent = translate("save");
-            saveButton.removeAttribute("title");
+        });
+    }
+
+    window.restoreKairoProgress = function (save) {
+        const progress = save?.progress;
+        const introScreen = document.getElementById("kairoImageReveal");
+        const finalScreen = document.getElementById("kairoFinalScreen");
+        const refugeButton = document.getElementById("kairoRefugeButton");
+
+        if (!progress || progress.stage !== "refuge" || !finalScreen) {
+            return false;
         }
+
+        if (introScreen) {
+            introScreen.classList.add("kairo-intro-dismissed");
+            introScreen.setAttribute("aria-hidden", "true");
+        }
+        finalScreen.hidden = false;
+        finalScreen.setAttribute("aria-hidden", "false");
+        finalScreen.classList.add("powering-on");
+        if (refugeButton) {
+            refugeButton.hidden = false;
+        }
+        document.body.classList.add("kairo-interface-active");
+        if (customCursor) {
+            document.body.classList.add("kairo-cursor-active");
+        }
+        activateSaveProgress(progress);
+
+        try {
+            localStorage.setItem(saveKey, JSON.stringify(save));
+        } catch {
+            // The server copy remains available if local storage is full.
+        }
+
+        return true;
     }
 
     function applySettings() {
@@ -421,7 +460,7 @@
     });
 
     if (saveButton && menuStatus) {
-        saveButton.addEventListener("click", () => {
+        saveButton.addEventListener("click", async () => {
             const progress = window.valdorianProgress;
 
             if (!progress) {
@@ -437,10 +476,30 @@
             }
 
             try {
-                localStorage.setItem(saveKey, JSON.stringify({
-                    savedAt: Date.now(),
-                    progress
-                }));
+                const token = localStorage.getItem("valdorian_session");
+                const response = await fetch(`${window.valdorianApiUrl}/save`, {
+                    method: "POST",
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ progress })
+                });
+
+                if (!response.ok) {
+                    throw new Error("La sauvegarde distante a échoué.");
+                }
+
+                const result = await response.json();
+                if (!result.success || !result.save) {
+                    throw new Error("La sauvegarde distante a échoué.");
+                }
+
+                try {
+                    localStorage.setItem(saveKey, JSON.stringify(result.save));
+                } catch {
+                    // The server save remains successful if local storage is full.
+                }
                 menuStatus.textContent = translate("saveDone");
             } catch {
                 menuStatus.textContent = translate("saveFailed");

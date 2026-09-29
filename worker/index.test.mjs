@@ -95,3 +95,28 @@ test("the complete Worker rejects moderation by a non-moderator", async () => {
     }), env);
     assert.equal(response.status, 403);
 });
+
+test("the complete Worker stores and returns progress for the authenticated player only", async () => {
+    const env = createEnvironment();
+    const progress = { stage: "refuge", reachedAt: 1234 };
+
+    const saveResponse = await worker.fetch(authorizedRequest("/save", "player-token", "POST", { progress }), env);
+    const saveResult = await saveResponse.json();
+
+    assert.equal(saveResponse.status, 200);
+    assert.deepEqual(saveResult.save.progress, progress);
+    assert.equal(env.values.has("save:player-id"), true);
+
+    const loadResponse = await worker.fetch(authorizedRequest("/save", "player-token"), env);
+    const loadResult = await loadResponse.json();
+    assert.equal(loadResponse.status, 200);
+    assert.deepEqual(loadResult.save, saveResult.save);
+
+    const otherPlayerResponse = await worker.fetch(authorizedRequest("/save", "moderator-token"), env);
+    const otherPlayerResult = await otherPlayerResponse.json();
+    assert.equal(otherPlayerResponse.status, 200);
+    assert.equal(otherPlayerResult.save, null);
+
+    const unauthorizedResponse = await worker.fetch(new Request("https://worker.test/save", { method: "GET" }), env);
+    assert.equal(unauthorizedResponse.status, 401);
+});
