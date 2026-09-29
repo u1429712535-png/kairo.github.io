@@ -584,22 +584,15 @@
 
         .kairo-refuge-button {
             position: absolute;
-            left: 14px;
-            bottom: 14px;
+            left: 0;
+            bottom: 0;
             z-index: 1;
-            min-width: 145px;
-            min-height: 38px;
-            padding: 7px 14px;
-            border: 1px solid rgba(215, 239, 194, 0.48);
-            border-radius: 4px;
-            background: rgba(8, 12, 9, 0.9);
-            box-shadow: 0 0 12px rgba(215, 239, 194, 0.08);
-            backdrop-filter: blur(5px);
-            color: #d7efc2;
-            font: 700 14px "Courier New", monospace;
-            line-height: 1;
-            cursor: not-allowed;
-            opacity: 0.9;
+            width: 30%;
+            height: 15%;
+            padding: 0;
+            border: 0;
+            background: transparent;
+            cursor: default;
         }
 
 
@@ -1378,8 +1371,8 @@
                 class="kairo-refuge-button"
                 type="button"
                 disabled
-                title="Bientôt disponible"
-                hidden>Le Refuge</button>
+                aria-label="Le Refuge, bientôt disponible"
+                hidden></button>
         </div>
     </div>
 
