@@ -710,20 +710,95 @@
         }
 
 
-        #kairoSensitivity {
-            width: 100%;
-            accent-color: #d8b053;
+        .kairo-sensitivity-control {
+            display: grid;
+            grid-template-columns: 48px minmax(0, 1fr) 48px;
+            align-items: center;
+            gap: 10px;
+            margin-top: 8px;
         }
 
 
-        #kairoLanguage {
-            min-width: 130px;
-            padding: 8px 10px;
+        .kairo-sensitivity-step {
+            width: 48px;
+            height: 48px;
+            border: 1px solid rgba(216, 176, 83, 0.4);
+            border-radius: 6px;
+            background: rgba(216, 176, 83, 0.1);
+            color: #f2cf78;
+            font: inherit;
+            font-size: 24px;
+            cursor: pointer;
+            touch-action: manipulation;
+        }
+
+
+        .kairo-sensitivity-step:hover:not(:disabled) {
+            background: rgba(216, 176, 83, 0.22);
+        }
+
+
+        .kairo-sensitivity-step:disabled {
+            opacity: 0.45;
+            cursor: default;
+        }
+
+
+        #kairoSensitivity {
+            width: 100%;
+            height: 48px;
+            margin: 0;
+            accent-color: #d8b053;
+            cursor: pointer;
+            touch-action: pan-y;
+        }
+
+
+        #kairoSensitivity::-webkit-slider-thumb {
+            width: 28px;
+            height: 28px;
+        }
+
+
+        #kairoSensitivity::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+        }
+
+
+        .kairo-language-choice {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 8px;
+            min-width: 190px;
+        }
+
+
+        .kairo-language-choice button {
+            min-height: 46px;
+            padding: 8px 12px;
             border: 1px solid rgba(216, 176, 83, 0.35);
             border-radius: 5px;
-            background: rgba(0, 0, 0, 0.45);
+            background: rgba(0, 0, 0, 0.35);
             color: #f1e6c9;
             font: inherit;
+            cursor: pointer;
+            touch-action: manipulation;
+        }
+
+
+        .kairo-language-choice button[aria-checked="true"] {
+            border-color: #d8b053;
+            background: rgba(216, 176, 83, 0.2);
+            color: #f2cf78;
+        }
+
+
+        .kairo-language-choice button:focus-visible,
+        .kairo-sensitivity-step:focus-visible,
+        #kairoSensitivity:focus-visible {
+            outline: 2px solid #f2cf78;
+            outline-offset: 3px;
         }
 
 
@@ -951,18 +1026,39 @@
             <div class="kairo-settings-body">
                 <div>
                     <label class="kairo-setting-row" for="kairoSensitivity">
-                        <span data-i18n="sensitivity">Sensibilité de la souris</span>
+                        <span id="kairoSensitivityLabel" data-i18n="sensitivity">Sensibilité de la souris</span>
                         <output id="kairoSensitivityValue" for="kairoSensitivity">1.0×</output>
                     </label>
-                    <input id="kairoSensitivity" type="range" min="0.5" max="2" step="0.1" value="1">
+                    <div class="kairo-sensitivity-control">
+                        <button
+                            class="kairo-sensitivity-step"
+                            id="kairoSensitivityDown"
+                            type="button"
+                            data-i18n-aria="decreaseSensitivity"
+                            aria-label="Diminuer la sensibilité">−</button>
+                        <input
+                            id="kairoSensitivity"
+                            type="range"
+                            min="0.5"
+                            max="2"
+                            step="0.1"
+                            value="1"
+                            aria-labelledby="kairoSensitivityLabel">
+                        <button
+                            class="kairo-sensitivity-step"
+                            id="kairoSensitivityUp"
+                            type="button"
+                            data-i18n-aria="increaseSensitivity"
+                            aria-label="Augmenter la sensibilité">+</button>
+                    </div>
                 </div>
-                <label class="kairo-setting-row" for="kairoLanguage">
-                    <span data-i18n="language">Langue</span>
-                    <select id="kairoLanguage">
-                        <option value="fr">Français</option>
-                        <option value="en">English</option>
-                    </select>
-                </label>
+                <div class="kairo-setting-row">
+                    <span id="kairoLanguageLabel" data-i18n="language">Langue</span>
+                    <div class="kairo-language-choice" role="radiogroup" aria-labelledby="kairoLanguageLabel">
+                        <button type="button" role="radio" data-language="fr" data-i18n-aria="chooseFrench" aria-checked="true">Français</button>
+                        <button type="button" role="radio" data-language="en" data-i18n-aria="chooseEnglish" aria-checked="false">English</button>
+                    </div>
+                </div>
                 <label class="kairo-setting-row" for="kairoVisualEffects">
                     <span data-i18n="visualEffects">Effets visuels</span>
                     <input id="kairoVisualEffects" type="checkbox" checked>
