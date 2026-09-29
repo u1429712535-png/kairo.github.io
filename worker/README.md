@@ -1,65 +1,21 @@
-# Worker moderation module
+# Remplacer le Worker Cloudflare
 
-This repository serves a static GitHub Pages site. The live authentication API is a separate Cloudflare Worker, so this module must be imported by that Worker and deployed there before moderation actions become effective.
+Le fichier complet prêt à remplacer le script Cloudflare est [`index.mjs`](index.mjs). Il conserve les routes d’authentification existantes et ajoute les routes de mute, ban et unban.
 
-## KV binding
+Dans Cloudflare, ouvre le Worker `valdorian-verification`, remplace le contenu de son éditeur par le contenu complet de `index.mjs`, puis enregistre et déploie. Garde les bindings déjà configurés : `VALDORIAN_KV` et `BREVO_API_KEY`. Aucun nouveau namespace KV n’est requis ; les sanctions utilisent des clés `moderation:account:<id>` dans le KV existant.
 
-Create a dedicated Cloudflare KV namespace for moderation data and bind it as `VALDORIAN_MODERATION`. Keep account and session data in the existing namespace. The module stores one record per account under `moderation:account:<encoded-account-id>`.
+Le mute accepte une durée entière de 1 à 9999 et une unité : `m` (minute), `h` (heure), `j` (jour), `mo` (mois de 30 jours) ou `a` (année de 365 jours). Le ban n’expire pas et reste en place jusqu’à `/moderation/unban`. Seul `kairo5575` peut appliquer ces actions, et ce compte ne peut pas être sanctionné.
 
-Add the binding to the Worker configuration:
-
-```toml
-[[kv_namespaces]]
-binding = "VALDORIAN_MODERATION"
-id = "YOUR_KV_NAMESPACE_ID"
-```
-
-## Integration
-
-Import the module in the existing Worker entry point. Adapt the three callbacks to the Worker's current session and account storage implementation; never trust an account ID or moderator identity supplied by the browser.
-
-```js
-import { createModerationApi, restrictionResponse } from "./moderation.mjs";
-
-const moderation = createModerationApi({
-    kv: env.VALDORIAN_MODERATION,
-    authenticate: (request) => getUserFromExistingSession(request, env),
-    getAccounts: () => listAccountsFromExistingStorage(env),
-    getAccountById: (accountId) => getAccountFromExistingStorage(env, accountId)
-});
-
-const moderationResponse = await moderation.handle(request);
-if (moderationResponse) {
-    return addExistingCorsHeaders(moderationResponse);
-}
-```
-
-Pass the `moderationResponse` check before the existing `/moderation/accounts` route so this module can add restriction state to each account. Preserve the Worker's existing CORS wrapper for every returned response.
-
-After the existing Worker has identified an account, check restrictions before sending a login code, issuing a session, and returning protected profile/session data:
-
-```js
-const restriction = await moderation.getRestriction(account.id);
-if (restriction) {
-    return addExistingCorsHeaders(restrictionResponse(restriction));
-}
-```
-
-Apply the check to both `/send-code` and `/verify-code` before sending a code or creating a session. Also apply it to authenticated routes such as `/profile`; when a restriction is found, invalidate that account's active session using the existing session store before returning the 403. This makes bans effective for existing sessions as well as future logins. A mute expires automatically when its timestamp passes; a ban has no expiry and remains until `/moderation/unban` removes it.
-
-The moderation page calls these routes:
+## Routes ajoutées
 
 - `GET /moderation/accounts`
-- `POST /moderation/mute` with `{ "accountId": "...", "durationValue": 2, "durationUnit": "h" }`
-- `POST /moderation/ban` with `{ "accountId": "..." }`
-- `POST /moderation/unban` with `{ "accountId": "..." }`
+- `POST /moderation/mute` avec `{ "accountId": "...", "durationValue": 2, "durationUnit": "h" }`
+- `POST /moderation/ban` avec `{ "accountId": "..." }`
+- `POST /moderation/unban` avec `{ "accountId": "..." }`
 
-Mute duration is entered as an integer from 1 to 9999 with a unit: `m` (minute), `h` (hour), `j` (day), `mo` (30-day month), or `a` (365-day year). Only the authenticated `kairo5575` account can moderate, and the moderator account cannot be sanctioned.
-
-## Test
-
-Run the module tests locally with:
+## Vérification locale
 
 ```sh
-node --test worker/moderation.test.mjs
+node --check worker/index.mjs
+node --test worker/*.test.mjs
 ```
