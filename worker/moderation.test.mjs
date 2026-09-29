@@ -37,17 +37,29 @@ function post(path, body) {
     });
 }
 
-test("mute stores a finite expiry and appears in the account list", async () => {
+test("mute accepts each custom unit and appears in the account list", async () => {
     const { api } = createHarness();
-    const response = await api.handle(post("/moderation/mute", {
-        accountId: "player-1",
-        durationMinutes: 30
-    }));
-    const result = await response.json();
+    const units = {
+        m: 60 * 1000,
+        h: 60 * 60 * 1000,
+        j: 24 * 60 * 60 * 1000,
+        mo: 30 * 24 * 60 * 60 * 1000,
+        a: 365 * 24 * 60 * 60 * 1000
+    };
 
-    assert.equal(response.status, 200);
-    assert.equal(result.moderation.type, "mute");
-    assert.ok(result.moderation.expiresAt > Date.now());
+    for (const [durationUnit, unitMilliseconds] of Object.entries(units)) {
+        const response = await api.handle(post("/moderation/mute", {
+            accountId: "player-1",
+            durationValue: 2,
+            durationUnit
+        }));
+        const result = await response.json();
+
+        assert.equal(response.status, 200);
+        assert.equal(result.moderation.type, "mute");
+        assert.equal(result.moderation.durationUnit, durationUnit);
+        assert.equal(result.moderation.expiresAt - result.moderation.createdAt, 2 * unitMilliseconds);
+    }
 
     const accountsResponse = await api.handle(new Request("https://example.test/moderation/accounts"));
     const accountsResult = await accountsResponse.json();
@@ -72,9 +84,17 @@ test("rejects invalid mute durations and non-moderators", async () => {
     const { api } = createHarness();
     const invalidDuration = await api.handle(post("/moderation/mute", {
         accountId: "player-1",
-        durationMinutes: 7
+        durationValue: 1.5,
+        durationUnit: "h"
     }));
     assert.equal(invalidDuration.status, 400);
+
+    const invalidUnit = await api.handle(post("/moderation/mute", {
+        accountId: "player-1",
+        durationValue: 1,
+        durationUnit: "week"
+    }));
+    assert.equal(invalidUnit.status, 400);
 
     const { api: unprivilegedApi } = createHarness({ actor: { username: "player" } });
     const forbidden = await unprivilegedApi.handle(post("/moderation/ban", { accountId: "player-1" }));

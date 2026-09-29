@@ -50,11 +50,11 @@ Apply the check to both `/send-code` and `/verify-code` before sending a code or
 The moderation page calls these routes:
 
 - `GET /moderation/accounts`
-- `POST /moderation/mute` with `{ "accountId": "...", "durationMinutes": 5 }`
+- `POST /moderation/mute` with `{ "accountId": "...", "durationValue": 2, "durationUnit": "h" }`
 - `POST /moderation/ban` with `{ "accountId": "..." }`
 - `POST /moderation/unban` with `{ "accountId": "..." }`
 
-Allowed mute durations are 5, 10, 30, 60, and 1440 minutes. Only the authenticated `kairo5575` account can moderate, and the moderator account cannot be sanctioned.
+Mute duration is entered as an integer from 1 to 9999 with a unit: `m` (minute), `h` (hour), `j` (day), `mo` (30-day month), or `a` (365-day year). Only the authenticated `kairo5575` account can moderate, and the moderator account cannot be sanctioned.
 
 ## Test
 

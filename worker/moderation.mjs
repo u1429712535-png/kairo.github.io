@@ -1,5 +1,11 @@
-const MUTE_DURATIONS = new Set([5, 10, 30, 60, 1440]);
 const MODERATION_PREFIX = "moderation:account:";
+const MUTE_UNIT_MILLISECONDS = {
+    m: 60 * 1000,
+    h: 60 * 60 * 1000,
+    j: 24 * 60 * 60 * 1000,
+    mo: 30 * 24 * 60 * 60 * 1000,
+    a: 365 * 24 * 60 * 60 * 1000
+};
 
 function jsonResponse(data, status = 200) {
     return new Response(JSON.stringify(data), {
@@ -115,15 +121,26 @@ export function createModerationApi({
 
         let restriction;
         if (action === "mute") {
-            const durationMinutes = Number(body.durationMinutes);
-            if (!MUTE_DURATIONS.has(durationMinutes)) {
+            const durationValue = Number(body.durationValue);
+            const durationUnit = body.durationUnit;
+            const unitMilliseconds = MUTE_UNIT_MILLISECONDS[durationUnit];
+            const durationMilliseconds = durationValue * unitMilliseconds;
+            if (
+                !Number.isInteger(durationValue) ||
+                durationValue < 1 ||
+                durationValue > 9999 ||
+                !unitMilliseconds ||
+                !Number.isSafeInteger(durationMilliseconds)
+            ) {
                 return jsonResponse({ success: false, error: "Durée de mute invalide." }, 400);
             }
             const now = Date.now();
             restriction = {
                 type: "mute",
                 createdAt: now,
-                expiresAt: now + durationMinutes * 60 * 1000,
+                expiresAt: now + durationMilliseconds,
+                durationValue,
+                durationUnit,
                 moderator: actor.username
             };
         } else {
