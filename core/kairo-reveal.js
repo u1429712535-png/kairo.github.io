@@ -363,7 +363,6 @@
         }
         refugeModal.hidden = false;
         refugeModal.setAttribute("aria-hidden", "false");
-        document.body.classList.add("kairo-refuge-modal-open");
         refugeButton?.setAttribute("aria-expanded", "true");
         refugeClose?.focus();
     }
@@ -375,7 +374,6 @@
 
         refugeModal.hidden = true;
         refugeModal.setAttribute("aria-hidden", "true");
-        document.body.classList.remove("kairo-refuge-modal-open");
         refugeButton?.setAttribute("aria-expanded", "false");
         refugeButton?.focus();
     }
