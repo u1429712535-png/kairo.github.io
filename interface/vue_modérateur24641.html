@@ -495,6 +495,95 @@
             word-break: break-word;
         }
 
+        .profile-moderation {
+            margin-top: 16px;
+            padding: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 9px;
+            background: rgba(0, 0, 0, 0.24);
+        }
+
+        .profile-moderation > label {
+            display: block;
+            margin-bottom: 12px;
+            color: #c9a24a;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .moderation-state {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-height: 54px;
+            margin-bottom: 14px;
+            color: #d4d5d8;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .moderation-state img {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+        }
+
+        .moderation-state img[hidden] {
+            display: none;
+        }
+
+        .moderation-action-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .moderation-action-row select,
+        .moderation-action-row button {
+            min-height: 42px;
+            padding: 9px 12px;
+            border: 1px solid rgba(201, 162, 74, 0.4);
+            border-radius: 6px;
+            background: rgba(201, 162, 74, 0.08);
+            color: #f2f2f4;
+            font: inherit;
+            font-size: 12px;
+        }
+
+        .moderation-action-row select {
+            flex: 1 1 160px;
+        }
+
+        .moderation-action-row button {
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .moderation-action-row button:hover {
+            background: rgba(201, 162, 74, 0.2);
+        }
+
+        .moderation-action-row .ban-action {
+            border-color: rgba(220, 78, 78, 0.48);
+            background: rgba(220, 78, 78, 0.1);
+            color: #ff9b9b;
+        }
+
+        .moderation-action-row .ban-action:hover {
+            background: rgba(220, 78, 78, 0.22);
+        }
+
+        #moderationActionMessage {
+            min-height: 18px;
+            margin-top: 10px;
+            color: #d7b764;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
         .account-item {
             cursor: pointer;
             transition:
@@ -730,6 +819,27 @@
                 class="profile-details"
             ></div>
 
+            <section class="profile-moderation" aria-label="Actions de modération">
+                <label>Sanction du compte</label>
+                <div class="moderation-state" aria-live="polite">
+                    <img src="../image/969291-attention.gif" alt="" id="moderationWarningIcon" hidden>
+                    <span id="moderationStateText">Aucune sanction active.</span>
+                </div>
+                <div class="moderation-action-row">
+                    <select id="muteDuration" aria-label="Durée du mute">
+                        <option value="5">Mute · 5 minutes</option>
+                        <option value="10">Mute · 10 minutes</option>
+                        <option value="30">Mute · 30 minutes</option>
+                        <option value="60">Mute · 1 heure</option>
+                        <option value="1440">Mute · 24 heures</option>
+                    </select>
+                    <button type="button" id="muteAccountButton" onclick="applyModerationAction('mute')">Mute</button>
+                    <button type="button" class="ban-action" id="banAccountButton" onclick="applyModerationAction('ban')">Ban</button>
+                    <button type="button" id="unbanAccountButton" onclick="applyModerationAction('unban')" hidden>Unban</button>
+                </div>
+                <p id="moderationActionMessage" role="status" aria-live="polite"></p>
+            </section>
+
         </div>
     </div>
 
@@ -752,6 +862,10 @@
      */
     const MODERATOR_USERNAME =
         "kairo5575";
+
+    let moderationAccounts = [];
+    let selectedAccount = null;
+    let moderationCountdown = null;
 
 
     /*
@@ -992,6 +1106,8 @@
             return;
         }
 
+        selectedAccount = account;
+
         const accountUsername =
             account.username || "inconnu";
 
@@ -1071,10 +1187,134 @@
             </div>
         `;
 
+        renderModerationStatus();
+
         modal.classList.add("active");
 
         document.body.style.overflow =
             "hidden";
+    }
+
+
+    function renderModerationStatus() {
+        const stateText = document.getElementById("moderationStateText");
+        const warningIcon = document.getElementById("moderationWarningIcon");
+        const muteButton = document.getElementById("muteAccountButton");
+        const banButton = document.getElementById("banAccountButton");
+        const unbanButton = document.getElementById("unbanAccountButton");
+        const muteDuration = document.getElementById("muteDuration");
+
+        if (!stateText || !warningIcon || !muteButton || !banButton || !unbanButton) {
+            return;
+        }
+
+        window.clearInterval(moderationCountdown);
+        const restriction = selectedAccount && selectedAccount.moderation;
+        warningIcon.hidden = !restriction;
+        banButton.hidden = restriction?.type === "ban";
+        unbanButton.hidden = restriction?.type !== "ban";
+        muteButton.hidden = restriction?.type === "ban";
+        if (muteDuration) {
+            muteDuration.hidden = restriction?.type === "ban";
+        }
+
+        if (restriction?.type === "ban") {
+            stateText.textContent = "Compte banni définitivement. L’utilisateur ne peut plus se connecter.";
+            return;
+        }
+
+        if (restriction?.type !== "mute") {
+            stateText.textContent = "Aucune sanction active.";
+            return;
+        }
+
+        const updateCountdown = () => {
+            const remaining = restriction.expiresAt - Date.now();
+            if (remaining <= 0) {
+                selectedAccount.moderation = null;
+                warningIcon.hidden = true;
+                stateText.textContent = "Le mute est terminé.";
+                muteButton.hidden = false;
+                if (muteDuration) {
+                    muteDuration.hidden = false;
+                }
+                window.clearInterval(moderationCountdown);
+                return;
+            }
+
+            const totalSeconds = Math.ceil(remaining / 1000);
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+            const remainingLabel = hours > 0
+                ? `${hours} h ${minutes} min ${seconds} s`
+                : `${minutes} min ${seconds} s`;
+            stateText.textContent = `Compte muet. Temps restant : ${remainingLabel}.`;
+        };
+
+        updateCountdown();
+        moderationCountdown = window.setInterval(updateCountdown, 1000);
+    }
+
+
+    async function applyModerationAction(action) {
+        if (!selectedAccount || !selectedAccount.id) {
+            return;
+        }
+
+        const message = document.getElementById("moderationActionMessage");
+        const buttons = [
+            document.getElementById("muteAccountButton"),
+            document.getElementById("banAccountButton"),
+            document.getElementById("unbanAccountButton")
+        ].filter(Boolean);
+
+        if (action === "ban" && !window.confirm(`Bannir définitivement @${selectedAccount.username} ?`)) {
+            return;
+        }
+
+        buttons.forEach((button) => {
+            button.disabled = true;
+        });
+        message.textContent = "Enregistrement de la sanction...";
+
+        try {
+            const body = { accountId: selectedAccount.id };
+            if (action === "mute") {
+                body.durationMinutes = Number(document.getElementById("muteDuration").value);
+            }
+
+            const response = await fetch(`${API_URL}/moderation/${action}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${getToken()}`
+                },
+                body: JSON.stringify(body)
+            });
+            const data = await response.json();
+
+            if (!response.ok || !data.success) {
+                throw new Error(data.error || data.message || "Impossible d’appliquer cette sanction.");
+            }
+
+            selectedAccount.moderation = data.moderation;
+            moderationAccounts = moderationAccounts.map((account) =>
+                account.id === selectedAccount.id ? selectedAccount : account
+            );
+            renderModerationStatus();
+            message.textContent = action === "unban"
+                ? "Le compte peut de nouveau se connecter."
+                : action === "ban"
+                    ? "Compte banni définitivement."
+                    : "Mute appliqué.";
+        } catch (error) {
+            message.textContent = error.message || "Erreur de connexion au service de modération.";
+        } finally {
+            buttons.forEach((button) => {
+                button.disabled = false;
+            });
+        }
     }
 
 
@@ -1093,6 +1333,8 @@
                 "active"
             );
         }
+
+        window.clearInterval(moderationCountdown);
 
         document.body.style.overflow =
             "";
@@ -1203,6 +1445,8 @@
                 Array.isArray(data.accounts)
                     ? data.accounts
                     : [];
+
+            moderationAccounts = accounts;
 
 
             count.textContent =

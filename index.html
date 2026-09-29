@@ -517,6 +517,63 @@
             object-fit: contain;
         }
 
+        .restriction-notice {
+            position: fixed;
+            inset: 0;
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.82);
+            backdrop-filter: blur(8px);
+        }
+
+        .restriction-notice.active {
+            display: flex;
+        }
+
+        .restriction-notice-box {
+            width: min(420px, 100%);
+            padding: 28px;
+            border: 1px solid rgba(220, 78, 78, 0.45);
+            border-radius: 10px;
+            background: rgba(12, 14, 18, 0.96);
+            text-align: center;
+            box-shadow: 0 24px 70px rgba(0, 0, 0, 0.6);
+        }
+
+        .restriction-notice-box img {
+            width: 84px;
+            height: 84px;
+            margin-bottom: 14px;
+            object-fit: contain;
+        }
+
+        .restriction-notice-box h2 {
+            margin-bottom: 10px;
+            color: #ff9b9b;
+            font-size: 22px;
+        }
+
+        .restriction-notice-box p {
+            color: #d4d5d8;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .restriction-notice-box button {
+            min-height: 42px;
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.06);
+            color: white;
+            font: inherit;
+            cursor: pointer;
+        }
+
         .modal-title {
             text-align: center;
 
@@ -1308,6 +1365,22 @@
 </div>
 
 
+<div
+    id="restrictionNotice"
+    class="restriction-notice"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="restrictionNoticeTitle"
+    aria-hidden="true">
+    <div class="restriction-notice-box">
+        <img src="image/969291-attention.gif" alt="">
+        <h2 id="restrictionNoticeTitle">Accès temporairement bloqué</h2>
+        <p id="restrictionNoticeMessage" aria-live="polite"></p>
+        <button type="button" onclick="closeRestrictionNotice()">Fermer</button>
+    </div>
+</div>
+
+
 <script>
 
     const API_URL =
@@ -1332,6 +1405,63 @@
             "valdorian_session"
         );
 
+    }
+
+
+    let restrictionCountdown = null;
+
+    function showModerationRestriction(data) {
+        const restriction = data && data.moderation;
+        if (!restriction || !["mute", "ban"].includes(restriction.type)) {
+            return false;
+        }
+
+        const notice = document.getElementById("restrictionNotice");
+        const title = document.getElementById("restrictionNoticeTitle");
+        const message = document.getElementById("restrictionNoticeMessage");
+        window.clearInterval(restrictionCountdown);
+        title.textContent = restriction.type === "ban"
+            ? "Compte banni définitivement"
+            : "Accès temporairement bloqué";
+
+        const updateMessage = () => {
+            if (restriction.type === "ban") {
+                message.textContent = "Ce compte ne peut plus se connecter. Contacte l’équipe de modération si tu penses qu’il s’agit d’une erreur.";
+                return;
+            }
+
+            const remaining = Number(restriction.expiresAt) - Date.now();
+            if (!Number.isFinite(remaining) || remaining <= 0) {
+                message.textContent = "Ton mute est terminé. Tu peux réessayer de te connecter.";
+                window.clearInterval(restrictionCountdown);
+                return;
+            }
+
+            const seconds = Math.ceil(remaining / 1000);
+            const hours = Math.floor(seconds / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            const restSeconds = seconds % 60;
+            const remainingText = hours > 0
+                ? `${hours} h ${minutes} min ${restSeconds} s`
+                : `${minutes} min ${restSeconds} s`;
+            message.textContent = `Ton compte est bloqué. Temps restant : ${remainingText}.`;
+        };
+
+        updateMessage();
+        if (restriction.type === "mute") {
+            restrictionCountdown = window.setInterval(updateMessage, 1000);
+        }
+        notice.classList.add("active");
+        notice.setAttribute("aria-hidden", "false");
+        return true;
+    }
+
+
+    function closeRestrictionNotice() {
+        const notice = document.getElementById("restrictionNotice");
+        notice.classList.remove("active");
+        notice.setAttribute("aria-hidden", "true");
+        window.clearInterval(restrictionCountdown);
     }
 
 
@@ -1623,6 +1753,10 @@
 
             if (!response.ok) {
 
+                if (showModerationRestriction(data)) {
+                    return;
+                }
+
                 message.textContent =
                     data.error ||
                     data.message ||
@@ -1718,6 +1852,10 @@
 
             if (!response.ok) {
 
+                if (showModerationRestriction(data)) {
+                    return;
+                }
+
                 message.textContent =
                     data.error ||
                     data.message ||
@@ -1812,6 +1950,10 @@
 
 
             if (!response.ok) {
+
+                if (showModerationRestriction(data)) {
+                    return;
+                }
 
                 message.textContent =
                     data.error ||
@@ -2220,7 +2362,11 @@
                 );
 
 
+            const data = await response.json();
+
             if (!response.ok) {
+
+                showModerationRestriction(data);
 
                 localStorage.removeItem(
                     "valdorian_session"
@@ -2236,10 +2382,6 @@
                 return;
 
             }
-
-
-            const data =
-                await response.json();
 
 
             currentUser =
