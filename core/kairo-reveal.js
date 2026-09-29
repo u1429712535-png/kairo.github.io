@@ -8,6 +8,9 @@
     const settingsPanel = document.getElementById("kairoSettingsPanel");
     const settingsClose = document.getElementById("kairoSettingsClose");
     const settingsTitlebar = document.getElementById("kairoSettingsTitlebar");
+    const refugeButton = document.getElementById("kairoRefugeButton");
+    const refugeModal = document.getElementById("kairoRefugeModal");
+    const refugeClose = document.getElementById("kairoRefugeClose");
     const sensitivityInput = document.getElementById("kairoSensitivity");
     const sensitivityValue = document.getElementById("kairoSensitivityValue");
     const languageButtons = [...document.querySelectorAll("[data-language]")];
@@ -349,6 +352,32 @@
         optionsButton?.focus();
     }
 
+    function openRefugeModal() {
+        if (!refugeModal) {
+            return;
+        }
+
+        setMenuOpen(false);
+        if (settingsPanel && !settingsPanel.hidden) {
+            closeSettings();
+        }
+        refugeModal.hidden = false;
+        refugeModal.setAttribute("aria-hidden", "false");
+        refugeButton?.setAttribute("aria-expanded", "true");
+        refugeClose?.focus();
+    }
+
+    function closeRefugeModal() {
+        if (!refugeModal || refugeModal.hidden) {
+            return;
+        }
+
+        refugeModal.hidden = true;
+        refugeModal.setAttribute("aria-hidden", "true");
+        refugeButton?.setAttribute("aria-expanded", "false");
+        refugeButton?.focus();
+    }
+
     applySettings();
 
     document.getElementById("kairoWelcomeYes")?.addEventListener("click", () => {
@@ -378,6 +407,13 @@
 
     optionsButton?.addEventListener("click", openSettings);
     settingsClose?.addEventListener("click", closeSettings);
+    refugeButton?.addEventListener("click", openRefugeModal);
+    refugeClose?.addEventListener("click", closeRefugeModal);
+    refugeModal?.addEventListener("click", (event) => {
+        if (event.target === refugeModal) {
+            closeRefugeModal();
+        }
+    });
 
     document.getElementById("kairoImageReveal")?.addEventListener("contextmenu", (event) => {
         event.preventDefault();
@@ -385,7 +421,12 @@
     });
 
     document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape" && settingsPanel && !settingsPanel.hidden) {
+        if (event.key !== "Escape") {
+            return;
+        }
+        if (refugeModal && !refugeModal.hidden) {
+            closeRefugeModal();
+        } else if (settingsPanel && !settingsPanel.hidden) {
             closeSettings();
         }
     });
