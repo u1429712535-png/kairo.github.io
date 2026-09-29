@@ -40,6 +40,7 @@
 
             background: rgba(7, 8, 11, 0.82);
             backdrop-filter: blur(14px);
+
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
@@ -650,6 +651,65 @@
             background: rgba(180, 50, 50, 0.2);
         }
 
+
+        /* ================================
+           MENU CLIC DROIT DU COMPTE
+        ================================= */
+
+        .profile-context-menu {
+            position: fixed;
+            z-index: 10000;
+
+            display: none;
+
+            min-width: 190px;
+
+            padding: 6px;
+
+            background: #111318;
+
+            border: 1px solid rgba(201, 162, 74, 0.35);
+            border-radius: 10px;
+
+            box-shadow:
+                0 15px 45px rgba(0, 0, 0, 0.65);
+        }
+
+        .profile-context-menu.active {
+            display: block;
+        }
+
+        .profile-context-menu button {
+            width: 100%;
+
+            padding: 11px 13px;
+
+            border: none;
+            border-radius: 7px;
+
+            background: transparent;
+            color: #d8d8d8;
+
+            text-align: left;
+
+            font-size: 12px;
+            font-weight: 800;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .profile-context-menu button:hover {
+            background: rgba(201, 162, 74, 0.14);
+            color: #d7b764;
+        }
+
+        .profile-context-menu .moderation-icon {
+            margin-right: 8px;
+        }
+
+
         @media (max-width: 900px) {
 
             header {
@@ -753,6 +813,21 @@
 </header>
 
 
+<!-- MENU CLIC DROIT DU COMPTE -->
+<div
+    id="profileContextMenu"
+    class="profile-context-menu"
+>
+    <button
+        type="button"
+        onclick="openModerationPage()"
+    >
+        <span class="moderation-icon">🛡️</span>
+        Modération
+    </button>
+</div>
+
+
 <section class="hero">
 
     <div class="hero-content">
@@ -796,9 +871,13 @@
 
     <div class="section-header">
 
-        <small>L'univers de Valdorian</small>
+        <small>
+            L'univers de Valdorian
+        </small>
 
-        <h2>Un monde qui évolue avec vous</h2>
+        <h2>
+            Un monde qui évolue avec vous
+        </h2>
 
         <p>
             Explorez, combattez, construisez et survivez
@@ -942,7 +1021,6 @@
         </article>
 
 
-        <!-- PHASES -->
         <article
             class="game-card"
             onclick="window.location.href='interface/lors_phases.html'"
@@ -1239,6 +1317,14 @@
     let selectedAvatar = null;
 
 
+    /*
+     * Seul ce compte peut accéder
+     * au menu de modération.
+     */
+    const MODERATOR_USERNAME =
+        "kairo5575";
+
+
     function getToken() {
 
         return localStorage.getItem(
@@ -1248,11 +1334,132 @@
     }
 
 
-    function openLoginModal(showWarning = false) {
+    /*
+     * Ouvre le menu avec clic droit
+     * sur le bouton du compte.
+     */
+    function openProfileContextMenu(event) {
+
+        event.preventDefault();
+
+
+        const menu =
+            document.getElementById(
+                "profileContextMenu"
+            );
+
+
+        if (!menu) {
+            return;
+        }
+
+
+        /*
+         * Le menu n'existe fonctionnellement
+         * que pour le compte kairo5575.
+         */
+        if (
+            !currentUser ||
+            currentUser.username !== MODERATOR_USERNAME
+        ) {
+            return;
+        }
+
+
+        menu.classList.add("active");
+
+
+        let x = event.clientX;
+        let y = event.clientY;
+
+
+        const menuWidth = 190;
+        const menuHeight = 55;
+
+
+        /*
+         * Empêche le menu de sortir
+         * de l'écran.
+         */
+        if (
+            x + menuWidth >
+            window.innerWidth
+        ) {
+
+            x =
+                window.innerWidth -
+                menuWidth -
+                10;
+
+        }
+
+
+        if (
+            y + menuHeight >
+            window.innerHeight
+        ) {
+
+            y =
+                window.innerHeight -
+                menuHeight -
+                10;
+
+        }
+
+
+        menu.style.left =
+            Math.max(10, x) + "px";
+
+        menu.style.top =
+            Math.max(10, y) + "px";
+
+    }
+
+
+    /*
+     * Ferme le menu de modération.
+     */
+    function closeProfileContextMenu() {
+
+        const menu =
+            document.getElementById(
+                "profileContextMenu"
+            );
+
+
+        if (menu) {
+
+            menu.classList.remove(
+                "active"
+            );
+
+        }
+
+    }
+
+
+    /*
+     * Ouvre la page de modération.
+     */
+    function openModerationPage() {
+
+        closeProfileContextMenu();
+
+
+        window.location.href =
+            "interface/vue_modérateur24641.html";
+
+    }
+
+
+    function openLoginModal(
+        showWarning = false
+    ) {
 
         document
             .getElementById("loginModal")
             .classList.add("active");
+
 
         document
             .getElementById("warningContainer")
@@ -1261,21 +1468,26 @@
                 showWarning
             );
 
+
         document
             .getElementById("loginSection")
             .style.display = "block";
+
 
         document
             .getElementById("verificationSection")
             .classList.remove("active");
 
+
         document
             .getElementById("profileSection")
             .classList.remove("active");
 
+
         document
             .getElementById("loginMessage")
             .textContent = "";
+
 
         document
             .getElementById("verificationMessage")
@@ -1297,6 +1509,7 @@
 
         event.preventDefault();
 
+
         if (currentUser) {
 
             window.location.href =
@@ -1306,12 +1519,15 @@
 
         }
 
+
         sessionStorage.setItem(
             "valdorian_play_after_login",
             "true"
         );
 
+
         openLoginModal(true);
+
 
         return false;
 
@@ -1342,10 +1558,12 @@
                 .trim()
                 .toLowerCase();
 
+
         const password =
             document
                 .getElementById("passwordInput")
                 .value;
+
 
         const message =
             document.getElementById(
@@ -1436,12 +1654,14 @@
                 .getElementById("codeInput")
                 .focus();
 
+
         } catch (error) {
 
             console.error(
                 "Erreur sendCode :",
                 error
             );
+
 
             message.textContent =
                 "Impossible de contacter Valdorian.";
@@ -1459,6 +1679,7 @@
                 .value
                 .trim()
                 .toLowerCase();
+
 
         const message =
             document.getElementById(
@@ -1510,12 +1731,14 @@
                 data.message ||
                 "Nouveau code envoyé par e-mail.";
 
+
         } catch (error) {
 
             console.error(
                 "Erreur resendCode :",
                 error
             );
+
 
             message.textContent =
                 "Impossible de contacter Valdorian.";
@@ -1534,11 +1757,13 @@
                 .trim()
                 .toLowerCase();
 
+
         const code =
             document
                 .getElementById("codeInput")
                 .value
                 .trim();
+
 
         const message =
             document.getElementById(
@@ -1597,7 +1822,10 @@
             }
 
 
-            if (!data.token || !data.user) {
+            if (
+                !data.token ||
+                !data.user
+            ) {
 
                 message.textContent =
                     "Réponse du serveur invalide.";
@@ -1626,14 +1854,18 @@
                 );
 
 
-            if (playAfterLogin === "true") {
+            if (
+                playAfterLogin === "true"
+            ) {
 
                 sessionStorage.removeItem(
                     "valdorian_play_after_login"
                 );
 
+
                 window.location.href =
                     "interface/play.html";
+
 
                 return;
 
@@ -1652,12 +1884,14 @@
 
             loadProfile();
 
+
         } catch (error) {
 
             console.error(
                 "Erreur verifyCode :",
                 error
             );
+
 
             message.textContent =
                 "Impossible de contacter Valdorian.";
@@ -1749,6 +1983,7 @@
                         .textContent =
                         "Image trop volumineuse. Maximum 500 Ko.";
 
+
                     this.value = "";
 
                     return;
@@ -1838,6 +2073,7 @@
                         body: JSON.stringify({
                             displayName,
                             username,
+
                             avatar:
                                 selectedAvatar ||
                                 currentUser.avatar ||
@@ -1872,11 +2108,13 @@
 
             updateAccountButton();
 
+
             loadProfile();
 
 
             message.textContent =
                 "Profil enregistré.";
+
 
         } catch (error) {
 
@@ -1884,6 +2122,7 @@
                 "Erreur saveProfile :",
                 error
             );
+
 
             message.textContent =
                 "Erreur de connexion.";
@@ -1933,11 +2172,14 @@
 
 
         currentUser = null;
-
         selectedAvatar = null;
 
 
         updateAccountButton();
+
+
+        closeProfileContextMenu();
+
 
         closeLoginModal();
 
@@ -1983,9 +2225,12 @@
                     "valdorian_session"
                 );
 
+
                 currentUser = null;
 
+
                 updateAccountButton();
+
 
                 return;
 
@@ -2002,6 +2247,7 @@
 
             updateAccountButton();
 
+
         } catch (error) {
 
             console.error(
@@ -2009,7 +2255,9 @@
                 error
             );
 
+
             currentUser = null;
+
 
             updateAccountButton();
 
@@ -2048,6 +2296,7 @@
                 >${escapeHtml(
                     currentUser.username
                 )}`;
+
 
         } else {
 
@@ -2150,6 +2399,67 @@
                     document.title,
                     window.location.pathname
                 );
+
+            }
+
+        }
+    );
+
+
+    /*
+     * CLIC DROIT SUR LE BOUTON COMPTE
+     */
+    document
+        .getElementById("accountButton")
+        .addEventListener(
+            "contextmenu",
+            openProfileContextMenu
+        );
+
+
+    /*
+     * Ferme le menu quand on clique ailleurs.
+     */
+    document.addEventListener(
+        "click",
+        function (event) {
+
+            const menu =
+                document.getElementById(
+                    "profileContextMenu"
+                );
+
+
+            const accountButton =
+                document.getElementById(
+                    "accountButton"
+                );
+
+
+            if (
+                menu &&
+                !menu.contains(event.target) &&
+                event.target !== accountButton
+            ) {
+
+                closeProfileContextMenu();
+
+            }
+
+        }
+    );
+
+
+    /*
+     * Ferme le menu avec Échap.
+     */
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (event.key === "Escape") {
+
+                closeProfileContextMenu();
 
             }
 
