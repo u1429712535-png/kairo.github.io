@@ -16,9 +16,11 @@
     const saveKey = "valdorian_progress_save";
     const saveCooldown = 5 * 60 * 1000;
     const settingsKey = "valdorian_settings";
+    let welcomeTypingTimer = null;
+    let introductionStarted = false;
     const translations = {
         fr: {
-            save: "Sauvegarder",
+            save: "Sauvegarder (bientôt)",
             quit: "Quitter",
             options: "Options",
             openMenu: "Ouvrir le menu",
@@ -28,6 +30,12 @@
             sensitivity: "Sensibilité de la souris",
             language: "Langue",
             visualEffects: "Effets visuels",
+            bootLabel: "VALDORIAN · CONNEXION ÉTABLIE",
+            welcomeLead: (name) => `Bienvenue à toi, ${name}, dans Valdorian.`,
+            welcomeStory: "Tu vas te lancer à la découverte d’un monde incroyable.",
+            welcomeQuestion: "Es-tu prêt à le découvrir ?",
+            yes: "Oui",
+            no: "Non",
             saveUnavailable: "Aucune progression de jeu n’est disponible à sauvegarder pour le moment.",
             saveWait: (minutes) => `Prochaine sauvegarde possible dans ${minutes} min.`,
             saveDone: "Progression sauvegardée.",
@@ -35,7 +43,7 @@
             quitPrompt: "Tu n’as pas sauvegardé depuis au moins 5 minutes. Quitter quand même ?"
         },
         en: {
-            save: "Save",
+            save: "Save (coming soon)",
             quit: "Quit",
             options: "Options",
             openMenu: "Open menu",
@@ -45,6 +53,12 @@
             sensitivity: "Mouse sensitivity",
             language: "Language",
             visualEffects: "Visual effects",
+            bootLabel: "VALDORIAN · CONNECTION ESTABLISHED",
+            welcomeLead: (name) => `Welcome, ${name}, to Valdorian.`,
+            welcomeStory: "You are about to discover an incredible world.",
+            welcomeQuestion: "Are you ready to discover it?",
+            yes: "Yes",
+            no: "No",
             saveUnavailable: "There is no game progress available to save yet.",
             saveWait: (minutes) => `Next save available in ${minutes} min.`,
             saveDone: "Progress saved.",
@@ -92,6 +106,54 @@
         document.querySelectorAll("[data-i18n-aria]").forEach((element) => {
             element.setAttribute("aria-label", translate(element.dataset.i18nAria));
         });
+        if (introductionStarted) {
+            startWelcomeTyping();
+        }
+    }
+
+    function startWelcomeTyping() {
+        const welcomeText = document.getElementById("kairoWelcomeText");
+        const caret = document.getElementById("kairoWelcomeCaret");
+        const actions = document.getElementById("kairoWelcomeActions");
+        if (!welcomeText || !caret || !actions) {
+            return;
+        }
+
+        window.clearTimeout(welcomeTypingTimer);
+        const playerName = window.valdorianPlayerName || "voyageur";
+        const message = [
+            translate("welcomeLead", playerName),
+            translate("welcomeStory"),
+            translate("welcomeQuestion")
+        ].join("\n\n");
+        welcomeText.textContent = "";
+        actions.hidden = true;
+
+        const reducedMotion = !settings.visualEffects || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reducedMotion) {
+            welcomeText.textContent = message;
+            caret.hidden = true;
+            actions.hidden = false;
+            return;
+        }
+
+        caret.hidden = false;
+        let position = 0;
+        const typeNextCharacter = () => {
+            if (position >= message.length) {
+                caret.hidden = true;
+                actions.hidden = false;
+                return;
+            }
+
+            const character = message[position];
+            welcomeText.textContent += character;
+            position += 1;
+            const delay = character === "\n" ? 170 : ".?!,:;".includes(character) ? 210 : 36;
+            welcomeTypingTimer = window.setTimeout(typeNextCharacter, delay);
+        };
+
+        typeNextCharacter();
     }
 
     function applySettings() {
@@ -245,7 +307,7 @@
         applySettings();
     });
 
-    if (saveButton && menuStatus) {
+    if (saveButton && menuStatus && !saveButton.disabled) {
         saveButton.addEventListener("click", () => {
             const progress = window.valdorianProgress;
 
@@ -310,5 +372,7 @@
         blackScreen.setAttribute("aria-hidden", "true");
         revealLayer.setAttribute("aria-hidden", "false");
         revealLayer.classList.add("visible");
+        introductionStarted = true;
+        startWelcomeTyping();
     };
 })();
