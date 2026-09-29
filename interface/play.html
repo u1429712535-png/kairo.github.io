@@ -1746,7 +1746,7 @@
             const memoryLoad =
                 Math.max(0, Math.min(1, (8 - memory) / 7.5));
 
-            return (30 + 210 * Math.max(networkLoad, processorLoad, memoryLoad)) * 1000;
+            return (10 + 10 * Math.max(networkLoad, processorLoad, memoryLoad)) * 1000;
 
         }
 
