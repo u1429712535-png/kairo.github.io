@@ -587,36 +587,51 @@
             left: 0;
             bottom: 0;
             z-index: 1;
+            display: grid;
+            place-items: center;
             width: 30%;
             height: 15%;
-            padding: 0;
-            border: 0;
-            background: transparent;
+            padding: 6px 10px;
+            border: 2px solid #71552f;
+            border-radius: 2px;
+            outline: 1px solid rgba(255, 239, 190, 0.72);
+            outline-offset: -6px;
+            background:
+                radial-gradient(ellipse at 15% 18%, rgba(255, 248, 217, 0.65), transparent 48%),
+                radial-gradient(ellipse at 86% 82%, rgba(115, 78, 36, 0.2), transparent 52%),
+                linear-gradient(135deg, #d9c58f 0%, #b99d67 55%, #d3bb85 100%);
+            box-shadow: 0 5px 16px rgba(0, 0, 0, 0.55), inset 0 0 16px rgba(97, 68, 34, 0.24);
+            color: #352717;
+            font: 700 clamp(13px, 1.35vw, 18px) "Courier New", monospace;
+            text-shadow: 0 1px rgba(255, 246, 212, 0.65);
             cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
         }
 
 
         .kairo-refuge-button::before {
             content: "";
             position: absolute;
-            inset: 0;
-            border: 1px solid rgba(242, 207, 120, 0);
-            background: linear-gradient(115deg, transparent 20%, rgba(242, 207, 120, 0.22) 50%, transparent 80%);
-            box-shadow: 0 0 0 rgba(242, 207, 120, 0);
-            mix-blend-mode: screen;
-            opacity: 0;
-            transform: scale(0.96);
-            transition: opacity 0.22s ease, transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+            inset: 7px;
+            border: 1px solid rgba(89, 65, 33, 0.55);
+            background: linear-gradient(115deg, transparent 20%, rgba(255, 247, 212, 0.22) 50%, transparent 80%);
+            opacity: 0.72;
             pointer-events: none;
         }
 
 
         .kairo-refuge-button:hover::before,
         .kairo-refuge-button:focus-visible::before {
-            border-color: rgba(242, 207, 120, 0.9);
-            box-shadow: inset 0 0 18px rgba(242, 207, 120, 0.12), 0 0 20px rgba(242, 207, 120, 0.45);
+            border-color: rgba(73, 51, 25, 0.82);
             opacity: 1;
-            transform: scale(1);
+        }
+
+
+        .kairo-refuge-button:hover,
+        .kairo-refuge-button:focus-visible {
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.68), inset 0 0 18px rgba(97, 68, 34, 0.3);
+            filter: brightness(1.08);
+            transform: translateY(-2px) scale(1.02);
         }
 
 
@@ -1475,8 +1490,8 @@
                 type="button"
                 aria-haspopup="dialog"
                 aria-controls="kairoRefugeModal"
-                aria-label="Le Refuge, bientôt disponible"
-                hidden></button>
+                aria-label="Ouvrir Le Refuge"
+                hidden>Le Refuge</button>
         </div>
     </div>
 
