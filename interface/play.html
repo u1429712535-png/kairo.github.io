@@ -507,6 +507,11 @@
         }
 
 
+        #kairoImageReveal.kairo-intro-dismissed {
+            display: none;
+        }
+
+
         #kairoImageReveal > img {
             width: 100%;
             height: 100%;
@@ -635,6 +640,18 @@
             background: rgba(215, 239, 194, 0.08);
             color: #d7efc2;
             font: 700 14px "Courier New", monospace;
+            cursor: pointer;
+            transition: background 0.18s ease, border-color 0.18s ease, opacity 0.18s ease;
+        }
+
+
+        .kairo-welcome-actions button:not(:disabled):hover {
+            border-color: #d7efc2;
+            background: rgba(215, 239, 194, 0.17);
+        }
+
+
+        .kairo-welcome-actions button:disabled {
             opacity: 0.6;
             cursor: not-allowed;
         }
@@ -1144,8 +1161,11 @@
                 <p class="kairo-boot-label" data-i18n="bootLabel">VALDORIAN · CONNEXION ÉTABLIE</p>
                 <p id="kairoWelcomeMessage"><span id="kairoWelcomeText"></span><span class="kairo-type-caret" id="kairoWelcomeCaret" aria-hidden="true" hidden></span></p>
                 <div class="kairo-welcome-actions" id="kairoWelcomeActions" hidden>
+                    <button type="button" id="kairoWelcomeYes" data-i18n="yes">Oui</button>
+                    <button type="button" id="kairoWelcomeNo" data-i18n="no">Non</button>
+                </div>
+                <div class="kairo-welcome-actions" id="kairoJourneyActions" hidden>
                     <button type="button" data-i18n="yes" disabled>Oui</button>
-                    <button type="button" data-i18n="no" disabled>Non</button>
                 </div>
             </div>
         </main>

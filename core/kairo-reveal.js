@@ -18,6 +18,7 @@
     const settingsKey = "valdorian_settings";
     let welcomeTypingTimer = null;
     let introductionStarted = false;
+    let welcomePhase = 1;
     const translations = {
         fr: {
             save: "Sauvegarder (bientôt)",
@@ -38,6 +39,10 @@
             welcomeLead: (name) => `Bienvenue à toi, ${name}, dans Valdorian.`,
             welcomeStory: "Tu vas te lancer à la découverte d’un monde incroyable.",
             welcomeQuestion: "Es-tu prêt à le découvrir ?",
+            journeyWarning: "Ce monde ne vous fera pas de cadeaux.",
+            journeyDanger: "Chaque expédition peut être la fin de votre aventure.",
+            journeyPrepare: "Préparez-vous et adaptez-vous aux terres rudes.",
+            journeyQuestion: "Survivrez-vous assez longtemps pour connaître l’histoire de ce monde ?",
             yes: "Oui",
             no: "Non",
             saveUnavailable: "Aucune progression de jeu n’est disponible à sauvegarder pour le moment.",
@@ -65,6 +70,10 @@
             welcomeLead: (name) => `Welcome, ${name}, to Valdorian.`,
             welcomeStory: "You are about to discover an incredible world.",
             welcomeQuestion: "Are you ready to discover it?",
+            journeyWarning: "This world will show you no mercy.",
+            journeyDanger: "Every expedition could be the end of your adventure.",
+            journeyPrepare: "Prepare yourself and adapt to these harsh lands.",
+            journeyQuestion: "Will you survive long enough to learn this world’s story?",
             yes: "Yes",
             no: "No",
             saveUnavailable: "There is no game progress available to save yet.",
@@ -119,23 +128,34 @@
         }
     }
 
-    function startWelcomeTyping() {
+    function startWelcomeTyping(phase = welcomePhase) {
         const welcomeText = document.getElementById("kairoWelcomeText");
         const caret = document.getElementById("kairoWelcomeCaret");
-        const actions = document.getElementById("kairoWelcomeActions");
-        if (!welcomeText || !caret || !actions) {
+        const welcomeActions = document.getElementById("kairoWelcomeActions");
+        const journeyActions = document.getElementById("kairoJourneyActions");
+        if (!welcomeText || !caret || !welcomeActions || !journeyActions) {
             return;
         }
 
+        welcomePhase = phase;
         window.clearTimeout(welcomeTypingTimer);
         const playerName = window.valdorianPlayerName || "voyageur";
-        const message = [
-            translate("welcomeLead", playerName),
-            translate("welcomeStory"),
-            translate("welcomeQuestion")
-        ].join("\n\n");
+        const message = phase === 1
+            ? [
+                translate("welcomeLead", playerName),
+                translate("welcomeStory"),
+                translate("welcomeQuestion")
+            ].join("\n\n")
+            : [
+                translate("journeyWarning"),
+                translate("journeyDanger"),
+                translate("journeyPrepare"),
+                translate("journeyQuestion")
+            ].join("\n\n");
         welcomeText.textContent = "";
-        actions.hidden = true;
+        welcomeActions.hidden = true;
+        journeyActions.hidden = true;
+        const actions = phase === 1 ? welcomeActions : journeyActions;
 
         const reducedMotion = !settings.visualEffects || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         if (reducedMotion) {
@@ -162,6 +182,29 @@
         };
 
         typeNextCharacter();
+    }
+
+    function returnToGameMenu() {
+        window.clearTimeout(welcomeTypingTimer);
+        const revealLayer = document.getElementById("kairoImageReveal");
+        const gameContent = document.getElementById("gameContent");
+        const loginRequired = document.getElementById("loginRequired");
+
+        if (revealLayer) {
+            revealLayer.classList.add("kairo-intro-dismissed");
+            revealLayer.setAttribute("aria-hidden", "true");
+        }
+        if (gameContent) {
+            gameContent.style.display = "block";
+        }
+        if (loginRequired) {
+            loginRequired.style.display = "none";
+        }
+
+        document.body.classList.remove("kairo-cursor-active");
+        if (document.fullscreenElement && document.exitFullscreen) {
+            document.exitFullscreen().catch(() => {});
+        }
     }
 
     function applySettings() {
@@ -227,6 +270,12 @@
     }
 
     applySettings();
+
+    document.getElementById("kairoWelcomeYes")?.addEventListener("click", () => {
+        startWelcomeTyping(2);
+    });
+
+    document.getElementById("kairoWelcomeNo")?.addEventListener("click", returnToGameMenu);
 
     if (menuToggle && menuOptions) {
         menuToggle.addEventListener("click", () => {
