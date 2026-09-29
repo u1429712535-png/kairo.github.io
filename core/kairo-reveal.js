@@ -51,6 +51,7 @@
             saveUnavailable: "Aucune progression de jeu n’est disponible à sauvegarder pour le moment.",
             saveWait: (minutes) => `Prochaine sauvegarde possible dans ${minutes} min.`,
             saveDone: "Progression sauvegardée.",
+            saveLocalOnly: "Sauvegarde conservée sur cet appareil. Synchronisation serveur indisponible.",
             saveFailed: "La sauvegarde a échoué. Vérifie l’espace de stockage disponible.",
             quitPrompt: "Tu n’as pas sauvegardé depuis au moins 5 minutes. Quitter quand même ?"
         },
@@ -82,6 +83,7 @@
             saveUnavailable: "There is no game progress available to save yet.",
             saveWait: (minutes) => `Next save available in ${minutes} min.`,
             saveDone: "Progress saved.",
+            saveLocalOnly: "Saved on this device. Server sync is unavailable.",
             saveFailed: "Save failed. Check available storage space.",
             quitPrompt: "You have not saved in at least 5 minutes. Quit anyway?"
         }
@@ -318,7 +320,7 @@
         activateSaveProgress(progress);
 
         try {
-            localStorage.setItem(saveKey, JSON.stringify(save));
+            localStorage.setItem(getSaveStorageKey(), JSON.stringify(save));
         } catch {
             // The server copy remains available if local storage is full.
         }
@@ -341,9 +343,14 @@
         applyLanguage();
     }
 
+    function getSaveStorageKey() {
+        const playerId = window.valdorianPlayerId;
+        return playerId ? `${saveKey}:${encodeURIComponent(playerId)}` : saveKey;
+    }
+
     function getLastSaveTime() {
         try {
-            const savedProgress = JSON.parse(localStorage.getItem(saveKey) || "null");
+            const savedProgress = JSON.parse(localStorage.getItem(getSaveStorageKey()) || "null");
             return Number.isFinite(savedProgress?.savedAt) ? savedProgress.savedAt : 0;
         } catch {
             return 0;
@@ -552,8 +559,24 @@
                 return;
             }
 
+            let locallySaved = false;
+            const localSave = {
+                savedAt: Date.now(),
+                progress
+            };
+
+            try {
+                localStorage.setItem(getSaveStorageKey(), JSON.stringify(localSave));
+                locallySaved = true;
+            } catch {
+                // Continue with the server save if local storage is unavailable.
+            }
+
             try {
                 const token = localStorage.getItem("valdorian_session");
+                if (!token) {
+                    throw new Error("Session absente.");
+                }
                 const response = await fetch(`${window.valdorianApiUrl}/save`, {
                     method: "POST",
                     headers: {
@@ -573,13 +596,13 @@
                 }
 
                 try {
-                    localStorage.setItem(saveKey, JSON.stringify(result.save));
+                    localStorage.setItem(getSaveStorageKey(), JSON.stringify(result.save));
                 } catch {
                     // The server save remains successful if local storage is full.
                 }
                 menuStatus.textContent = translate("saveDone");
             } catch {
-                menuStatus.textContent = translate("saveFailed");
+                menuStatus.textContent = translate(locallySaved ? "saveLocalOnly" : "saveFailed");
             }
         });
     }
