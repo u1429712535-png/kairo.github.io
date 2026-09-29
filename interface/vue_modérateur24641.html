@@ -374,6 +374,141 @@
             border-top: 1px solid rgba(255, 255, 255, 0.06);
         }
 
+
+        /* =================================================
+           FICHE PROFIL MODÉRATION
+           ================================================= */
+
+        .profile-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+            background: rgba(0, 0, 0, 0.78);
+            backdrop-filter: blur(10px);
+        }
+
+        .profile-modal.active {
+            display: flex;
+        }
+
+        .profile-modal-box {
+            position: relative;
+            width: min(680px, 100%);
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 30px;
+            border: 1px solid rgba(201, 162, 74, 0.35);
+            border-radius: 18px;
+            background:
+                linear-gradient(
+                    145deg,
+                    #171820,
+                    #0d0e12
+                );
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.55);
+        }
+
+        .profile-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 38px;
+            height: 38px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .profile-modal-close:hover {
+            background: rgba(201, 162, 74, 0.2);
+            border-color: #c9a24a;
+        }
+
+        .profile-modal-head {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding-right: 45px;
+            margin-bottom: 28px;
+        }
+
+        .profile-modal-avatar {
+            width: 90px;
+            height: 90px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(201, 162, 74, 0.55);
+            background: #20212a;
+        }
+
+        .profile-modal-head h2 {
+            font-size: 25px;
+            margin-bottom: 7px;
+            word-break: break-word;
+        }
+
+        .profile-modal-head p {
+            color: #c9a24a;
+            font-size: 13px;
+            word-break: break-word;
+        }
+
+        .profile-details {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .profile-detail {
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.025);
+        }
+
+        .profile-detail.full {
+            grid-column: 1 / -1;
+        }
+
+        .profile-detail label {
+            display: block;
+            margin-bottom: 7px;
+            color: #777a80;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .profile-detail div {
+            color: #f2f2f4;
+            font-size: 13px;
+            line-height: 1.5;
+            word-break: break-word;
+        }
+
+        .account-item {
+            cursor: pointer;
+            transition:
+                transform 0.2s,
+                border-color 0.2s,
+                background 0.2s;
+        }
+
+        .account-item:hover {
+            transform: translateX(3px);
+            border-color: rgba(201, 162, 74, 0.4);
+            background: rgba(201, 162, 74, 0.06);
+        }
+
         @media (max-width: 650px) {
 
             header {
@@ -402,6 +537,31 @@
 
             .account-item {
                 align-items: flex-start;
+            }
+
+            .profile-modal {
+                padding: 15px;
+            }
+
+            .profile-modal-box {
+                padding: 22px;
+            }
+
+            .profile-modal-head {
+                align-items: flex-start;
+            }
+
+            .profile-modal-avatar {
+                width: 70px;
+                height: 70px;
+            }
+
+            .profile-details {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-detail.full {
+                grid-column: auto;
             }
         }
     </style>
@@ -517,6 +677,61 @@
 
 </main>
 
+
+
+    <!-- =================================================
+         MODAL PROFIL UTILISATEUR
+         ================================================= -->
+
+    <div
+        id="profileModal"
+        class="profile-modal"
+        onclick="handleProfileModalBackground(event)"
+    >
+        <div
+            class="profile-modal-box"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="profileModalTitle"
+            onclick="event.stopPropagation()"
+        >
+            <button
+                type="button"
+                class="profile-modal-close"
+                onclick="closeProfileModal()"
+                aria-label="Fermer"
+            >
+                ×
+            </button>
+
+            <div class="profile-modal-head">
+
+                <img
+                    id="profileModalAvatar"
+                    class="profile-modal-avatar"
+                    src=""
+                    alt="Avatar"
+                >
+
+                <div>
+                    <h2 id="profileModalTitle">
+                        Profil utilisateur
+                    </h2>
+
+                    <p id="profileModalUsername">
+                        @inconnu
+                    </p>
+                </div>
+
+            </div>
+
+            <div
+                id="profileDetails"
+                class="profile-details"
+            ></div>
+
+        </div>
+    </div>
 
 <footer>
     VALDORIAN • Espace modération
@@ -750,11 +965,174 @@
 
 
     /*
-     * Chargement des comptes.
+     * Ouvre la fiche complète d'un compte.
      *
-     * IMPORTANT :
-     * L'endpoint API permettant de récupérer
-     * tous les comptes devra être ajouté côté serveur.
+     * Les informations sensibles d'authentification
+     * (mot de passe, passwordHash, passwordSalt)
+     * ne sont jamais affichées.
+     */
+    function openAccountProfile(account) {
+
+        const modal =
+            document.getElementById("profileModal");
+
+        const avatar =
+            document.getElementById("profileModalAvatar");
+
+        const title =
+            document.getElementById("profileModalTitle");
+
+        const username =
+            document.getElementById("profileModalUsername");
+
+        const details =
+            document.getElementById("profileDetails");
+
+        if (!modal || !avatar || !title || !username || !details) {
+            return;
+        }
+
+        const accountUsername =
+            account.username || "inconnu";
+
+        const accountAvatar =
+            account.avatar ||
+            createDefaultAvatar(accountUsername);
+
+        avatar.src = accountAvatar;
+
+        avatar.onerror = function () {
+            this.src =
+                createDefaultAvatar(accountUsername);
+        };
+
+        title.textContent =
+            account.displayName ||
+            accountUsername ||
+            "Utilisateur";
+
+        username.textContent =
+            "@" + accountUsername;
+
+        const createdAt =
+            account.createdAt
+                ? new Date(account.createdAt).toLocaleString(
+                    "fr-FR",
+                    {
+                        dateStyle: "long",
+                        timeStyle: "short"
+                    }
+                )
+                : "Non renseignée";
+
+        details.innerHTML = `
+            <div class="profile-detail">
+                <label>Nom affiché</label>
+                <div>${escapeHtml(
+                    account.displayName || "Non renseigné"
+                )}</div>
+            </div>
+
+            <div class="profile-detail">
+                <label>Nom d'utilisateur</label>
+                <div>@${escapeHtml(
+                    account.username || "Non renseigné"
+                )}</div>
+            </div>
+
+            <div class="profile-detail full">
+                <label>Adresse e-mail</label>
+                <div>${escapeHtml(
+                    account.email || "Non renseignée"
+                )}</div>
+            </div>
+
+            <div class="profile-detail full">
+                <label>ID du compte</label>
+                <div>${escapeHtml(
+                    account.id || "Non renseigné"
+                )}</div>
+            </div>
+
+            <div class="profile-detail">
+                <label>Date de création</label>
+                <div>${escapeHtml(
+                    createdAt
+                )}</div>
+            </div>
+
+            <div class="profile-detail">
+                <label>Avatar</label>
+                <div>
+                    ${account.avatar
+                        ? "Avatar personnalisé"
+                        : "Avatar par défaut"}
+                </div>
+            </div>
+        `;
+
+        modal.classList.add("active");
+
+        document.body.style.overflow =
+            "hidden";
+    }
+
+
+    /*
+     * Ferme la fiche profil.
+     */
+    function closeProfileModal() {
+
+        const modal =
+            document.getElementById(
+                "profileModal"
+            );
+
+        if (modal) {
+            modal.classList.remove(
+                "active"
+            );
+        }
+
+        document.body.style.overflow =
+            "";
+    }
+
+
+    /*
+     * Ferme la fiche si on clique
+     * sur l'arrière-plan.
+     */
+    function handleProfileModalBackground(event) {
+
+        if (
+            event.target.id ===
+            "profileModal"
+        ) {
+            closeProfileModal();
+        }
+    }
+
+
+    /*
+     * Touche Échap = fermeture.
+     */
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (
+                event.key === "Escape"
+            ) {
+                closeProfileModal();
+            }
+
+        }
+    );
+
+
+    /*
+     * Chargement des comptes.
      */
     async function loadAccounts() {
 
@@ -860,12 +1238,20 @@
 
 
                     return `
-                        <div class="account-item">
+                        <div
+                            class="account-item"
+                            role="button"
+                            tabindex="0"
+                            title="Cliquer pour voir le profil complet"
+                            onclick="openAccountProfile(${JSON.stringify(account).replace(/</g, "\\u003c").replace(/>/g, "\\u003e").replace(/&/g, "\\u0026").replace(/'/g, "\\u0027")})"
+                            onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openAccountProfile(${JSON.stringify(account).replace(/</g, "\\u003c").replace(/>/g, "\\u003e").replace(/&/g, "\\u0026").replace(/'/g, "\\u0027")}); }"
+                        >
 
                             <img
                                 class="account-avatar"
                                 src="${escapeHtml(avatar)}"
                                 alt="Avatar"
+                                onerror="this.src=createDefaultAvatar('${String(account.username || "V").replace(/'/g, "\\'")}')"
                             >
 
                             <div class="account-info">
