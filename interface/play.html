@@ -657,6 +657,41 @@
         }
 
 
+        .kairo-glitch-button {
+            animation: kairoYesGlitch 2.7s steps(1, end) infinite;
+            box-shadow: 0 0 16px rgba(215, 239, 194, 0.18);
+        }
+
+
+        @keyframes kairoYesGlitch {
+            0%, 87%, 100% {
+                transform: none;
+                text-shadow: 0 0 8px rgba(173, 235, 157, 0.45);
+                filter: none;
+            }
+            88% {
+                transform: translateX(-2px) skewX(-5deg);
+                text-shadow: -3px 0 #ff5574, 3px 0 #4fffe0;
+                filter: brightness(1.5);
+            }
+            89% {
+                transform: translateX(2px) skewX(4deg);
+                text-shadow: 3px 1px #ff5574, -3px -1px #4fffe0;
+                filter: brightness(0.8);
+            }
+            90% {
+                transform: translateY(1px);
+                text-shadow: -2px 0 #4fffe0, 2px 0 #ff5574;
+                filter: brightness(1.35);
+            }
+            91% {
+                transform: none;
+                text-shadow: 0 0 8px rgba(173, 235, 157, 0.45);
+                filter: none;
+            }
+        }
+
+
         .kairo-game-menu {
             z-index: 4;
         }
@@ -982,6 +1017,11 @@
         }
 
 
+        body.kairo-reduced-effects .kairo-glitch-button {
+            animation: none;
+        }
+
+
         body.kairo-cursor-active,
         body.kairo-cursor-active * {
             cursor: none !important;
@@ -1012,9 +1052,10 @@
             #kairoBlackScreen,
             #kairoImageReveal,
             .kairo-boot-content,
-            .kairo-type-caret {
+            .kairo-type-caret,
+            .kairo-glitch-button {
                 transition-duration: 0.01ms;
-                animation-duration: 0.01ms;
+                animation: none;
             }
         }
 
@@ -1165,7 +1206,7 @@
                     <button type="button" id="kairoWelcomeNo" data-i18n="no">Non</button>
                 </div>
                 <div class="kairo-welcome-actions" id="kairoJourneyActions" hidden>
-                    <button type="button" data-i18n="yes" disabled>Oui</button>
+                    <button type="button" class="kairo-glitch-button" data-i18n="yes" disabled>Oui</button>
                 </div>
             </div>
         </main>
