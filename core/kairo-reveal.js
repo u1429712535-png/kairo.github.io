@@ -308,7 +308,11 @@
         if (refugeButton) {
             refugeButton.hidden = true;
         }
-        void playFinalScreenAnimation(finalScreen).then(() => {
+        const loadingFinishedAt = Number(window.kairoLoadingFinishedAt) || Date.now();
+        const remainingButtonDelay = Math.max(0, loadingFinishedAt + 2000 - Date.now());
+        const buttonDelay = new Promise((resolve) => window.setTimeout(resolve, remainingButtonDelay));
+
+        void Promise.all([playFinalScreenAnimation(finalScreen), buttonDelay]).then(() => {
             if (refugeButton && !finalScreen.hidden) {
                 refugeButton.hidden = false;
             }

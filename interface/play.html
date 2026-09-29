@@ -1966,6 +1966,8 @@
                     if (progress >= 1) {
 
                         window.clearInterval(timer);
+                        window.kairoLoadingFinishedAt =
+                            Date.now();
 
                         window.setTimeout(() => {
                             window.revealKairoImage();
