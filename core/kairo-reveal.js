@@ -232,6 +232,11 @@
         await new Promise((resolve) => window.setTimeout(resolve, 3000));
 
         finalScreen.classList.add("powering-on");
+        const refugeButton = document.getElementById("kairoRefugeButton");
+        if (refugeButton) {
+            refugeButton.hidden = false;
+        }
+
         window.valdorianProgress = {
             stage: "refuge",
             reachedAt: Date.now()
