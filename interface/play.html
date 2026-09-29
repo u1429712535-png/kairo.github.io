@@ -514,6 +514,32 @@
         }
 
 
+        body.kairo-cursor-active,
+        body.kairo-cursor-active * {
+            cursor: none !important;
+        }
+
+
+        #kairoCustomCursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000000;
+
+            display: none;
+            width: 80px;
+            height: 80px;
+
+            object-fit: contain;
+            pointer-events: none;
+        }
+
+
+        body.kairo-cursor-active #kairoCustomCursor {
+            display: block;
+        }
+
+
         @media (prefers-reduced-motion: reduce) {
             #kairoBlackScreen,
             #kairoImageReveal {
@@ -660,6 +686,12 @@
     <div id="kairoImageReveal" aria-hidden="true">
         <img src="../image/IMG_2118.webp" alt="Image de révélation">
     </div>
+
+    <img
+        id="kairoCustomCursor"
+        src="../image/ChatGPT%20Image%2029%20sept.%202026,%2015_29_07.png"
+        alt=""
+        aria-hidden="true">
 
     <div
         id="kairoBlackScreen"
