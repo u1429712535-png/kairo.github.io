@@ -220,6 +220,38 @@
         }
     }
 
+    function playFinalScreenAnimation(finalScreen) {
+        const finalImage = finalScreen.querySelector("img");
+
+        return new Promise((resolve) => {
+            let imageAnimationFinished = !finalImage;
+            let vignetteAnimationFinished = false;
+            let fallbackTimer;
+
+            const finishAnimation = () => {
+                finalScreen.removeEventListener("animationend", handleAnimationEnd);
+                window.clearTimeout(fallbackTimer);
+                resolve();
+            };
+
+            const handleAnimationEnd = (event) => {
+                if (event.target === finalImage && event.animationName === "kairoCrtPowerOnImage") {
+                    imageAnimationFinished = true;
+                }
+                if (event.target === finalScreen && event.pseudoElement === "::after" && event.animationName === "kairoCrtVignette") {
+                    vignetteAnimationFinished = true;
+                }
+                if (imageAnimationFinished && vignetteAnimationFinished) {
+                    finishAnimation();
+                }
+            };
+
+            finalScreen.addEventListener("animationend", handleAnimationEnd);
+            fallbackTimer = window.setTimeout(finishAnimation, 2500);
+            finalScreen.classList.add("powering-on");
+        });
+    }
+
     async function startFinalWorldReveal() {
         const introScreen = document.getElementById("kairoImageReveal");
         const finalScreen = document.getElementById("kairoFinalScreen");
@@ -243,7 +275,7 @@
         finalScreen.setAttribute("aria-hidden", "false");
         await new Promise((resolve) => window.setTimeout(resolve, 3000));
 
-        finalScreen.classList.add("powering-on");
+        await playFinalScreenAnimation(finalScreen);
         const refugeButton = document.getElementById("kairoRefugeButton");
         if (refugeButton) {
             refugeButton.hidden = false;
@@ -271,10 +303,14 @@
         }
         finalScreen.hidden = false;
         finalScreen.setAttribute("aria-hidden", "false");
-        finalScreen.classList.add("powering-on");
         if (refugeButton) {
-            refugeButton.hidden = false;
+            refugeButton.hidden = true;
         }
+        void playFinalScreenAnimation(finalScreen).then(() => {
+            if (refugeButton && !finalScreen.hidden) {
+                refugeButton.hidden = false;
+            }
+        });
         document.body.classList.add("kairo-interface-active");
         if (customCursor) {
             document.body.classList.add("kairo-cursor-active");
@@ -584,6 +620,13 @@
         document.body.classList.add("kairo-interface-active");
         blackScreen.classList.add("finished", "revealing");
         blackScreen.setAttribute("aria-hidden", "true");
+
+        const pendingSave = window.valdorianPendingSave;
+        window.valdorianPendingSave = null;
+        if (pendingSave && window.restoreKairoProgress?.(pendingSave)) {
+            return;
+        }
+
         revealLayer.setAttribute("aria-hidden", "false");
         revealLayer.classList.add("visible");
         introductionStarted = true;

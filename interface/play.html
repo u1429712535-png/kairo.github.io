@@ -2138,8 +2138,8 @@
                             console.warn("Impossible de charger la sauvegarde :", saveError);
                         }
 
-                        if (savedGame && window.restoreKairoProgress?.(savedGame)) {
-                            return;
+                        if (savedGame) {
+                            window.valdorianPendingSave = savedGame;
                         }
 
                         await activateKairoScreen();
