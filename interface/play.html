@@ -591,21 +591,22 @@
             place-items: center;
             width: 14.5%;
             height: 7%;
-            padding: 4px 8px;
-            border: 2px solid #71552f;
+            padding: 0;
+            border: 0;
             border-radius: 2px;
-            outline: 1px solid rgba(255, 239, 190, 0.72);
-            outline-offset: -6px;
-            background:
-                radial-gradient(ellipse at 15% 18%, rgba(255, 248, 217, 0.65), transparent 48%),
-                radial-gradient(ellipse at 86% 82%, rgba(115, 78, 36, 0.2), transparent 52%),
-                linear-gradient(135deg, #d9c58f 0%, #b99d67 55%, #d3bb85 100%);
+            background: transparent;
             box-shadow: 0 5px 16px rgba(0, 0, 0, 0.55), inset 0 0 16px rgba(97, 68, 34, 0.24);
-            color: #352717;
-            font: 700 clamp(11px, 0.9vw, 14px) "Courier New", monospace;
-            text-shadow: 0 1px rgba(255, 246, 212, 0.65);
             cursor: pointer;
             transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+        }
+
+
+        .kairo-refuge-button img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            pointer-events: none;
         }
 
 
@@ -613,7 +614,7 @@
             content: "";
             position: absolute;
             inset: 7px;
-            border: 1px solid rgba(89, 65, 33, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.55);
             background: linear-gradient(115deg, transparent 20%, rgba(255, 247, 212, 0.22) 50%, transparent 80%);
             opacity: 0.72;
             pointer-events: none;
@@ -1480,7 +1481,7 @@
                 aria-haspopup="dialog"
                 aria-controls="kairoRefugeModal"
                 aria-label="Ouvrir Le Refuge"
-                hidden>Le Refuge</button>
+                hidden><img src="../image/image.png" alt=""></button>
         </div>
     </div>
 
